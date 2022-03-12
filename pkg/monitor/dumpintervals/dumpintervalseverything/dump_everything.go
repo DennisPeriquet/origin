@@ -2,11 +2,25 @@ package dumpintervalseverything
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
+	"sort"
+	"time"
 
+	"github.com/openshift/origin/pkg/monitor/intervalcreation"
+	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
+
+func logIt(str string, err error) {
+	fmt.Println(str, err)
+}
+
+func logFatal(str string, err error) {
+	logIt(str, err)
+	os.Exit(1)
+}
 
 type DumpEverythingCreateFlags struct {
 	// jsonBytes is filled in after marshalling the json taken from jsonFilename
@@ -39,19 +53,18 @@ func NewDumpEverythingCommand() *cobra.Command {
 
 			if err := f.Validate(); err != nil {
 				//logrus.WithError(err).Fatal("Flags are invalid")
-				fmt.Println("Flags are invalid", err)
+				logIt("Flags are invalid", err)
 			}
 
 			o, err := f.ToOptions()
 			if err != nil {
 				//logrus.WithError(err).Fatal("Failed to build runtime options")
-				fmt.Println("Failed to build runtime options", err)
-				os.Exit(1)
+				logFatal("Failed to build runtime options", err)
 			}
 
 			if err := o.Run(); err != nil {
 				//logrus.WithError(err).Fatal("Command failed")
-				fmt.Println("Command failed", err)
+				logIt("Command failed", err)
 			}
 
 			return nil
@@ -90,6 +103,50 @@ func (f *DumpEverythingCreateFlags) ToOptions() (*DumpEverythingCreateOptions, e
 }
 
 func (o *DumpEverythingCreateOptions) Run() error {
-	fmt.Println("Filename  = ", o.jsonFilename)
+	fmt.Println("Reading file: ", o.jsonFilename)
+
+	file_bytes, err := ioutil.ReadFile(o.jsonFilename)
+	if err != nil {
+		logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
+	}
+
+	fmt.Println("Transforming json file to events (Instants) to use as input ...")
+	inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+	if err != nil {
+		logFatal("Error transforming file to events", err)
+	}
+
+	sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
+
+	// We use the periodic-ci-openshift-release-master-ci-4.10-upgrade-from-stable-4.9-e2e-ovirt-upgrade/
+	// jobid=1498692901662625792 and take the e2e-intervals_everything_20220301-164208.json
+	//
+	// starttime: March 1, 2022 16:13:29
+	// endtime  : March 1, 2022 17:52:16
+
+	startTime, err := time.Parse(time.RFC3339, "2022-03-01T16:13:29Z")
+	//startTime, err := time.Parse(time.RFC3339, "2022-03-01T16:42:08Z")
+	if err != nil {
+		logFatal("Error setting up start time", err)
+	}
+
+	endTime, err := time.Parse(time.RFC3339, "2022-03-01T17:52:16Z")
+	//endTime, err := time.Parse(time.RFC3339, "2022-03-01T17:46:44Z")
+	if err != nil {
+		logFatal("Error setting up end time", err)
+	}
+
+	fmt.Println("Creating PodIntervals from Instants ...")
+	result := intervalcreation.CreatePodIntervalsFromInstants(inputIntervals, startTime, endTime)
+
+	resultBytes, err := monitorserialization.EventsToJSON(result)
+	//resultBytes, err := monitorserialization.EventsToJSON(inputIntervals)
+	if err != nil {
+		logFatal("Error translating back to json", err)
+	}
+	fmt.Println(string(resultBytes))
+
+	//opt := ginkgo.NewOptions()
+	//fmt.Printf("%v\n", opt)
 	return nil
 }
