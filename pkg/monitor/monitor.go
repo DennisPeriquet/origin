@@ -46,6 +46,13 @@ func NewMonitorWithInterval(interval time.Duration) *Monitor {
 
 var _ Interface = &Monitor{}
 
+// setUnsortedEvents allows callers to set the unsortedEvents field.
+// This is so that the caller can create unsortedEvents using a method
+// other than the usual monitoring.
+func (m *Monitor) SetUnsortedEvents(events monitorapi.Intervals) {
+	m.unsortedEvents = events
+}
+
 // StartSampling starts sampling every interval until the provided context is done.
 // A sample is captured when the context is closed.
 func (m *Monitor) StartSampling(ctx context.Context) {

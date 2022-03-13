@@ -2,14 +2,25 @@ package dumpintervalsoperators
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"time"
 
 	"github.com/openshift/origin/pkg/monitor"
+	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
 	"github.com/openshift/origin/pkg/test/ginkgo"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
+
+func logIt(str string, err error) {
+	fmt.Println(str, err)
+}
+
+func logFatal(str string, err error) {
+	logIt(str, err)
+	os.Exit(1)
+}
 
 type DumpOperatorsCreateFlags struct {
 	// jsonBytes is filled in after marshalling the json taken from jsonFilename
@@ -119,6 +130,20 @@ func (o *DumpOperatorsCreateOptions) Run() error {
 	// gcs/origin-ci-test/pr-logs/pull/26892/pull-ci-openshift-origin-master-e2e-aws-serial/1502030011752779776/
 	// artifacts/e2e-aws-serial/openshift-e2e-test/artifacts/junit/e2e-events_20220310-224620.json
 	m := monitor.NewMonitorWithInterval(time.Second)
+
+	file_bytes, err := ioutil.ReadFile(o.jsonFilename)
+	if err != nil {
+		logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
+	}
+
+	fmt.Println("Transforming json file to events (Instants) to use as input ...")
+	inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+	if err != nil {
+		logFatal("Error transforming file to events", err)
+	}
+
+	//sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
+	m.SetUnsortedEvents(inputIntervals)
 
 	//m, _ := monitor.Start(ctx, restConfig,
 	//	[]monitor.StartEventIntervalRecorderFunc{
