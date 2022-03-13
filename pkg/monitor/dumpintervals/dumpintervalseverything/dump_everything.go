@@ -22,12 +22,13 @@ func logFatal(str string, err error) {
 }
 
 type DumpEverythingCreateFlags struct {
-	// jsonBytes is filled in after marshalling the json taken from jsonFilename
+	// filename is passed as an argument on the cli
 	filename string
 }
 
 type DumpEverythingCreateOptions struct {
-	// jsonFilename is the name of the file that holds the events.json produced by pods.go
+	// jsonFilename is the name of the file that holds the events json file and is known
+	// to exist
 	jsonFilename string
 }
 
