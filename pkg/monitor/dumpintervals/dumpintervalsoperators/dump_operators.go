@@ -2,7 +2,6 @@ package dumpintervalsoperators
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -131,13 +130,15 @@ func (o *DumpOperatorsCreateOptions) Run() error {
 	// artifacts/e2e-aws-serial/openshift-e2e-test/artifacts/junit/e2e-events_20220310-224620.json
 	m := monitor.NewMonitorWithInterval(time.Second)
 
-	file_bytes, err := ioutil.ReadFile(o.jsonFilename)
-	if err != nil {
-		logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
-	}
+	//file_bytes, err := ioutil.ReadFile(o.jsonFilename)
+	//if err != nil {
+	//	logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
+	//}
 
-	fmt.Println("Transforming json file to events (Instants) to use as input ...")
-	inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+	//fmt.Println("Transforming json file to events (Instants) to use as input ...")
+	//inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+
+	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
 	if err != nil {
 		logFatal("Error transforming file to events", err)
 	}

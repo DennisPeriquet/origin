@@ -2,7 +2,6 @@ package dumpintervalseverything
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"sort"
 	"time"
@@ -105,13 +104,14 @@ func (f *DumpEverythingCreateFlags) ToOptions() (*DumpEverythingCreateOptions, e
 func (o *DumpEverythingCreateOptions) Run() error {
 	fmt.Println("Reading file: ", o.jsonFilename)
 
-	file_bytes, err := ioutil.ReadFile(o.jsonFilename)
-	if err != nil {
-		logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
-	}
+	//file_bytes, err := ioutil.ReadFile(o.jsonFilename)
+	//if err != nil {
+	//	logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
+	//}
 
 	fmt.Println("Transforming json file to events (Instants) to use as input ...")
-	inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+	//inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
 	if err != nil {
 		logFatal("Error transforming file to events", err)
 	}
