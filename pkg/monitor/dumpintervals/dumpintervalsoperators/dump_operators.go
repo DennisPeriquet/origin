@@ -106,8 +106,7 @@ func (f *DumpOperatorsCreateFlags) ToOptions() (*DumpOperatorsCreateOptions, err
 func (o *DumpOperatorsCreateOptions) Run() error {
 	fmt.Println("Filename  = ", o.jsonFilename)
 
-	// https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/
-	// gcs/origin-ci-test/pr-logs/pull/26892/pull-ci-openshift-origin-master-e2e-aws-serial/1502030011752779776/
+	// https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/pr-logs/pull/26892/pull-ci-openshift-origin-master-e2e-aws-serial/1502030011752779776/artifacts/e2e-aws-serial/openshift-e2e-test/artifacts/junit/e2e-events_20220310-224620.json
 	// start time March 10, 2022 9:15:44 PM
 	// end time  March 11, 2022 12:44:01 AM
 	start, err := time.Parse(time.RFC3339, "2022-03-10T21:15:44Z")
@@ -118,26 +117,9 @@ func (o *DumpOperatorsCreateOptions) Run() error {
 	opt := ginkgo.NewOptions()
 	opt.JUnitDir = "/home/dperique/mygit/dperique/NG/Dennis/Redhat/origin/output"
 
-	//ctx, _ := context.WithCancel(context.Background())
-	//restConfig, err := monitor.GetMonitorRESTConfig()
-	//if err != nil {
-	//fmt.Println(err)
-	//return err
-	//}
-
-	//https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/
-	// gcs/origin-ci-test/pr-logs/pull/26892/pull-ci-openshift-origin-master-e2e-aws-serial/1502030011752779776/
-	// artifacts/e2e-aws-serial/openshift-e2e-test/artifacts/junit/e2e-events_20220310-224620.json
 	m := monitor.NewMonitorWithInterval(time.Second)
 
-	//file_bytes, err := ioutil.ReadFile(o.jsonFilename)
-	//if err != nil {
-	//	logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
-	//}
-
-	//fmt.Println("Transforming json file to events (Instants) to use as input ...")
-	//inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
-
+	fmt.Println("Transforming json file to events (Instants) to use as input ...")
 	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
 	if err != nil {
 		logFatal("Error transforming file to events", err)
@@ -146,12 +128,6 @@ func (o *DumpOperatorsCreateOptions) Run() error {
 	//sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
 	m.SetUnsortedEvents(inputIntervals)
 
-	//m, _ := monitor.Start(ctx, restConfig,
-	//	[]monitor.StartEventIntervalRecorderFunc{
-	//		controlplane.StartAllAPIMonitoring,
-	//		frontends.StartAllIngressMonitoring,
-	//	},
-	//)
 	timeSuffix := fmt.Sprintf("_%s", start.UTC().Format("20060102-150405"))
 	events := m.Intervals(time.Time{}, time.Time{})
 

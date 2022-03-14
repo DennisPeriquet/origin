@@ -10,7 +10,7 @@ func NewDumpIntervalsCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "dump-intervals",
 		Short: "Dump the itervals html files",
-		Long:  `Given a events json file, dump the interval html files`,
+		Long:  `Given an events json file, dump the interval html files`,
 	}
 
 	cmd.AddCommand(dumpintervalseverything.NewDumpEverythingCommand())

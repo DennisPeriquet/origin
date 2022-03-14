@@ -104,14 +104,8 @@ func (f *DumpEverythingCreateFlags) ToOptions() (*DumpEverythingCreateOptions, e
 
 func (o *DumpEverythingCreateOptions) Run() error {
 	fmt.Println("Reading file: ", o.jsonFilename)
-
-	//file_bytes, err := ioutil.ReadFile(o.jsonFilename)
-	//if err != nil {
-	//	logFatal(fmt.Sprintf("Error reading %s", o.jsonFilename), err)
-	//}
-
 	fmt.Println("Transforming json file to events (Instants) to use as input ...")
-	//inputIntervals, err := monitorserialization.EventsFromJSON(file_bytes)
+
 	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
 	if err != nil {
 		logFatal("Error transforming file to events", err)
@@ -119,8 +113,8 @@ func (o *DumpEverythingCreateOptions) Run() error {
 
 	sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
 
-	// We use the periodic-ci-openshift-release-master-ci-4.10-upgrade-from-stable-4.9-e2e-ovirt-upgrade/
-	// jobid=1498692901662625792 and take the e2e-intervals_everything_20220301-164208.json
+	// We use this like to test:
+	// https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-ci-4.10-upgrade-from-stable-4.9-e2e-ovirt-upgrade/1498692901662625792/artifacts/e2e-ovirt-upgrade/openshift-e2e-test/artifacts/junit/e2e-intervals_everything_20220301-164208.json
 	//
 	// starttime: March 1, 2022 16:13:29
 	// endtime  : March 1, 2022 17:52:16
@@ -141,13 +135,10 @@ func (o *DumpEverythingCreateOptions) Run() error {
 	result := intervalcreation.CreatePodIntervalsFromInstants(inputIntervals, startTime, endTime)
 
 	resultBytes, err := monitorserialization.EventsToJSON(result)
-	//resultBytes, err := monitorserialization.EventsToJSON(inputIntervals)
 	if err != nil {
 		logFatal("Error translating back to json", err)
 	}
 	fmt.Println(string(resultBytes))
 
-	//opt := ginkgo.NewOptions()
-	//fmt.Printf("%v\n", opt)
 	return nil
 }
