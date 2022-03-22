@@ -8,18 +8,19 @@ import (
 	"github.com/openshift/origin/pkg/monitor"
 	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
 	"github.com/openshift/origin/pkg/test/ginkgo"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
 
-func logIt(str string, err error) {
-	fmt.Println(str, err)
-}
+//func logIt(str string, err error) {
+//	fmt.Println(str, err)
+//}
 
-func logFatal(str string, err error) {
-	logIt(str, err)
-	os.Exit(1)
-}
+//func logFatal(str string, err error) {
+//	logIt(str, err)
+//	os.Exit(1)
+//}
 
 type DumpOperatorsCreateFlags struct {
 	// jsonBytes is filled in after marshalling the json taken from jsonFilename
@@ -51,20 +52,20 @@ func NewDumpOperatorsCommand() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			if err := f.Validate(); err != nil {
-				//logrus.WithError(err).Fatal("Flags are invalid")
-				fmt.Println("Flags are invalid", err)
+				logrus.WithError(err).Fatal("Flags are invalid")
+				//fmt.Println("Flags are invalid", err)
 			}
 
 			o, err := f.ToOptions()
 			if err != nil {
-				//logrus.WithError(err).Fatal("Failed to build runtime options")
-				fmt.Println("Failed to build runtime options", err)
+				logrus.WithError(err).Fatal("Failed to build runtime options")
+				//fmt.Println("Failed to build runtime options", err)
 				os.Exit(1)
 			}
 
 			if err := o.Run(); err != nil {
-				//logrus.WithError(err).Fatal("Command failed")
-				fmt.Println("Command failed", err)
+				logrus.WithError(err).Fatal("Command failed")
+				//fmt.Println("Command failed", err)
 			}
 
 			return nil

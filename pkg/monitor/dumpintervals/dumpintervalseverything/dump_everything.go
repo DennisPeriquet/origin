@@ -8,18 +8,19 @@ import (
 
 	"github.com/openshift/origin/pkg/monitor/intervalcreation"
 	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
 
-func logIt(str string, err error) {
-	fmt.Println(str, err)
-}
+//func logIt(str string, err error) {
+//	fmt.Println(str, err)
+//}
 
-func logFatal(str string, err error) {
-	logIt(str, err)
-	os.Exit(1)
-}
+//func logFatal(str string, err error) {
+//	logIt(str, err)
+//	os.Exit(1)
+//}
 
 type DumpEverythingCreateFlags struct {
 	// filename is passed as an argument on the cli
@@ -52,19 +53,19 @@ func NewDumpEverythingCommand() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			if err := f.Validate(); err != nil {
-				//logrus.WithError(err).Fatal("Flags are invalid")
-				logIt("Flags are invalid", err)
+				logrus.WithError(err).Fatal("Flags are invalid")
+				//logIt("Flags are invalid", err)
 			}
 
 			o, err := f.ToOptions()
 			if err != nil {
-				//logrus.WithError(err).Fatal("Failed to build runtime options")
-				logFatal("Failed to build runtime options", err)
+				logrus.WithError(err).Fatal("Failed to build runtime options")
+				//logFatal("Failed to build runtime options", err)
 			}
 
 			if err := o.Run(); err != nil {
-				//logrus.WithError(err).Fatal("Command failed")
-				logIt("Command failed", err)
+				logrus.WithError(err).Fatal("Command failed")
+				//logIt("Command failed", err)
 			}
 
 			return nil
