@@ -930,6 +930,7 @@ github.com/seccomp/libseccomp-golang
 # github.com/sergi/go-diff v1.1.0
 github.com/sergi/go-diff/diffmatchpatch
 # github.com/sirupsen/logrus v1.8.1
+## explicit
 github.com/sirupsen/logrus
 # github.com/soheilhy/cmux v0.1.5
 github.com/soheilhy/cmux
