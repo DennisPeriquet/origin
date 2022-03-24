@@ -109,7 +109,7 @@ func (o *DumpEverythingCreateOptions) Run() error {
 
 	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
 	if err != nil {
-		logFatal("Error transforming file to events", err)
+		logrus.WithError(err).Fatal("Error transforming file to events")
 	}
 
 	sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
@@ -123,13 +123,13 @@ func (o *DumpEverythingCreateOptions) Run() error {
 	startTime, err := time.Parse(time.RFC3339, "2022-03-01T16:13:29Z")
 	//startTime, err := time.Parse(time.RFC3339, "2022-03-01T16:42:08Z")
 	if err != nil {
-		logFatal("Error setting up start time", err)
+		logrus.WithError(err).Fatal("Error setting up start time")
 	}
 
 	endTime, err := time.Parse(time.RFC3339, "2022-03-01T17:52:16Z")
 	//endTime, err := time.Parse(time.RFC3339, "2022-03-01T17:46:44Z")
 	if err != nil {
-		logFatal("Error setting up end time", err)
+		logrus.WithError(err).Fatal("Error setting up end time")
 	}
 
 	fmt.Println("Creating PodIntervals from Instants ...")
@@ -137,7 +137,7 @@ func (o *DumpEverythingCreateOptions) Run() error {
 
 	resultBytes, err := monitorserialization.EventsToJSON(result)
 	if err != nil {
-		logFatal("Error translating back to json", err)
+		logrus.WithError(err).Fatal("Error translating back to json")
 	}
 	fmt.Println(string(resultBytes))
 
