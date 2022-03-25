@@ -123,7 +123,7 @@ func (o *DumpOperatorsCreateOptions) Run() error {
 	fmt.Println("Transforming json file to events (Instants) to use as input ...")
 	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
 	if err != nil {
-		logFatal("Error transforming file to events", err)
+		logrus.WithError(err).Fatal("Error transforming file to events")
 	}
 
 	//sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))

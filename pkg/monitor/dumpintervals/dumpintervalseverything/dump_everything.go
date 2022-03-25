@@ -3,10 +3,9 @@ package dumpintervalseverything
 import (
 	"fmt"
 	"os"
-	"sort"
 	"time"
 
-	"github.com/openshift/origin/pkg/monitor/intervalcreation"
+	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -108,11 +107,12 @@ func (o *DumpEverythingCreateOptions) Run() error {
 	fmt.Println("Transforming json file to events (Instants) to use as input ...")
 
 	inputIntervals, err := monitorserialization.EventsFromFile(o.jsonFilename)
+	fmt.Print(inputIntervals)
 	if err != nil {
 		logrus.WithError(err).Fatal("Error transforming file to events")
 	}
 
-	sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
+	//sort.Stable(intervalcreation.ByPodLifecycle(inputIntervals))
 
 	// We use this like to test:
 	// https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-ci-4.10-upgrade-from-stable-4.9-e2e-ovirt-upgrade/1498692901662625792/artifacts/e2e-ovirt-upgrade/openshift-e2e-test/artifacts/junit/e2e-intervals_everything_20220301-164208.json
@@ -121,6 +121,7 @@ func (o *DumpEverythingCreateOptions) Run() error {
 	// endtime  : March 1, 2022 17:52:16
 
 	startTime, err := time.Parse(time.RFC3339, "2022-03-01T16:13:29Z")
+	fmt.Print(startTime)
 	//startTime, err := time.Parse(time.RFC3339, "2022-03-01T16:42:08Z")
 	if err != nil {
 		logrus.WithError(err).Fatal("Error setting up start time")
@@ -133,7 +134,9 @@ func (o *DumpEverythingCreateOptions) Run() error {
 	}
 
 	fmt.Println("Creating PodIntervals from Instants ...")
-	result := intervalcreation.CreatePodIntervalsFromInstants(inputIntervals, startTime, endTime)
+	//result := intervalcreation.CreatePodIntervalsFromInstants(inputIntervals, startTime, endTime)
+	result := monitorapi.Intervals{}
+	fmt.Print(endTime)
 
 	resultBytes, err := monitorserialization.EventsToJSON(result)
 	if err != nil {
