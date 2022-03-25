@@ -625,6 +625,16 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-arch] [Conformance] FIPS TestFIPS": "TestFIPS [Suite:openshift/conformance/parallel/minimal]",
 
+	"[Top Level] [sig-arch] [Conformance] sysctl pod should start for each sysctl on whitelist kernel.shm_rmid_forced": "kernel.shm_rmid_forced [Suite:openshift/conformance/parallel/minimal]",
+
+	"[Top Level] [sig-arch] [Conformance] sysctl pod should start for each sysctl on whitelist net.ipv4.ip_local_port_range": "net.ipv4.ip_local_port_range [Suite:openshift/conformance/parallel/minimal]",
+
+	"[Top Level] [sig-arch] [Conformance] sysctl pod should start for each sysctl on whitelist net.ipv4.ip_unprivileged_port_start": "net.ipv4.ip_unprivileged_port_start [Suite:openshift/conformance/parallel/minimal]",
+
+	"[Top Level] [sig-arch] [Conformance] sysctl pod should start for each sysctl on whitelist net.ipv4.ping_group_range": "net.ipv4.ping_group_range [Suite:openshift/conformance/parallel/minimal]",
+
+	"[Top Level] [sig-arch] [Conformance] sysctl pod should start for each sysctl on whitelist net.ipv4.tcp_syncookies": "net.ipv4.tcp_syncookies [Suite:openshift/conformance/parallel/minimal]",
+
 	"[Top Level] [sig-arch] ocp payload should be based on existing source OLM version should contain the source commit id": "OLM version should contain the source commit id [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch][Early] Managed cluster should start all core operators": "start all core operators [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
@@ -1215,10 +1225,6 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-builds][Feature:Builds][pullsecret] docker build using a pull secret  Building from a template should create a docker build that pulls using a secret run it": "should create a docker build that pulls using a secret run it [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][sig-devex][Feature:Jenkins][Slow] openshift pipeline build  Sync plugin tests using the ephemeral template": "using the ephemeral template",
-
-	"[Top Level] [sig-builds][Feature:Builds][sig-devex][Feature:Jenkins][Slow] openshift pipeline build  jenkins-client-plugin tests using the ephemeral template": "using the ephemeral template",
-
 	"[Top Level] [sig-builds][Feature:Builds][timing] capture build stages and durations  should record build stages and durations for docker": "should record build stages and durations for docker [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds][timing] capture build stages and durations  should record build stages and durations for s2i": "should record build stages and durations for s2i [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
@@ -1254,6 +1260,8 @@ var annotations = map[string]string{
 	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPushWithImage": "TestWebhookGitHubPushWithImage [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPushWithImageStream": "TestWebhookGitHubPushWithImageStream [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-builds][Feature:JenkinsRHELImagesOnly][Feature:Jenkins][Feature:Builds][sig-devex][Slow] openshift pipeline build  jenkins pipeline build config strategy using a jenkins instance launched with the ephemeral template": "using a jenkins instance launched with the ephemeral template",
 
 	"[Top Level] [sig-cli] Kubectl Port forwarding With a server listening on 0.0.0.0 should support forwarding over websockets": "should support forwarding over websockets [Skipped:Proxy] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -1722,12 +1730,6 @@ var annotations = map[string]string{
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][python][Slow] hot deploy for openshift python image  Django example should work with hot deploy": "should work with hot deploy",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][ruby][Slow] hot deploy for openshift ruby image  Rails example should work with hot deploy": "should work with hot deploy",
-
-	"[Top Level] [sig-devex][Feature:JenkinsRHELImagesOnly][Slow] openshift pipeline build  Sync plugin tests using the ephemeral template": "using the ephemeral template",
-
-	"[Top Level] [sig-devex][Feature:Jenkins][Slow] Jenkins repos e2e openshift using slow openshift pipeline build  Sync plugin tests using the ephemeral template": "using the ephemeral template",
-
-	"[Top Level] [sig-devex][Feature:Jenkins][Slow] Jenkins repos e2e openshift using slow openshift pipeline build  Sync plugin tests using the persistent template": "using the persistent template",
 
 	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestAutomaticCreationOfPullSecrets": "TestAutomaticCreationOfPullSecrets [Suite:openshift/conformance/parallel]",
 
@@ -2498,6 +2500,10 @@ var annotations = map[string]string{
 	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on different nodes via service IPs": "should prevent connections to pods in different namespaces on different nodes via service IPs [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on the same node via service IPs": "should prevent connections to pods in different namespaces on the same node via service IPs [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-network][Feature:EgressRouterCNI] should ensure ipv4 egressrouter cni resources are created": "should ensure ipv4 egressrouter cni resources are created [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-network][Feature:EgressRouterCNI] when using openshift ovn-kubernetes should ensure ipv6 egressrouter cni resources are created": "should ensure ipv6 egressrouter cni resources are created [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network][Feature:Multus] should use multus to create net1 device from network-attachment-definition": "should use multus to create net1 device from network-attachment-definition [Suite:openshift/conformance/parallel]",
 

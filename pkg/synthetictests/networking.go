@@ -10,6 +10,8 @@ import (
 
 	"github.com/openshift/origin/pkg/monitor/intervalcreation"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
+
+	"k8s.io/client-go/rest"
 )
 
 type testCategorizer struct {
@@ -30,6 +32,7 @@ func testPodSandboxCreation(events monitorapi.Intervals) []*junitapi.JUnitTestCa
 		{by: " by writing network status", substring: "error setting the networks status"},
 		{by: " by getting pod", substring: " error getting pod: pods"},
 		{by: " by writing child", substring: "write child: broken pipe"},
+		{by: " by ovn default network ready", substring: "have you checked that your default network is ready? still waiting for readinessindicatorfile"},
 		{by: " by other", substring: " "}, // always matches
 	}
 
@@ -44,12 +47,19 @@ func testPodSandboxCreation(events monitorapi.Intervals) []*junitapi.JUnitTestCa
 		if !strings.Contains(event.Message, "reason/FailedCreatePodSandBox Failed to create pod sandbox") {
 			continue
 		}
-		if strings.Contains(event.Message, "Multus") && strings.Contains(event.Message, "error getting pod") && (strings.Contains(event.Message, "connection refused") || strings.Contains(event.Message, "i/o timeout")) {
+		if strings.Contains(event.Message, "Multus") &&
+			strings.Contains(event.Message, "error getting pod") &&
+			(strings.Contains(event.Message, "connection refused") || strings.Contains(event.Message, "i/o timeout")) {
 			flakes = append(flakes, fmt.Sprintf("%v - multus is unable to get pods due to LB disruption https://bugzilla.redhat.com/show_bug.cgi?id=1927264 - %v", event.Locator, event.Message))
 			continue
 		}
 		if strings.Contains(event.Message, "Multus") && strings.Contains(event.Message, "error getting pod: Unauthorized") {
 			flakes = append(flakes, fmt.Sprintf("%v - multus is unable to get pods due to authorization https://bugzilla.redhat.com/show_bug.cgi?id=1972490 - %v", event.Locator, event.Message))
+			continue
+		}
+		if strings.Contains(event.Message, "Multus") &&
+			strings.Contains(event.Message, "have you checked that your default network is ready? still waiting for readinessindicatorfile") {
+			flakes = append(flakes, fmt.Sprintf("%v - multus is unable to get pods as ovnkube-node pod has not yet written readinessindicatorfile (possibly not running due to image pull delays) https://bugzilla.redhat.com/show_bug.cgi?id=20671320 - %v", event.Locator, event.Message))
 			continue
 		}
 		deletionTime := getPodDeletionTime(eventsForPods[event.Locator], event.Locator)
@@ -187,7 +197,7 @@ func getPodDeletionTime(events monitorapi.Intervals, podLocator string) *time.Ti
 }
 
 // bug is tracked here: https://bugzilla.redhat.com/show_bug.cgi?id=2057181
-func testOvnNodeReadinessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func testOvnNodeReadinessProbe(events monitorapi.Intervals, kubeClientConfig *rest.Config) []*junitapi.JUnitTestCase {
 	const testName = "[bz-networking] ovnkube-node readiness probe should not fail repeatedly"
 	regExp := regexp.MustCompile(ovnReadinessRegExpStr)
 	var tests []*junitapi.JUnitTestCase
@@ -200,7 +210,14 @@ func testOvnNodeReadinessProbe(events monitorapi.Intervals) []*junitapi.JUnitTes
 				msgMap[msg] = true
 				eventDisplayMessage, times := getTimesAnEventHappened(msg)
 				if times > duplicateEventThreshold {
-					failureOutput += fmt.Sprintf("event [%s] happened too frequently for %d times\n", eventDisplayMessage, times)
+					// if the readiness probe failure for this pod happened AFTER the initial installation was complete,
+					// then this probe failure is unexpected and should fail.
+					isDuringInstall, err := isEventDuringInstallation(event, kubeClientConfig, regExp)
+					if err != nil {
+						failureOutput += fmt.Sprintf("error [%v] happened when processing event [%s]\n", err, eventDisplayMessage)
+					} else if !isDuringInstall {
+						failureOutput += fmt.Sprintf("event [%s] happened too frequently for %d times\n", eventDisplayMessage, times)
+					}
 				}
 			}
 		}
