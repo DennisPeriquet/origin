@@ -124,7 +124,14 @@ func TestUpgradeEventRegexExcluder(t *testing.T) {
 }
 
 func Test_testDuplicatedEventForUpgrade(t *testing.T) {
-	events2 := monitorapi.Intervals{
+
+	// junit/e2e-events... has level, locator, message, from/to.
+	// We can take data from that and make a monitorapi.Intervals out of it.
+	// In thi scase, we can just make up some data.
+
+	// Composite literal for everything style.
+	//
+	events := monitorapi.Intervals{
 		monitorapi.EventInterval{
 			Condition: monitorapi.Condition{
 				Level:   monitorapi.Info,
@@ -144,29 +151,42 @@ func Test_testDuplicatedEventForUpgrade(t *testing.T) {
 			To:   time.Time{},
 		},
 	}
-	events := monitorapi.Intervals{}
-	events = append(events, monitorapi.EventInterval{
-		Condition: monitorapi.Condition{
-			Level:   monitorapi.Info,
-			Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
-			Message: "reason/GracefulDelete duration/1s",
-		},
-		From: time.Time{},
-		To:   time.Time{},
-	})
-	events = append(events, monitorapi.EventInterval{
-		Condition: monitorapi.Condition{
-			Level:   monitorapi.Info,
-			Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
-			Message: "reason/GracefulDelete duration/1s",
-		},
-		From: time.Time{},
-		To:   time.Time{},
-	})
-	fmt.Print(events, events2)
-	kubeClientConfig := &rest.Config{}
-	fmt.Print(kubeClientConfig)
 
+	// Composite literal for Condition with append style
+	events2 := monitorapi.Intervals{}
+	events2 = append(events2, monitorapi.EventInterval{
+		Condition: monitorapi.Condition{
+			Level:   monitorapi.Info,
+			Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
+			Message: "reason/GracefulDelete duration/1s",
+		},
+		From: time.Time{},
+		To:   time.Time{},
+	})
+	events2 = append(events2, monitorapi.EventInterval{
+		Condition: monitorapi.Condition{
+			Level:   monitorapi.Info,
+			Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
+			Message: "reason/GracefulDelete duration/1s",
+		},
+		From: time.Time{},
+		To:   time.Time{},
+	})
+
+	// Print to create a reference to satisfy the linter.
+	fmt.Print(events, events2)
+
+	// Make an Openshift cluster with cluster-bot; then take the cert, key and ca
+	// data from the downloaded kubeconfig, base64 decode it, place it in files and
+	// set the values below (or just make the files that this code uses).
+	kubeClientConfig := &rest.Config{
+		Host: "https://api.ci-ln-vx4h0d2-72292.origin-ci-int-gce.dev.rhcloud.com:6443",
+		TLSClientConfig: rest.TLSClientConfig{
+			CertFile: "/tmp/auth/cert_file",
+			KeyFile:  "/tmp/auth/key_file",
+			CAFile:   "/tmp/auth/ca_file",
+		},
+	}
 	testDuplicatedEventForUpgrade(events, kubeClientConfig, "[simple] sampe test")
 }
 
