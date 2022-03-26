@@ -1,6 +1,7 @@
 package synthetictests
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 	"testing"
@@ -8,6 +9,7 @@ import (
 
 	v1 "github.com/openshift/api/config/v1"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
+	"k8s.io/client-go/rest"
 )
 
 func TestEventCountExtractor(t *testing.T) {
@@ -119,6 +121,53 @@ func TestUpgradeEventRegexExcluder(t *testing.T) {
 		})
 	}
 
+}
+
+func Test_testDuplicatedEventForUpgrade(t *testing.T) {
+	events2 := monitorapi.Intervals{
+		monitorapi.EventInterval{
+			Condition: monitorapi.Condition{
+				Level:   monitorapi.Info,
+				Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
+				Message: "reason/GracefulDelete duration/1s",
+			},
+			From: time.Time{},
+			To:   time.Time{},
+		},
+		monitorapi.EventInterval{
+			Condition: monitorapi.Condition{
+				Level:   monitorapi.Info,
+				Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
+				Message: "reason/GracefulDelete duration/1s",
+			},
+			From: time.Time{},
+			To:   time.Time{},
+		},
+	}
+	events := monitorapi.Intervals{}
+	events = append(events, monitorapi.EventInterval{
+		Condition: monitorapi.Condition{
+			Level:   monitorapi.Info,
+			Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
+			Message: "reason/GracefulDelete duration/1s",
+		},
+		From: time.Time{},
+		To:   time.Time{},
+	})
+	events = append(events, monitorapi.EventInterval{
+		Condition: monitorapi.Condition{
+			Level:   monitorapi.Info,
+			Locator: "ns/e2e-test-check-for-alerts-685lf pod/execpod node/ip-10-0-187-99.us-west-1.compute.internal",
+			Message: "reason/GracefulDelete duration/1s",
+		},
+		From: time.Time{},
+		To:   time.Time{},
+	})
+	fmt.Print(events, events2)
+	kubeClientConfig := &rest.Config{}
+	fmt.Print(kubeClientConfig)
+
+	testDuplicatedEventForUpgrade(events, kubeClientConfig, "[simple] sampe test")
 }
 
 func TestKnownBugEvents(t *testing.T) {
