@@ -110,9 +110,14 @@ func monitorEventIntervalToEventInterval(interval monitorapi.EventInterval) Even
 	return ret
 }
 
+// byTime is a list of serialize.EventIntervals (note that this is distinct from the
+// monitorapi.EventIntervals)
 type byTime []EventInterval
 
 func (intervals byTime) Less(i, j int) bool {
+
+	// intervals[j].From is of type matav1.Time which has a field called "Time"
+	// which is of time time.Time
 	switch d := intervals[i].From.Sub(intervals[j].From.Time); {
 	case d < 0:
 		return true
