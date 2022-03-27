@@ -103,6 +103,7 @@ func (filters IntervalFilters) Any(i EventInterval) bool {
 	return false
 }
 
+// If i.To is after i.From
 func HasDuration(i EventInterval) bool { return i.To.After(i.From) }
 
 type Intervals []EventInterval
@@ -283,29 +284,46 @@ func (intervals Intervals) CopyAndSort(from, to time.Time) Intervals {
 // that start after from and start before to (if to is set). The zero value will
 // return all elements. If intervals is unsorted the result is undefined. This
 // runs in O(n).
+// Essentially, we are returning the intervals between from and to (inclusive).
 func (intervals Intervals) Slice(from, to time.Time) Intervals {
 	if from.IsZero() && to.IsZero() {
 		return intervals
 	}
 
+	// Since the list is sorted, the first one will be the earliest
+	// Interval whose From is after the given from.  "first" is an index
+	// in intervals.
 	first := sort.Search(len(intervals), func(i int) bool {
 		return intervals[i].From.After(from)
 	})
+
+	// In this case, there was no Interval whose From was after the given from
 	if first == -1 {
 		return nil
 	}
+
+	// Since to is 0, we return everything from first to the end of the Intervals
 	if to.IsZero() {
 		return intervals[first:]
 	}
+
+	// Travere intervals from first to an Interval whose From is after the given to.
+	// Once you find that, return intervals from first to the interval before the
+	// one we found.
 	for i := first; i < len(intervals); i++ {
 		if intervals[i].From.After(to) {
 			return intervals[first:i]
 		}
 	}
+
+	// If we didn't find an Interval whose From is after the given to, we reutrn all
+	// Intervals from first to the end
 	return intervals[first:]
 }
 
 // Clamp sets all zero value From or To fields to from or to.
+// Essentially, this "clamps" intervals to being between the given from and to
+// when they started out undefined before From and undefined after To.
 func (intervals Intervals) Clamp(from, to time.Time) {
 	for i := range intervals {
 		if intervals[i].From.IsZero() {
