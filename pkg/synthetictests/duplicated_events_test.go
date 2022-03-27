@@ -178,9 +178,10 @@ func Test_testDuplicatedEventForUpgrade(t *testing.T) {
 
 	// Make an Openshift cluster with cluster-bot; then take the cert, key and ca
 	// data from the downloaded kubeconfig, base64 decode it, place it in files and
-	// set the values below (or just make the files that this code uses).
+	// set the values below (or just make the files that this code uses).  Make
+	// use of tools/get_kube_auth.sh as needed to create the /tmp/auth files.
 	kubeClientConfig := &rest.Config{
-		Host: "https://api.ci-ln-vx4h0d2-72292.origin-ci-int-gce.dev.rhcloud.com:6443",
+		Host: "https://api.ci-ln-f6kxh72-72292.origin-ci-int-gce.dev.rhcloud.com:6443",
 		TLSClientConfig: rest.TLSClientConfig{
 			CertFile: "/tmp/auth/cert_file",
 			KeyFile:  "/tmp/auth/key_file",
