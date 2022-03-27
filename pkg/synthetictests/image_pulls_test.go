@@ -6,6 +6,7 @@ import (
 
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
+	"github.com/openshift/origin/pkg/test/ginkgo/junitapi"
 )
 
 func Test_testBackoffPullingRegistryRedhatImage(t *testing.T) {
@@ -141,4 +142,28 @@ func Test_FiletestBackoffPullingRegistryRedhatImage(t *testing.T) {
 			}
 		})
 	}
+}
+
+func Test_FileTestRequiredInstallerResourcesMissing(t *testing.T) {
+	// Take an existing json file from a junit subdir from a prow job that had the
+	// Test_FileTestRequiredInstallerResourcesMissing.
+	// Run like this: go test -v -run Test_FileTestRequiredInstallerResourcesMissing
+	// run click "debug test" in vscode.
+	e2e_file := "/home/dperique/origin_testdata/e2e-events-testRequiredInstallerResourcesMissing.json"
+	e, err := monitorserialization.EventsFromFile(e2e_file)
+	if err != nil {
+		t.Errorf("Unable to open e2e_file %s: not found", e2e_file)
+	}
+
+	// Append the test data to the end of the Intervals
+	//
+	t.Run("Test actual data", func(t *testing.T) {
+		// Comment out for now until I merge my other PR.
+		//junit_tests := testRequiredInstallerResourcesMissing(e)
+		t.Error(e)
+		junit_tests := []*junitapi.JUnitTestCase{}
+		if len(junit_tests) != 1 {
+			t.Errorf("We should've matched exactly one (failure) but matched %d", len(junit_tests))
+		}
+	})
 }
