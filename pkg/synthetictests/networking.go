@@ -76,9 +76,13 @@ func testPodSandboxCreation(events monitorapi.Intervals) []*junitapi.JUnitTestCa
 			// This failed to create a sandbox case is expected due to the ovnkube-msater pod trying to bring up the logical port
 			// for a pod that is in the process of being deleted.
 			// See https://github.com/openshift/origin/blob/36ddf0503bbb9f7adf9fe3481f85c856ec0a2f31/vendor/k8s.io/kubernetes/test/e2e/apimachinery/garbage_collector.go#L739
-			continue
+			fmt.Print()
+			//continue
 		}
-		deletionTime := getPodDeletionTime(eventsForPods[event.Locator], event.Locator)
+
+		//deletionTime := getPodDeletionTime(eventsForPods[event.Locator], event.Locator)
+		podName := monitorapi.LocatorParts(event.Locator)["pod"]
+		deletionTime := getPodDeletionTime(eventsForPods[podName], podName)
 		if deletionTime == nil {
 			// mark sandboxes errors as flakes if networking is being updated
 			match := -1
@@ -194,18 +198,21 @@ func categorizeBySubset(categorizers []testCategorizer, failures, flakes []strin
 // getEventsByPod returns map keyed by pod locator with all events associated with it.
 func getEventsByPod(events monitorapi.Intervals) map[string]monitorapi.Intervals {
 	eventsByPods := map[string]monitorapi.Intervals{}
+	var podName string
 	for _, event := range events {
 		if !strings.Contains(event.Locator, "pod/") {
 			continue
 		}
-		eventsByPods[event.Locator] = append(eventsByPods[event.Locator], event)
+		//eventsByPods[event.Locator] = append(eventsByPods[event.Locator], event)
+		podName = monitorapi.PodFrom(event.Locator).Name
+		eventsByPods[podName] = append(eventsByPods[podName], event)
 	}
 	return eventsByPods
 }
 
-func getPodDeletionTime(events monitorapi.Intervals, podLocator string) *time.Time {
+func getPodDeletionTime(events monitorapi.Intervals, podName string) *time.Time {
 	for _, event := range events {
-		if event.Locator == podLocator && event.Message == "reason/Deleted" {
+		if strings.Contains(event.Locator, podName) && strings.Contains(event.Message, "reason/Deleted") {
 			return &event.From
 		}
 	}
