@@ -88,9 +88,6 @@ var (
 			// https://bugzilla.redhat.com/show_bug.cgi?id=1854379
 			`\[sig-storage\].*\[Driver: nfs\] \[Testpattern: Dynamic PV \(default fs\)\].*subPath should be able to unmount after the subpath directory is deleted`,
 
-			// https://bugzilla.redhat.com/show_bug.cgi?id=1945329
-			`should drop INVALID conntrack entries`,
-
 			// https://bugzilla.redhat.com/show_bug.cgi?id=1986306
 			`\[sig-cli\] Kubectl client kubectl wait should ignore not found error with --for=delete`,
 
@@ -110,9 +107,6 @@ var (
 			`Netpol \[LinuxOnly\] NetworkPolicy between server and client using UDP should enforce policy to allow traffic only from a pod in a different namespace based on PodSelector and NamespaceSelector`,
 
 			`Topology Hints should distribute endpoints evenly`,
-
-			// https://bugzilla.redhat.com/show_bug.cgi?id=2034958
-			`\[sig-network\] Conntrack should be able to preserve UDP traffic when initial unready endpoints get ready`,
 		},
 		// tests that may work, but we don't support them
 		"[Disabled:Unsupported]": {
@@ -157,6 +151,10 @@ var (
 		},
 		"[Skipped:azure]": {
 			"Networking should provide Internet connection for containers", // Azure does not allow ICMP traffic to internet.
+			// Azure CSI migration changed how we treat regions without zones.
+			// See https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=2066865
+			`\[sig-storage\] In-tree Volumes \[Driver: azure-disk\] \[Testpattern: Dynamic PV \(immediate binding\)\] topology should provision a volume and schedule a pod with AllowedTopologies`,
+			`\[sig-storage\] In-tree Volumes \[Driver: azure-disk\] \[Testpattern: Dynamic PV \(delayed binding\)\] topology should provision a volume and schedule a pod with AllowedTopologies`,
 		},
 		"[Skipped:gce]": {
 			// Requires creation of a different compute instance in a different zone and is not compatible with volumeBindingMode of WaitForFirstConsumer which we use in 4.x

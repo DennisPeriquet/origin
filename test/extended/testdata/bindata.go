@@ -17215,6 +17215,9 @@ items:
     strategy:
       type: Source
       sourceStrategy:
+        env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
         from:
           kind: DockerImage
           name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -17354,6 +17357,8 @@ spec:
     type: Source
     sourceStrategy:
       env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
         - name: FIELDREF_ENV
           valueFrom:
             fieldRef:
@@ -17395,6 +17400,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+      - name: "BUILD_LOGLEVEL"
+        value: "2"
       from:
         kind: DockerImage
         name: registry.redhat.io/ubi8/php-74:latest
@@ -17481,7 +17489,10 @@ spec:
       FROM image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
       RUN touch /php-file
   strategy:
-    dockerStrategy: {}`)
+    dockerStrategy:
+      env:
+      - name: "BUILD_LOGLEVEL"
+        value: "2"`)
 
 func testExtendedTestdataBuildsBuildPruningSuccessfulBuildConfigYamlBytes() ([]byte, error) {
 	return _testExtendedTestdataBuildsBuildPruningSuccessfulBuildConfigYaml, nil
@@ -18696,6 +18707,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+      - name: "BUILD_LOGLEVEL"
+        value: "2"
       from:
         kind: DockerImage
         name: image-registry.openshift-image-registry.svc:5000/openshift/nodejs:latest
@@ -18866,6 +18880,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+      - name: "BUILD_LOGLEVEL"
+        value: "2"
       from:
         kind: DockerImage
         name: image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8
@@ -18997,6 +19014,9 @@ spec:
   strategy:
     type: Docker
     dockerStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8
@@ -19028,6 +19048,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8
@@ -19059,6 +19082,7 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+
       from:
         kind: DockerImage
         name: image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8
@@ -19066,6 +19090,8 @@ spec:
       env:
         - name: http_proxy
           value: "http://%"
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
 `)
 
 func testExtendedTestdataBuildsStatusfailGenericreasonYamlBytes() ([]byte, error) {
@@ -19097,6 +19123,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8
@@ -19131,6 +19160,9 @@ spec:
       - failme
   strategy:
     sourceStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -19167,6 +19199,9 @@ spec:
       name: bogus.registry/image
   strategy:
     sourceStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -19270,6 +19305,9 @@ items:
     strategy:
       type: Source
       sourceStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStreamTag
           name: python:latest
@@ -19292,6 +19330,9 @@ items:
     strategy:
       type: Docker
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: DockerImage
           name: registry.redhat.io/ubi8/python-36:latest
@@ -19543,6 +19584,8 @@ items:
           value: 127.0.0.1:3128
         - name: HTTP_PROXY
           value: 127.0.0.1:3128
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
         from:
           kind: DockerImage
           name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -19573,6 +19616,8 @@ items:
           value: https://envuser:password@proxy3.com
         - name: SOME_HTTPS_PROXY
           value: https://envuser:password@proxy4.com
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
 - kind: BuildConfig
   apiVersion: v1
   metadata:
@@ -19600,6 +19645,8 @@ items:
           value: https://envuser:password@proxy3.com
         - name: SOME_HTTPS_PROXY
           value: https://envuser:password@proxy4.com
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
 - kind: BuildConfig
   apiVersion: build.openshift.io/v1
   metadata:
@@ -19612,6 +19659,9 @@ items:
         RUN cat /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
     strategy:
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStreamTag
           name: cli
@@ -19634,42 +19684,51 @@ func testExtendedTestdataBuildsTestBuildProxyYaml() (*asset, error) {
 }
 
 var _testExtendedTestdataBuildsTestBuildRevisionJson = []byte(`{
-  "kind": "List",
-  "apiVersion": "v1",
-  "metadata": {},
-  "items": [
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "sample-build",
-        "creationTimestamp": null
-      },
-      "spec": {
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/openshift/ruby-hello-world.git"
-          }
+  "kind":"List",
+  "apiVersion":"v1",
+  "metadata":{
+     
+  },
+  "items":[
+     {
+        "kind":"BuildConfig",
+        "apiVersion":"v1",
+        "metadata":{
+           "name":"sample-build",
+           "creationTimestamp":null
         },
-        "strategy": {
-          "type": "Source",
-          "sourceStrategy": {
-            "from": {
-              "kind": "DockerImage",
-              "name": "quay.io/redhat-developer/test-build-simples2i:1.2"
-            }
-          }
+        "spec":{
+           "source":{
+              "type":"Git",
+              "git":{
+                 "uri":"https://github.com/openshift/ruby-hello-world.git"
+              }
+           },
+           "strategy":{
+              "type":"Source",
+              "sourceStrategy":{
+                 "env":[
+                    {
+                       "name":"BUILD_LOGLEVEL",
+                       "value":"2"
+                    }
+                 ],
+                 "from":{
+                    "kind":"DockerImage",
+                    "name":"quay.io/redhat-developer/test-build-simples2i:1.2"
+                 }
+              }
+           },
+           "resources":{
+              
+           }
         },
-        "resources": {}
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    }
+        "status":{
+           "lastVersion":0
+        }
+     }
   ]
-}
-`)
+}`)
 
 func testExtendedTestdataBuildsTestBuildRevisionJsonBytes() ([]byte, error) {
 	return _testExtendedTestdataBuildsTestBuildRevisionJson, nil
@@ -19906,6 +19965,9 @@ items:
     strategy:
       type: Docker
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: DockerImage
           name: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
@@ -19932,6 +19994,9 @@ items:
     strategy:
       type: Docker
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: DockerImage
           name: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
@@ -20002,6 +20067,9 @@ items:
     strategy:
       type: Source
       sourceStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStream
           name: test
@@ -20032,6 +20100,9 @@ items:
     strategy:
       type: Source
       sourceStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStream
           name: test
@@ -20083,6 +20154,12 @@ var _testExtendedTestdataBuildsTestCdsDockerbuildJson = []byte(`{
     "strategy":{
       "type":"Docker",
       "dockerStrategy":{
+        "env":[
+          {
+             "name":"BUILD_LOGLEVEL",
+             "value":"2"
+          }
+        ],
         "from":{
           "kind":"DockerImage",
           "name":"image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
@@ -20140,6 +20217,12 @@ var _testExtendedTestdataBuildsTestCdsSourcebuildJson = []byte(`{
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
+            "env":[
+              {
+                 "name":"BUILD_LOGLEVEL",
+                 "value":"2"
+              }
+           ],
             "from": {
               "kind": "DockerImage",
               "name": "image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
@@ -20356,6 +20439,9 @@ items:
     strategy:
       type: Custom
       customStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         forcePull: true
         from:
           kind: ImageStreamTag
@@ -20431,6 +20517,12 @@ var _testExtendedTestdataBuildsTestDockerBuildPullsecretJson = []byte(`{
       "strategy": {
         "type": "Docker",
         "dockerStrategy": {
+          "env":[
+            {
+               "name":"BUILD_LOGLEVEL",
+               "value":"2"
+            }
+         ],
           "from": {
             "kind": "DockerImage",
             "name": "image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
@@ -20461,6 +20553,12 @@ var _testExtendedTestdataBuildsTestDockerBuildPullsecretJson = []byte(`{
       "strategy": {
         "type": "Docker",
         "dockerStrategy": {
+          "env":[
+            {
+               "name":"BUILD_LOGLEVEL",
+               "value":"2"
+            }
+         ],
           "from": {
             "kind": "ImageStreamTag",
             "name": "image1:latest"
@@ -20492,51 +20590,58 @@ var _testExtendedTestdataBuildsTestDockerBuildJson = []byte(`{
   "kind":"BuildConfig",
   "apiVersion":"v1",
   "metadata":{
-    "name":"test",
-    "labels":{
-      "name":"test"
-    }
+     "name":"test",
+     "labels":{
+        "name":"test"
+     }
   },
   "spec":{
-    "triggers":[],
-    "source":{
-      "git": {
-        "uri":"https://github.com/sclorg/nodejs-ex"        
-      },
-      "dockerfile": "FROM image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
-    },
-    "strategy":{
-      "type":"Docker",
-      "dockerStrategy":{
-        "from":{
-          "kind":"DockerImage",
-          "name":"image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
-        }
-      }
-    },
-    "output":{
-      "to":{
-        "kind":"ImageStreamTag",
-        "name":"test:latest"
-      },
-      "imageLabels": [
-        {
-          "name": "user-specified-label",
-          "value": "arbitrary-value"
+     "triggers":[
+        
+     ],
+     "source":{
+        "git":{
+           "uri":"https://github.com/sclorg/nodejs-ex"
         },
-        {
-          "name": "io.k8s.display-name",
-          "value": "overridden"
-        },
-        {
-          "name": "io.openshift.builder-version",
-          "value": "overridden2"
+        "dockerfile":"FROM image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
+     },
+     "strategy":{
+        "type":"Docker",
+        "dockerStrategy":{
+           "env":[
+              {
+                 "name":"BUILD_LOGLEVEL",
+                 "value":"2"
+              }
+           ],
+           "from":{
+              "kind":"DockerImage",
+              "name":"image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"
+           }
         }
-      ]
-    }
+     },
+     "output":{
+        "to":{
+           "kind":"ImageStreamTag",
+           "name":"test:latest"
+        },
+        "imageLabels":[
+           {
+              "name":"user-specified-label",
+              "value":"arbitrary-value"
+           },
+           {
+              "name":"io.k8s.display-name",
+              "value":"overridden"
+           },
+           {
+              "name":"io.openshift.builder-version",
+              "value":"overridden2"
+           }
+        ]
+     }
   }
-}
-`)
+}`)
 
 func testExtendedTestdataBuildsTestDockerBuildJsonBytes() ([]byte, error) {
 	return _testExtendedTestdataBuildsTestDockerBuildJson, nil
@@ -20618,6 +20723,12 @@ var _testExtendedTestdataBuildsTestEnvBuildJson = []byte(`{
     "strategy":{
       "type":"Source",
       "sourceStrategy":{
+        "env":[
+          {
+             "name":"BUILD_LOGLEVEL",
+             "value":"2"
+          }
+       ],
         "from":{
           "kind":"DockerImage",
           "name":"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8"
@@ -20706,6 +20817,9 @@ items:
     strategy:
       type: Source
       sourceStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStreamTag
           name: nodejs-ex:latest
@@ -20727,6 +20841,9 @@ items:
     strategy:
       type: Docker
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStreamTag
           name: nodejs-ex:latest
@@ -20745,6 +20862,9 @@ items:
     strategy:
       type: Custom
       customStrategy:
+        env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
         from:
           kind: ImageStreamTag
           name: nodejs-ex:latest
@@ -20763,6 +20883,9 @@ items:
     strategy:
       type: Jenkins
       jenkinsPipelineStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         jenkinsfile: node {}
     triggers:
     - type: ImageChange
@@ -20951,6 +21074,9 @@ items:
             ln -s ../../rh/6/root/usr/bin /opt/app-root/test-links/bin
     strategy:
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStreamTag
           name: ruby:2.7-ubi8
@@ -21010,7 +21136,10 @@ items:
         - destinationDir: injected/usr/bin
           sourcePath: /usr/bin/ruby
     strategy:
-      dockerStrategy: {}
+      dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
 
 - apiVersion: v1
   kind: ImageStream
@@ -21164,6 +21293,12 @@ var _testExtendedTestdataBuildsTestNosrcBuildJson = []byte(`{
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
+            "env":[
+              {
+                 "name":"BUILD_LOGLEVEL",
+                 "value":"2"
+              }
+           ],
             "from": {
               "kind": "DockerImage",
               "name": "quay.io/redhat-developer/test-build-simples2i:1.2"
@@ -21386,6 +21521,9 @@ items:
     strategy:
       type: Source
       sourceStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: ImageStreamTag
           name: nodejs:latest
@@ -21853,6 +21991,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -22058,6 +22199,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+        - name: BUILD_LOGLEVEL
+          value: "5"
       from:
         kind: DockerImage
         name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -22245,6 +22389,9 @@ spec:
   strategy:
     type: Source
     sourceStrategy:
+      env:
+        - name: "BUILD_LOGLEVEL"
+          value: "2"
       from:
         kind: DockerImage
         name: quay.io/redhat-developer/test-build-simples2i:1.2
@@ -40775,8 +40922,7 @@ spec:
       - ruby
       from:
         kind: ImageStreamTag
-        name: ruby:latest
-        namespace: openshift
+        name: ruby-30:latest
     type: ImageChange
   - imageChangeParams:
       automatic: true
@@ -40784,8 +40930,7 @@ spec:
       - postgresql
       from:
         kind: ImageStreamTag
-        name: postgresql:latest
-        namespace: openshift
+        name: postgresql-13:latest
     type: ImageChange
 `)
 
@@ -41300,8 +41445,7 @@ spec:
       - ruby2
       from:
         kind: ImageStreamTag
-        name: ruby:latest
-        namespace: openshift
+        name: ruby-30:latest
     type: ImageChange
 `)
 
@@ -48163,6 +48307,9 @@ objects:
   spec:
     host: first.example.com
     path: /Letter
+    tls:
+      insecureEdgeTerminationPolicy: Allow
+      termination: Edge
     to:
       name: endpoints
     ports:
@@ -48177,6 +48324,9 @@ objects:
   spec:
     host: second.example.com
     path: /Letter
+    tls:
+      insecureEdgeTerminationPolicy: Allow
+      termination: Edge
     to:
       name: endpoints
     ports:
@@ -49497,6 +49647,58 @@ kind: Template
 parameters:
 - name: IMAGE
   value: openshift/origin-haproxy-router:latest
+- name: DEFAULT_CERTIFICATE
+  value: |-
+    -----BEGIN CERTIFICATE-----
+    MIIDuTCCAqGgAwIBAgIUZYD30F0sJl7HqxE7gAequtxk/HowDQYJKoZIhvcNAQEL
+    BQAwgaExCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJTQzEVMBMGA1UEBwwMRGVmYXVs
+    dCBDaXR5MRwwGgYDVQQKDBNEZWZhdWx0IENvbXBhbnkgTHRkMRAwDgYDVQQLDAdU
+    ZXN0IENBMRowGAYDVQQDDBF3d3cuZXhhbXBsZWNhLmNvbTEiMCAGCSqGSIb3DQEJ
+    ARYTZXhhbXBsZUBleGFtcGxlLmNvbTAeFw0yMjAxMjgwMjU0MDlaFw0zMjAxMjYw
+    MjU0MDlaMHwxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTELMAkGA1UECAwCU0Mx
+    CzAJBgNVBAYTAlVTMSIwIAYJKoZIhvcNAQkBFhNleGFtcGxlQGV4YW1wbGUuY29t
+    MRAwDgYDVQQKDAdFeGFtcGxlMRAwDgYDVQQLDAdFeGFtcGxlMIIBIjANBgkqhkiG
+    9w0BAQEFAAOCAQ8AMIIBCgKCAQEA71W7gdEnM+Nm4/SA/4jEJ2SPQfVjkCMsIYGO
+    WrLLHq23HkMGstQoPyBnjLY8LmkKQsNhhWGRMWQz6+yGKgI1gh8huhfocuw+HODE
+    K3ugP/3DlaVEQlIQbVzwxDx+K78UqZHecQAJfvakuS/JThxsMf8/pqLuhjAf+t9N
+    k0CO8Z6mNVALtSvyQ+e+zjmzepVtu6WmtJ+8zW9dBQEmg0QCfWFd06836LrfixLk
+    vTRgCn0lzTuj7rSuGjY45JDIvKK4jZGQJKsYN59Wxg1d2CEoXBUJOJjecVdS3NhY
+    ubHNdcm+6Equ5ZmyVEkBmv462rOcednsHU6Ggt/vWSe05EOPVQIDAQABow0wCzAJ
+    BgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQCHI+fkEr27bJ2IMtFuHpSLpFF3
+    E4R5oVHt8XjflwKmuclyyLa8Z7nXnuvQLHa4jwf0tWUixsmtOyQN4tBI/msMk2PF
+    +ao2amcPoIo2lAg63+jFsIzkr2MEXBPu09wwt86e3XCoqmqT1Psnihh+Ys9KIPnc
+    wMr9muGkOh03O61vo71iaV17UKeGM4bzod333pSQIXLdYnoOuvmKdCsnD00lADoI
+    93DmG/4oYR/mD93QjxPFPDxDxR4isvWGoj7iXx7CFkN7PR9B3IhZt+T//ddeau3y
+    kXK0iSxOhyaqHvl15hHQ8tKPBBJRSDVU4qmaqAYWRXr65yxBoelHhTJQ6Gt4
+    -----END CERTIFICATE-----
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvVbuB0Scz42bj
+    9ID/iMQnZI9B9WOQIywhgY5assserbceQway1Cg/IGeMtjwuaQpCw2GFYZExZDPr
+    7IYqAjWCHyG6F+hy7D4c4MQre6A//cOVpURCUhBtXPDEPH4rvxSpkd5xAAl+9qS5
+    L8lOHGwx/z+mou6GMB/6302TQI7xnqY1UAu1K/JD577OObN6lW27paa0n7zNb10F
+    ASaDRAJ9YV3Trzfout+LEuS9NGAKfSXNO6PutK4aNjjkkMi8oriNkZAkqxg3n1bG
+    DV3YIShcFQk4mN5xV1Lc2Fi5sc11yb7oSq7lmbJUSQGa/jras5x52ewdToaC3+9Z
+    J7TkQ49VAgMBAAECggEAaCBzqOI3XSLlo+2/pe158e2VSkwZ2h8DVzyHk7xQFPPd
+    RKRCqNEXBYfypUyv2D1JAo0Aw8gUJFoFIPLR2DsHzqn+wXkfX8iaqXO8xXJO4Shl
+    zJiPnw8XKI2UDryG5D+JHNFi5uTuPLfQKOW6fmptRD9aEQS4I9eSQlKe7J7c0g+t
+    pCR1vCp6ZMFIXDgpHhquArI1fjA36nWK0dJkaO9LrTYPgeMIr0KFjEF+W3UPh/af
+    uw/KLjzyzHExwfVBcGZonb6rG1nU/7isUHqK75OhOKDcXpv+7NCBYZ6fu4COlE0O
+    +yGztbRXojWo1upKzzGPM+yoLyNA1aSljpCGOCSljQKBgQD+4i5FzRQ+e1XZxvUt
+    izypHHQcc7y9DfwKTwLXb9EUhmGCmrxVIuM+gm5N/Y/eXDjqtR2bqg7iIFjj3KTS
+    f9djCYT8FqlTtyDBk/qFNLchDX/mrykOuhqIXfT7JpQbk5+qkCy8k2ZJMl2ToNXA
+    WRqRCP4oa1WJMmoJFwo3BIVRIwKBgQDwYh2ryrs/QFE0W082oHAQ3Nrce5JmOtFp
+    70X/v8zZ8ESdeo7KOS0tNLeirBxlDGvUAesKwUHU1YwTgWhl/DkoPtv9INgT8kxS
+    VRcrix9kq62uiD+TKI732mwoG36keJdRECrQYRYjX+mf364EI+DeNmbPs3xsigaF
+    Zdbg+umxJwKBgF4fFelOvuAH2X8PGnDUDvV//VyYXKUPqfgAj1MRBotmyFFbZJqn
+    xHTL44HHVb5OHfKGKUXXeaGFQm36h573+Iio9kPE9ohkgqMZSxSvj8ST4JxGKIo4
+    rR2YXKP17hF05SwuC2cjo0z6XVXruaNLBCV0xa4VXMPKKx/qMyp37+czAoGBAL8c
+    woo6e/QlpmoBzlCX7YD6leaFODeeu6+FVBmo26zJoUOylKOiIZC3QOhL/ac44OGF
+    ROEgFL6pqNw5Hk824BpnH294FVKGaLdsfydXTHY1J7iDCkhtDn1vYl3gvib02RjR
+    ybgx9+/X6V3579fKzpTcm5C2Gk4Qzm5wMQ5dbj4xAoGBANYzYbBu8bItAEE6ohgf
+    D27SPW7VJsHGzbgRNC2SGCBzo3XaTJ0A8IMP+ghl5ndCJdLBz2FpeZLQvxOuopQD
+    J5dJXQxp7y20vh2C1e3wTPlA5CHHKpU1JZAe4THCJUg+EPwa4I+BOlvp71EB7BaH
+    bk65iLoLrUSkxMDi46qTAs5K
+    -----END PRIVATE KEY-----
 objects:
 
 # a router that overrides domains
@@ -49517,6 +49719,9 @@ objects:
         valueFrom:
           fieldRef:
             fieldPath: metadata.namespace
+      - name: DEFAULT_CERTIFICATE
+        value: |-
+          ${DEFAULT_CERTIFICATE}
       args:
       - "--name=test-override-domains"
       - "--namespace=$(POD_NAMESPACE)"
@@ -49560,6 +49765,58 @@ kind: Template
 parameters:
 - name: IMAGE
   value: openshift/origin-haproxy-router:latest
+- name: DEFAULT_CERTIFICATE
+  value: |-
+    -----BEGIN CERTIFICATE-----
+    MIIDuTCCAqGgAwIBAgIUZYD30F0sJl7HqxE7gAequtxk/HowDQYJKoZIhvcNAQEL
+    BQAwgaExCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJTQzEVMBMGA1UEBwwMRGVmYXVs
+    dCBDaXR5MRwwGgYDVQQKDBNEZWZhdWx0IENvbXBhbnkgTHRkMRAwDgYDVQQLDAdU
+    ZXN0IENBMRowGAYDVQQDDBF3d3cuZXhhbXBsZWNhLmNvbTEiMCAGCSqGSIb3DQEJ
+    ARYTZXhhbXBsZUBleGFtcGxlLmNvbTAeFw0yMjAxMjgwMjU0MDlaFw0zMjAxMjYw
+    MjU0MDlaMHwxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTELMAkGA1UECAwCU0Mx
+    CzAJBgNVBAYTAlVTMSIwIAYJKoZIhvcNAQkBFhNleGFtcGxlQGV4YW1wbGUuY29t
+    MRAwDgYDVQQKDAdFeGFtcGxlMRAwDgYDVQQLDAdFeGFtcGxlMIIBIjANBgkqhkiG
+    9w0BAQEFAAOCAQ8AMIIBCgKCAQEA71W7gdEnM+Nm4/SA/4jEJ2SPQfVjkCMsIYGO
+    WrLLHq23HkMGstQoPyBnjLY8LmkKQsNhhWGRMWQz6+yGKgI1gh8huhfocuw+HODE
+    K3ugP/3DlaVEQlIQbVzwxDx+K78UqZHecQAJfvakuS/JThxsMf8/pqLuhjAf+t9N
+    k0CO8Z6mNVALtSvyQ+e+zjmzepVtu6WmtJ+8zW9dBQEmg0QCfWFd06836LrfixLk
+    vTRgCn0lzTuj7rSuGjY45JDIvKK4jZGQJKsYN59Wxg1d2CEoXBUJOJjecVdS3NhY
+    ubHNdcm+6Equ5ZmyVEkBmv462rOcednsHU6Ggt/vWSe05EOPVQIDAQABow0wCzAJ
+    BgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQCHI+fkEr27bJ2IMtFuHpSLpFF3
+    E4R5oVHt8XjflwKmuclyyLa8Z7nXnuvQLHa4jwf0tWUixsmtOyQN4tBI/msMk2PF
+    +ao2amcPoIo2lAg63+jFsIzkr2MEXBPu09wwt86e3XCoqmqT1Psnihh+Ys9KIPnc
+    wMr9muGkOh03O61vo71iaV17UKeGM4bzod333pSQIXLdYnoOuvmKdCsnD00lADoI
+    93DmG/4oYR/mD93QjxPFPDxDxR4isvWGoj7iXx7CFkN7PR9B3IhZt+T//ddeau3y
+    kXK0iSxOhyaqHvl15hHQ8tKPBBJRSDVU4qmaqAYWRXr65yxBoelHhTJQ6Gt4
+    -----END CERTIFICATE-----
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvVbuB0Scz42bj
+    9ID/iMQnZI9B9WOQIywhgY5assserbceQway1Cg/IGeMtjwuaQpCw2GFYZExZDPr
+    7IYqAjWCHyG6F+hy7D4c4MQre6A//cOVpURCUhBtXPDEPH4rvxSpkd5xAAl+9qS5
+    L8lOHGwx/z+mou6GMB/6302TQI7xnqY1UAu1K/JD577OObN6lW27paa0n7zNb10F
+    ASaDRAJ9YV3Trzfout+LEuS9NGAKfSXNO6PutK4aNjjkkMi8oriNkZAkqxg3n1bG
+    DV3YIShcFQk4mN5xV1Lc2Fi5sc11yb7oSq7lmbJUSQGa/jras5x52ewdToaC3+9Z
+    J7TkQ49VAgMBAAECggEAaCBzqOI3XSLlo+2/pe158e2VSkwZ2h8DVzyHk7xQFPPd
+    RKRCqNEXBYfypUyv2D1JAo0Aw8gUJFoFIPLR2DsHzqn+wXkfX8iaqXO8xXJO4Shl
+    zJiPnw8XKI2UDryG5D+JHNFi5uTuPLfQKOW6fmptRD9aEQS4I9eSQlKe7J7c0g+t
+    pCR1vCp6ZMFIXDgpHhquArI1fjA36nWK0dJkaO9LrTYPgeMIr0KFjEF+W3UPh/af
+    uw/KLjzyzHExwfVBcGZonb6rG1nU/7isUHqK75OhOKDcXpv+7NCBYZ6fu4COlE0O
+    +yGztbRXojWo1upKzzGPM+yoLyNA1aSljpCGOCSljQKBgQD+4i5FzRQ+e1XZxvUt
+    izypHHQcc7y9DfwKTwLXb9EUhmGCmrxVIuM+gm5N/Y/eXDjqtR2bqg7iIFjj3KTS
+    f9djCYT8FqlTtyDBk/qFNLchDX/mrykOuhqIXfT7JpQbk5+qkCy8k2ZJMl2ToNXA
+    WRqRCP4oa1WJMmoJFwo3BIVRIwKBgQDwYh2ryrs/QFE0W082oHAQ3Nrce5JmOtFp
+    70X/v8zZ8ESdeo7KOS0tNLeirBxlDGvUAesKwUHU1YwTgWhl/DkoPtv9INgT8kxS
+    VRcrix9kq62uiD+TKI732mwoG36keJdRECrQYRYjX+mf364EI+DeNmbPs3xsigaF
+    Zdbg+umxJwKBgF4fFelOvuAH2X8PGnDUDvV//VyYXKUPqfgAj1MRBotmyFFbZJqn
+    xHTL44HHVb5OHfKGKUXXeaGFQm36h573+Iio9kPE9ohkgqMZSxSvj8ST4JxGKIo4
+    rR2YXKP17hF05SwuC2cjo0z6XVXruaNLBCV0xa4VXMPKKx/qMyp37+czAoGBAL8c
+    woo6e/QlpmoBzlCX7YD6leaFODeeu6+FVBmo26zJoUOylKOiIZC3QOhL/ac44OGF
+    ROEgFL6pqNw5Hk824BpnH294FVKGaLdsfydXTHY1J7iDCkhtDn1vYl3gvib02RjR
+    ybgx9+/X6V3579fKzpTcm5C2Gk4Qzm5wMQ5dbj4xAoGBANYzYbBu8bItAEE6ohgf
+    D27SPW7VJsHGzbgRNC2SGCBzo3XaTJ0A8IMP+ghl5ndCJdLBz2FpeZLQvxOuopQD
+    J5dJXQxp7y20vh2C1e3wTPlA5CHHKpU1JZAe4THCJUg+EPwa4I+BOlvp71EB7BaH
+    bk65iLoLrUSkxMDi46qTAs5K
+    -----END PRIVATE KEY-----
 objects:
 
 # a router that overrides host
@@ -49580,6 +49837,9 @@ objects:
         valueFrom:
           fieldRef:
             fieldPath: metadata.namespace
+      - name: DEFAULT_CERTIFICATE
+        value: |-
+          ${DEFAULT_CERTIFICATE}
       args:
       - "--name=test-override"
       - "--namespace=$(POD_NAMESPACE)"
@@ -49625,6 +49885,58 @@ parameters:
   value: openshift/origin-haproxy-router:latest
 - name: ROUTER_NAME
   value: "test-scoped"
+- name: DEFAULT_CERTIFICATE
+  value: |-
+    -----BEGIN CERTIFICATE-----
+    MIIDuTCCAqGgAwIBAgIUZYD30F0sJl7HqxE7gAequtxk/HowDQYJKoZIhvcNAQEL
+    BQAwgaExCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJTQzEVMBMGA1UEBwwMRGVmYXVs
+    dCBDaXR5MRwwGgYDVQQKDBNEZWZhdWx0IENvbXBhbnkgTHRkMRAwDgYDVQQLDAdU
+    ZXN0IENBMRowGAYDVQQDDBF3d3cuZXhhbXBsZWNhLmNvbTEiMCAGCSqGSIb3DQEJ
+    ARYTZXhhbXBsZUBleGFtcGxlLmNvbTAeFw0yMjAxMjgwMjU0MDlaFw0zMjAxMjYw
+    MjU0MDlaMHwxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTELMAkGA1UECAwCU0Mx
+    CzAJBgNVBAYTAlVTMSIwIAYJKoZIhvcNAQkBFhNleGFtcGxlQGV4YW1wbGUuY29t
+    MRAwDgYDVQQKDAdFeGFtcGxlMRAwDgYDVQQLDAdFeGFtcGxlMIIBIjANBgkqhkiG
+    9w0BAQEFAAOCAQ8AMIIBCgKCAQEA71W7gdEnM+Nm4/SA/4jEJ2SPQfVjkCMsIYGO
+    WrLLHq23HkMGstQoPyBnjLY8LmkKQsNhhWGRMWQz6+yGKgI1gh8huhfocuw+HODE
+    K3ugP/3DlaVEQlIQbVzwxDx+K78UqZHecQAJfvakuS/JThxsMf8/pqLuhjAf+t9N
+    k0CO8Z6mNVALtSvyQ+e+zjmzepVtu6WmtJ+8zW9dBQEmg0QCfWFd06836LrfixLk
+    vTRgCn0lzTuj7rSuGjY45JDIvKK4jZGQJKsYN59Wxg1d2CEoXBUJOJjecVdS3NhY
+    ubHNdcm+6Equ5ZmyVEkBmv462rOcednsHU6Ggt/vWSe05EOPVQIDAQABow0wCzAJ
+    BgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQCHI+fkEr27bJ2IMtFuHpSLpFF3
+    E4R5oVHt8XjflwKmuclyyLa8Z7nXnuvQLHa4jwf0tWUixsmtOyQN4tBI/msMk2PF
+    +ao2amcPoIo2lAg63+jFsIzkr2MEXBPu09wwt86e3XCoqmqT1Psnihh+Ys9KIPnc
+    wMr9muGkOh03O61vo71iaV17UKeGM4bzod333pSQIXLdYnoOuvmKdCsnD00lADoI
+    93DmG/4oYR/mD93QjxPFPDxDxR4isvWGoj7iXx7CFkN7PR9B3IhZt+T//ddeau3y
+    kXK0iSxOhyaqHvl15hHQ8tKPBBJRSDVU4qmaqAYWRXr65yxBoelHhTJQ6Gt4
+    -----END CERTIFICATE-----
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvVbuB0Scz42bj
+    9ID/iMQnZI9B9WOQIywhgY5assserbceQway1Cg/IGeMtjwuaQpCw2GFYZExZDPr
+    7IYqAjWCHyG6F+hy7D4c4MQre6A//cOVpURCUhBtXPDEPH4rvxSpkd5xAAl+9qS5
+    L8lOHGwx/z+mou6GMB/6302TQI7xnqY1UAu1K/JD577OObN6lW27paa0n7zNb10F
+    ASaDRAJ9YV3Trzfout+LEuS9NGAKfSXNO6PutK4aNjjkkMi8oriNkZAkqxg3n1bG
+    DV3YIShcFQk4mN5xV1Lc2Fi5sc11yb7oSq7lmbJUSQGa/jras5x52ewdToaC3+9Z
+    J7TkQ49VAgMBAAECggEAaCBzqOI3XSLlo+2/pe158e2VSkwZ2h8DVzyHk7xQFPPd
+    RKRCqNEXBYfypUyv2D1JAo0Aw8gUJFoFIPLR2DsHzqn+wXkfX8iaqXO8xXJO4Shl
+    zJiPnw8XKI2UDryG5D+JHNFi5uTuPLfQKOW6fmptRD9aEQS4I9eSQlKe7J7c0g+t
+    pCR1vCp6ZMFIXDgpHhquArI1fjA36nWK0dJkaO9LrTYPgeMIr0KFjEF+W3UPh/af
+    uw/KLjzyzHExwfVBcGZonb6rG1nU/7isUHqK75OhOKDcXpv+7NCBYZ6fu4COlE0O
+    +yGztbRXojWo1upKzzGPM+yoLyNA1aSljpCGOCSljQKBgQD+4i5FzRQ+e1XZxvUt
+    izypHHQcc7y9DfwKTwLXb9EUhmGCmrxVIuM+gm5N/Y/eXDjqtR2bqg7iIFjj3KTS
+    f9djCYT8FqlTtyDBk/qFNLchDX/mrykOuhqIXfT7JpQbk5+qkCy8k2ZJMl2ToNXA
+    WRqRCP4oa1WJMmoJFwo3BIVRIwKBgQDwYh2ryrs/QFE0W082oHAQ3Nrce5JmOtFp
+    70X/v8zZ8ESdeo7KOS0tNLeirBxlDGvUAesKwUHU1YwTgWhl/DkoPtv9INgT8kxS
+    VRcrix9kq62uiD+TKI732mwoG36keJdRECrQYRYjX+mf364EI+DeNmbPs3xsigaF
+    Zdbg+umxJwKBgF4fFelOvuAH2X8PGnDUDvV//VyYXKUPqfgAj1MRBotmyFFbZJqn
+    xHTL44HHVb5OHfKGKUXXeaGFQm36h573+Iio9kPE9ohkgqMZSxSvj8ST4JxGKIo4
+    rR2YXKP17hF05SwuC2cjo0z6XVXruaNLBCV0xa4VXMPKKx/qMyp37+czAoGBAL8c
+    woo6e/QlpmoBzlCX7YD6leaFODeeu6+FVBmo26zJoUOylKOiIZC3QOhL/ac44OGF
+    ROEgFL6pqNw5Hk824BpnH294FVKGaLdsfydXTHY1J7iDCkhtDn1vYl3gvib02RjR
+    ybgx9+/X6V3579fKzpTcm5C2Gk4Qzm5wMQ5dbj4xAoGBANYzYbBu8bItAEE6ohgf
+    D27SPW7VJsHGzbgRNC2SGCBzo3XaTJ0A8IMP+ghl5ndCJdLBz2FpeZLQvxOuopQD
+    J5dJXQxp7y20vh2C1e3wTPlA5CHHKpU1JZAe4THCJUg+EPwa4I+BOlvp71EB7BaH
+    bk65iLoLrUSkxMDi46qTAs5K
+    -----END PRIVATE KEY-----
 - name: UPDATE_STATUS
   value: "true"
 objects:
@@ -49646,6 +49958,9 @@ objects:
         valueFrom:
           fieldRef:
             fieldPath: metadata.namespace
+      - name: DEFAULT_CERTIFICATE
+        value: |-
+          ${DEFAULT_CERTIFICATE}
       args:
       - "--name=${ROUTER_NAME}"
       - "--namespace=$(POD_NAMESPACE)"
@@ -49732,6 +50047,58 @@ kind: Template
 parameters:
 - name: IMAGE
   value: openshift/origin-haproxy-router:latest
+- name: DEFAULT_CERTIFICATE
+  value: |-
+    -----BEGIN CERTIFICATE-----
+    MIIDuTCCAqGgAwIBAgIUZYD30F0sJl7HqxE7gAequtxk/HowDQYJKoZIhvcNAQEL
+    BQAwgaExCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJTQzEVMBMGA1UEBwwMRGVmYXVs
+    dCBDaXR5MRwwGgYDVQQKDBNEZWZhdWx0IENvbXBhbnkgTHRkMRAwDgYDVQQLDAdU
+    ZXN0IENBMRowGAYDVQQDDBF3d3cuZXhhbXBsZWNhLmNvbTEiMCAGCSqGSIb3DQEJ
+    ARYTZXhhbXBsZUBleGFtcGxlLmNvbTAeFw0yMjAxMjgwMjU0MDlaFw0zMjAxMjYw
+    MjU0MDlaMHwxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTELMAkGA1UECAwCU0Mx
+    CzAJBgNVBAYTAlVTMSIwIAYJKoZIhvcNAQkBFhNleGFtcGxlQGV4YW1wbGUuY29t
+    MRAwDgYDVQQKDAdFeGFtcGxlMRAwDgYDVQQLDAdFeGFtcGxlMIIBIjANBgkqhkiG
+    9w0BAQEFAAOCAQ8AMIIBCgKCAQEA71W7gdEnM+Nm4/SA/4jEJ2SPQfVjkCMsIYGO
+    WrLLHq23HkMGstQoPyBnjLY8LmkKQsNhhWGRMWQz6+yGKgI1gh8huhfocuw+HODE
+    K3ugP/3DlaVEQlIQbVzwxDx+K78UqZHecQAJfvakuS/JThxsMf8/pqLuhjAf+t9N
+    k0CO8Z6mNVALtSvyQ+e+zjmzepVtu6WmtJ+8zW9dBQEmg0QCfWFd06836LrfixLk
+    vTRgCn0lzTuj7rSuGjY45JDIvKK4jZGQJKsYN59Wxg1d2CEoXBUJOJjecVdS3NhY
+    ubHNdcm+6Equ5ZmyVEkBmv462rOcednsHU6Ggt/vWSe05EOPVQIDAQABow0wCzAJ
+    BgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQCHI+fkEr27bJ2IMtFuHpSLpFF3
+    E4R5oVHt8XjflwKmuclyyLa8Z7nXnuvQLHa4jwf0tWUixsmtOyQN4tBI/msMk2PF
+    +ao2amcPoIo2lAg63+jFsIzkr2MEXBPu09wwt86e3XCoqmqT1Psnihh+Ys9KIPnc
+    wMr9muGkOh03O61vo71iaV17UKeGM4bzod333pSQIXLdYnoOuvmKdCsnD00lADoI
+    93DmG/4oYR/mD93QjxPFPDxDxR4isvWGoj7iXx7CFkN7PR9B3IhZt+T//ddeau3y
+    kXK0iSxOhyaqHvl15hHQ8tKPBBJRSDVU4qmaqAYWRXr65yxBoelHhTJQ6Gt4
+    -----END CERTIFICATE-----
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvVbuB0Scz42bj
+    9ID/iMQnZI9B9WOQIywhgY5assserbceQway1Cg/IGeMtjwuaQpCw2GFYZExZDPr
+    7IYqAjWCHyG6F+hy7D4c4MQre6A//cOVpURCUhBtXPDEPH4rvxSpkd5xAAl+9qS5
+    L8lOHGwx/z+mou6GMB/6302TQI7xnqY1UAu1K/JD577OObN6lW27paa0n7zNb10F
+    ASaDRAJ9YV3Trzfout+LEuS9NGAKfSXNO6PutK4aNjjkkMi8oriNkZAkqxg3n1bG
+    DV3YIShcFQk4mN5xV1Lc2Fi5sc11yb7oSq7lmbJUSQGa/jras5x52ewdToaC3+9Z
+    J7TkQ49VAgMBAAECggEAaCBzqOI3XSLlo+2/pe158e2VSkwZ2h8DVzyHk7xQFPPd
+    RKRCqNEXBYfypUyv2D1JAo0Aw8gUJFoFIPLR2DsHzqn+wXkfX8iaqXO8xXJO4Shl
+    zJiPnw8XKI2UDryG5D+JHNFi5uTuPLfQKOW6fmptRD9aEQS4I9eSQlKe7J7c0g+t
+    pCR1vCp6ZMFIXDgpHhquArI1fjA36nWK0dJkaO9LrTYPgeMIr0KFjEF+W3UPh/af
+    uw/KLjzyzHExwfVBcGZonb6rG1nU/7isUHqK75OhOKDcXpv+7NCBYZ6fu4COlE0O
+    +yGztbRXojWo1upKzzGPM+yoLyNA1aSljpCGOCSljQKBgQD+4i5FzRQ+e1XZxvUt
+    izypHHQcc7y9DfwKTwLXb9EUhmGCmrxVIuM+gm5N/Y/eXDjqtR2bqg7iIFjj3KTS
+    f9djCYT8FqlTtyDBk/qFNLchDX/mrykOuhqIXfT7JpQbk5+qkCy8k2ZJMl2ToNXA
+    WRqRCP4oa1WJMmoJFwo3BIVRIwKBgQDwYh2ryrs/QFE0W082oHAQ3Nrce5JmOtFp
+    70X/v8zZ8ESdeo7KOS0tNLeirBxlDGvUAesKwUHU1YwTgWhl/DkoPtv9INgT8kxS
+    VRcrix9kq62uiD+TKI732mwoG36keJdRECrQYRYjX+mf364EI+DeNmbPs3xsigaF
+    Zdbg+umxJwKBgF4fFelOvuAH2X8PGnDUDvV//VyYXKUPqfgAj1MRBotmyFFbZJqn
+    xHTL44HHVb5OHfKGKUXXeaGFQm36h573+Iio9kPE9ohkgqMZSxSvj8ST4JxGKIo4
+    rR2YXKP17hF05SwuC2cjo0z6XVXruaNLBCV0xa4VXMPKKx/qMyp37+czAoGBAL8c
+    woo6e/QlpmoBzlCX7YD6leaFODeeu6+FVBmo26zJoUOylKOiIZC3QOhL/ac44OGF
+    ROEgFL6pqNw5Hk824BpnH294FVKGaLdsfydXTHY1J7iDCkhtDn1vYl3gvib02RjR
+    ybgx9+/X6V3579fKzpTcm5C2Gk4Qzm5wMQ5dbj4xAoGBANYzYbBu8bItAEE6ohgf
+    D27SPW7VJsHGzbgRNC2SGCBzo3XaTJ0A8IMP+ghl5ndCJdLBz2FpeZLQvxOuopQD
+    J5dJXQxp7y20vh2C1e3wTPlA5CHHKpU1JZAe4THCJUg+EPwa4I+BOlvp71EB7BaH
+    bk65iLoLrUSkxMDi46qTAs5K
+    -----END PRIVATE KEY-----
 objects:
 # a weighted router
 - apiVersion: v1
@@ -49751,6 +50118,9 @@ objects:
         valueFrom:
           fieldRef:
             fieldPath: metadata.namespace
+      - name: DEFAULT_CERTIFICATE
+        value: |-
+          ${DEFAULT_CERTIFICATE}
       args: ["--namespace=$(POD_NAMESPACE)", "-v=4", "--labels=select=weighted", "--stats-password=password", "--stats-port=1936", "--stats-user=admin"]
       hostNetwork: false
       ports:
@@ -50387,6 +50757,9 @@ items:
     strategy:
       type: Docker
       dockerStrategy:
+        env:
+          - name: "BUILD_LOGLEVEL"
+            value: "2"
         from:
           kind: DockerImage
           name: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
@@ -51655,6 +52028,12 @@ var _testExtendedTestdataTestBuildcliJson = []byte(`{
           "strategy": {
             "type": "Source",
             "sourceStrategy": {
+              "env":[
+                {
+                   "name":"BUILD_LOGLEVEL",
+                   "value":"2"
+                }
+             ],
               "from": {
                 "kind": "DockerImage",
                 "name": "image-registry.openshift-image-registry.svc:5000/openshift/ruby"
@@ -51697,6 +52076,12 @@ var _testExtendedTestdataTestBuildcliJson = []byte(`{
           "strategy": {
             "type": "Source",
             "sourceStrategy": {
+              "env":[
+                {
+                   "name":"BUILD_LOGLEVEL",
+                   "value":"2"
+                }
+             ],
               "from": {
                 "kind": "DockerImage",
                 "name": "image-registry.openshift-image-registry.svc:5000/openshift/ruby"
@@ -52213,6 +52598,34 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
         return false
     }
 
+    function isPod(eventInterval) {
+        if (eventInterval.locator.includes("pod/") && !eventInterval.locator.includes("alert/")) {
+            return true
+        }
+        return false
+    }
+
+    function isPodLifecycle(eventInterval) {
+        if (eventInterval.locator.includes("pod/") && (eventInterval.message.includes("reason/Created") || eventInterval.message.includes("reason/Scheduled"))) {
+            return true
+        }
+        return false
+    }
+
+    function isContainerLifecycle(eventInterval) {
+        if (eventInterval.locator.includes("container/") && (eventInterval.message.includes("reason/ContainerExit") || eventInterval.message.includes("reason/ContainerStart") || eventInterval.message.includes("reason/ContainerWait"))) {
+            return true
+        }
+        return false
+    }
+
+    function isContainerReadiness(eventInterval) {
+        if (eventInterval.locator.includes("container/") && (eventInterval.message.includes("reason/Ready") || eventInterval.message.includes("reason/NotReady"))) {
+            return true
+        }
+        return false
+    }
+
     function isE2EFailed(eventInterval) {
         if (eventInterval.locator.startsWith("e2e-test/") && eventInterval.message.includes("finished As \"Failed")) {
             return true
@@ -52263,6 +52676,37 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
             return true
         }
         return false
+    }
+
+    const reReason = new RegExp("(^| )reason/([^ ]+)")
+    function podStateValue(item) {
+        let m = item.message.match(reReason);
+
+        if (m && isPodLifecycle(item)){
+            if (m[2] == "Created") {
+                return [item.locator, ` + "`" + ` (pod lifecycle)` + "`" + `, "PodCreated"];
+            }
+            if (m[2] == "Scheduled") {
+                return [item.locator, ` + "`" + ` (pod lifecycle)` + "`" + `, "PodScheduled"];
+            }
+        }
+        if (m && isContainerLifecycle(item)){
+            if (m[2] == "ContainerWait") {
+                return [item.locator, ` + "`" + ` (container lifecycle)` + "`" + `, "ContainerWait"];
+            }
+            if (m[2] == "ContainerStart") {
+                return [item.locator, ` + "`" + ` (container lifecycle)` + "`" + `, "ContainerStart"];
+            }
+        }
+        if (m && isContainerReadiness(item)){
+            if (m[2] == "NotReady") {
+                return [item.locator, ` + "`" + ` (container readiness)` + "`" + `, "ContainerNotReady"];
+            }
+            if (m[2] == "Ready") {
+                return [item.locator, ` + "`" + ` (container readiness)` + "`" + `, "ContainerReady"];
+            }
+        }
+        return [item.locator, "", "Unknown"];
     }
 
     const rePhase = new RegExp("(^| )phase/([^ ]+)")
@@ -52380,6 +52824,9 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
     timelineGroups.push({group: "operator-progressing", data: []})
     createTimelineData("OperatorProgressing", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorProgressing)
 
+    timelineGroups.push({group: "pods", data: []})
+    createTimelineData(podStateValue, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isPod)
+
     timelineGroups.push({group: "alerts", data: []})
     createTimelineData(alertSeverity, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isAlert)
     // leaving this for posterity so future me (or someone else) can try it, but I think ordering by name makes the
@@ -52443,23 +52890,25 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
             'OperatorUnavailable', 'OperatorDegraded', 'OperatorProgressing', // operators
             'Update', 'Drain', 'Reboot', 'OperatingSystemUpdate', 'NodeNotReady', // nodes
             'Passed', 'Skipped', 'Flaked', 'Failed',  // tests
+            'PodCreated', 'PodScheduled', 'ContainerWait', 'ContainerStart', 'ContainerNotReady', 'ContainerReady',  // pods
             'Degraded', 'Upgradeable', 'False', 'Unknown'])
         .range([
             '#fada5e','#fada5e','#ffa500','#d0312d',  // alerts
             '#d0312d', '#ffa500', '#fada5e', // operators
             '#1e7bd9', '#4294e6', '#6aaef2', '#96cbff', '#fada5e', // nodes
             '#3cb043', '#ceba76', '#ffa500', '#d0312d', // tests
+            '#96cbff', '#1e7bd9', '#ca8dfd', '#9300ff', '#fada5e','#3cb043', // pods
             '#b65049', '#32b8b6', '#ffffff', '#bbbbbb']);
     myChart.
-        data(timelineGroups).
-        zQualitative(true).
-        enableAnimations(false).
-        leftMargin(240).
-        rightMargin(550).
-        maxLineHeight(20).
-        maxHeight(10000).
-        zColorScale(ordinalScale).
-        onSegmentClick(segmentFunc)
+    data(timelineGroups).
+    zQualitative(true).
+    enableAnimations(false).
+    leftMargin(240).
+    rightMargin(550).
+    maxLineHeight(20).
+    maxHeight(10000).
+    zColorScale(ordinalScale).
+    onSegmentClick(segmentFunc)
     (el);
 
 
