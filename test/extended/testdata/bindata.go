@@ -53027,7 +53027,7 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
     zQualitative(true).
     enableAnimations(false).
     leftMargin(240).
-    rightMargin(550).
+    rightMargin(1550).
     maxLineHeight(20).
     maxHeight(10000).
     zColorScale(ordinalScale).
@@ -53036,7 +53036,7 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
 
 
     // force a minimum width for smaller devices (which otherwise get an unusable display)
-    setTimeout(() => { if (myChart.width() < 1300) { myChart.width(1300) }}, 1)
+    setTimeout(() => { if (myChart.width() < 3000) { myChart.width(3000) }}, 1)
 </script>
 </body>
 </html>

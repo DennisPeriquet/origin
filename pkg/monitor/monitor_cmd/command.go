@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -33,9 +34,10 @@ type TimelineOptions struct {
 	PodResourceFilename  string
 	TimelineType         string
 
-	LocatorMatchers []string
-	Namespaces      []string
-	OutputType      string
+	LocatorMatchers        []string
+	InverseLocatorMatchers []string
+	Namespaces             []string
+	OutputType             string
 
 	KnownRenderers map[string]RenderFunc
 	KnownTimelines map[string]monitorapi.EventIntervalMatchesFunc
@@ -104,7 +106,8 @@ func (o *TimelineOptions) Bind(flagset *pflag.FlagSet) error {
 	flagset.StringVarP(&o.OutputType, "output", "o", o.OutputType, fmt.Sprintf("type of output: [%s]", strings.Join(sets.StringKeySet(o.KnownRenderers).List(), ",")))
 	flagset.StringVar(&o.TimelineType, "type", o.TimelineType, "type of timeline to produce: "+strings.Join(sets.StringKeySet(o.KnownTimelines).List(), ","))
 	flagset.StringVar(&o.PodResourceFilename, "known-pods", o.PodResourceFilename, "resource-pods_<timestamp>.zip filename from openshift-tests.")
-	flagset.StringSliceVarP(&o.LocatorMatchers, "locator", "l", o.LocatorMatchers, "key=value selector for monitor event locators.  for instance -lpod=openshift-etcd-installer.  The same key listed multiple times means an OR.  Each separate key is logically ANDed")
+	flagset.StringSliceVarP(&o.LocatorMatchers, "locator", "l", o.LocatorMatchers, "key=value selector for monitor event locators (where value is a regex).  for instance -lpod=openshift-etcd-installer.  The same key listed multiple times means an OR.  Each separate key is logically ANDed")
+	flagset.StringSliceVarP(&o.InverseLocatorMatchers, "inverse locator", "i", o.InverseLocatorMatchers, "same as locator except inverse")
 
 	return nil
 }
@@ -137,23 +140,38 @@ func (o *TimelineOptions) Validate() error {
 		}
 	}
 
+	for _, inverseMatcher := range o.InverseLocatorMatchers {
+		if !strings.Contains(inverseMatcher, "=") {
+			return fmt.Errorf("invalid --inverseLocator format, must be key=value")
+		}
+	}
+
 	return nil
 }
 
 func (o *TimelineOptions) ToTimeline() *Timeline {
-	locatorMatcher := map[string][]string{}
+	locatorMatcher := map[string][]*regexp.Regexp{}
+	inverseLocatorMatcher := map[string][]*regexp.Regexp{}
 
 	for _, matcherString := range o.LocatorMatchers {
 		parts := strings.SplitN(matcherString, "=", 2)
-		locatorMatcher[parts[0]] = append(locatorMatcher[parts[0]], parts[1])
+		regExp := regexp.MustCompile(parts[1])
+		locatorMatcher[parts[0]] = append(locatorMatcher[parts[0]], regExp)
+	}
+
+	for _, matcherString := range o.InverseLocatorMatchers {
+		parts := strings.SplitN(matcherString, "=", 2)
+		regExp := regexp.MustCompile(parts[1])
+		inverseLocatorMatcher[parts[0]] = append(inverseLocatorMatcher[parts[0]], regExp)
 	}
 
 	return &Timeline{
 		MonitorEventFilename: o.MonitorEventFilename,
 		PodResourceFilename:  o.PodResourceFilename,
 
-		LocatorMatcher: locatorMatcher,
-		Namespaces:     o.Namespaces,
+		LocatorMatcher:        locatorMatcher,
+		InverseLocatorMatcher: inverseLocatorMatcher,
+		Namespaces:            o.Namespaces,
 
 		Renderer:       o.KnownRenderers[o.OutputType],
 		TimelineFilter: o.KnownTimelines[o.TimelineType],
@@ -165,8 +183,9 @@ type Timeline struct {
 	MonitorEventFilename string
 	PodResourceFilename  string
 
-	LocatorMatcher map[string][]string
-	Namespaces     []string
+	LocatorMatcher        map[string][]*regexp.Regexp
+	InverseLocatorMatcher map[string][]*regexp.Regexp
+	Namespaces            []string
 
 	Renderer       RenderFunc
 	TimelineFilter monitorapi.EventIntervalMatchesFunc
@@ -194,6 +213,9 @@ func (o *Timeline) Run() error {
 	}
 	if len(o.LocatorMatcher) > 0 {
 		filteredEvents = filteredEvents.Filter(monitorapi.ContainsAllParts(o.LocatorMatcher))
+	}
+	if len(o.InverseLocatorMatcher) > 0 {
+		filteredEvents = filteredEvents.Filter(monitorapi.NotContainsAllParts(o.InverseLocatorMatcher))
 	}
 
 	// compute intervals from raw
