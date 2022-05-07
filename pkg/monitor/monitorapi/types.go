@@ -228,19 +228,13 @@ func NotContainsAllParts(matchers map[string][]*regexp.Regexp) EventIntervalMatc
 		for key, possibleValues := range matchers {
 			actualValue := actualParts[key]
 
-			found := false
 			for _, possibleValue := range possibleValues {
 				if possibleValue.MatchString(actualValue) {
-					found = true
-					break
+					return false
 				}
 			}
-			if !found {
-				return true
-			}
 		}
-
-		return false
+		return true
 	}
 }
 func And(filters ...EventIntervalMatchesFunc) EventIntervalMatchesFunc {
