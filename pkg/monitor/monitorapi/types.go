@@ -221,7 +221,7 @@ func ContainsAllParts(matchers map[string][]*regexp.Regexp) EventIntervalMatches
 	}
 }
 
-// NotContainsAllParts returns false if any key matches.
+// NotContainsAllParts returns a function that returns false if any key matches.
 func NotContainsAllParts(matchers map[string][]*regexp.Regexp) EventIntervalMatchesFunc {
 	return func(eventInterval EventInterval) bool {
 		actualParts := LocatorParts(eventInterval.Locator)
@@ -237,6 +237,7 @@ func NotContainsAllParts(matchers map[string][]*regexp.Regexp) EventIntervalMatc
 		return true
 	}
 }
+
 func And(filters ...EventIntervalMatchesFunc) EventIntervalMatchesFunc {
 	return func(eventInterval EventInterval) bool {
 		for _, filter := range filters {
