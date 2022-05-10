@@ -35,7 +35,7 @@ type TimelineOptions struct {
 	TimelineType         string
 
 	LocatorMatchers        []string
-	removedLocatorMatchers []string
+	RemovedLocatorMatchers []string
 	Namespaces             []string
 	OutputType             string
 	EndDate                string
@@ -108,8 +108,8 @@ func (o *TimelineOptions) Bind(flagset *pflag.FlagSet) error {
 	flagset.StringVar(&o.TimelineType, "type", o.TimelineType, "type of timeline to produce: "+strings.Join(sets.StringKeySet(o.KnownTimelines).List(), ","))
 	flagset.StringVar(&o.PodResourceFilename, "known-pods", o.PodResourceFilename, "resource-pods_<timestamp>.zip filename from openshift-tests.")
 	flagset.StringSliceVarP(&o.LocatorMatchers, "locator", "l", o.LocatorMatchers, "key=value selector for monitor event locators (where value is a regex).  for instance -lpod=openshift-etcd-installer.  The same key listed multiple times means an OR.  Each separate key is logically ANDed")
-	flagset.StringSliceVarP(&o.removedLocatorMatchers, "remove", "r", o.removedLocatorMatchers, "key=val selector to remove monitor event locators")
-	flagset.StringVarP(&o.EndDate, "end-date", "e", o.EndDate, "End date (default is one hour after latest event)")
+	flagset.StringSliceVarP(&o.RemovedLocatorMatchers, "remove", "r", o.RemovedLocatorMatchers, "key=val selector to anti-match monitor event locators")
+	flagset.StringVarP(&o.EndDate, "end-date", "e", o.EndDate, fmt.Sprintf("End date (default is one hour after latest event) in RFC3399 format in UTC timezone: %s", time.RFC3339))
 
 	return nil
 }
@@ -142,20 +142,16 @@ func (o *TimelineOptions) Validate() error {
 		}
 	}
 
-	for _, removedMatcher := range o.removedLocatorMatchers {
+	for _, removedMatcher := range o.RemovedLocatorMatchers {
 		if !strings.Contains(removedMatcher, "=") {
 			return fmt.Errorf("invalid --remove format, must be key=value")
 		}
 	}
 
-	if len(o.EndDate) == 0 {
-		// Nothing specified for end-date so make it default.
-		o.EndDate = "default"
-	}
-	if o.EndDate != "default" {
-		_, err := time.Parse(time.RFC3339, o.EndDate)
+	if len(o.EndDate) > 0 {
+		_, err := time.ParseInLocation(time.RFC3339, o.EndDate, time.UTC)
 		if err != nil {
-			return fmt.Errorf("The --end-date value needs to be a valid time")
+			return fmt.Errorf("The --end-date value needs to be a valid time in RFC3339 format: %s", time.RFC3339)
 		}
 	}
 	return nil
@@ -171,10 +167,15 @@ func (o *TimelineOptions) ToTimeline() *Timeline {
 		locatorMatcher[parts[0]] = append(locatorMatcher[parts[0]], regExp)
 	}
 
-	for _, matcherString := range o.removedLocatorMatchers {
+	for _, matcherString := range o.RemovedLocatorMatchers {
 		parts := strings.SplitN(matcherString, "=", 2)
 		regExp := regexp.MustCompile(parts[1])
 		inverseLocatorMatcher[parts[0]] = append(inverseLocatorMatcher[parts[0]], regExp)
+	}
+
+	endDateTime := time.Time{}
+	if len(o.EndDate) > 0 {
+		endDateTime, _ = time.Parse(time.RFC3339, o.EndDate)
 	}
 
 	return &Timeline{
@@ -184,7 +185,7 @@ func (o *TimelineOptions) ToTimeline() *Timeline {
 		LocatorMatcher:        locatorMatcher,
 		RemovedLocatorMatcher: inverseLocatorMatcher,
 		Namespaces:            o.Namespaces,
-		EndDate:               o.EndDate,
+		EndDate:               endDateTime,
 
 		Renderer:       o.KnownRenderers[o.OutputType],
 		TimelineFilter: o.KnownTimelines[o.TimelineType],
@@ -199,7 +200,7 @@ type Timeline struct {
 	LocatorMatcher        map[string][]*regexp.Regexp
 	RemovedLocatorMatcher map[string][]*regexp.Regexp
 	Namespaces            []string
-	EndDate               string
+	EndDate               time.Time
 
 	Renderer       RenderFunc
 	TimelineFilter monitorapi.EventIntervalMatchesFunc
@@ -236,7 +237,7 @@ func (o *Timeline) Run() error {
 	from := time.Time{}
 	var to time.Time
 
-	if o.EndDate == "default" {
+	if o.EndDate.IsZero() {
 		// Limit the final timestamp "To" to one hour after the latest "To" value.
 		to = filteredEvents[0].To
 		for _, e := range filteredEvents[1:] {
@@ -246,7 +247,7 @@ func (o *Timeline) Run() error {
 		}
 		to = to.Add(1 * time.Hour)
 	} else {
-		to, _ = time.Parse(time.RFC3339, o.EndDate)
+		to = o.EndDate
 	}
 	computedIntervalFns := monitor.DefaultIntervalCreationFns()
 	for _, createIntervals := range computedIntervalFns {
