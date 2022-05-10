@@ -107,8 +107,7 @@ func (o *TimelineOptions) Bind(flagset *pflag.FlagSet) error {
 	flagset.StringVarP(&o.OutputType, "output", "o", o.OutputType, fmt.Sprintf("type of output: [%s]", strings.Join(sets.StringKeySet(o.KnownRenderers).List(), ",")))
 	flagset.StringVar(&o.TimelineType, "type", o.TimelineType, "type of timeline to produce: "+strings.Join(sets.StringKeySet(o.KnownTimelines).List(), ","))
 	flagset.StringVar(&o.PodResourceFilename, "known-pods", o.PodResourceFilename, "resource-pods_<timestamp>.zip filename from openshift-tests.")
-	flagset.StringSliceVarP(&o.LocatorMatchers, "locator", "l", o.LocatorMatchers, "key=value selector for monitor event locators (where value is a regex).  for instance -lpod=openshift-etcd-installer.  The same key listed multiple times means an OR.  Each separate key is logically ANDed")
-	flagset.StringSliceVarP(&o.RemovedLocatorMatchers, "remove", "r", o.RemovedLocatorMatchers, "key=val selector to anti-match monitor event locators")
+	flagset.StringSliceVarP(&o.LocatorMatchers, "locator", "l", o.LocatorMatchers, "key=value selector for monitor event locators (where value is a regex).  for instance -lpod=openshift-etcd-installer.  The same key listed multiple times means an OR.  Each separate key is logically ANDed.  Precede value with a dash for anti-match")
 	flagset.StringVarP(&o.EndDate, "end-date", "e", o.EndDate, fmt.Sprintf("End date (default is one hour after latest event) in RFC3399 format in UTC timezone: %s", time.RFC3339))
 
 	return nil
@@ -142,12 +141,6 @@ func (o *TimelineOptions) Validate() error {
 		}
 	}
 
-	for _, removedMatcher := range o.RemovedLocatorMatchers {
-		if !strings.Contains(removedMatcher, "=") {
-			return fmt.Errorf("invalid --remove format, must be key=value")
-		}
-	}
-
 	if len(o.EndDate) > 0 {
 		_, err := time.ParseInLocation(time.RFC3339, o.EndDate, time.UTC)
 		if err != nil {
@@ -163,8 +156,15 @@ func (o *TimelineOptions) ToTimeline() *Timeline {
 
 	for _, matcherString := range o.LocatorMatchers {
 		parts := strings.SplitN(matcherString, "=", 2)
-		regExp := regexp.MustCompile(parts[1])
-		locatorMatcher[parts[0]] = append(locatorMatcher[parts[0]], regExp)
+
+		// value starts with a "-"" so treat it as an anti-matcher.
+		if strings.HasPrefix(parts[1], "-") {
+			regExp := regexp.MustCompile(parts[1][1:])
+			inverseLocatorMatcher[parts[0]] = append(inverseLocatorMatcher[parts[0]], regExp)
+		} else {
+			regExp := regexp.MustCompile(parts[1])
+			locatorMatcher[parts[0]] = append(locatorMatcher[parts[0]], regExp)
+		}
 	}
 
 	for _, matcherString := range o.RemovedLocatorMatchers {
