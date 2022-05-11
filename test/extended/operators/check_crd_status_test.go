@@ -17,7 +17,9 @@ func Test_checkSubresourceStatus(t *testing.T) {
 		if err != nil {
 			t.Errorf("Fail: %s", err)
 		}
-		failures := checkSubresourceStatus(crdList)
+		subresourceStatusChecker := checkSubresourceStatusType{}
+		failures := checkFunc(subresourceStatusChecker, crdList)
+		//failures := checkSubresourceStatus(crdList)
 		if len(failures) > 0 {
 			t.Error("There should be no failures")
 			for _, i := range failures {
@@ -35,7 +37,9 @@ func Test_checkStatusInSchema(t *testing.T) {
 		if err != nil {
 			t.Errorf("Fail: %s", err)
 		}
-		failures := checkStatusInSchema(crdList)
+		statusInSchemaChecker := checkStatusInSchemaType{}
+		failures := checkFunc(statusInSchemaChecker, crdList)
+		//failures := checkStatusInSchema(crdList)
 		if len(failures) > 0 {
 			t.Error("There should be no failures")
 			for _, i := range failures {
@@ -48,7 +52,7 @@ func setupLocalAPIClientset() *apiextensionsclientset.Clientset {
 	// Get the kubeconfig by creating an Openshift cluster with cluster-bot, downloading it,
 	// and using the filename for KUBECONFIG.
 	home_dir := os.Getenv("HOME")
-	err := os.Setenv("KUBECONFIG", fmt.Sprintf("%s/Downloads/cluster-bot-2022-05-10-100029.kubeconfig.txt", home_dir))
+	err := os.Setenv("KUBECONFIG", fmt.Sprintf("%s/Downloads/cluster-bot-2022-05-11-143017.kubeconfig.txt", home_dir))
 	kube_dir := os.Getenv("KUBECONFIG")
 	fmt.Println(kube_dir)
 	if err != nil {
