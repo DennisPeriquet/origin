@@ -38,7 +38,7 @@ type TimelineOptions struct {
 	RemovedLocatorMatchers []string
 	Namespaces             []string
 	OutputType             string
-	EndDate                string
+	EndDate                *string
 
 	KnownRenderers map[string]RenderFunc
 	KnownTimelines map[string]monitorapi.EventIntervalMatchesFunc
@@ -108,7 +108,10 @@ func (o *TimelineOptions) Bind(flagset *pflag.FlagSet) error {
 	flagset.StringVar(&o.TimelineType, "type", o.TimelineType, "type of timeline to produce: "+strings.Join(sets.StringKeySet(o.KnownTimelines).List(), ","))
 	flagset.StringVar(&o.PodResourceFilename, "known-pods", o.PodResourceFilename, "resource-pods_<timestamp>.zip filename from openshift-tests.")
 	flagset.StringSliceVarP(&o.LocatorMatchers, "locator", "l", o.LocatorMatchers, "key=value selector for monitor event locators (where value is a regex).  for instance -lpod=openshift-etcd-installer.  The same key listed multiple times means an OR.  Each separate key is logically ANDed.  Precede value with a dash for anti-match")
-	flagset.StringVarP(&o.EndDate, "end-date", "e", o.EndDate, fmt.Sprintf("End date (default is one hour after latest event) in RFC3399 format in UTC timezone: %s", time.RFC3339))
+
+	var endDateStr string
+	o.EndDate = &endDateStr
+	flagset.StringVarP(o.EndDate, "end-date", "e", *o.EndDate, fmt.Sprintf("End date (default is one hour after latest event) in RFC3399 format in UTC timezone: %s", time.RFC3339))
 
 	return nil
 }
@@ -141,8 +144,8 @@ func (o *TimelineOptions) Validate() error {
 		}
 	}
 
-	if len(o.EndDate) > 0 {
-		_, err := time.ParseInLocation(time.RFC3339, o.EndDate, time.UTC)
+	if *o.EndDate != "" {
+		_, err := time.ParseInLocation(time.RFC3339, *o.EndDate, time.UTC)
 		if err != nil {
 			return fmt.Errorf("The --end-date value needs to be a valid time in RFC3339 format: %s", time.RFC3339)
 		}
@@ -173,10 +176,13 @@ func (o *TimelineOptions) ToTimeline() *Timeline {
 		inverseLocatorMatcher[parts[0]] = append(inverseLocatorMatcher[parts[0]], regExp)
 	}
 
-	endDateTime := time.Time{}
-	if len(o.EndDate) > 0 {
-		endDateTime, _ = time.Parse(time.RFC3339, o.EndDate)
-	}
+	//endDateTime := time.Time{}
+	//if o.EndDate != nil {
+	//	endDateTime, _ = time.Parse(time.RFC3339, *o.EndDate)
+	//}
+
+	// If --end-date not passed, *o.EndDate is "" which is parsed as zero time.
+	endDateTime, _ := time.Parse(time.RFC3339, *o.EndDate)
 
 	return &Timeline{
 		MonitorEventFilename: o.MonitorEventFilename,
