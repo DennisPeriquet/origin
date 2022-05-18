@@ -67,3 +67,6 @@ func getCurrentResults() historicaldata.BestMatcher {
 
 	return historicalData
 }
+
+// interestingNamespaces is the list of known namespaces we have in an openshift cluster
+var interestingNamespaces = []string{}
