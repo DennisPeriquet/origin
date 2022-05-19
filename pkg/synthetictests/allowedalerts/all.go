@@ -29,30 +29,41 @@ func AllAlertTests(ctx context.Context, clientConfig *rest.Config, duration time
 
 	ret := []AlertTest{}
 	ret = append(ret, newWatchdogAlert())
+
+	// These are new and for all namespaces.
 	ret = append(ret, newNamespacedAlert("KubePodNotReady").pending().neverFail().toTests()...)
 	ret = append(ret, newNamespacedAlert("KubePodNotReady").firing().toTests()...)
 
 	ret = append(ret, newAlert("etcd", "etcdMembersDown").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdMembersDown").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdGRPCRequestsSlow").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdGRPCRequestsSlow").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfFailedGRPCRequests").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfFailedGRPCRequests").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdMemberCommunicationSlow").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdMemberCommunicationSlow").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdNoLeader").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdNoLeader").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdHighFsyncDurations").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighFsyncDurations").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdHighCommitDurations").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighCommitDurations").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdInsufficientMembers").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdInsufficientMembers").firing().toTests()...)
+
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfLeaderChanges").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfLeaderChanges").withAllowance(etcdAllowance).firing().toTests()...)
 
 	ret = append(ret, newAlert("kube-apiserver", "KubeAPIErrorBudgetBurn").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("kube-apiserver", "KubeAPIErrorBudgetBurn").firing().toTests()...)
+
 	ret = append(ret, newAlert("kube-apiserver", "KubeClientErrors").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("kube-apiserver", "KubeClientErrors").firing().toTests()...)
 
@@ -65,6 +76,7 @@ func AllAlertTests(ctx context.Context, clientConfig *rest.Config, duration time
 	ret = append(ret, newAlert("monitoring", "PrometheusOperatorWatchErrors").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("monitoring", "PrometheusOperatorWatchErrors").firing().toTests()...)
 
+	// These two are new
 	ret = append(ret, newAlert("OLM", "RedhatOperatorsCatalogError").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("OLM", "RedhatOperatorsCatalogError").firing().toTests()...)
 

@@ -29,6 +29,8 @@ func WhenWasAlertPending(ctx context.Context, prometheusClient prometheusv1.API,
 	return whenWasAlertInState(ctx, prometheusClient, startTime, alertName, "pending", namespace)
 }
 
+// whenWasAlertInState returns the EventIntervals representation of the alertName
+// in this namespace when the alert was in the given alertState
 func whenWasAlertInState(ctx context.Context, prometheusClient prometheusv1.API, startTime time.Time, alertName, alertState, namespace string) ([]monitorapi.EventInterval, error) {
 	if alertState != "pending" && alertState != "firing" {
 		return nil, fmt.Errorf("unrecognized alertState: %v", alertState)
@@ -62,7 +64,11 @@ func whenWasAlertInState(ctx context.Context, prometheusClient prometheusv1.API,
 	}
 
 	if namespace == platformidentification.NamespaceOther {
+		// Remove alerts that were not in knownNamespaces list.
 		knownNamespaces := sets.StringKeySet(platformidentification.GetNamespacesToBugzillaComponents())
+
+		// Essentially, ret = ret with events not in knowNamespaces filtered out.
+		// ret is converted from an EventInterval to an Intervals so we can use the Filter func.
 		ret = monitorapi.Intervals(ret).Filter(func(eventInterval monitorapi.EventInterval) bool {
 			namespace := monitorapi.NamespaceFromLocator(eventInterval.Locator)
 			return !knownNamespaces.Has(namespace)

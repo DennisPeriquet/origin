@@ -66,6 +66,7 @@ type basicAlertTest struct {
 
 func newAlert(bugzillaComponent, alertName string) *alertBuilder {
 	return &alertBuilder{
+		divideByNamespaces:  false,
 		bugzillaComponent:   bugzillaComponent,
 		alertName:           alertName,
 		alertState:          AlertPending,
@@ -112,6 +113,9 @@ func (a *alertBuilder) neverFail() *alertBuilder {
 	return a
 }
 
+// toTest returns one of two things:
+// * a list of: one AlertTests per namespace used by all Openshift operators plus AlertTest for all other namespaces
+// * a basic alert (i.e., with no namespace)
 func (a *alertBuilder) toTests() []AlertTest {
 	if !a.divideByNamespaces {
 		return []AlertTest{
