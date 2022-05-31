@@ -36,28 +36,20 @@ func AllAlertTests(ctx context.Context, clientConfig *rest.Config, duration time
 
 	ret = append(ret, newAlert("etcd", "etcdMembersDown").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdMembersDown").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdGRPCRequestsSlow").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdGRPCRequestsSlow").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfFailedGRPCRequests").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfFailedGRPCRequests").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdMemberCommunicationSlow").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdMemberCommunicationSlow").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdNoLeader").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdNoLeader").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdHighFsyncDurations").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighFsyncDurations").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdHighCommitDurations").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighCommitDurations").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdInsufficientMembers").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdInsufficientMembers").firing().toTests()...)
-
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfLeaderChanges").pending().neverFail().toTests()...)
 	ret = append(ret, newAlert("etcd", "etcdHighNumberOfLeaderChanges").withAllowance(etcdAllowance).firing().toTests()...)
 

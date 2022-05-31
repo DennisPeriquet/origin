@@ -19,7 +19,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [Serial] [sig-auth][Feature:OAuthServer] [RequestHeaders] [IdP] test RequestHeaders IdP": "test RequestHeaders IdP [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-api-machinery] API data in etcd should be stored at the correct location and version for all resources [Serial]": "should be stored at the correct location and version for all resources [Serial] [SkippedUntil:05272022:blocker-bz/2081021] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-api-machinery] API data in etcd should be stored at the correct location and version for all resources [Serial]": "should be stored at the correct location and version for all resources [Serial] [SkippedUntil:06072022:blocker-bz/2081021] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-api-machinery] API priority and fairness should ensure that requests can be classified by adding FlowSchema and PriorityLevelConfiguration": "should ensure that requests can be classified by adding FlowSchema and PriorityLevelConfiguration [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -959,7 +959,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-auth] ServiceAccounts ServiceAccountIssuerDiscovery should support OIDC discovery of service account issuer [Conformance]": "ServiceAccountIssuerDiscovery should support OIDC discovery of service account issuer [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
-	"[Top Level] [sig-auth] ServiceAccounts should allow opting out of API token automount  [Conformance]": "should allow opting out of API token automount  [Conformance] [SkippedUntil:05272022:blocker-bz/2081087] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
+	"[Top Level] [sig-auth] ServiceAccounts should allow opting out of API token automount  [Conformance]": "should allow opting out of API token automount  [Conformance] [SkippedUntil:06072022:blocker-bz/2081087] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
 	"[Top Level] [sig-auth] ServiceAccounts should ensure a single API token exists": "should ensure a single API token exists [Disabled:Broken] [Suite:k8s]",
 
@@ -1835,8 +1835,6 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-ubi8\" should print the usage",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:5.0-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:5.0-ubi8\" should print the usage",
-
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:6.0-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:6.0-ubi8\" should print the usage",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/nginx:1.18-ubi7\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/nginx:1.18-ubi7\" should print the usage",
@@ -1863,8 +1861,6 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/php:7.4-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/php:7.4-ubi8\" should print the usage",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi7\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi7\" should print the usage",
-
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi8\" should print the usage",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/python:3.6-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:3.6-ubi8\" should print the usage",
@@ -1877,10 +1873,6 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.5-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.5-ubi8\" should print the usage",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi7\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi7\" should print the usage",
-
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi8\" should print the usage",
-
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi7\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi7\" should print the usage",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi8\" should print the usage",
@@ -1892,8 +1884,6 @@ var annotations = map[string]string{
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-el7\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-el7\" should be SCL enabled",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-ubi8\" should be SCL enabled",
-
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:5.0-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:5.0-ubi8\" should be SCL enabled",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:6.0-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:6.0-ubi8\" should be SCL enabled",
 
@@ -1921,8 +1911,6 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/php:7.4-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/php:7.4-ubi8\" should be SCL enabled",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi7\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi7\" should be SCL enabled",
-
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:2.7-ubi8\" should be SCL enabled",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/python:3.6-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:3.6-ubi8\" should be SCL enabled",
@@ -1934,10 +1922,6 @@ var annotations = map[string]string{
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/python:3.9-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/python:3.9-ubi8\" should be SCL enabled",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.5-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.5-ubi8\" should be SCL enabled",
-
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi7\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi7\" should be SCL enabled",
-
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.6-ubi8\" should be SCL enabled",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi7\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:2.7-ubi7\" should be SCL enabled",
 
@@ -2008,8 +1992,6 @@ var annotations = map[string]string{
 	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another": "[Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another [Serial]",
 
 	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should restore itself after quorum loss": "[Feature:EtcdRecovery] Cluster should restore itself after quorum loss [Serial]",
-
-	"[Top Level] [sig-etcd][Serial] etcd is able to vertically scale up and down with a single node": "is able to vertically scale up and down with a single node [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-imageregistry] Image registry should redirect on blob pull": "should redirect on blob pull [Suite:openshift/conformance/parallel]",
 
@@ -2123,7 +2105,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-instrumentation] Events API should delete a collection of events [Conformance]": "should delete a collection of events [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
-	"[Top Level] [sig-instrumentation] Events API should ensure that an event can be fetched, patched, deleted, and listed [Conformance]": "should ensure that an event can be fetched, patched, deleted, and listed [Conformance] [SkippedUntil:05272022:blocker-bz/2081084] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
+	"[Top Level] [sig-instrumentation] Events API should ensure that an event can be fetched, patched, deleted, and listed [Conformance]": "should ensure that an event can be fetched, patched, deleted, and listed [Conformance] [SkippedUntil:06072022:blocker-bz/2081084] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
 	"[Top Level] [sig-instrumentation] Events should delete a collection of events [Conformance]": "should delete a collection of events [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 

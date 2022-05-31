@@ -8,8 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"k8s.io/apimachinery/pkg/util/sets"
-
 	"github.com/openshift/origin/pkg/synthetictests/platformidentification"
 
 	routeclient "github.com/openshift/client-go/route/clientset/versioned"
@@ -64,14 +62,11 @@ func whenWasAlertInState(ctx context.Context, prometheusClient prometheusv1.API,
 	}
 
 	if namespace == platformidentification.NamespaceOther {
-		// Remove alerts that were not in knownNamespaces list.
-		knownNamespaces := sets.StringKeySet(platformidentification.GetNamespacesToBugzillaComponents())
-
 		// Essentially, ret = ret with events not in knowNamespaces filtered out.
 		// ret is converted from an EventInterval to an Intervals so we can use the Filter func.
 		ret = monitorapi.Intervals(ret).Filter(func(eventInterval monitorapi.EventInterval) bool {
 			namespace := monitorapi.NamespaceFromLocator(eventInterval.Locator)
-			return !knownNamespaces.Has(namespace)
+			return !platformidentification.KnownNamespaces.Has(namespace)
 		})
 	}
 
