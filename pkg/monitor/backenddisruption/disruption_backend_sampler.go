@@ -392,9 +392,13 @@ func (b *BackendSampler) RunEndpointMonitoring(ctx context.Context, monitorRecor
 		return fmt.Errorf("monitor is required")
 	}
 	if eventRecorder == nil {
+
+		// Create an event recorder with 100 entries.
 		fakeEventRecorder := events.NewFakeRecorder(100)
 		// discard the events
 		go func() {
+
+			// No idea why deads did this.
 			for {
 				select {
 				case <-fakeEventRecorder.Events:
@@ -406,6 +410,7 @@ func (b *BackendSampler) RunEndpointMonitoring(ctx context.Context, monitorRecor
 		eventRecorder = fakeEventRecorder
 	}
 
+	// We sample the backend every second.
 	interval := 1 * time.Second
 	disruptionSampler := newDisruptionSampler(b)
 	go disruptionSampler.produceSamples(producerContext, interval)
@@ -477,6 +482,7 @@ func newDisruptionSampler(backendSampler *BackendSampler) *disruptionSampler {
 }
 
 // produceSamples only exits when the ctx is closed
+// This ticket runs checkConnection every second.
 func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
@@ -487,13 +493,18 @@ func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Du
 		// was actually 30s before.
 		currDisruptionSample := b.newSample(ctx)
 		go func() {
+			// checkConnection is where we call the http get to hit the b's url
 			sampleErr := b.backendSampler.checkConnection(ctx)
 			currDisruptionSample.setSampleError(sampleErr)
 			close(currDisruptionSample.finished)
 		}()
 
 		select {
+
+		// Block until the next tick
 		case <-ticker.C:
+
+		// If context is done, this function is done
 		case <-ctx.Done():
 			return
 		}
@@ -517,16 +528,24 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 
 	for {
 		select {
+
+		// If the context is done, then this function is done
 		case <-ctx.Done():
 			return
+
+		// Do nothing but proceed to process the oldest sample.
 		default:
 		}
 
 		currSample := b.popOldestSample(ctx)
 		if currSample == nil {
 			select {
+
+			// Nothing to process so wait for one interval and proceed.
 			case <-time.After(interval):
 				continue
+
+			// If the context is done, then this function is done.
 			case <-ctx.Done():
 				return
 			}
@@ -564,6 +583,8 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 			// start a new interval with the new error
 			message := DisruptionBeganMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
 			framework.Logf(message)
+
+			// This event will show up in the gather-extra/events.json file.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
 				v1.EventTypeWarning, "DisruptionBegan", "detected", message)
@@ -580,6 +601,7 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 				monitorRecorder.EndInterval(previousIntervalID, currSample.startTime)
 			}
 
+			// This event will show up in the gather-extra/events.json file.
 			message := DisruptionEndedMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType())
 			framework.Logf(message)
 			eventRecorder.Eventf(
@@ -600,6 +622,8 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 
 			message := DisruptionBeganMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
 			framework.Logf(message)
+
+			// This event will show up in the gather-extra/events.json file.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
 				v1.EventTypeWarning, "DisruptionBegan", "detected", message)
