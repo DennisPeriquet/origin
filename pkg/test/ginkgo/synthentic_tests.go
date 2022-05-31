@@ -46,6 +46,9 @@ func (a JUnitsForAllEvents) JUnitsForEvents(events monitorapi.Intervals, duratio
 	return all
 }
 
+// createSyntheticTestsFromMonitor looks at the events passed in and if it finds any events
+// with level=Error, add them into a string and use them as the systemOut for a returned failed test.
+// If there are no events with level=Error, a passing test is returned.
 func createSyntheticTestsFromMonitor(events monitorapi.Intervals, monitorDuration time.Duration) ([]*junitapi.JUnitTestCase, *bytes.Buffer, *bytes.Buffer) {
 	var syntheticTestResults []*junitapi.JUnitTestCase
 

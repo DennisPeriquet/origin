@@ -15,8 +15,15 @@ type IntervalCreationFunc func(intervals monitorapi.Intervals, recordedResources
 type SamplerFunc func(time.Time) []*monitorapi.Condition
 
 type Interface interface {
+
+	// Intervals a slice/copy of Intervals between from and to
 	Intervals(from, to time.Time) monitorapi.Intervals
+
+	// Conditions returns all conditions that were sampled in the interval
+	// between from and to
 	Conditions(from, to time.Time) monitorapi.Intervals
+
+	// CurrentResources returns a copy of the monitored resources
 	CurrentResourceState() monitorapi.ResourcesMap
 }
 

@@ -73,6 +73,8 @@ func whenWasAlertInState(ctx context.Context, prometheusClient prometheusv1.API,
 	return ret, nil
 }
 
+// FetchEventIntervalsForAllAlerts collects the vents from the instance of Prometheus running
+// on the Openshift cluster under test.
 func FetchEventIntervalsForAllAlerts(ctx context.Context, restConfig *rest.Config, startTime time.Time) ([]monitorapi.EventInterval, error) {
 	kubeClient, err := kubernetes.NewForConfig(restConfig)
 	if err != nil {

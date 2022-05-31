@@ -99,6 +99,8 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 		return
 	}
 
+	// serial tests have the Serial attribute; parallel tests don't (i.e., parallel is assumed unless
+	// there is a Serial attribute)
 	serial, parallel := splitTests(tests, func(t *testCase) bool { return strings.Contains(t.name, "[Serial]") })
 
 	r := ring.New(len(parallel))
@@ -108,6 +110,8 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 	}
 	q.queue = r
 
+	// Run n (parallelism) tests at a time by executing n go routines and waiting for n
+	// go routines to finish.
 	var wg sync.WaitGroup
 	wg.Add(parallelism)
 	for i := 0; i < parallelism; i++ {
@@ -124,6 +128,7 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 	}
 	wg.Wait()
 
+	// Once the parallel test are done, run the serial tests sequentially.
 	for _, test := range serial {
 		if ctx.Err() != nil {
 			return

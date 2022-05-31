@@ -130,16 +130,30 @@ func (t *backendDisruptionTest) Test(f *framework.Framework, done <-chan struct{
 	defer endpointMonitoringCancel() // final backstop on closure
 	m := monitor.NewMonitorWithInterval(1 * time.Second)
 	disruptionErrCh := make(chan error, 1)
+
+	// Create an Endpoint Monitor and then immediately check if there was an error.
+	// Why deads chose to make this a go routing, I have no idea
 	go func() {
 		err := t.backend.RunEndpointMonitoring(endpointMonitoringContext, m, eventRecorder)
+
+		// If the monitor starts up successfully, a produceSamples and consumeSamples go routine
+		// will have launched for this backend and block so we'll never get to this line until
+		// we're finished monitoring (via error or, context cancellation, or just return where
+		// error is set to nil).
 		disruptionErrCh <- err
 	}()
+
+	// The above go routine has 1 second to run before we check for error.
 	time.Sleep(1 * time.Second) // wait for some initial errors so we can fail early if it happens
+
+	// We then check for error.  If we got no error, the monitor successfully started.
 	var disruptionErr error
 	select {
 	case disruptionErr = <-disruptionErrCh:
 	default:
 	}
+
+	// If there's an error, we mark this test as failed because the monitor could not start.
 	framework.ExpectNoError(disruptionErr, fmt.Sprintf("unable to monitor: %s", t.backend.GetLocator()))
 
 	// Wait to ensure the backend is still available after the test ends.
@@ -164,6 +178,8 @@ func (t *backendDisruptionTest) Test(f *framework.Framework, done <-chan struct{
 	framework.ExpectNoError(err)
 
 	ginkgo.By(fmt.Sprintf("writing results: %s", t.backend.GetLocator()))
+
+	// The check to see if we exceeded the max duration for disruption.
 	ExpectNoDisruptionForDuration(
 		f,
 		*allowedDisruption,
