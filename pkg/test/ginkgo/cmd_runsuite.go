@@ -396,8 +396,12 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	var syntheticTestResults []*junitapi.JUnitTestCase
 	var syntheticFailure bool
 	timeSuffix := fmt.Sprintf("_%s", start.UTC().Format("20060102-150405"))
+
+	// Create a list of eventIntervals
 	events := m.Intervals(time.Time{}, time.Time{})
 
+	// Apparently, we had collected events on disk in the junit dir.  Read them from each
+	// dir and construct an additionalEvents list.
 	if len(opt.JUnitDir) > 0 {
 		var additionalEvents monitorapi.Intervals
 		filepath.WalkDir(opt.JUnitDir, func(path string, d fs.DirEntry, err error) error {
@@ -414,6 +418,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 			additionalEvents = append(additionalEvents, saved...)
 			return nil
 		})
+
+		// Add the additional events from disk to the events we already have and sort them.
 		if len(additionalEvents) > 0 {
 			events = append(events, additionalEvents.Cut(start, end)...)
 			sort.Sort(events)
@@ -421,6 +427,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	}
 
 	// add events from alerts so we can create the intervals
+	// These events are obtained by running PromQL queries for firing and pending on the Prometheus
+	// instance running on the Openshift cluster under test.
 	alertEventIntervals, err := monitor.FetchEventIntervalsForAllAlerts(ctx, restConfig, start)
 	if err != nil {
 		fmt.Printf("\n\n\n#### alertErr=%v\n", err)
@@ -436,6 +444,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		}
 	}
 
+	// The events list is the input to the synthetic tests.  If there are events, we
+	// will create synthetic tests.
 	if len(events) > 0 {
 		var buf *bytes.Buffer
 		syntheticTestResults, buf, _ = createSyntheticTestsFromMonitor(events, duration)

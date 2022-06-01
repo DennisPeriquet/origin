@@ -26,7 +26,18 @@ type Monitor struct {
 	samples        []*sample
 
 	recordedResourceLock sync.Mutex
-	recordedResources    monitorapi.ResourcesMap
+
+	// I put this code here so you don't have to keep looking it up:
+	//   type InstanceKey struct {
+	//	   Namespace string
+	//	   Name      string
+	//	   UID       string
+	//   }
+	//   type InstanceMap map[InstanceKey]runtime.Object
+	//   type ResourcesMap map[string]InstanceMap
+	//
+	// Notice the key for InstanceMap is a struct
+	recordedResources monitorapi.ResourcesMap
 }
 
 // NewMonitor creates a monitor with the default sampling interval.
@@ -76,6 +87,7 @@ func (m *Monitor) AddSampler(fn SamplerFunc) {
 	m.samplers = append(m.samplers, fn)
 }
 
+// CurrentResourceState returns a copy of m's recordedResources
 func (m *Monitor) CurrentResourceState() monitorapi.ResourcesMap {
 	m.recordedResourceLock.Lock()
 	defer m.recordedResourceLock.Unlock()
