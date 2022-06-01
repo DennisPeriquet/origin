@@ -317,7 +317,12 @@ func makeNamespaceScheduleToAllNodes(f *e2e.Framework) {
 	}
 }
 
+// modifyNetworkConfig modifies the cluster network configuration by adding an external IP.
+// We add blocking calls to WaitForOperatorToRolling so that we can wait until the affected
+// clusterOperator (kube-apiserver) is stable before exiting this function
 func modifyNetworkConfig(configClient configv1client.Interface, autoAssignCIDRs, allowedCIDRs, rejectedCIDRs []string) {
+
+	// Set a context with a 20 minute timeout
 	ctx := context.Background()
 	ctx, cancel := context.WithTimeout(ctx, 20*time.Minute)
 	defer cancel()
