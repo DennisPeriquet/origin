@@ -45,7 +45,7 @@ func (p *OperatorProgressingStatus) Started() <-chan struct{} {
 // Done is closed once the operator finishes progressing *or* once the operation has failed.
 // If the operation failed, then Err() will be non-nil
 // I would've called this rolloutDone instead of Done to avoid people thinking it's a ctx.Done()
-// idiom.
+// idiom; but it could've been his point.
 func (p *OperatorProgressingStatus) Done() <-chan struct{} {
 	return p.rolloutDone
 }
