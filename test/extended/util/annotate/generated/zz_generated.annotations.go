@@ -261,6 +261,8 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and don't send request early": "API LBs follow /readyz of kube-apiserver and don't send request early [Suite:openshift/conformance/parallel]",
 
+	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and stop sending requests before server shutdowns for external clients": "API LBs follow /readyz of kube-apiserver and stop sending requests before server shutdowns for external clients [Suite:openshift/conformance/parallel]",
+
 	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and stop sending requests": "API LBs follow /readyz of kube-apiserver and stop sending requests [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] kube-apiserver terminates within graceful termination period": "kube-apiserver terminates within graceful termination period [Suite:openshift/conformance/parallel]",
@@ -2539,9 +2541,9 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] Networking should check kube-proxy urls": "should check kube-proxy urls [Disabled:Broken] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Networking should provide Internet connection for containers [Feature:Networking-IPv4]": "should provide Internet connection for containers [Feature:Networking-IPv4] [Skipped:Disconnected] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-network] Networking should provide Internet connection for containers [Feature:Networking-IPv4]": "should provide Internet connection for containers [Feature:Networking-IPv4] [Skipped:Disconnected] [Skipped:Proxy] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Networking should provide Internet connection for containers [Feature:Networking-IPv6][Experimental][LinuxOnly]": "should provide Internet connection for containers [Feature:Networking-IPv6][Experimental][LinuxOnly] [Disabled:Broken] [Skipped:Disconnected] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-network] Networking should provide Internet connection for containers [Feature:Networking-IPv6][Experimental][LinuxOnly]": "should provide Internet connection for containers [Feature:Networking-IPv6][Experimental][LinuxOnly] [Disabled:Broken] [Skipped:Disconnected] [Skipped:Proxy] [Skipped:azure] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Networking should provide unchanging, static URL paths for kubernetes api services": "should provide unchanging, static URL paths for kubernetes api services [Disabled:Broken] [Suite:k8s]",
 
