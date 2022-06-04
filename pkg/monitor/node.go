@@ -16,6 +16,10 @@ import (
 )
 
 func startNodeMonitoring(ctx context.Context, m Recorder, client kubernetes.Interface) {
+
+	// These functions are used in the EventHandlers below to track and record events
+	// for node changes.  I.e., we track node changes though EventHandlers from
+	// NodeInformers
 	nodeChangeFns := []func(node, oldNode *corev1.Node) []monitorapi.Condition{
 		func(node, oldNode *corev1.Node) []monitorapi.Condition {
 			var conditions []monitorapi.Condition
@@ -27,6 +31,8 @@ func startNodeMonitoring(ctx context.Context, m Recorder, client kubernetes.Inte
 				if previous == nil {
 					continue
 				}
+
+				// Tracking node condition changes.
 				if c.Status != previous.Status {
 					conditions = append(conditions, monitorapi.Condition{
 						Level:   monitorapi.Warning,
@@ -35,6 +41,8 @@ func startNodeMonitoring(ctx context.Context, m Recorder, client kubernetes.Inte
 					})
 				}
 			}
+
+			// Tracking node delete followed by recreate
 			if node.UID != oldNode.UID {
 				conditions = append(conditions, monitorapi.Condition{
 					Level:   monitorapi.Error,
@@ -127,11 +135,15 @@ func startNodeMonitoring(ctx context.Context, m Recorder, client kubernetes.Inte
 	go nodeInformer.Run(ctx.Done())
 }
 
+// nodeRoles returns a sorted list of roles as specified by any labels of type
+// node-role.kubernetes.io=...
 func nodeRoles(node *corev1.Node) string {
 	const roleLabel = "node-role.kubernetes.io"
 	var roles []string
 	for label := range node.Labels {
 		if strings.Contains(label, roleLabel) {
+
+			// append the part that is after the = in node-role.kubernetes.io=...
 			roles = append(roles, label[len(roleLabel)+1:])
 		}
 	}

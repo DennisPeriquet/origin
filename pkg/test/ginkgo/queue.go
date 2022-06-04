@@ -101,6 +101,7 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 
 	serial, parallel := splitTests(tests, func(t *testCase) bool { return strings.Contains(t.name, "[Serial]") })
 
+	// Populate a ring of tests equal to the numbr of parallel tests.
 	r := ring.New(len(parallel))
 	for _, test := range parallel {
 		r.Value = test
@@ -108,6 +109,9 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 	}
 	q.queue = r
 
+	// run this many tests at a time until their finished, then run serial tests one at a time.
+	// DP: hm... if parallelism is less than the number of parallel tests, we end up running the
+	// first set of tests and finish.
 	var wg sync.WaitGroup
 	wg.Add(parallelism)
 	for i := 0; i < parallelism; i++ {
@@ -124,6 +128,7 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 	}
 	wg.Wait()
 
+	// Run serial tests one at a time.
 	for _, test := range serial {
 		if ctx.Err() != nil {
 			return

@@ -162,6 +162,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		}
 	}
 
+	// Setup the synthetic test list.
 	syntheticEventTests := JUnitsForAllEvents{
 		opt.SyntheticEventTests,
 		suite.SyntheticEventTests,
@@ -226,6 +227,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		}
 	}
 
+	// parallelism is set in the options and suite with default of 10
 	parallelism := opt.Parallelism
 	if parallelism == 0 {
 		parallelism = suite.Parallelism
@@ -233,6 +235,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	if parallelism == 0 {
 		parallelism = 10
 	}
+
+	// timeout is set in the suite with default of 15
 	timeout := opt.Timeout
 	if timeout == 0 {
 		timeout = suite.TestTimeout
@@ -241,6 +245,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		timeout = 15 * time.Minute
 	}
 
+	// This chunk of code sets up signal handling for SIGINT and SIGTERM.
 	ctx, cancelFn := context.WithCancel(context.Background())
 	defer cancelFn()
 	abortCh := make(chan os.Signal, 2)
@@ -252,20 +257,30 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		fmt.Fprintf(opt.ErrOut, "Interrupted twice, exiting (%s)\n", sig)
 		switch sig {
 		case syscall.SIGINT:
+			// the job was terminated by the owner
 			os.Exit(130)
 		default:
+			// return success on any other signal
 			os.Exit(0)
 		}
 	}()
 	signal.Notify(abortCh, syscall.SIGINT, syscall.SIGTERM)
 
+	// Get a restConfig/kubeconfig from monitor package? not sure why we do this from monitor package.
+	// Perhaps it's a restConfig speicfically for disruption testing.
 	restConfig, err := monitor.GetMonitorRESTConfig()
 	if err != nil {
 		return err
 	}
+
+	// Disruption monitoring start here.
 	m, err := monitor.Start(ctx, restConfig,
 		[]monitor.StartEventIntervalRecorderFunc{
+
+			// Create all api samplers for disruption testing.
 			controlplane.StartAllAPIMonitoring,
+
+			// Create all ingress samplers for disruption testing.
 			frontends.StartAllIngressMonitoring,
 		},
 	)
@@ -273,6 +288,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		return err
 	}
 
+	// pc = Pod Collector
 	pc, err := SetupNewPodCollector(ctx)
 	if err != nil {
 		return err
@@ -287,6 +303,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		includeSuccess = true
 	}
 
+	// Split the tests into the 4 categories.
 	early, notEarly := splitTests(tests, func(t *testCase) bool {
 		return strings.Contains(t.name, "[Early]")
 	})
@@ -304,6 +321,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	})
 
 	// If user specifies a count, duplicate the kube and openshift tests that many times.
+	// Running tests n times involves increasing the size of each test list by that many tests.
 	expectedTestCount := len(early) + len(late)
 	if count != -1 {
 		originalKube := kubeTests

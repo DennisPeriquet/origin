@@ -20,6 +20,8 @@ import (
 )
 
 func startPodMonitoring(ctx context.Context, m Recorder, client kubernetes.Interface) {
+
+	// Keep track of the condition where "pod has been pending longer than a minute"
 	podInformer := cache.NewSharedIndexInformer(
 		NewErrorRecordingListWatcher(m, &cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
@@ -535,11 +537,19 @@ func startPodMonitoring(ctx context.Context, m Recorder, client kubernetes.Inter
 
 }
 
+// toCreateFns takes a slice of functions and returns a slice of objCreateFuncs
+// type objCreateFunc func(obj interface{}) []monitorapi.Condition
 func toCreateFns(podCreateFns []func(pod *corev1.Pod) []monitorapi.Condition) []objCreateFunc {
 	ret := []objCreateFunc{}
 
 	for i := range podCreateFns {
 		fn := podCreateFns[i]
+
+		// We are returning a function with a signature that is accepted by something else
+		// (a particular interface we are trying to satisfy perhaps?) by returning the same
+		// function with the parameter casted as the one we are converting.  I'm betting
+		// we wrote the origin function with corev1.Pod to take advantage of strong type
+		// checking.
 		ret = append(ret, func(obj interface{}) []monitorapi.Condition {
 			return fn(obj.(*corev1.Pod))
 		})
@@ -548,6 +558,8 @@ func toCreateFns(podCreateFns []func(pod *corev1.Pod) []monitorapi.Condition) []
 	return ret
 }
 
+// toDeleteFns takes a slice of functions and returns a slice of objDeleteFuncs
+// type objDeleteFunc func(obj interface{}) []monitorapi.Condition
 func toDeleteFns(podDeleteFns []func(pod *corev1.Pod) []monitorapi.Condition) []objDeleteFunc {
 	ret := []objDeleteFunc{}
 
@@ -561,6 +573,8 @@ func toDeleteFns(podDeleteFns []func(pod *corev1.Pod) []monitorapi.Condition) []
 	return ret
 }
 
+// toUpdateFns takes a slace of functions and returns a slice of objUpdateFuncs
+// type objUpdateFunc func(obj, oldObj interface{}) []monitorapi.Condition
 func toUpdateFns(podUpdateFns []func(pod, oldPod *corev1.Pod) []monitorapi.Condition) []objUpdateFunc {
 	ret := []objUpdateFunc{}
 

@@ -43,6 +43,8 @@ func DefaultIntervalCreationFns() []IntervalCreationFunc {
 
 // Start begins monitoring the cluster referenced by the default kube configuration until
 // context is finished.
+// This is a major entry point into the Monitor because all Conditions into one big Monitor.
+// Those Conditions are for disruption or for all the informers and the Event reflector.
 func Start(ctx context.Context, restConfig *rest.Config, additionalEventIntervalRecorders []StartEventIntervalRecorderFunc) (*Monitor, error) {
 	m := NewMonitorWithInterval(time.Second)
 	client, err := kubernetes.NewForConfig(restConfig)
@@ -54,12 +56,17 @@ func Start(ctx context.Context, restConfig *rest.Config, additionalEventInterval
 		return nil, err
 	}
 
+	// This calls the additionalEventIntervalRecorders which are the samplers for all
+	// the backends for disruption testing.
 	for _, additionalEventIntervalRecorder := range additionalEventIntervalRecorders {
 		if err := additionalEventIntervalRecorder(ctx, m, restConfig); err != nil {
 			return nil, err
 		}
 	}
 
+	// All this monitoring (with Pod informers, Node informers, and Event reflector) is done with
+	// the same Monitor created above in this function.  So whatever is recorded, is stored in
+	// one big list of events
 	startPodMonitoring(ctx, m, client)
 	startNodeMonitoring(ctx, m, client)
 	startEventMonitoring(ctx, m, client)

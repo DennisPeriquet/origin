@@ -234,6 +234,7 @@ func (m *Monitor) sample(hasPrevious bool) bool {
 	samplers := m.samplers
 	m.lock.Unlock()
 
+	// Call all the samplers and gather up all the Conditions that they return.
 	now := time.Now().UTC()
 	var conditions []*monitorapi.Condition
 	for _, fn := range samplers {
@@ -245,6 +246,7 @@ func (m *Monitor) sample(hasPrevious bool) bool {
 		}
 	}
 
+	// Save the samples we got; samples are a Condition and the time they happened.
 	m.lock.Lock()
 	defer m.lock.Unlock()
 	m.samples = append(m.samples, &sample{

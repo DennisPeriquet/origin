@@ -18,6 +18,8 @@ import (
 )
 
 func startClusterOperatorMonitoring(ctx context.Context, m Recorder, client configclientset.Interface) {
+
+	// co = cluster operator
 	coInformer := cache.NewSharedIndexInformer(
 		NewErrorRecordingListWatcher(m, &cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
@@ -81,6 +83,7 @@ func startClusterOperatorMonitoring(ctx context.Context, m Recorder, client conf
 		},
 	}
 
+	// Track cluster operator add, delete, update.
 	startTime := time.Now().UTC().Add(-time.Minute)
 	coInformer.AddEventHandler(
 		cache.ResourceEventHandlerFuncs{
@@ -132,6 +135,7 @@ func startClusterOperatorMonitoring(ctx context.Context, m Recorder, client conf
 
 	go coInformer.Run(ctx.Done())
 
+	// cv = cluster version
 	cvInformer := cache.NewSharedIndexInformer(
 		NewErrorRecordingListWatcher(m, &cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {

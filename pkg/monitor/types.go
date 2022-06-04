@@ -46,6 +46,7 @@ type ConditionalSampler interface {
 //  3. a bool indicating if it is currently available
 type SampleFunc func(previouslyAvailable bool) (edgeCondition *monitorapi.Condition, currentlyAvailable bool)
 
+// sample represents a Condition at a specific time.
 type sample struct {
 	at         time.Time
 	conditions []*monitorapi.Condition

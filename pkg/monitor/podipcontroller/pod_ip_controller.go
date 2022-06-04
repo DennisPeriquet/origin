@@ -20,6 +20,8 @@ import (
 	"k8s.io/client-go/util/workqueue"
 )
 
+// Recorder is a subset of the methods defined in Monitor because this is all the reecorder
+// needs for this controller.
 type Recorder interface {
 	Record(conditions ...monitorapi.Condition)
 }
@@ -35,7 +37,12 @@ type SimultaneousPodIPController struct {
 	queue workqueue.RateLimitingInterface
 }
 
+// NewSimultaneousPodIPController is a constructor and note that
+// recorder uses only the local Recorder interface which has only the "Record" method because that's the
+// only method we need.  This recorder is passed in as a Monitor which includes the Record method among
+// others
 func NewSimultaneousPodIPController(
+
 	recorder Recorder,
 	podInformer informercorev1.PodInformer,
 ) *SimultaneousPodIPController {
