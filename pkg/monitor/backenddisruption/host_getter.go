@@ -47,6 +47,8 @@ func NewKubeAPIHostGetter(clientConfig *rest.Config) HostGetter {
 	}
 }
 
+// GetHost returns the host of the client config ; I wonder if this is the
+// external Load Balancer IP address that sits in front of the kube-apiservers.
 func (g *kubeAPIHostGetter) GetHost() (string, error) {
 	return g.clientConfig.Host, nil
 }
@@ -58,8 +60,10 @@ type routeHostGetter struct {
 
 	// initializeHost is used to ensure we only look up the route once instead of on every request
 	initializeHost sync.Once
+
 	// host is the https://host:port part of the URL
 	host string
+
 	// hostErr is the error (if we got one) from initializeHost.  This easier than retrying if we fail and probably
 	// good enough for CI.
 	hostErr error
@@ -73,6 +77,7 @@ func NewRouteHostGetter(clientConfig *rest.Config, routeNamespace string, routeN
 	}
 }
 
+// GetHost returns an url made up of the host extracted from the first Ingress of a route.
 func (g *routeHostGetter) GetHost() (string, error) {
 	g.initializeHost.Do(func() {
 		client, err := routeclientset.NewForConfig(g.clientConfig)
@@ -85,6 +90,8 @@ func (g *routeHostGetter) GetHost() (string, error) {
 			g.hostErr = err
 			return
 		}
+
+		// Get only the first Ingress that has a host and make a url out of it.
 		for _, ingress := range route.Status.Ingress {
 			if len(ingress.Host) > 0 {
 				g.host = fmt.Sprintf("https://%s", ingress.Host)

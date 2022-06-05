@@ -43,7 +43,7 @@ func DefaultIntervalCreationFns() []IntervalCreationFunc {
 
 // Start begins monitoring the cluster referenced by the default kube configuration until
 // context is finished.
-// This is a major entry point into the Monitor because all Conditions into one big Monitor.
+// This is a major entry point into The Monitor; all Conditions are help in one big Monitor.
 // Those Conditions are for disruption or for all the informers and the Event reflector.
 func Start(ctx context.Context, restConfig *rest.Config, additionalEventIntervalRecorders []StartEventIntervalRecorderFunc) (*Monitor, error) {
 	m := NewMonitorWithInterval(time.Second)

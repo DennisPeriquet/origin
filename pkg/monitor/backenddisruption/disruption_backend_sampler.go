@@ -189,6 +189,7 @@ func (b *BackendSampler) WithExpectedBodyRegex(expectedBodyRegex string) *Backen
 }
 
 // bodyMatches checks the body content and returns an error if it doesn't match the expected.
+// if there is a match, it returns nil
 func (b *BackendSampler) bodyMatches(body []byte) error {
 	switch {
 	case len(b.expect) != 0 && !bytes.Contains(body, []byte(b.expect)):
@@ -254,6 +255,8 @@ func (b *BackendSampler) GetHTTPClient() (*http.Client, error) {
 	timeoutForEntireRequest := b.getTimeout()
 	timeoutForPartOfRequest := timeoutForEntireRequest / 2 // this is less so that we can see failures for individual portions of the request
 
+	// This is on the first call of this method ; on subsequent calls, the cached
+	// values are returned.
 	b.initHTTPClient.Do(func() {
 		var httpTransport *http.Transport
 		switch b.GetConnectionType() {
@@ -313,6 +316,9 @@ func (b *BackendSampler) GetHTTPClient() (*http.Client, error) {
 	return b.httpClient, b.httpClientErr
 }
 
+// checkConnection, uses the httpClient and url to send an http GET to the backend
+// if the GET succeeds and the body matches what is expected, return nil, otherwise
+// return an error.
 func (b *BackendSampler) checkConnection(ctx context.Context) error {
 	httpClient, err := b.GetHTTPClient()
 	if err != nil {
@@ -328,11 +334,14 @@ func (b *BackendSampler) checkConnection(ctx context.Context) error {
 	backstopContextTimeout := b.getTimeout() * 3 / 2 // (1.5)
 	requestContext, requestCancel := context.WithTimeout(ctx, backstopContextTimeout)
 	defer requestCancel()
+
+	// build the http request
 	req, err := http.NewRequestWithContext(requestContext, http.MethodGet, url, nil)
 	if err != nil {
 		return err
 	}
 
+	// send the http request we built above
 	resp, getErr := httpClient.Do(req)
 	if requestContext.Err() == context.Canceled {
 		// this isn't an error, we were simply cancelled
@@ -342,6 +351,8 @@ func (b *BackendSampler) checkConnection(ctx context.Context) error {
 	var body []byte
 	var bodyReadErr, sampleErr error
 	if getErr == nil {
+
+		// Read the contents of the response
 		body, bodyReadErr = ioutil.ReadAll(resp.Body)
 		if closeErr := resp.Body.Close(); closeErr != nil {
 			framework.Logf("error closing body: %v: %v", b.GetLocator(), closeErr)
@@ -357,6 +368,8 @@ func (b *BackendSampler) checkConnection(ctx context.Context) error {
 	case resp.StatusCode < 200 || resp.StatusCode > 399:
 		sampleErr = fmt.Errorf("error running request: %v: %v", resp.Status, string(body))
 	default:
+
+		// check if the content of the body is as expected
 		if bodyMatchErr := b.bodyMatches(body); bodyMatchErr != nil {
 			sampleErr = bodyMatchErr
 		}
@@ -394,6 +407,10 @@ func (b *BackendSampler) RunEndpointMonitoring(ctx context.Context, monitorRecor
 	if eventRecorder == nil {
 		fakeEventRecorder := events.NewFakeRecorder(100)
 		// discard the events
+		// Yes, I get we discard events and I get that we block on events and until the producer context is done.
+		// But, why are we even doing this? and why are we using this?
+		// Looking at the call stack for how we get here, eventRecorder will NOT be null for the typical case where
+		// we are running testing.
 		go func() {
 			for {
 				select {
@@ -464,7 +481,11 @@ func (b *BackendSampler) StartEndpointMonitoring(ctx context.Context, monitorRec
 type disruptionSampler struct {
 	backendSampler *BackendSampler
 
-	lock           sync.Mutex
+	lock sync.Mutex
+
+	// activeSamplers is a list of disruptionSamples; the later disruptionSamples
+	// are at the back of the list.  The disruptionSamples hold the time and result
+	// of checking the backend (represented by the backendSampler) every interval (i.e., 1 second).
 	activeSamplers list.List
 }
 
@@ -476,6 +497,10 @@ func newDisruptionSampler(backendSampler *BackendSampler) *disruptionSampler {
 	}
 }
 
+// produceSamples runs on a Ticker such that on every interval (1 second), we check
+// the backend connection (via sending an http GET and getting a response) and saving
+// the result in a disruptionSample.  Each disruptionSample is saved by adding it to
+// the back of the activeSamplers list.
 // produceSamples only exits when the ctx is closed
 func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Duration) {
 	ticker := time.NewTicker(interval)
@@ -487,8 +512,14 @@ func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Du
 		// was actually 30s before.
 		currDisruptionSample := b.newSample(ctx)
 		go func() {
+
+			// Send the http GET to the endpoint and collect the result.
 			sampleErr := b.backendSampler.checkConnection(ctx)
+
+			// Save the result (sampleErr) in the disruptionSample we just created above.
 			currDisruptionSample.setSampleError(sampleErr)
+
+			// mark the connection check a finished
 			close(currDisruptionSample.finished)
 		}()
 
@@ -501,6 +532,7 @@ func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Du
 }
 
 // consumeSamples only exits when the ctx is closed
+// consumeSamples consumes disruptionSamples
 func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Duration, monitorRecorder Recorder, eventRecorder events.EventRecorder) {
 	firstSample := true
 	previousError := fmt.Errorf("never checked before")
@@ -523,6 +555,8 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 		}
 
 		currSample := b.popOldestSample(ctx)
+
+		// if there was no disruptionSample to process, wait one more interval
 		if currSample == nil {
 			select {
 			case <-time.After(interval):
@@ -532,13 +566,14 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 			}
 		}
 
-		//wait for the current sample to finish
+		// wait for the current sample to finish
 		select {
 		case <-currSample.finished:
 		case <-ctx.Done():
 			return
 		}
 
+		// if the error is nil, that means the backend was available.
 		previouslyAvailable := previousError == nil
 		currentError := currSample.getSampleError()
 		currentlyAvailable := currentError == nil
@@ -621,6 +656,8 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 	}
 }
 
+// popOldestSample removes a disruptionSample from the front of the list of
+// activeSamplers
 func (b *disruptionSampler) popOldestSample(ctx context.Context) *disruptionSample {
 	b.lock.Lock()
 	defer b.lock.Unlock()
@@ -631,9 +668,14 @@ func (b *disruptionSampler) popOldestSample(ctx context.Context) *disruptionSamp
 	if uncast != nil {
 		b.activeSamplers.Remove(uncast)
 	}
+
+	// Removing something from the queue results in a list.Element so we take the
+	// Value and convert it to a disruptionSample on return.
 	return uncast.Value.(*disruptionSample)
 }
 
+// newSample creates a new disruptionSample and places it at the back of the activeSamplers
+// list.  The startTime for the sample is set to the time this method was called.
 func (b *disruptionSampler) newSample(ctx context.Context) *disruptionSample {
 	b.lock.Lock()
 	defer b.lock.Unlock()
@@ -642,6 +684,8 @@ func (b *disruptionSampler) newSample(ctx context.Context) *disruptionSample {
 	return currentDisruptionSample
 }
 
+// numberOfSamples returns the number of activeSamplers (i.e., number of
+// disruptionSamples)
 func (b *disruptionSampler) numberOfSamples(ctx context.Context) int {
 	b.lock.Lock()
 	defer b.lock.Unlock()
@@ -653,6 +697,7 @@ type disruptionSample struct {
 	startTime time.Time
 	sampleErr error
 
+	// my guess is that this channel is written to if the sample succeeded.
 	finished chan struct{}
 }
 
