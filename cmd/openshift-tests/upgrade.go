@@ -101,6 +101,8 @@ func upgradeTestPreTest() error {
 			return name == controlplane.NewKubeAvailableWithNewConnectionsTest().Name() || name == controlplane.NewKubeAvailableWithConnectionReuseTest().Name()
 		})
 	default:
+
+		// This is the most common one.
 		return filterUpgrade(upgrade.AllTests(), func(string) bool { return true })
 	}
 }

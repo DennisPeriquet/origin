@@ -86,7 +86,9 @@ func AllTests() []upgrades.Test {
 }
 
 var (
-	upgradeToImage             string
+	upgradeToImage string
+
+	// These tests are set in SetTests
 	upgradeTests               = []upgrades.Test{}
 	upgradeAbortAt             int
 	upgradeDisruptRebootPolicy string
@@ -147,6 +149,8 @@ func SetUpgradeAbortAt(policy string) error {
 	return fmt.Errorf("abort-at must be empty, set to 'random', or an integer in [0,100], inclusive")
 }
 
+// This test runs disruption tests during upgrade.  These tests use the same mechanism used by the synthetic
+// disruption tests.
 var _ = g.Describe("[sig-arch][Feature:ClusterUpgrade]", func() {
 	f := framework.NewDefaultFramework("cluster-upgrade")
 	f.SkipNamespaceCreation = true
@@ -166,6 +170,8 @@ var _ = g.Describe("[sig-arch][Feature:ClusterUpgrade]", func() {
 				UpgradeType:    upgrades.ClusterUpgrade,
 				UpgradeContext: *upgCtx,
 			},
+
+			// The list of tests to use (also referred to as invariants)
 			upgradeTests,
 			func() {
 				for i := 1; i < len(upgCtx.Versions); i++ {
