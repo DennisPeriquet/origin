@@ -473,7 +473,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		syntheticTestResults, buf, _ = createSyntheticTestsFromMonitor(events, duration)
 
 		// Left off here June 5, 2022; I think this is where we
-		// Run and create the rest of the synthetic tests using the events as input.
+		// Run the rest of the synthetic tests using the events as input.
 		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name)
 		syntheticTestResults = append(syntheticTestResults, testCases...)
 
