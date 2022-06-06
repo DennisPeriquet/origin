@@ -92,6 +92,9 @@ type TestSuite struct {
 	TestTimeout time.Duration
 }
 
+// Filter take a list of tests and returns the list of tests that satisfies this
+// test suite's Match function.  Essentially, we use this to determine what tests
+// comprise this test suite.
 func (s *TestSuite) Filter(tests []*testCase) []*testCase {
 	matches := make([]*testCase, 0, len(tests))
 	for _, test := range tests {

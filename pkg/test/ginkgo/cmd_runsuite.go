@@ -163,6 +163,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	}
 
 	// Setup the synthetic test list.
+	// By the time we got here, opt.SyntheticEventTests and suite.SyntheticEventTests has
+	// already been set.
 	syntheticEventTests := JUnitsForAllEvents{
 		opt.SyntheticEventTests,
 		suite.SyntheticEventTests,
@@ -189,6 +191,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		return false
 	})
 
+	// Figure out what tests are in this test suite.
 	tests = suite.Filter(tests)
 	if len(tests) == 0 {
 		return fmt.Errorf("suite %q does not contain any tests", suite.Name)
@@ -274,7 +277,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	}
 
 	// Disruption monitoring start here.
-	m, err := monitor.Start(ctx, restConfig,
+	// theMonitor used to be called m.  But, given that we keep referring to it as "The Monitor"
+	// I find this name more appropriate.
+	theMonitor, err := monitor.Start(ctx, restConfig,
 		[]monitor.StartEventIntervalRecorderFunc{
 
 			// Create all api samplers for disruption testing.
@@ -336,7 +341,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	}
 	expectedTestCount += len(openshiftTests) + len(kubeTests)
 
-	status := newTestStatus(opt.Out, includeSuccess, expectedTestCount, timeout, m, m, opt.AsEnv())
+	status := newTestStatus(opt.Out, includeSuccess, expectedTestCount, timeout, theMonitor, theMonitor, opt.AsEnv())
 	testCtx := ctx
 	if opt.FailFast {
 		var cancelFn context.CancelFunc
@@ -414,8 +419,10 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	var syntheticTestResults []*junitapi.JUnitTestCase
 	var syntheticFailure bool
 	timeSuffix := fmt.Sprintf("_%s", start.UTC().Format("20060102-150405"))
-	events := m.Intervals(time.Time{}, time.Time{})
+	events := theMonitor.Intervals(time.Time{}, time.Time{})
 
+	// If there are any additional events (produced by disruption testing and placed on disk),
+	// merge them into our event list.
 	if len(opt.JUnitDir) > 0 {
 		var additionalEvents monitorapi.Intervals
 		filepath.WalkDir(opt.JUnitDir, func(path string, d fs.DirEntry, err error) error {
@@ -425,6 +432,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 			if d.IsDir() {
 				return nil
 			}
+
+			// files that start with AddtionalEvents_ are produced by disruption tests and contain the
+			// "started responding to GET requests" and "stopped responding to GET requests" messages.
 			if !strings.HasPrefix(d.Name(), "AdditionalEvents_") {
 				return nil
 			}
@@ -443,20 +453,27 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	if err != nil {
 		fmt.Printf("\n\n\n#### alertErr=%v\n", err)
 	}
+
+	// alert events are also merged into the event list.
 	events = append(events, alertEventIntervals...)
 	sort.Sort(events)
 
 	events.Clamp(start, end)
 
 	if len(opt.JUnitDir) > 0 {
-		if err := opt.WriteRunDataToArtifactsDir(opt.JUnitDir, m, events, timeSuffix); err != nil {
+		if err := opt.WriteRunDataToArtifactsDir(opt.JUnitDir, theMonitor, events, timeSuffix); err != nil {
 			fmt.Fprintf(opt.ErrOut, "error: Failed to write run-data: %v\n", err)
 		}
 	}
 
 	if len(events) > 0 {
 		var buf *bytes.Buffer
+
+		// Create the first synthetic test that just checks for any Events with level == Error.
 		syntheticTestResults, buf, _ = createSyntheticTestsFromMonitor(events, duration)
+
+		// Left off here June 5, 2022; I think this is where we
+		// Run and create the rest of the synthetic tests using the events as input.
 		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name)
 		syntheticTestResults = append(syntheticTestResults, testCases...)
 
@@ -471,6 +488,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 			// if a test has both a pass and a failure, flag it
 			// as a flake
 			for _, test := range syntheticTestResults {
+
+				// no FailureOutput implies a test that passed
 				if test.FailureOutput == nil {
 					if failing.Has(test.Name) {
 						flaky.Insert(test.Name)
@@ -503,7 +522,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		}
 
 		q := newParallelTestQueue()
-		status := newTestStatus(ioutil.Discard, opt.IncludeSuccessOutput, len(retries), timeout, m, m, opt.AsEnv())
+		status := newTestStatus(ioutil.Discard, opt.IncludeSuccessOutput, len(retries), timeout, theMonitor, theMonitor, opt.AsEnv())
 		q.Execute(testCtx, retries, parallelism, status.Run)
 		var flaky []string
 		var repeatFailures []*testCase

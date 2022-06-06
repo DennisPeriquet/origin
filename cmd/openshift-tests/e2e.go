@@ -72,6 +72,12 @@ func (s testSuites) TestSuites() []*ginkgo.TestSuite {
 }
 
 // staticSuites are all known test suites this binary should run
+// Every TestSuite we declare has a Matches function that is used to filter for tests
+// that belong in the test suite.  That filter will look for a match in the tags for
+// each test name including a "[Disabled]" tag that denotes the test is disabled.
+// As such, there is no concept of a test suite having a set of tests per se.  There
+// are test suites that have a Match function that is used to determine the tests that
+// belong in the test suite.
 var staticSuites = testSuites{
 	{
 		TestSuite: ginkgo.TestSuite{

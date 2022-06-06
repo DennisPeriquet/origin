@@ -33,13 +33,14 @@ func (opt *Options) WriteRunDataToArtifactsDir(artifactDir string, monitor *moni
 	errs := []error{}
 
 	// use custom sorting here so that we can prioritize the sort order to make the intervals html page as readable
-	// as possible. This makes the events *not* sorted by time.
+	// as possible. This makes the events *not* sorted by time -- but sorted by namespace, then time (From, To), then message.
 	events := make([]monitorapi.EventInterval, len(unorderedEvents))
 	for i := range unorderedEvents {
 		events[i] = unorderedEvents[i]
 	}
 	sort.Stable(monitorapi.ByTimeWithNamespacedPods(events))
 
+	// What is writes is not fully understood by DP.
 	for _, writer := range opt.RunDataWriters {
 		currErr := writer.WriteRunData(artifactDir, monitor, events, timeSuffix)
 		if currErr != nil {

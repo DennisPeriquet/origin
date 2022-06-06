@@ -500,7 +500,8 @@ func newDisruptionSampler(backendSampler *BackendSampler) *disruptionSampler {
 // produceSamples runs on a Ticker such that on every interval (1 second), we check
 // the backend connection (via sending an http GET and getting a response) and saving
 // the result in a disruptionSample.  Each disruptionSample is saved by adding it to
-// the back of the activeSamplers list.
+// the back of the activeSamplers list.  The activeSamplers list is consumed by the
+// consumeSamples function.
 // produceSamples only exits when the ctx is closed
 func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Duration) {
 	ticker := time.NewTicker(interval)
@@ -532,10 +533,14 @@ func (b *disruptionSampler) produceSamples(ctx context.Context, interval time.Du
 }
 
 // consumeSamples only exits when the ctx is closed
-// consumeSamples consumes disruptionSamples
+// consumeSamples consumes disruptionSamples that were produced by the produceSamples function, records disruption
+// changes as Intervals in the monitorRecorder, and records DisruptionBegain/DisruptionEnded events using the
+// eventRecorder.
 func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Duration, monitorRecorder Recorder, eventRecorder events.EventRecorder) {
 	firstSample := true
 	previousError := fmt.Errorf("never checked before")
+
+	// previousIntervalID is an index that represents the position of Interval in the Recorder.
 	previousIntervalID := -1
 	var previousSampleTime *time.Time
 
@@ -554,6 +559,7 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 		default:
 		}
 
+		// Get a disruptionSample from the front of the activeSamplers list.
 		currSample := b.popOldestSample(ctx)
 
 		// if there was no disruptionSample to process, wait one more interval
@@ -598,10 +604,16 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 
 			// start a new interval with the new error
 			message := DisruptionBeganMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
+
+			// Emit a log, for easy viewing in the test output, to show that disruption began.
 			framework.Logf(message)
+
+			// Record the event in kube-system.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
 				v1.EventTypeWarning, "DisruptionBegan", "detected", message)
+
+			// Record a starting Interval indicating that disruption began.
 			currCondition := monitorapi.Condition{
 				Level:   monitorapi.Error,
 				Locator: b.backendSampler.GetLocator(),
@@ -612,14 +624,22 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 		case currentlyAvailable && !previouslyAvailable:
 			// end the previous interval if we have one because our state changed
 			if previousIntervalID != -1 {
+
+				// Record that the previously tracked disruption interval has ended since service is now available.
 				monitorRecorder.EndInterval(previousIntervalID, currSample.startTime)
 			}
 
 			message := DisruptionEndedMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType())
+
+			// Emit a log, for easy viewing in the test output, to show that disruption ended.
 			framework.Logf(message)
+
+			// Record the event in kube-system.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
 				v1.EventTypeNormal, "DisruptionEnded", "detected", message)
+
+			// Record a starting Interval indicating that disruption ended (i.e., started getting responses).
 			currCondition := monitorapi.Condition{
 				Level:   monitorapi.Info,
 				Locator: b.backendSampler.GetLocator(),
@@ -634,10 +654,16 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 			}
 
 			message := DisruptionBeganMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
+
+			// Emit a log, for easy viewing in the test output, to show that disruption began.
 			framework.Logf(message)
+
+			// Record the event in kube-system.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
 				v1.EventTypeWarning, "DisruptionBegan", "detected", message)
+
+			// Record a starting Interval indicating that disruption began (i.e., stopped receiving responses).
 			currCondition := monitorapi.Condition{
 				Level:   monitorapi.Error,
 				Locator: b.backendSampler.GetLocator(),

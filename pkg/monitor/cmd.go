@@ -44,6 +44,8 @@ func (opt *Options) Run() error {
 	if err != nil {
 		return err
 	}
+
+	// Called when we invoke openshift-tests run-monitor
 	m, err := Start(ctx, restConfig, opt.AdditionalEventIntervalRecorders)
 	if err != nil {
 		return err

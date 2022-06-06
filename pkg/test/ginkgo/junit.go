@@ -14,7 +14,11 @@ import (
 	"github.com/openshift/origin/pkg/version"
 )
 
+// writeJUnitReport takes a list of test cases and a list of addtionalResults (e.g., synthetic test cases) and
+// builds a junit testSuite which it then writes to an xml file with the name as something like: junit_e2e_20220603-115640.xml
 func writeJUnitReport(filePrefix, name string, tests []*testCase, dir string, duration time.Duration, errOut io.Writer, additionalResults ...*junitapi.JUnitTestCase) error {
+
+	// Create a suite.
 	s := &junitapi.JUnitTestSuite{
 		Name:     name,
 		Duration: duration.Seconds(),
@@ -25,6 +29,8 @@ func writeJUnitReport(filePrefix, name string, tests []*testCase, dir string, du
 			},
 		},
 	}
+
+	// Insert all the tests into suite and tally up the number of tests, passed, failed, and skipped.
 	for _, test := range tests {
 		switch {
 		case test.skipped:
@@ -69,6 +75,8 @@ func writeJUnitReport(filePrefix, name string, tests []*testCase, dir string, du
 			})
 		}
 	}
+
+	// The additionalResults are the synthetic tests; add these in to the suite too.
 	for _, result := range additionalResults {
 		switch {
 		case result.SkipMessage != nil:
@@ -79,11 +87,15 @@ func writeJUnitReport(filePrefix, name string, tests []*testCase, dir string, du
 		s.NumTests++
 		s.TestCases = append(s.TestCases, result)
 	}
+
+	// Marshall the data as xml so you can write it to file.
 	out, err := xml.Marshal(s)
 	if err != nil {
 		return err
 	}
 	path := filepath.Join(dir, fmt.Sprintf("%s_%s.xml", filePrefix, time.Now().UTC().Format("20060102-150405")))
+
+	// You will see this message in the toplevel build-log.txt
 	fmt.Fprintf(errOut, "Writing JUnit report to %s\n\n", path)
 	return ioutil.WriteFile(path, out, 0640)
 }

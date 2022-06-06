@@ -25,7 +25,7 @@ import (
 
 // EventRecorder knows how to record events on behalf of an EventSource.
 type EventRecorder interface {
-	// There is an events-filter.html (from must-gather) and events.json (from gather-extra) that has
+	// The events-filter.html (from must-gather) and events.json (from gather-extra) both have
 	// these fields and this is the explanation for some of those fields.
 	// Eventf constructs an event from the given information and puts it in the queue for sending.
 	// 'regarding' is the object this event is about. Event will make a reference-- or you may also

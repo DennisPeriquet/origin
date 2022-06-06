@@ -43,10 +43,10 @@ func DefaultIntervalCreationFns() []IntervalCreationFunc {
 
 // Start begins monitoring the cluster referenced by the default kube configuration until
 // context is finished.
-// This is a major entry point into The Monitor; all Conditions are help in one big Monitor.
-// Those Conditions are for disruption or for all the informers and the Event reflector.
+// This is a major entry point for informers and disruption monitoring; all Conditions are held in a single Monitor
+// referred to as "The Monitor" which created and returned by this function.
 func Start(ctx context.Context, restConfig *rest.Config, additionalEventIntervalRecorders []StartEventIntervalRecorderFunc) (*Monitor, error) {
-	m := NewMonitorWithInterval(time.Second)
+	localMonitor := NewMonitorWithInterval(time.Second)
 	client, err := kubernetes.NewForConfig(restConfig)
 	if err != nil {
 		return nil, err
@@ -59,24 +59,24 @@ func Start(ctx context.Context, restConfig *rest.Config, additionalEventInterval
 	// This calls the additionalEventIntervalRecorders which are the samplers for all
 	// the backends for disruption testing.
 	for _, additionalEventIntervalRecorder := range additionalEventIntervalRecorders {
-		if err := additionalEventIntervalRecorder(ctx, m, restConfig); err != nil {
+		if err := additionalEventIntervalRecorder(ctx, localMonitor, restConfig); err != nil {
 			return nil, err
 		}
 	}
 
 	// All this monitoring (with Pod informers, Node informers, and Event reflector) is done with
 	// the same Monitor created above in this function.  So whatever is recorded, is stored in
-	// one big list of events
-	startPodMonitoring(ctx, m, client)
-	startNodeMonitoring(ctx, m, client)
-	startEventMonitoring(ctx, m, client)
+	// one big list of monitorapi.Conditions.
+	startPodMonitoring(ctx, localMonitor, client)
+	startNodeMonitoring(ctx, localMonitor, client)
+	startEventMonitoring(ctx, localMonitor, client)
 
 	// add interval creation at the same point where we add the monitors
-	startClusterOperatorMonitoring(ctx, m, configClient)
-	m.intervalCreationFns = append(m.intervalCreationFns, DefaultIntervalCreationFns()...)
+	startClusterOperatorMonitoring(ctx, localMonitor, configClient)
+	localMonitor.intervalCreationFns = append(localMonitor.intervalCreationFns, DefaultIntervalCreationFns()...)
 
-	m.StartSampling(ctx)
-	return m, nil
+	localMonitor.StartSampling(ctx)
+	return localMonitor, nil
 }
 
 func findContainerStatus(status []corev1.ContainerStatus, name string, position int) *corev1.ContainerStatus {

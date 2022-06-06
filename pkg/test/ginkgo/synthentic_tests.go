@@ -46,11 +46,15 @@ func (a JUnitsForAllEvents) JUnitsForEvents(events monitorapi.Intervals, duratio
 	return all
 }
 
+// createSyntheticTestsFromMonitor returns a junit test that flakes if there are any EventIntervals
+// with level of Error; this is a single test (or two tests if failed/flaked).
 func createSyntheticTestsFromMonitor(events monitorapi.Intervals, monitorDuration time.Duration) ([]*junitapi.JUnitTestCase, *bytes.Buffer, *bytes.Buffer) {
 	var syntheticTestResults []*junitapi.JUnitTestCase
 
 	buf, errBuf := &bytes.Buffer{}, &bytes.Buffer{}
 	fmt.Fprintf(buf, "\nTimeline:\n\n")
+
+	// Count any EventIntervals that have an error level of Error
 	errorCount := 0
 	for _, event := range events {
 		if event.Level == monitorapi.Error {
@@ -61,6 +65,7 @@ func createSyntheticTestsFromMonitor(events monitorapi.Intervals, monitorDuratio
 	}
 	fmt.Fprintln(buf)
 
+	// Create a synthetic test that fails if there are any errors but make it a flake.
 	monitorTestName := "[sig-arch] Monitor cluster while tests execute"
 	if errorCount > 0 {
 		syntheticTestResults = append(
