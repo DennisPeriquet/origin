@@ -16,7 +16,10 @@ import (
 // Monitor records events that have occurred in memory and can also periodically
 // sample results.
 type Monitor struct {
-	interval            time.Duration
+	interval time.Duration
+
+	// These are added in calls to AddSampler near where the SharedIndexInformers are created
+	// for Pods and Nodes.
 	samplers            []SamplerFunc
 	intervalCreationFns []IntervalCreationFunc
 
