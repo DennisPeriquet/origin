@@ -86,6 +86,13 @@ func Run(f *framework.Framework, description, testname string, adapter TestData,
 		start := time.Now()
 		defer finalizeTest(start, test, testSuite, f)
 		defer g.GinkgoRecover()
+
+		// This is passed in and is the function that does this:
+		// func() {
+		//	for i := 1; i < len(upgCtx.Versions); i++ {
+		//		framework.ExpectNoError(clusterUpgrade(f, client, dynamicClient, config, upgCtx.Versions[i]), fmt.Sprintf("during upgrade to %s", upgCtx.Versions[i].NodeImage))
+		//	}
+		//},
 		fn()
 	})
 	runChaosmonkey(cm, adapter, invariants, testSuite)
@@ -170,6 +177,7 @@ type chaosMonkeyAdapter struct {
 	framework       *framework.Framework
 }
 
+// this is what is called when we call test(sem) in the for loop where we shadow test.
 func (cma *chaosMonkeyAdapter) Test(sem *chaosmonkey.Semaphore) {
 	start := time.Now()
 	var once sync.Once

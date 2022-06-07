@@ -46,7 +46,13 @@ var _ = g.Describe("[sig-cli] oc adm must-gather", func() {
 		tempDir, err := ioutil.TempDir("", "test.oc-adm-must-gather.")
 		o.Expect(err).NotTo(o.HaveOccurred())
 		defer os.RemoveAll(tempDir)
-		o.Expect(oc.Run("adm", "must-gather").Args("--dest-dir", tempDir).Execute()).To(o.Succeed())
+		//o.Expect(oc.Run("adm", "must-gather").Args("--dest-dir", tempDir).Execute()).To(o.Succeed())
+		ocErr := oc.Run("adm", "must-gather").Args("--dest-dir", tempDir).Execute()
+		if ocErr != nil {
+			t := g.GinkgoT()
+			t.Logf("Got error on 'oc adm must-gather: %s\n", ocErr)
+		}
+		o.Expect(ocErr).To(o.Succeed())
 
 		pluginOutputDir := GetPluginOutputDir(tempDir)
 

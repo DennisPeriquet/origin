@@ -80,18 +80,27 @@ func (cm *Chaosmonkey) Do() {
 	// All semaphores have the same StopCh.
 	stopCh := make(chan struct{})
 
+	// Launch the disruption monitors.
 	for _, test := range cm.tests {
+
+		// Shadowing
 		test := test
 		sem := newSemaphore(stopCh)
 		sems = append(sems, sem)
 		go func() {
 			defer ginkgo.GinkgoRecover()
 			defer sem.done()
+
+			// Ths calls func (cma *chaosMonkeyAdapter) Test(sem *chaosmonkey.Semaphore)
+			// to startup the disruption test.  The semaphore is used to signal the disruption
+			// test is ready.
 			test(sem)
 		}()
 	}
 
 	ginkgo.By("Waiting for all async tests to be ready")
+
+	// This is like one big waitGroup waiting for the disuption tests to get ready.
 	for _, sem := range sems {
 		// Wait for test to be ready.  We have to wait for ready *or done* because a test
 		// may panic before signaling that its ready, and we shouldn't block.  Since we
@@ -108,6 +117,13 @@ func (cm *Chaosmonkey) Do() {
 	}()
 
 	ginkgo.By("Starting disruption")
+
+	// This is passed in and is the function that does this:
+	// func() {
+	//	for i := 1; i < len(upgCtx.Versions); i++ {
+	//		framework.ExpectNoError(clusterUpgrade(f, client, dynamicClient, config, upgCtx.Versions[i]), fmt.Sprintf("during upgrade to %s", upgCtx.Versions[i].NodeImage))
+	//	}
+	//},
 	cm.disruption()
 	ginkgo.By("Disruption complete; stopping async validations")
 }

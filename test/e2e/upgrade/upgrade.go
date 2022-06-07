@@ -386,7 +386,11 @@ func clusterUpgrade(f *framework.Framework, c configv1client.Interface, dc dynam
 			if err != nil {
 				return fmt.Errorf("marshal ClusterVersion patch: %v", err), false
 			}
+
+			// Set the desired upgrade.
 			patch := []byte(fmt.Sprintf(`{"spec":{"desiredUpdate": %s}}`, updateJSON))
+
+			// Initiate the upgrade via making a patch to the spec.
 			cv, err = c.ConfigV1().ClusterVersions().Patch(context.Background(), original.ObjectMeta.Name, types.MergePatchType, patch, metav1.PatchOptions{})
 			if err != nil {
 				return err, false
@@ -412,6 +416,8 @@ func clusterUpgrade(f *framework.Framework, c configv1client.Interface, dc dynam
 				if err != nil || cv == nil {
 					return false, err
 				}
+
+				// this is the happy path for this condition function
 				observedGeneration = cv.Status.ObservedGeneration
 				return cv.Status.ObservedGeneration >= updated.Generation, nil
 
