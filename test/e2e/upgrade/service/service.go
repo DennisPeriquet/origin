@@ -84,6 +84,8 @@ func (t *serviceLoadBalancerUpgradeTest) RequiresKubeNamespace() bool {
 
 func shouldTestPDBs() bool { return true }
 
+// loadBalancerSetup relaxes security constraints, creates a loadbalancer, and creates the host for hostGetter
+// for t.
 func (t *serviceLoadBalancerUpgradeTest) loadBalancerSetup(f *framework.Framework, backendSampler disruption.BackendSampler) error {
 	// we must update our namespace to bypass SCC so that we can avoid default mutation of our pod and SCC evaluation.
 	// technically we could also choose to bind an SCC, but I don't see a lot of value in doing that and we have to wait
