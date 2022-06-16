@@ -16,6 +16,7 @@ import (
 	"github.com/openshift/origin/pkg/synthetictests/platformidentification"
 	"github.com/openshift/origin/test/e2e/upgrade/adminack"
 	"github.com/openshift/origin/test/e2e/upgrade/alert"
+	"github.com/openshift/origin/test/e2e/upgrade/cidisruptiontester"
 	"github.com/openshift/origin/test/e2e/upgrade/dns"
 	"github.com/openshift/origin/test/e2e/upgrade/manifestdelete"
 	"github.com/openshift/origin/test/e2e/upgrade/service"
@@ -67,6 +68,8 @@ func AllTests() []upgrades.Test {
 		frontends.NewConsoleRouteAvailableWithConnectionReuseTest(),
 		service.NewServiceLoadBalancerWithNewConnectionsTest(),
 		service.NewServiceLoadBalancerWithReusedConnectionsTest(),
+		cidisruptiontester.NewCIDisruptionWithNewConnectionsTest(),
+		cidisruptiontester.NewCIDisruptionWithReusedConnectionsTest(),
 		&node.SecretUpgradeTest{},
 		&apps.ReplicaSetUpgradeTest{},
 		&apps.StatefulSetUpgradeTest{},
@@ -389,7 +392,7 @@ func clusterUpgrade(f *framework.Framework, c configv1client.Interface, dc dynam
 			switch infra.Status.PlatformStatus.Type {
 			// Timeout was previously 2min, bumped for metal/openstack while work underway on https://bugzilla.redhat.com/show_bug.cgi?id=2071998
 			case configv1.BareMetalPlatformType:
-				cvoAckTimeout = 4 * time.Minute
+				cvoAckTimeout = 10 * time.Minute
 			case configv1.OpenStackPlatformType:
 				cvoAckTimeout = 4 * time.Minute
 			default:

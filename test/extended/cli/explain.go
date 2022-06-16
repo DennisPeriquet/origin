@@ -21,6 +21,7 @@ import (
 	e2e "k8s.io/kubernetes/test/e2e/framework"
 
 	configv1 "github.com/openshift/api/config/v1"
+	configclient "github.com/openshift/client-go/config/clientset/versioned"
 	"github.com/openshift/origin/test/extended/networking"
 	exutil "github.com/openshift/origin/test/extended/util"
 )
@@ -102,7 +103,6 @@ var (
 		{Group: "config.openshift.io", Version: "v1", Resource: "ingresses"},
 		{Group: "config.openshift.io", Version: "v1", Resource: "networks"},
 		{Group: "config.openshift.io", Version: "v1", Resource: "oauths"},
-		{Group: "config.openshift.io", Version: "v1", Resource: "operatorhubs"},
 		{Group: "config.openshift.io", Version: "v1", Resource: "projects"},
 		{Group: "config.openshift.io", Version: "v1", Resource: "proxies"},
 		{Group: "config.openshift.io", Version: "v1", Resource: "schedulers"},
@@ -166,6 +166,10 @@ var (
 		{Group: "machine.openshift.io", Version: "v1beta1", Resource: "machinehealthchecks"},
 		{Group: "machine.openshift.io", Version: "v1beta1", Resource: "machines"},
 		{Group: "machine.openshift.io", Version: "v1beta1", Resource: "machinesets"},
+	}
+
+	marketplaceTypes = []schema.GroupVersionResource{
+		{Group: "config.openshift.io", Version: "v1", Resource: "operatorhubs"},
 	}
 
 	metal3Types = []schema.GroupVersionResource{
@@ -414,17 +418,38 @@ var (
 	}
 )
 
+func getCrdTypes(oc *exutil.CLI) []schema.GroupVersionResource {
+	configClient := configclient.NewForConfigOrDie(oc.AdminConfig())
+	clusterVersion, err := configClient.ConfigV1().ClusterVersions().Get(context.TODO(), "version", metav1.GetOptions{})
+	if err != nil {
+		e2e.Failf("Failed to get cluster version: %v", err)
+	}
+
+	crdTypes := append(baseCRDTypes, mcoTypes...)
+	crdTypes = append(crdTypes, autoscalingTypes...)
+	crdTypes = append(crdTypes, machineTypes...)
+	crdTypes = append(crdTypes, additionalOperatorTypes...)
+
+	// Conditional, capability-specific types
+	for _, capability := range clusterVersion.Status.Capabilities.EnabledCapabilities {
+		switch capability {
+		case configv1.ClusterVersionCapabilityMarketplace:
+			crdTypes = append(crdTypes, marketplaceTypes...)
+		case configv1.ClusterVersionCapabilityBaremetal:
+			crdTypes = append(crdTypes, metal3Types...)
+		}
+	}
+
+	return crdTypes
+}
+
 var _ = g.Describe("[sig-cli] oc explain", func() {
 	defer g.GinkgoRecover()
 
 	oc := exutil.NewCLI("oc-explain")
 
-	crdTypes := append(baseCRDTypes, mcoTypes...)
-	crdTypes = append(crdTypes, autoscalingTypes...)
-	crdTypes = append(crdTypes, machineTypes...)
-	crdTypes = append(crdTypes, metal3Types...)
-	crdTypes = append(crdTypes, additionalOperatorTypes...)
 	g.It("list uncovered GroupVersionResources", func() {
+		crdTypes := getCrdTypes(oc)
 		resourceMap := make(map[schema.GroupVersionResource]bool)
 		kubeClient := kclientset.NewForConfigOrDie(oc.AdminConfig())
 		_, resourceList, err := kubeClient.Discovery().ServerGroupsAndResources()
@@ -480,8 +505,7 @@ var _ = g.Describe("[sig-cli] oc explain", func() {
 
 	g.It("should contain proper spec+status for CRDs", func() {
 		crdClient := apiextensionsclientset.NewForConfigOrDie(oc.AdminConfig())
-		crdTypesTest := crdTypes
-
+		crdTypesTest := getCrdTypes(oc)
 		controlPlaneTopology, err := exutil.GetControlPlaneTopology(oc)
 		o.Expect(err).NotTo(o.HaveOccurred())
 		// External clusters are not expected to have 'autoscaling' or

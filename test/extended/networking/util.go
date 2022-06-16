@@ -10,36 +10,32 @@ import (
 	"strings"
 	"time"
 
-	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
-	"k8s.io/apimachinery/pkg/runtime/schema"
-	"k8s.io/client-go/dynamic"
-	"k8s.io/client-go/rest"
-
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 	configv1 "github.com/openshift/api/config/v1"
 	projectv1 "github.com/openshift/api/project/v1"
+	configv1client "github.com/openshift/client-go/config/clientset/versioned"
 	networkclient "github.com/openshift/client-go/network/clientset/versioned/typed/network/v1"
 	"github.com/openshift/library-go/pkg/network/networkutils"
-	"k8s.io/kubernetes/test/e2e/framework/pod"
-	frameworkpod "k8s.io/kubernetes/test/e2e/framework/pod"
-
 	exutil "github.com/openshift/origin/test/extended/util"
-
 	corev1 "k8s.io/api/core/v1"
 	kapierrs "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/apiserver/pkg/storage/names"
+	"k8s.io/client-go/dynamic"
+	k8sclient "k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/util/retry"
 	e2e "k8s.io/kubernetes/test/e2e/framework"
 	e2enode "k8s.io/kubernetes/test/e2e/framework/node"
+	"k8s.io/kubernetes/test/e2e/framework/pod"
+	frameworkpod "k8s.io/kubernetes/test/e2e/framework/pod"
 	e2eskipper "k8s.io/kubernetes/test/e2e/framework/skipper"
-
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-
-	configv1client "github.com/openshift/client-go/config/clientset/versioned"
-	k8sclient "k8s.io/client-go/kubernetes"
+	utilnet "k8s.io/utils/net"
 )
 
 type NodeType int
@@ -322,8 +318,15 @@ func makeNamespaceScheduleToAllNodes(f *e2e.Framework) {
 }
 
 func modifyNetworkConfig(configClient configv1client.Interface, autoAssignCIDRs, allowedCIDRs, rejectedCIDRs []string) {
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 20*time.Minute)
+	defer cancel()
+
+	kubeAPIServerRollout := exutil.WaitForOperatorToRollout(ctx, configClient, "kube-apiserver")
+	<-kubeAPIServerRollout.StableBeforeStarting() // wait for the initial state to be stable
+
 	err := retry.RetryOnConflict(retry.DefaultRetry, func() error {
-		network, err := configClient.ConfigV1().Networks().Get(context.Background(), "cluster", metav1.GetOptions{})
+		network, err := configClient.ConfigV1().Networks().Get(ctx, "cluster", metav1.GetOptions{})
 		expectNoError(err)
 		extIPConfig := &configv1.ExternalIPConfig{Policy: &configv1.ExternalIPPolicy{}}
 		if len(allowedCIDRs) != 0 || len(rejectedCIDRs) != 0 || len(autoAssignCIDRs) != 0 {
@@ -331,10 +334,13 @@ func modifyNetworkConfig(configClient configv1client.Interface, autoAssignCIDRs,
 				RejectedCIDRs: rejectedCIDRs}, AutoAssignCIDRs: autoAssignCIDRs}
 		}
 		network.Spec.ExternalIP = extIPConfig
-		_, err = configClient.ConfigV1().Networks().Update(context.Background(), network, metav1.UpdateOptions{})
+		_, err = configClient.ConfigV1().Networks().Update(ctx, network, metav1.UpdateOptions{})
 		return err
 	})
 	expectNoError(err)
+
+	<-kubeAPIServerRollout.Done()
+	expectNoError(kubeAPIServerRollout.Err())
 }
 
 // findAppropriateNodes tries to find a source and destination for a type of node connectivity
@@ -614,4 +620,60 @@ func createPod(client k8sclient.Interface, ns, generateName string) ([]corev1.Po
 		return retrievedPod.Status.Phase == corev1.PodRunning, nil
 	})
 	return podIPs, err
+}
+
+// SubnetIPs enumerates all IP addresses in an IP subnet (starting with the provided IP address and including the broadcast address).
+func SubnetIPs(ipnet net.IPNet) ([]net.IP, error) {
+	var ipList []net.IP
+	ip := ipnet.IP
+	for ; ipnet.Contains(ip); ip = incIP(ip) {
+		ipList = append(ipList, ip)
+	}
+
+	return ipList, nil
+}
+
+// incIP increases the current IP address by one. This function works for both IPv4 and IPv6.
+func incIP(ip net.IP) net.IP {
+	// allocate a new IP
+	newIp := make(net.IP, len(ip))
+	copy(newIp, ip)
+
+	byteIp := []byte(newIp)
+	l := len(byteIp)
+	var i int
+	for k := range byteIp {
+		// start with the rightmost index first
+		// increment it
+		// if the index is < 256, then no overflow happened and we increment and break
+		// else, continue to the next field in the byte
+		i = l - 1 - k
+		if byteIp[i] < 0xff {
+			byteIp[i]++
+			break
+		} else {
+			byteIp[i] = 0
+		}
+	}
+	return net.IP(byteIp)
+}
+
+// GetIPAddressFamily returns if this cloud uses IPv4 and/or IPv6.
+func GetIPAddressFamily(oc *exutil.CLI) (bool, bool, error) {
+	var hasIPv4 bool
+	var hasIPv6 bool
+	var err error
+
+	networkConfig, err := oc.AdminOperatorClient().OperatorV1().Networks().Get(context.Background(), "cluster", metav1.GetOptions{})
+	if err != nil {
+		return false, false, err
+	}
+	for _, cidr := range networkConfig.Spec.ServiceNetwork {
+		if utilnet.IsIPv6CIDRString(cidr) {
+			hasIPv6 = true
+		} else {
+			hasIPv4 = true
+		}
+	}
+	return hasIPv4, hasIPv6, nil
 }

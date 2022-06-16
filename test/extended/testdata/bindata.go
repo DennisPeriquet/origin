@@ -204,7 +204,6 @@
 // test/extended/testdata/cmd/test/cmd/env.sh
 // test/extended/testdata/cmd/test/cmd/framework-test.sh
 // test/extended/testdata/cmd/test/cmd/get.sh
-// test/extended/testdata/cmd/test/cmd/help.sh
 // test/extended/testdata/cmd/test/cmd/idle.sh
 // test/extended/testdata/cmd/test/cmd/image-lookup.sh
 // test/extended/testdata/cmd/test/cmd/images.sh
@@ -803,6 +802,7 @@ var _examplesDbTemplatesMariadbEphemeralTemplateJson = []byte(`{
 		}
 	],
 	"labels": {
+		"app.openshift.io/runtime": "mariadb",
 		"template": "mariadb-ephemeral-template"
 	}
 }`)
@@ -1107,6 +1107,7 @@ var _examplesDbTemplatesMariadbPersistentTemplateJson = []byte(`{
 		}
 	],
 	"labels": {
+		"app.openshift.io/runtime": "mariadb",
 		"template": "mariadb-persistent-template"
 	}
 }`)
@@ -2891,52 +2892,6 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             }
           },
           {
-            "name": "5.0-ubi8",
-            "annotations": {
-              "description": "Build and run .NET 5 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/redhat-developer/s2i-dotnetcore/tree/master/5.0/build/README.md.",
-              "iconClass": "icon-dotnet",
-              "openshift.io/display-name": ".NET 5 (UBI 8)",
-              "sampleContextDir": "app",
-              "sampleRef": "dotnet-5.0",
-              "sampleRepo": "https://github.com/redhat-developer/s2i-dotnetcore-ex",
-              "supports": "dotnet:5.0,dotnet",
-              "tags": "builder,.net,dotnet,dotnetcore,dotnet50",
-              "version": "5.0"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/ubi8/dotnet-50:5.0"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
-            "name": "5.0",
-            "annotations": {
-              "description": "Build and run .NET 5 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/redhat-developer/s2i-dotnetcore/tree/master/5.0/build/README.md.",
-              "iconClass": "icon-dotnet",
-              "openshift.io/display-name": ".NET 5 (UBI 8)",
-              "sampleContextDir": "app",
-              "sampleRef": "dotnetcore-5.0",
-              "sampleRepo": "https://github.com/redhat-developer/s2i-dotnetcore-ex",
-              "supports": "dotnet:5.0,dotnet",
-              "tags": "builder,.net,dotnet,dotnetcore,rh-dotnet50,hidden",
-              "version": "5.0"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/ubi8/dotnet-50:5.0"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
             "name": "3.1-ubi8",
             "annotations": {
               "description": "Build and run .NET Core 3.1 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/redhat-developer/s2i-dotnetcore/tree/master/3.1/build/README.md.",
@@ -3039,7 +2994,51 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             },
             "from": {
               "kind": "ImageStreamTag",
-              "name": "2.4-el8"
+              "name": "2.4-ubi8"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "2.4-ubi9",
+            "annotations": {
+              "description": "Build and serve static content via Apache HTTP Server (httpd) 2.4 on UBI 9. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/httpd-container/blob/master/2.4/README.md.",
+              "iconClass": "icon-apache",
+              "openshift.io/display-name": "Apache HTTP Server 2.4 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/httpd-ex.git",
+              "supports": "httpd",
+              "tags": "builder,httpd",
+              "version": "2.4"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/httpd-24:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "2.4-ubi8",
+            "annotations": {
+              "description": "Build and serve static content via Apache HTTP Server (httpd) 2.4 on RHEL 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/httpd-container/blob/master/2.4/README.md.",
+              "iconClass": "icon-apache",
+              "openshift.io/display-name": "Apache HTTP Server 2.4 (UBI 8)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/httpd-ex.git",
+              "supports": "httpd",
+              "tags": "builder,httpd",
+              "version": "2.4"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi8/httpd-24:latest"
             },
             "generation": null,
             "importPolicy": {},
@@ -3056,7 +3055,7 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
               "openshift.io/provider-display-name": "Red Hat, Inc.",
               "sampleRepo": "https://github.com/sclorg/httpd-ex.git",
               "supports": "httpd",
-              "tags": "builder,httpd",
+              "tags": "builder,httpd,hidden",
               "version": "2.4"
             },
             "from": {
@@ -3154,6 +3153,25 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             }
           },
           {
+            "name": "ocp-upgrade-redeploy",
+            "annotations": {
+              "description": "Provides a Jenkins 2.X server from quay.io. For more information about using this container image, including OpenShift considerations, see https://github.com/openshift/jenkins/blob/master/README.md. This tag will will redeploy the Jenkins DeploymentConfig on an upgrade in OCP versions if the Jenkins image reference has changed.",
+              "iconClass": "icon-jenkins",
+              "openshift.io/display-name": "Jenkins (Latest)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "tags": "jenkins"
+            },
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "2"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
             "name": "2",
             "annotations": {
               "description": "Provides a Jenkins v2.x server on CentOS. For more information about using this container image, including OpenShift considerations, see https://github.com/openshift/jenkins/blob/master/README.md.",
@@ -3165,10 +3183,52 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             },
             "from": {
               "kind": "DockerImage",
-              "name": "quay.io/openshift/origin-jenkins:v4.0"
+              "name": "quay.io/openshift/origin-jenkins:4.11"
             },
             "generation": null,
             "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "user-maintained-upgrade-redeploy",
+            "annotations": {
+              "description": "Provides a Jenkins 2.X server from quay.io. For more information about using this container image, including OpenShift considerations, see https://github.com/openshift/jenkins/blob/master/README.md. This tag will will redeploy the Jenkins DeploymentConfig on an upgrade in OKD versions if the Jenkins image reference has changed. A user must invoke 'oc import-image jenkins:user-maintained-upgrade-redeploy -n openshift' in order for the ImageStream controller to pull the latest digest for the image tag, and if a new digest exists, any running Jenkins DeploymentConfig will redeploy.",
+              "iconClass": "icon-jenkins",
+              "openshift.io/display-name": "Jenkins 2.X",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "tags": "jenkins",
+              "version": "2.x"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "quay.io/openshift/origin-jenkins:4.11"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "scheduled-upgrade-redeploy",
+            "annotations": {
+              "description": "Provides a Jenkins 2.X server from quay.io. For more information about using this container image, including OpenShift considerations, see https://github.com/openshift/jenkins/blob/master/README.md. OpenShift will periodically check to ensure that the latest digest for this image tag is imported. If an update occurs, any running Jenkins DeploymentConfig will redeploy.",
+              "iconClass": "icon-jenkins",
+              "openshift.io/display-name": "Jenkins 2.X",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "tags": "jenkins",
+              "version": "2.x"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "quay.io/openshift/origin-jenkins:4.11"
+            },
+            "generation": null,
+            "importPolicy": {
+              "scheduled": true
+            },
             "referencePolicy": {
               "type": "Local"
             }
@@ -3436,6 +3496,28 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             }
           },
           {
+            "name": "1.20-ubi9",
+            "annotations": {
+              "description": "Build and serve static content via Nginx HTTP server and a reverse proxy (nginx) on RHEL 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/nginx-container/blob/master/1.20/README.md.",
+              "iconClass": "icon-nginx",
+              "openshift.io/display-name": "Nginx HTTP server and a reverse proxy 1.20 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/nginx-ex.git",
+              "supports": "nginx",
+              "tags": "builder,nginx",
+              "version": "1.20"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/nginx-120:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
             "name": "1.20-ubi8",
             "annotations": {
               "description": "Build and serve static content via Nginx HTTP server and a reverse proxy (nginx) on RHEL 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/nginx-container/blob/master/1.20/README.md.",
@@ -3558,6 +3640,48 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             "from": {
               "kind": "ImageStreamTag",
               "name": "16-ubi8"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "16-ubi9",
+            "annotations": {
+              "description": "Build and run Node.js 16 applications on UBI 9. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-nodejs-container/blob/master/16/README.md.",
+              "iconClass": "icon-nodejs",
+              "openshift.io/display-name": "Node.js 16 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/nodejs-ex.git",
+              "tags": "builder,nodejs",
+              "version": "16"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/nodejs-16:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "16-ubi9-minimal",
+            "annotations": {
+              "description": "Build and run Node.js 16 applications on UBI 9 Minimal. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-nodejs-container/blob/master/16-minimal/README.md.",
+              "iconClass": "icon-nodejs",
+              "openshift.io/display-name": "Node.js 16 (UBI 9 Minimal)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/nodejs-ex.git",
+              "tags": "builder,nodejs",
+              "version": "16"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/nodejs-16-minimal:latest"
             },
             "generation": null,
             "importPolicy": {},
@@ -3694,7 +3818,7 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
           {
             "name": "latest",
             "annotations": {
-              "description": "Build and run Perl applications on UBI. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-perl-container/blob/master/5.30-mod_fcgid/README.md.\n\nWARNING: By selecting this tag, your application will automatically update to use the latest version of Perl available on OpenShift, including major version updates.",
+              "description": "Build and run Perl applications on UBI. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-perl-container/blob/master/5.32/README.md.\n\nWARNING: By selecting this tag, your application will automatically update to use the latest version of Perl available on OpenShift, including major version updates.",
               "iconClass": "icon-perl",
               "openshift.io/display-name": "Perl (Latest)",
               "openshift.io/provider-display-name": "Red Hat, Inc.",
@@ -3704,7 +3828,51 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             },
             "from": {
               "kind": "ImageStreamTag",
-              "name": "5.30-ubi8"
+              "name": "5.32-ubi8"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "5.32-ubi9",
+            "annotations": {
+              "description": "Build and run Perl 5.32 applications on UBI 9. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-perl-container/blob/master/5.32/README.md.",
+              "iconClass": "icon-perl",
+              "openshift.io/display-name": "Perl 5.32 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/dancer-ex.git",
+              "supports": "perl:5.32,perl",
+              "tags": "builder,perl",
+              "version": "5.32"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/perl-532:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "5.32-ubi8",
+            "annotations": {
+              "description": "Build and run Perl 5.32 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-perl-container/blob/master/5.32/README.md.",
+              "iconClass": "icon-perl",
+              "openshift.io/display-name": "Perl 5.32 (UBI 8)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/dancer-ex.git",
+              "supports": "perl:5.32,perl",
+              "tags": "builder,perl",
+              "version": "5.32"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi8/perl-532:latest"
             },
             "generation": null,
             "importPolicy": {},
@@ -3824,7 +3992,7 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
           {
             "name": "latest",
             "annotations": {
-              "description": "Build and run PHP applications on UBI. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/7.4/README.md.\n\nWARNING: By selecting this tag, your application will automatically update to use the latest version of PHP available on OpenShift, including major version updates.",
+              "description": "Build and run PHP applications on UBI. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/8.0/README.md.\n\nWARNING: By selecting this tag, your application will automatically update to use the latest version of PHP available on OpenShift, including major version updates.",
               "iconClass": "icon-php",
               "openshift.io/display-name": "PHP (Latest)",
               "openshift.io/provider-display-name": "Red Hat, Inc.",
@@ -3834,7 +4002,51 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             },
             "from": {
               "kind": "ImageStreamTag",
-              "name": "7.4-ubi8"
+              "name": "8.0-ubi8"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "8.0-ubi9",
+            "annotations": {
+              "description": "Build and run PHP 8.0 applications on UBI 9. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/8.0/README.md.",
+              "iconClass": "icon-php",
+              "openshift.io/display-name": "PHP 8.0 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/cakephp-ex.git",
+              "supports": "php:8.0,php",
+              "tags": "builder,php",
+              "version": "8.0"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/php-80:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "8.0-ubi8",
+            "annotations": {
+              "description": "Build and run PHP 8.0 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/8.0/README.md.",
+              "iconClass": "icon-php",
+              "openshift.io/display-name": "PHP 8.0 (UBI 8)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/cakephp-ex.git",
+              "supports": "php:8.0,php",
+              "tags": "builder,php",
+              "version": "8.0"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi8/php-80:latest"
             },
             "generation": null,
             "importPolicy": {},
@@ -4151,6 +4363,28 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             }
           },
           {
+            "name": "3.9-ubi9",
+            "annotations": {
+              "description": "Build and run Python 3.9 applications on UBI 9. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-python-container/blob/master/3.9/README.md.",
+              "iconClass": "icon-python",
+              "openshift.io/display-name": "Python 3.9 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/django-ex.git",
+              "supports": "python:3.9,python",
+              "tags": "builder,python",
+              "version": "3.9"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/python-39:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
             "name": "3.9-ubi8",
             "annotations": {
               "description": "Build and run Python 3.9 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-python-container/blob/master/3.9/README.md.",
@@ -4253,50 +4487,6 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             "from": {
               "kind": "DockerImage",
               "name": "registry.access.redhat.com/ubi8/python-27:latest"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
-            "name": "2.7-ubi7",
-            "annotations": {
-              "description": "Build and run Python 2.7 applications on UBI 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-python-container/blob/master/2.7/README.md.",
-              "iconClass": "icon-python",
-              "openshift.io/display-name": "Python 2.7 (UBI 7)",
-              "openshift.io/provider-display-name": "Red Hat, Inc.",
-              "sampleRepo": "https://github.com/sclorg/django-ex.git",
-              "supports": "python:2.7,python",
-              "tags": "builder,python",
-              "version": "2.7"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/ubi7/python-27:latest"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
-            "name": "2.7",
-            "annotations": {
-              "description": "Build and run Python 2.7 applications on CentOS 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-python-container/blob/master/2.7/README.md.",
-              "iconClass": "icon-python",
-              "openshift.io/display-name": "Python 2.7",
-              "openshift.io/provider-display-name": "Red Hat, Inc.",
-              "sampleRepo": "https://github.com/sclorg/django-ex.git",
-              "supports": "python:2.7,python",
-              "tags": "builder,python,hidden",
-              "version": "2.7"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "quay.io/centos7/python-27-centos7:latest"
             },
             "generation": null,
             "importPolicy": {},
@@ -4447,6 +4637,28 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             }
           },
           {
+            "name": "3.0-ubi9",
+            "annotations": {
+              "description": "Build and run Ruby 3.0 applications on UBI 9. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-ruby-container/blob/master/3.0/README.md.",
+              "iconClass": "icon-ruby",
+              "openshift.io/display-name": "Ruby 3.0 (UBI 9)",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/sclorg/ruby-ex.git",
+              "supports": "ruby:3.0,ruby",
+              "tags": "builder,ruby",
+              "version": "3.0"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/ubi9/ruby-30:latest"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
             "name": "3.0-ubi8",
             "annotations": {
               "description": "Build and run Ruby 3.0 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-ruby-container/blob/master/3.0/README.md.",
@@ -4548,72 +4760,6 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             "from": {
               "kind": "DockerImage",
               "name": "quay.io/centos7/ruby-27-centos7:latest"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
-            "name": "2.6-ubi8",
-            "annotations": {
-              "description": "Build and run Ruby 2.6 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-ruby-container/blob/master/2.6/README.md.",
-              "iconClass": "icon-ruby",
-              "openshift.io/display-name": "Ruby 2.6 (UBI 8)",
-              "openshift.io/provider-display-name": "Red Hat, Inc.",
-              "sampleRepo": "https://github.com/sclorg/ruby-ex.git",
-              "supports": "ruby:2.6,ruby",
-              "tags": "builder,ruby",
-              "version": "2.6"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/ubi8/ruby-26:latest"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
-            "name": "2.6-ubi7",
-            "annotations": {
-              "description": "Build and run Ruby 2.6 applications on UBI 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-ruby-container/blob/master/2.6/README.md.",
-              "iconClass": "icon-ruby",
-              "openshift.io/display-name": "Ruby 2.6 (UBI 7)",
-              "openshift.io/provider-display-name": "Red Hat, Inc.",
-              "sampleRepo": "https://github.com/sclorg/ruby-ex.git",
-              "supports": "ruby:2.6,ruby",
-              "tags": "builder,ruby",
-              "version": "2.6"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/ubi7/ruby-26:latest"
-            },
-            "generation": null,
-            "importPolicy": {},
-            "referencePolicy": {
-              "type": "Local"
-            }
-          },
-          {
-            "name": "2.6",
-            "annotations": {
-              "description": "Build and run Ruby 2.6 applications on CentOS 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-ruby-container/blob/master/2.6/README.md.",
-              "iconClass": "icon-ruby",
-              "openshift.io/display-name": "Ruby 2.6",
-              "openshift.io/provider-display-name": "Red Hat, Inc.",
-              "sampleRepo": "https://github.com/sclorg/ruby-ex.git",
-              "supports": "ruby:2.6,ruby",
-              "tags": "builder,ruby,hidden",
-              "version": "2.6"
-            },
-            "from": {
-              "kind": "DockerImage",
-              "name": "quay.io/centos7/ruby-26-centos7:latest"
             },
             "generation": null,
             "importPolicy": {},
@@ -5118,6 +5264,28 @@ var _examplesImageStreamsImageStreamsCentos7Json = []byte(`{
             "from": {
               "kind": "DockerImage",
               "name": "quay.io/wildfly/wildfly-centos7:26.0"
+            },
+            "generation": null,
+            "importPolicy": {},
+            "referencePolicy": {
+              "type": "Local"
+            }
+          },
+          {
+            "name": "26.1",
+            "annotations": {
+              "description": "Build and run WildFly 26 applications on CentOS 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/wildfly/wildfly-s2i/blob/current/README.md.",
+              "iconClass": "icon-wildfly",
+              "openshift.io/display-name": "WildFly 26",
+              "openshift.io/provider-display-name": "Red Hat, Inc.",
+              "sampleRepo": "https://github.com/openshift/openshift-jee-sample.git",
+              "supports": "wildfly:26,jee,java",
+              "tags": "builder,wildfly,java",
+              "version": "26.1"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "quay.io/wildfly/wildfly-centos7:26.1"
             },
             "generation": null,
             "importPolicy": {},
@@ -6928,7 +7096,7 @@ var _examplesQuickstartsCakephpMysqlPersistentJson = []byte(`{
 			}
 		},
 		{
-			"apiVersion": "apps.openshift.io/v1v1",
+			"apiVersion": "apps.openshift.io/v1",
 			"kind": "DeploymentConfig",
 			"metadata": {
 				"annotations": {
@@ -13732,6 +13900,10 @@ var _examplesJenkinsJenkinsEphemeralTemplateJson = []byte(`{
 									{
 										"name": "CASC_JENKINS_CONFIG",
 										"value": "/var/lib/jenkins/proxy.yaml"
+									},
+									{
+										"name": "JAVA_FIPS_OPTIONS",
+										"value": "${JAVA_FIPS_OPTIONS}"
 									}
 								],
 								"image": " ",
@@ -13935,6 +14107,12 @@ var _examplesJenkinsJenkinsEphemeralTemplateJson = []byte(`{
 			"value": "false"
 		},
 		{
+			"name": "JAVA_FIPS_OPTIONS",
+			"displayName": "Allows control over how the JVM interacts with FIPS on startup.",
+			"description": "See https://access.redhat.com/documentation/en-us/openjdk/11/html-single/configuring_openjdk_11_on_rhel_with_fips/index#config-fips-in-openjdk for the available command line properties to facilitate the JVM running on FIPS nodes.",
+			"value": "-Dcom.redhat.fips=false"
+		},
+		{
 			"name": "JENKINS_IMAGE_STREAM_TAG",
 			"displayName": "Jenkins ImageStreamTag",
 			"description": "Name of the ImageStreamTag to be used for the Jenkins image.",
@@ -14120,6 +14298,10 @@ var _examplesJenkinsJenkinsPersistentTemplateJson = []byte(`{
 									{
 										"name": "CASC_JENKINS_CONFIG",
 										"value": "/var/lib/jenkins/proxy.yaml"
+									},
+									{
+										"name": "JAVA_FIPS_OPTIONS",
+										"value": "${JAVA_FIPS_OPTIONS}"
 									}
 								],
 								"image": " ",
@@ -14328,6 +14510,12 @@ var _examplesJenkinsJenkinsPersistentTemplateJson = []byte(`{
 			"displayName": "Disable memory intensive administrative monitors",
 			"description": "Whether to perform memory intensive, possibly slow, synchronization with the Jenkins Update Center on start.  If true, the Jenkins core update monitor and site warnings monitor are disabled.",
 			"value": "false"
+		},
+		{
+			"name": "JAVA_FIPS_OPTIONS",
+			"displayName": "Allows control over how the JVM interacts with FIPS on startup.",
+			"description": "See https://access.redhat.com/documentation/en-us/openjdk/11/html-single/configuring_openjdk_11_on_rhel_with_fips/index#config-fips-in-openjdk for the available command line properties to facilitate the JVM running on FIPS nodes.",
+			"value": "-Dcom.redhat.fips=false"
 		},
 		{
 			"name": "JENKINS_IMAGE_STREAM_TAG",
@@ -30172,89 +30360,6 @@ func testExtendedTestdataCmdTestCmdGetSh() (*asset, error) {
 	return a, nil
 }
 
-var _testExtendedTestdataCmdTestCmdHelpSh = []byte(`#!/bin/bash
-source "$(dirname "${BASH_SOURCE}")/../../hack/lib/init.sh"
-trap os::test::junit::reconcile_output EXIT
-
-os::test::junit::declare_suite_start "cmd/help"
-# This test validates the help commands and output text
-
-# verify some default commands
-os::cmd::expect_success 'kubectl'
-os::cmd::expect_success 'oc'
-os::cmd::expect_success 'oc ex'
-os::cmd::expect_failure 'origin'
-
-# help for root commands must be consistent
-os::cmd::expect_success_and_text 'oc' 'OpenShift Client'
-os::cmd::expect_success_and_text 'oc -h' 'Build and Deploy Commands:'
-os::cmd::expect_success_and_text 'oc -h' 'Other Commands:'
-os::cmd::expect_success_and_text 'oc policy --help' 'add-role-to-user'
-os::cmd::expect_success_and_not_text 'oc policy --help' 'Other Commands'
-os::cmd::expect_success_and_not_text 'oc -h' 'Options'
-os::cmd::expect_success_and_not_text 'oc -h' 'Global Options'
-os::cmd::expect_success_and_text 'oc exec --help' '\-\- COMMAND \[args\.\.\.\]$'
-os::cmd::expect_success_and_text 'oc rsh --help' 'COMMAND'
-
-# help for root commands with --help flag must be consistent
-os::cmd::expect_success_and_text 'oc --help' 'OpenShift Client'
-os::cmd::expect_success_and_text 'oc login --help' 'Options'
-os::cmd::expect_success_and_not_text 'oc login --help' 'Global Options'
-os::cmd::expect_success_and_text 'oc login --help' 'insecure-skip-tls-verify'
-
-# help for given command with --help flag must be consistent
-os::cmd::expect_success_and_text 'oc get --help' 'Display one or many resources'
-os::cmd::expect_success_and_text 'oc project --help' 'Switch to another project'
-os::cmd::expect_success_and_text 'oc projects --help' 'existing projects'
-os::cmd::expect_success_and_text 'oc get --help' 'oc'
-
-# help for given command through help command must be consistent
-os::cmd::expect_success_and_text 'oc help get' 'Display one or many resources'
-os::cmd::expect_success_and_text 'oc help project' 'Switch to another project'
-os::cmd::expect_success_and_text 'oc help projects' 'current active project and existing projects on the server'
-
-# help tips must be consistent
-os::cmd::expect_success_and_text 'oc --help' 'Use "oc <command> --help" for more information'
-os::cmd::expect_success_and_text 'oc --help' 'Use "oc options" for a list of global'
-os::cmd::expect_success_and_text 'oc help' 'Use "oc <command> --help" for more information'
-os::cmd::expect_success_and_text 'oc help' 'Use "oc options" for a list of global'
-os::cmd::expect_success_and_text 'oc set --help' 'Use "oc set <command> --help" for more information'
-os::cmd::expect_success_and_text 'oc set --help' 'Use "oc options" for a list of global'
-os::cmd::expect_success_and_text 'oc set env --help' 'Use "oc options" for a list of global'
-
-# runnable commands with required flags must error consistently
-os::cmd::expect_failure_and_text 'oc get' 'Required resource not specified'
-
-# commands that expect file paths must validate and error out correctly
-os::cmd::expect_failure_and_text 'oc login --certificate-authority=/path/to/invalid' 'no such file or directory'
-
-# make sure that typoed commands come back with non-zero return codes
-os::cmd::expect_failure 'oc policy TYPO'
-os::cmd::expect_failure 'oc secrets TYPO'
-
-# make sure that LDAP group sync and prune exist under both experimental and ` + "`" + `oc adm` + "`" + `
-os::cmd::expect_success_and_text 'oc adm groups sync --help' 'external provider'
-os::cmd::expect_success_and_text 'oc adm groups prune --help' 'external provider'
-os::cmd::expect_success_and_text 'oc adm prune groups --help' 'external provider'
-
-os::test::junit::declare_suite_end
-`)
-
-func testExtendedTestdataCmdTestCmdHelpShBytes() ([]byte, error) {
-	return _testExtendedTestdataCmdTestCmdHelpSh, nil
-}
-
-func testExtendedTestdataCmdTestCmdHelpSh() (*asset, error) {
-	bytes, err := testExtendedTestdataCmdTestCmdHelpShBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "test/extended/testdata/cmd/test/cmd/help.sh", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
 var _testExtendedTestdataCmdTestCmdIdleSh = []byte(`#!/bin/bash
 source "$(dirname "${BASH_SOURCE}")/../../hack/lib/init.sh"
 trap os::test::junit::reconcile_output EXIT
@@ -34674,7 +34779,7 @@ var _testExtendedTestdataCmdTestCmdTestdataHelloOpenshiftHelloPodJson = []byte(`
     "containers": [
       {
         "name": "hello-openshift",
-        "image": "k8s.gcr.io/e2e-test-images/agnhost:2.33",
+        "image": "k8s.gcr.io/e2e-test-images/agnhost:2.36",
         "args": ["netexec"],
         "ports": [
           {
@@ -38803,7 +38908,7 @@ items:
             spec:
               containers:
               - name: hello-openshift
-                image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+                image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       - kind: Route
         apiVersion: route.openshift.io/v1
         metadata:
@@ -43039,7 +43144,7 @@ items:
           replicationcontroller: idling-echo
       spec:
         containers:
-        - image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+        - image: k8s.gcr.io/e2e-test-images/agnhost:2.36
           name: idling-echo-server
           args: [ "netexec", "--http-port", "8675" ]
           ports:
@@ -43105,7 +43210,7 @@ items:
           deploymentconfig: idling-echo
       spec:
         containers:
-        - image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+        - image: k8s.gcr.io/e2e-test-images/agnhost:2.36
           name: idling-echo-server
           args: [ "netexec", "--http-port", "8675", "--udp-port", "3090" ]
           ports:
@@ -48092,7 +48197,7 @@ items:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -48110,7 +48215,7 @@ items:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -48349,7 +48454,7 @@ objects:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -48511,7 +48616,7 @@ objects:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -49564,7 +49669,7 @@ items:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -49582,7 +49687,7 @@ items:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -50185,7 +50290,7 @@ objects:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -50203,7 +50308,7 @@ objects:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -50221,7 +50326,7 @@ objects:
     terminationGracePeriodSeconds: 1
     containers:
     - name: test
-      image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+      image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       args: ["netexec"]
       ports:
       - containerPort: 8080
@@ -51624,7 +51729,7 @@ items:
             spec:
               containers:
               - name: hello-openshift
-                image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+                image: k8s.gcr.io/e2e-test-images/agnhost:2.36
 `)
 
 func testExtendedTestdataTemplatesTemplateinstance_badobjectYamlBytes() ([]byte, error) {
@@ -51684,7 +51789,7 @@ items:
             spec:
               containers:
               - name: hello-openshift
-                image: k8s.gcr.io/e2e-test-images/agnhost:2.33
+                image: k8s.gcr.io/e2e-test-images/agnhost:2.36
       - kind: Route
         apiVersion: route.openshift.io/v1
         metadata:
@@ -52517,6 +52622,13 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
             crossorigin="anonymous"></script>
 </head>
 <body>
+
+<div id="search" class="form-control-lg">
+    <form>
+        <input class="form-control" type="text" id="filterInput" placeholder="RegExp Filter">
+    </form>
+</div>
+
 <div id="chart"></div>
 
 <div class="modal" id="myModal" tabindex="-1" role="dialog">
@@ -52543,6 +52655,23 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
 </script>
 
 <script>
+    // Re-render the chart with input as a regexp. Timeout for event debouncing.
+    $('#filterInput').on('input', (e) => {
+        var $this = $(this);
+        clearTimeout($this.data('timeout'));
+        $this.data('timeout', setTimeout(() => {
+            document.getElementById("chart").innerHTML = "";
+            renderChart(new RegExp(e.target.value))
+        }, 250));
+    });
+
+    // Prevent page refresh from pressing enter in input box
+    $('#filterInput').keypress((e) => {
+        if (event.which == '13') {
+            event.preventDefault();
+        }
+    });
+
     function isOperatorAvailable(eventInterval) {
         if (eventInterval.locator.startsWith("clusteroperator/") && eventInterval.message.includes("condition/Available") && eventInterval.message.includes("status/False")) {
             return true
@@ -52572,7 +52701,7 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
     }
 
     function isPodLifecycle(eventInterval) {
-        if (eventInterval.locator.includes("pod/") && (eventInterval.message.includes("reason/Created") || eventInterval.message.includes("reason/Scheduled"))) {
+        if (eventInterval.locator.includes("pod/") && (eventInterval.message.includes("reason/Created") || eventInterval.message.includes("reason/Scheduled") || eventInterval.message.includes("reason/GracefulDelete"))) {
             return true
         }
         return false
@@ -52655,6 +52784,9 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
             if (m[2] == "Scheduled") {
                 return [item.locator, ` + "`" + ` (pod lifecycle)` + "`" + `, "PodScheduled"];
             }
+            if (m[2] == "GracefulDelete") {
+                return [item.locator, ` + "`" + ` (pod lifecycle)` + "`" + `, "PodTerminating"];
+            }
         }
         if (m && isContainerLifecycle(item)){
             if (m[2] == "ContainerWait") {
@@ -52721,11 +52853,22 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
         return [item.locator, "", "AlertCritical"]
     }
 
-    function defaultToolTip(item) {
-        return item.message
+    function getDurationString(durationSeconds) {
+        const seconds = durationSeconds % 60;
+        const minutes = Math.floor(durationSeconds/60);
+        var durationString = "[";
+        if (minutes !== 0) {
+            durationString += minutes + "m"
+        }
+        durationString += seconds + "s]";
+        return durationString;
     }
 
-    function createTimelineData(timelineVal, timelineData, rawEventIntervals, preconditionFunc) {
+    function defaultToolTip(item) {
+        return item.message + " " + getDurationString(((new Date(item.to)).getTime() - (new Date(item.from).getTime()))/1000);
+    }
+
+    function createTimelineData(timelineVal, timelineData, rawEventIntervals, preconditionFunc, regex) {
         const data = {}
         var now = new Date();
         var earliest = rawEventIntervals.items.reduce(
@@ -52773,117 +52916,129 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
         for (const label in data) {
             const section = data[label]
             for (const sub in section) {
-                timelineData.push({label: label+sub, data: section[sub]})
+                if (regex == null || (regex != null && regex.test(label))) {
+                    const data = section[sub];
+                    const totalDurationSeconds = data.reduce(
+                        (prev, curr) => prev + (curr.timeRange[1].getTime() - curr.timeRange[0].getTime())/1000,
+                        0);
+
+                    timelineData.push({label: label + sub + " " + getDurationString(totalDurationSeconds), data: data})
+                }
             }
         }
     }
 
-    var loc = window.location.href;
+    function renderChart(regex) {
+        var loc = window.location.href;
 
-    var timelineGroups = []
-    timelineGroups.push({group: "operator-unavailable", data: []})
-    createTimelineData("OperatorUnavailable", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorAvailable)
+        var timelineGroups = []
+        timelineGroups.push({group: "operator-unavailable", data: []})
+        createTimelineData("OperatorUnavailable", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorAvailable, regex)
 
-    timelineGroups.push({group: "operator-degraded", data: []})
-    createTimelineData("OperatorDegraded", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorDegraded)
+        timelineGroups.push({group: "operator-degraded", data: []})
+        createTimelineData("OperatorDegraded", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorDegraded, regex)
 
-    timelineGroups.push({group: "operator-progressing", data: []})
-    createTimelineData("OperatorProgressing", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorProgressing)
+        timelineGroups.push({group: "operator-progressing", data: []})
+        createTimelineData("OperatorProgressing", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isOperatorProgressing, regex)
 
-    timelineGroups.push({group: "pods", data: []})
-    createTimelineData(podStateValue, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isPod)
-    timelineGroups[timelineGroups.length - 1].data.sort(function (e1 ,e2){
-        // I think I really want ordering by time in each of a few categories
-        return e1.label < e2.label ? -1 : e1.label > e2.label;
-    })
+        timelineGroups.push({group: "pods", data: []})
+        createTimelineData(podStateValue, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isPod, regex)
+        timelineGroups[timelineGroups.length - 1].data.sort(function (e1 ,e2){
+            // I think I really want ordering by time in each of a few categories
+            return e1.label < e2.label ? -1 : e1.label > e2.label;
+        })
 
-    timelineGroups.push({group: "alerts", data: []})
-    createTimelineData(alertSeverity, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isAlert)
-    // leaving this for posterity so future me (or someone else) can try it, but I think ordering by name makes the
-    // patterns shown by timing hide and timing appears more relevant to my eyes.
-    // sort alerts alphabetically for display purposes, but keep the json itself ordered by time.
-    // timelineGroups[timelineGroups.length - 1].data.sort(function (e1 ,e2){
-    //     if (e1.label.includes("alert") && e2.label.includes("alert")) {
-    //         return e1.label < e2.label ? -1 : e1.label > e2.label;
-    //     }
-    //     return 0
-    // })
-
-    timelineGroups.push({group: "node-state", data: []})
-    createTimelineData(nodeStateValue, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isNodeState)
-    timelineGroups[timelineGroups.length - 1].data.sort(function (e1 ,e2){
-        if (e1.label.includes("master") && e2.label.includes("worker")) {
-            return -1
-        }
-        return 0
-    })
-
-    timelineGroups.push({group: "endpoint-availability", data: []})
-    createTimelineData("Failed", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isEndpointConnectivity)
-
-    timelineGroups.push({group: "e2e-test-failed", data: []})
-    createTimelineData("Failed", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isE2EFailed)
-
-    timelineGroups.push({group: "e2e-test-flaked", data: []})
-    createTimelineData("Flaked", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isE2EFlaked)
-
-    timelineGroups.push({group: "e2e-test-passed", data: []})
-    createTimelineData("Passed", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isE2EPassed)
-
-    var segmentFunc = function (segment) {
-        // for (var i in data) {
-        //     if (data[i].group == segment.group) {
-        //         var groupdata = data[i].data
-        //         for (var j in groupdata) {
-        //             if (groupdata[j].label == segment.label) {
-        //                 labeldata = groupdata[j].data
-        //                 for (var k in labeldata) {
-        //                     var startDate = new Date(labeldata[k].timeRange[0])
-        //                     var endDate = new Date(labeldata[k].timeRange[1])
-        //                     if (startDate.getTime() == segment.timeRange[0].getTime() &&
-        //                         endDate.getTime() == segment.timeRange[1].getTime()) {
-        //                         $('#myModalContent').text(labeldata[k].extended)
-        //                         $('#myModal').modal()
-        //                     }
-        //                 }
-        //             }
-        //         }
+        timelineGroups.push({group: "alerts", data: []})
+        createTimelineData(alertSeverity, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isAlert, regex)
+        // leaving this for posterity so future me (or someone else) can try it, but I think ordering by name makes the
+        // patterns shown by timing hide and timing appears more relevant to my eyes.
+        // sort alerts alphabetically for display purposes, but keep the json itself ordered by time.
+        // timelineGroups[timelineGroups.length - 1].data.sort(function (e1 ,e2){
+        //     if (e1.label.includes("alert") && e2.label.includes("alert")) {
+        //         return e1.label < e2.label ? -1 : e1.label > e2.label;
         //     }
-        // }
+        //     return 0
+        // })
+
+        timelineGroups.push({group: "node-state", data: []})
+        createTimelineData(nodeStateValue, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isNodeState, regex)
+        timelineGroups[timelineGroups.length - 1].data.sort(function (e1 ,e2){
+            if (e1.label.includes("master") && e2.label.includes("worker")) {
+                return -1
+            }
+            return 0
+        })
+
+        timelineGroups.push({group: "endpoint-availability", data: []})
+        createTimelineData("Failed", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isEndpointConnectivity, regex)
+
+        timelineGroups.push({group: "e2e-test-failed", data: []})
+        createTimelineData("Failed", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isE2EFailed, regex)
+
+        timelineGroups.push({group: "e2e-test-flaked", data: []})
+        createTimelineData("Flaked", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isE2EFlaked, regex)
+
+        timelineGroups.push({group: "e2e-test-passed", data: []})
+        createTimelineData("Passed", timelineGroups[timelineGroups.length - 1].data, eventIntervals, isE2EPassed, regex)
+
+        var segmentFunc = function (segment) {
+            // for (var i in data) {
+            //     if (data[i].group == segment.group) {
+            //         var groupdata = data[i].data
+            //         for (var j in groupdata) {
+            //             if (groupdata[j].label == segment.label) {
+            //                 labeldata = groupdata[j].data
+            //                 for (var k in labeldata) {
+            //                     var startDate = new Date(labeldata[k].timeRange[0])
+            //                     var endDate = new Date(labeldata[k].timeRange[1])
+            //                     if (startDate.getTime() == segment.timeRange[0].getTime() &&
+            //                         endDate.getTime() == segment.timeRange[1].getTime()) {
+            //                         $('#myModalContent').text(labeldata[k].extended)
+            //                         $('#myModal').modal()
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+        }
+
+        const el = document.querySelector('#chart');
+        const myChart = TimelinesChart();
+        var ordinalScale = d3.scaleOrdinal()
+            .domain([
+                'AlertInfo', 'AlertPending', 'AlertWarning', 'AlertCritical', // alerts
+                'OperatorUnavailable', 'OperatorDegraded', 'OperatorProgressing', // operators
+                'Update', 'Drain', 'Reboot', 'OperatingSystemUpdate', 'NodeNotReady', // nodes
+                'Passed', 'Skipped', 'Flaked', 'Failed',  // tests
+                'PodCreated', 'PodScheduled', 'PodTerminating','ContainerWait', 'ContainerStart', 'ContainerNotReady', 'ContainerReady',  // pods
+                'Degraded', 'Upgradeable', 'False', 'Unknown'])
+            .range([
+                '#fada5e','#fada5e','#ffa500','#d0312d',  // alerts
+                '#d0312d', '#ffa500', '#fada5e', // operators
+                '#1e7bd9', '#4294e6', '#6aaef2', '#96cbff', '#fada5e', // nodes
+                '#3cb043', '#ceba76', '#ffa500', '#d0312d', // tests
+                '#96cbff', '#1e7bd9', '#ffa500', '#ca8dfd', '#9300ff', '#fada5e','#3cb043', // pods
+                '#b65049', '#32b8b6', '#ffffff', '#bbbbbb']);
+        myChart.
+        data(timelineGroups).
+        zQualitative(true).
+        enableAnimations(false).
+        leftMargin(240).
+        rightMargin(550).
+        maxLineHeight(20).
+        maxHeight(10000).
+        zColorScale(ordinalScale).
+        zoomX([new Date(eventIntervals.items[0].from), new Date(eventIntervals.items[eventIntervals.items.length - 1].to)]).
+        onSegmentClick(segmentFunc)
+        (el);
+
+
+        // force a minimum width for smaller devices (which otherwise get an unusable display)
+        setTimeout(() => { if (myChart.width() < 1300) { myChart.width(1300) }}, 1)
     }
 
-    const el = document.querySelector('#chart');
-    const myChart = TimelinesChart();
-    var ordinalScale = d3.scaleOrdinal()
-        .domain([
-            'AlertInfo', 'AlertPending', 'AlertWarning', 'AlertCritical', // alerts
-            'OperatorUnavailable', 'OperatorDegraded', 'OperatorProgressing', // operators
-            'Update', 'Drain', 'Reboot', 'OperatingSystemUpdate', 'NodeNotReady', // nodes
-            'Passed', 'Skipped', 'Flaked', 'Failed',  // tests
-            'PodCreated', 'PodScheduled', 'ContainerWait', 'ContainerStart', 'ContainerNotReady', 'ContainerReady',  // pods
-            'Degraded', 'Upgradeable', 'False', 'Unknown'])
-        .range([
-            '#fada5e','#fada5e','#ffa500','#d0312d',  // alerts
-            '#d0312d', '#ffa500', '#fada5e', // operators
-            '#1e7bd9', '#4294e6', '#6aaef2', '#96cbff', '#fada5e', // nodes
-            '#3cb043', '#ceba76', '#ffa500', '#d0312d', // tests
-            '#96cbff', '#1e7bd9', '#ca8dfd', '#9300ff', '#fada5e','#3cb043', // pods
-            '#b65049', '#32b8b6', '#ffffff', '#bbbbbb']);
-    myChart.
-    data(timelineGroups).
-    zQualitative(true).
-    enableAnimations(false).
-    leftMargin(240).
-    rightMargin(550).
-    maxLineHeight(20).
-    maxHeight(10000).
-    zColorScale(ordinalScale).
-    onSegmentClick(segmentFunc)
-    (el);
-
-
-    // force a minimum width for smaller devices (which otherwise get an unusable display)
-    setTimeout(() => { if (myChart.width() < 1300) { myChart.width(1300) }}, 1)
+    renderChart(null)
 </script>
 </body>
 </html>
@@ -53160,7 +53315,6 @@ var _bindata = map[string]func() (*asset, error){
 	"test/extended/testdata/cmd/test/cmd/env.sh":                                                             testExtendedTestdataCmdTestCmdEnvSh,
 	"test/extended/testdata/cmd/test/cmd/framework-test.sh":                                                  testExtendedTestdataCmdTestCmdFrameworkTestSh,
 	"test/extended/testdata/cmd/test/cmd/get.sh":                                                             testExtendedTestdataCmdTestCmdGetSh,
-	"test/extended/testdata/cmd/test/cmd/help.sh":                                                            testExtendedTestdataCmdTestCmdHelpSh,
 	"test/extended/testdata/cmd/test/cmd/idle.sh":                                                            testExtendedTestdataCmdTestCmdIdleSh,
 	"test/extended/testdata/cmd/test/cmd/image-lookup.sh":                                                    testExtendedTestdataCmdTestCmdImageLookupSh,
 	"test/extended/testdata/cmd/test/cmd/images.sh":                                                          testExtendedTestdataCmdTestCmdImagesSh,
@@ -53810,7 +53964,6 @@ var _bintree = &bintree{nil, map[string]*bintree{
 							"env.sh":                {testExtendedTestdataCmdTestCmdEnvSh, map[string]*bintree{}},
 							"framework-test.sh":     {testExtendedTestdataCmdTestCmdFrameworkTestSh, map[string]*bintree{}},
 							"get.sh":                {testExtendedTestdataCmdTestCmdGetSh, map[string]*bintree{}},
-							"help.sh":               {testExtendedTestdataCmdTestCmdHelpSh, map[string]*bintree{}},
 							"idle.sh":               {testExtendedTestdataCmdTestCmdIdleSh, map[string]*bintree{}},
 							"image-lookup.sh":       {testExtendedTestdataCmdTestCmdImageLookupSh, map[string]*bintree{}},
 							"images.sh":             {testExtendedTestdataCmdTestCmdImagesSh, map[string]*bintree{}},

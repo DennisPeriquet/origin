@@ -2,7 +2,6 @@ package synthetictests
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"regexp"
 	"strconv"
@@ -18,28 +17,27 @@ import (
 // staticPodFailureRegex trying to pull out information from messages like
 // `static pod lifecycle failure - static pod: "etcd" in namespace: "openshift-etcd" for revision: 6 on node: "ovirt10-gh8t5-master-2" didn't show up, waited: 2m30s`
 var staticPodFailureRegex = regexp.MustCompile(
-	`static pod lifecycle failure - static pod: ".*" in namespace: "(.*)" for revision: (\d) on node: "(.*)" didn't show up, waited: .*`)
+	`static pod lifecycle failure - static pod: ".*" in namespace: ".*" for revision: (\d) on node: "(.*)" didn't show up, waited: .*`)
 
 type staticPodFailure struct {
-	namespace      string
-	node           string
-	revision       int64
-	failureMessage string
+	operatorNamespace string
+	node              string
+	revision          int64
+	failureMessage    string
 }
 
 func staticPodFailureFromMessage(message string) (*staticPodFailure, error) {
 	matches := staticPodFailureRegex.FindStringSubmatch(message)
-	if len(matches) != 4 {
+	if len(matches) != 3 {
 		return nil, fmt.Errorf("wrong number of matches: %v", matches)
 	}
-	revision, err := strconv.ParseInt(matches[2], 0, 64)
+	revision, err := strconv.ParseInt(matches[1], 0, 64)
 	if err != nil {
 		return nil, err
 	}
 
 	return &staticPodFailure{
-		namespace:      matches[1],
-		node:           matches[3],
+		node:           matches[2],
 		revision:       revision,
 		failureMessage: message,
 	}, nil
@@ -91,6 +89,7 @@ func testStaticPodLifecycleFailure(events monitorapi.Intervals, kubeClientConfig
 				failures = append(failures, fmt.Sprintf("%v", err))
 				continue
 			}
+			staticPodFailure.operatorNamespace = ns
 			staticPodFailures = append(staticPodFailures, *staticPodFailure)
 		}
 	}
@@ -98,7 +97,7 @@ func testStaticPodLifecycleFailure(events monitorapi.Intervals, kubeClientConfig
 	// now check each failure to see if we eventually reached the level.  If we eventually reached the level
 	// then don't flag it
 	for _, staticPodFailure := range staticPodFailures {
-		events, err := kubeClient.EventsV1().Events(staticPodFailure.namespace).List(ctx, metav1.ListOptions{})
+		events, err := kubeClient.EventsV1().Events(staticPodFailure.operatorNamespace).List(ctx, metav1.ListOptions{})
 		if err != nil {
 			failures = append(failures, err.Error())
 			continue
@@ -115,38 +114,6 @@ func testStaticPodLifecycleFailure(events monitorapi.Intervals, kubeClientConfig
 					// it hasn't failed. It might be possible to go directly to a later revision, and if we want to account for
 					// that, the above could be changed to >= instead of equality.
 					foundEventForProperRevision = true
-				}
-			}
-		}
-
-		// We are suspecting events API and core API are not returning the same events. Double check here.
-		// For debugging purpose
-		if !foundEventForProperRevision {
-			coreEvents, err := kubeClient.CoreV1().Events(staticPodFailure.namespace).List(ctx, metav1.ListOptions{})
-			if err == nil {
-				for _, event := range coreEvents.Items {
-					isRevisionUpdate := event.Reason == "NodeCurrentRevisionChanged"
-					isForNode := strings.Contains(event.Message, staticPodFailure.node)
-					matches := regexp.MustCompile("to ([0-9]+) because static pod is ready").FindStringSubmatch(event.Message)
-					if len(matches) == 2 {
-						reachedRevision, _ := strconv.ParseInt(matches[1], 0, 64)
-						if isRevisionUpdate && isForNode && reachedRevision == staticPodFailure.revision {
-							// Found the event in events returned from core API
-							foundEventForProperRevision = true
-							fmt.Printf("test %s with failure message '%s' recovered\n", testName, staticPodFailure.failureMessage)
-							// Log the events API events
-							eventString, err := json.Marshal(events)
-							if err == nil {
-								fmt.Printf("test %s recovered: corresponding events from events API %s\n", testName, eventString)
-							}
-
-							// Log the core API events
-							eventString, err = json.Marshal(coreEvents)
-							if err == nil {
-								fmt.Printf("test %s recovered: corresponding events from core API %s\n", testName, eventString)
-							}
-						}
-					}
 				}
 			}
 		}

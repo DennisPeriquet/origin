@@ -66,6 +66,9 @@ var (
 
 			// https://bugzilla.redhat.com/show_bug.cgi?id=2004074
 			`\[sig-network-edge\]\[Feature:Idling\] Unidling should work with TCP \(while idling\)`,
+
+			// https://bugzilla.redhat.com/show_bug.cgi?id=2070929
+			`\[sig-network\]\[Feature:EgressIP\] \[internal-targets\]`,
 		},
 		// tests that may work, but we don't support them
 		"[Disabled:Unsupported]": {
@@ -86,12 +89,18 @@ var (
 			`openshift mongodb replication creating from a template`, // flaking on deployment
 		},
 		// tests that must be run without competition
-		"[Serial]": {},
+		"[Serial]": {
+			`\[sig-network\]\[Feature:EgressIP\]`,
+		},
 		// tests that can't be run in parallel with a copy of itself
 		"[Serial:Self]": {
 			`\[sig-network\] HostPort validates that there is no conflict between pods with same hostPort but different hostIP and protocol`,
 		},
-		"[Skipped:azure]": {},
+		"[Skipped:azure]": {
+			// TODO: azure-file storage tests are failing,
+			//  https://bugzilla.redhat.com/show_bug.cgi?id=2095623
+			`\[Driver: azure-file\]`,
+		},
 		"[Skipped:ovirt]": {},
 		"[Skipped:gce]":   {},
 
@@ -118,6 +127,8 @@ var (
 			`\[sig-network\] DNS should resolve DNS of partial qualified names for services`,
 			`\[sig-arch\] Only known images used by tests`,
 			`\[sig-network\] DNS should provide DNS for the cluster`,
+			// This test does not work when using in-proxy cluster, see https://bugzilla.redhat.com/show_bug.cgi?id=2084560
+			`\[sig-network\] Networking should provide Internet connection for containers`,
 		},
 		"[Skipped:SingleReplicaTopology]": {
 			`\[sig-apps\] Daemon set \[Serial\] should rollback without unnecessary restarts \[Conformance\]`,
@@ -330,20 +341,27 @@ var (
 			`\[Feature:Platform\] Managed cluster should ensure control plane operators do not make themselves unevictable`,
 		},
 
-		// TODO: to facilitate v.14 rebase, skip the following tests until May 27 2022,
+		// TODO: to facilitate v.14 rebase, skip the following tests until June 07 2022,
 		//  the following key should be removed after the rebase PR lands
 		//  BZs to keep track of these issues:
 		//   - [sig-api-machinery] API data in etcd should be: https://bugzilla.redhat.com/show_bug.cgi?id=2081021
 		//   - [sig-instrumentation] Events API should ensure that: https://bugzilla.redhat.com/show_bug.cgi?id=2081084
 		//   - [sig-auth] ServiceAccounts : https//bugzilla.redhat.com/show_bug.cgi?id=2081087
-		"[SkippedUntil:05272022:blocker-bz/2081087]": {
+		"[SkippedUntil:06182022:blocker-bz/2081087]": {
 			`\[sig-auth\] ServiceAccounts should allow opting out of API token automount`,
 		},
-		"[SkippedUntil:05272022:blocker-bz/2081084]": {
+		"[SkippedUntil:06182022:blocker-bz/2081084]": {
 			`\[sig-instrumentation\] Events API should ensure that an event can be fetched, patched, deleted, and listed`,
 		},
-		"[SkippedUntil:05272022:blocker-bz/2081021]": {
+		"[SkippedUntil:06182022:blocker-bz/2081021]": {
 			`\[sig-api-machinery\] API data in etcd should be stored at the correct location and version for all resources`,
+		},
+
+		// TODO: these CSI tests are disabled until June June 18 since Pods
+		//  created by these tests pull image directly:
+		//  https://bugzilla.redhat.com/show_bug.cgi?id=2093339
+		"[SkippedUntil:06182022:blocker-bz/2093339]": {
+			`provisioning should provision storage with any volume data source`,
 		},
 	}
 
