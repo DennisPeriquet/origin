@@ -603,19 +603,15 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 			}
 
 			// start a new interval with the new error
-			message := DisruptionBeganMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
-
-			// Emit a log, for easy viewing in the test output, to show that disruption began.
+			message, eventReason, level := DisruptionBegan(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
 			framework.Logf(message)
 
 			// Record the event in kube-system.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
-				v1.EventTypeWarning, "DisruptionBegan", "detected", message)
-
-			// Record a starting Interval indicating that disruption began.
+				v1.EventTypeWarning, eventReason, "detected", message)
 			currCondition := monitorapi.Condition{
-				Level:   monitorapi.Error,
+				Level:   level,
 				Locator: b.backendSampler.GetLocator(),
 				Message: message,
 			}
@@ -653,19 +649,15 @@ func (b *disruptionSampler) consumeSamples(ctx context.Context, interval time.Du
 				monitorRecorder.EndInterval(previousIntervalID, currSample.startTime)
 			}
 
-			message := DisruptionBeganMessage(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
-
-			// Emit a log, for easy viewing in the test output, to show that disruption began.
+			message, eventReason, level := DisruptionBegan(b.backendSampler.GetLocator(), b.backendSampler.GetConnectionType(), currentError)
 			framework.Logf(message)
 
 			// Record the event in kube-system.
 			eventRecorder.Eventf(
 				&v1.ObjectReference{Kind: "OpenShiftTest", Namespace: "kube-system", Name: b.backendSampler.GetDisruptionBackendName()}, nil,
-				v1.EventTypeWarning, "DisruptionBegan", "detected", message)
-
-			// Record a starting Interval indicating that disruption began (i.e., stopped receiving responses).
+				v1.EventTypeWarning, eventReason, "detected", message)
 			currCondition := monitorapi.Condition{
-				Level:   monitorapi.Error,
+				Level:   level,
 				Locator: b.backendSampler.GetLocator(),
 				Message: message,
 			}

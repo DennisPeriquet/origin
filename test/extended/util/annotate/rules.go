@@ -96,7 +96,11 @@ var (
 		"[Serial:Self]": {
 			`\[sig-network\] HostPort validates that there is no conflict between pods with same hostPort but different hostIP and protocol`,
 		},
-		"[Skipped:azure]": {},
+		"[Skipped:azure]": {
+			// TODO: azure-file storage tests are failing,
+			//  https://bugzilla.redhat.com/show_bug.cgi?id=2095623
+			`\[Driver: azure-file\]`,
+		},
 		"[Skipped:ovirt]": {},
 		"[Skipped:gce]":   {},
 
@@ -343,14 +347,21 @@ var (
 		//   - [sig-api-machinery] API data in etcd should be: https://bugzilla.redhat.com/show_bug.cgi?id=2081021
 		//   - [sig-instrumentation] Events API should ensure that: https://bugzilla.redhat.com/show_bug.cgi?id=2081084
 		//   - [sig-auth] ServiceAccounts : https//bugzilla.redhat.com/show_bug.cgi?id=2081087
-		"[SkippedUntil:06152022:blocker-bz/2081087]": {
+		"[SkippedUntil:06182022:blocker-bz/2081087]": {
 			`\[sig-auth\] ServiceAccounts should allow opting out of API token automount`,
 		},
-		"[SkippedUntil:06152022:blocker-bz/2081084]": {
+		"[SkippedUntil:06182022:blocker-bz/2081084]": {
 			`\[sig-instrumentation\] Events API should ensure that an event can be fetched, patched, deleted, and listed`,
 		},
-		"[SkippedUntil:06152022:blocker-bz/2081021]": {
+		"[SkippedUntil:06182022:blocker-bz/2081021]": {
 			`\[sig-api-machinery\] API data in etcd should be stored at the correct location and version for all resources`,
+		},
+
+		// TODO: these CSI tests are disabled until June June 18 since Pods
+		//  created by these tests pull image directly:
+		//  https://bugzilla.redhat.com/show_bug.cgi?id=2093339
+		"[SkippedUntil:06182022:blocker-bz/2093339]": {
+			`provisioning should provision storage with any volume data source`,
 		},
 	}
 
