@@ -12,6 +12,9 @@ type neverFailAllowance struct {
 	flakeDelegate AlertTestAllowanceCalculator
 }
 
+// DP: Make it explicit that neverFailAllowance implements AlertTestAllowanceCalculator
+var _ AlertTestAllowanceCalculator = &neverFailAllowance{}
+
 func neverFail(flakeDelegate AlertTestAllowanceCalculator) AlertTestAllowanceCalculator {
 	return &neverFailAllowance{
 		flakeDelegate,
@@ -40,6 +43,9 @@ type percentileAllowances struct {
 }
 
 var defaultAllowances = &percentileAllowances{}
+
+// DP: Make it explicit that percentileAllowances implements AlertTestAllowanceCalculator
+var _ AlertTestAllowanceCalculator = &percentileAllowances{}
 
 func (d *percentileAllowances) FailAfter(alertName string, jobType platformidentification.JobType) (time.Duration, error) {
 	allowed, _, _ := getClosestPercentilesValues(alertName, jobType)
