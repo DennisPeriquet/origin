@@ -223,19 +223,19 @@ count_over_time(ALERTS{alertstate="firing",severity!="info",alertname!~"Watchdog
 		if cause := firingAlertsWithBugs.Matches(series); cause != nil {
 			knownViolations.Insert(fmt.Sprintf("%s (open bug: %s)", violation, cause.Text))
 		} else {
-			if series.Metric["alertName"] == "KubePodNotReady" {
+			switch {
+			case series.Metric["alertName"] == "KubePodNotReady":
 				if kPNRDueToImagePullBackoff(helper.LabelsAsSelector(labels), series.Timestamp.Time(), t.oc.AdminKubeClient()) {
 					unexpectedViolationsAsFlakes.Insert(violation)
-					continue
 				}
-			}
-			if series.Metric["alertName"] == "RedhatOperatorsCatalogError" {
+
+			case series.Metric["alertName"] == "RedhatOperatorsCatalogError":
 				if redhatOperatorPodsNotPending(series.Timestamp.Time(), t.oc.AdminKubeClient()) {
 					unexpectedViolationsAsFlakes.Insert(violation)
-					continue
 				}
+			default:
+				unexpectedViolations.Insert(violation)
 			}
-			unexpectedViolations.Insert(violation)
 		}
 	}
 
