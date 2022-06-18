@@ -24,6 +24,8 @@ type EventInterval struct {
 
 // EventList is not an interval.  It is an instant.  The instant removes any ambiguity about "when"
 type EventIntervalList struct {
+
+	// Note the use of items; this is because the contents are inside an items field.
 	Items []EventInterval `json:"items"`
 }
 
@@ -49,6 +51,9 @@ func EventsFromJSON(data []byte) (monitorapi.Intervals, error) {
 		return nil, err
 	}
 	events := make(monitorapi.Intervals, 0, len(list.Items))
+
+	// Note that when we unmarshall'ed above, we got the items field.  So we have
+	// to get the elements from the items field in order to create the Intervals list.
 	for _, interval := range list.Items {
 		level, err := monitorapi.EventLevelFromString(interval.Level)
 		if err != nil {
@@ -69,6 +74,8 @@ func EventsFromJSON(data []byte) (monitorapi.Intervals, error) {
 	return events, nil
 }
 
+// EventsToJSON makes a copy of the events, sorts them, and stores them inside an
+// items field and then marshalls them for serialization.
 func EventsToJSON(events monitorapi.Intervals) ([]byte, error) {
 	outputEvents := []EventInterval{}
 	for _, curr := range events {
@@ -88,6 +95,8 @@ func EventsIntervalsToFile(filename string, events monitorapi.Intervals) error {
 	return ioutil.WriteFile(filename, json, 0644)
 }
 
+// EventsIntervalsToJSON makes a copy of the Intervals, sorts them, and stores them inside an
+// items field and then marshalls them for serialization.
 func EventsIntervalsToJSON(events monitorapi.Intervals) ([]byte, error) {
 	outputEvents := []EventInterval{}
 	for _, curr := range events {
@@ -102,6 +111,8 @@ func EventsIntervalsToJSON(events monitorapi.Intervals) ([]byte, error) {
 	return json.MarshalIndent(list, "", "    ")
 }
 
+// monitorEventIntervalToEventInterval converts from monitorapi.EventInterval to
+// EventInterval.
 func monitorEventIntervalToEventInterval(interval monitorapi.EventInterval) EventInterval {
 	ret := EventInterval{
 		Level:   fmt.Sprintf("%v", interval.Level),
@@ -115,6 +126,8 @@ func monitorEventIntervalToEventInterval(interval monitorapi.EventInterval) Even
 	return ret
 }
 
+// byTime is a type that allows us to implement sort.Interface so that we can
+// sort EventIntervals by From/To.
 type byTime []EventInterval
 
 func (intervals byTime) Less(i, j int) bool {
