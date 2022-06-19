@@ -317,8 +317,12 @@ func (intervals Intervals) Cut(from, to time.Time) Intervals {
 // CopyAndSort assumes intervals is unsorted and returns a sorted copy of intervals
 // for all intervals between from and to.
 func (intervals Intervals) CopyAndSort(from, to time.Time) Intervals {
+
+	// See make with 3 parameters: https://stackoverflow.com/questions/36349045/how-can-the-make-function-take-three-parameters
+	// Create an Intervals object of size 0 with capacity len(intervals).
 	copied := make(Intervals, 0, len(intervals))
 
+	// If from/to are both zero, return all intervals sorted.
 	if from.IsZero() && to.IsZero() {
 		for _, e := range intervals {
 			copied = append(copied, e)
@@ -328,9 +332,13 @@ func (intervals Intervals) CopyAndSort(from, to time.Time) Intervals {
 	}
 
 	for _, e := range intervals {
+
+		// if the from of this interval is not after from, skip.
 		if !e.From.After(from) {
 			continue
 		}
+
+		// if the from of this interval is not zero and not before to, skip.
 		if !to.IsZero() && !e.From.Before(to) {
 			continue
 		}
@@ -350,15 +358,22 @@ func (intervals Intervals) Slice(from, to time.Time) Intervals {
 		return intervals
 	}
 
+	// Binary search for the first relevant interval
 	first := sort.Search(len(intervals), func(i int) bool {
 		return intervals[i].From.After(from)
 	})
+
+	// No relevant interval found
 	if first == -1 {
 		return nil
 	}
+
+	// To is 0 so return everything starting with the first relevant Interval
 	if to.IsZero() {
 		return intervals[first:]
 	}
+
+	// Get all relevant Intervals starting with first.
 	for i := first; i < len(intervals); i++ {
 		if intervals[i].From.After(to) {
 			return intervals[first:i]
@@ -385,5 +400,11 @@ type InstanceKey struct {
 	UID       string
 }
 
+// InstanceMap maps a Namespace/Name/UID to an actual object.
 type InstanceMap map[InstanceKey]runtime.Object
+
+// ResourceMap maps resource Kinds to InstanceMaps.
+// For example, loadKnownPods creates ResourcesMap["pods"] that tracks all pods; then the
+// namespace/name/uid of each pod maps to an actual Pod object (i.e., runtime.Object).
+// pod_test.go has a unit test that also creates ResourcesMap["pods"].
 type ResourcesMap map[string]InstanceMap

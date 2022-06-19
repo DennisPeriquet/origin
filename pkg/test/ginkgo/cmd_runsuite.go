@@ -76,6 +76,8 @@ func NewOptions() *Options {
 	return &Options{
 		RunDataWriters: []RunDataWriter{
 			// these produce the various intervals.  Different intervals focused on inspecting different problem spaces.
+			// DP: These calls to AdaptEventDataWriter were made to create RunDataWriterFuncs (adapter pattern) so that
+			// loop in WriteRunDataToArtifactsDir can be clean/consistent.
 			AdaptEventDataWriter(intervalcreation.NewSpyglassEventIntervalRenderer("everything", intervalcreation.BelongsInEverything)),
 			AdaptEventDataWriter(intervalcreation.NewSpyglassEventIntervalRenderer("spyglass", intervalcreation.BelongsInSpyglass)),
 			// TODO add visualization of individual apiserver containers and their readiness on this page
@@ -84,6 +86,9 @@ func NewOptions() *Options {
 			AdaptEventDataWriter(intervalcreation.NewPodEventIntervalRenderer()),
 
 			RunDataWriterFunc(monitor.WriteEventsForJobRun),
+
+			// Re: TRT-238, note that WriteTrackedResourcesForJobRun has written the tracked resources to the
+			// artifacts/e2e/junits directory.
 			RunDataWriterFunc(monitor.WriteTrackedResourcesForJobRun),
 			RunDataWriterFunc(monitor.WriteBackendDisruptionForJobRun),
 			RunDataWriterFunc(allowedalerts.WriteAlertDataForJobRun),
@@ -165,6 +170,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	// Setup the synthetic test list.
 	// By the time we got here, opt.SyntheticEventTests and suite.SyntheticEventTests has
 	// already been set.
+	// Follow these two variables and you can see the top level of where tests are run.
 	syntheticEventTests := JUnitsForAllEvents{
 		opt.SyntheticEventTests,
 		suite.SyntheticEventTests,
@@ -276,7 +282,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		return err
 	}
 
-	// Disruption monitoring start here.
+	// Disruption monitoring starts here.
 	// theMonitor used to be called m.  But, given that we keep referring to it as "The Monitor"
 	// I find this name more appropriate.
 	theMonitor, err := monitor.Start(ctx, restConfig,
@@ -313,6 +319,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		return strings.Contains(t.name, "[Early]")
 	})
 
+	// late tests contain things like:
+	// Alerts alert/KubePodNotReady should not be at or above info in ns/openshift-marketplace
 	late, primaryTests := splitTests(notEarly, func(t *testCase) bool {
 		return strings.Contains(t.name, "[Late]")
 	})
@@ -395,6 +403,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	pc.SetEvents([]string{postUpgradeEvent})
 
 	// run Late test suits after everything else
+	// late tests include something like:
+	// Alerts alert/KubePodNotReady should not be at or above info in ns/openshift-marketplace
+	// TRT=238
 	q.Execute(testCtx, late, parallelism, status.Run)
 	tests = append(tests, late...)
 
@@ -433,7 +444,11 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	events := theMonitor.Intervals(time.Time{}, time.Time{})
 
 	// If there are any additional events (produced by disruption testing and placed on disk),
-	// merge them into our event list.
+	// read them in and merge them into our event list.  This the use of the AddtionalEvents files
+	// is an example re: TRT-238 where we are running tests that create an artifact, we write the
+	// artifact to disk, then we use that artifact for another activity later by reading it from
+	// the disk.  Note that we could've just created a  global variable that spanned the two activities.
+	// opt.JUnitDir is in artifacts/e2e.../artifacts/junit
 	if len(opt.JUnitDir) > 0 {
 		var additionalEvents monitorapi.Intervals
 		filepath.WalkDir(opt.JUnitDir, func(path string, d fs.DirEntry, err error) error {
@@ -471,6 +486,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 
 	events.Clamp(start, end)
 
+	// Tests have already run and theMonitor is populated with many things, so we write them out to
+	// artifacts/e2e/junit.
+	// Re: TRT-238, opt.JUnitDir is passed here when we write the artifacts.
 	if len(opt.JUnitDir) > 0 {
 		if err := opt.WriteRunDataToArtifactsDir(opt.JUnitDir, theMonitor, events, timeSuffix); err != nil {
 			fmt.Fprintf(opt.ErrOut, "error: Failed to write run-data: %v\n", err)
@@ -484,7 +502,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		syntheticTestResults, buf, _ = createSyntheticTestsFromMonitor(events, duration)
 
 		// Left off here June 5, 2022; I think this is where we
-		// Run the rest of the synthetic tests using the events as input.
+		// This line runs the rest of the synthetic tests using the events as input.
 		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name)
 		syntheticTestResults = append(syntheticTestResults, testCases...)
 

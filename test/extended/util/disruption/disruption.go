@@ -177,7 +177,7 @@ type chaosMonkeyAdapter struct {
 	framework       *framework.Framework
 }
 
-// this is what is called when we call test(sem) in the for loop where we shadow test.
+// this is what is called when we call test(sem) in the for loop where we shadow the "test" variable.
 func (cma *chaosMonkeyAdapter) Test(sem *chaosmonkey.Semaphore) {
 	start := time.Now()
 	var once sync.Once

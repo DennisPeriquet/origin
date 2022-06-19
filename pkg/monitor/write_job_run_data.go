@@ -14,10 +14,13 @@ import (
 	"sigs.k8s.io/kustomize/kyaml/sets"
 )
 
+// WriteEventsForJobRun writes out the artifacts in junit/e2e-events files.
 func WriteEventsForJobRun(artifactDir string, monitor *Monitor, events monitorapi.Intervals, timeSuffix string) error {
 	return monitorserialization.EventsToFile(filepath.Join(artifactDir, fmt.Sprintf("e2e-events%s.json", timeSuffix)), events)
 }
 
+// WriteTrackedResourcesForJobRun writes out the artifacts in junit/resource-events...zip or junit/resource-pods...zip.
+// Tracked resources include pods and events.
 func WriteTrackedResourcesForJobRun(artifactDir string, monitor *Monitor, events monitorapi.Intervals, timeSuffix string) error {
 	errors := []error{}
 
@@ -33,6 +36,7 @@ func WriteTrackedResourcesForJobRun(artifactDir string, monitor *Monitor, events
 	return utilerrors.NewAggregate(errors)
 }
 
+// WriteBackendDisruptionForJobRun writes out the artifacts in junit/backend-disruption...json
 func WriteBackendDisruptionForJobRun(artifactDir string, monitor *Monitor, events monitorapi.Intervals, timeSuffix string) error {
 	backendDisruption := computeDisruptionData(events)
 	return writeDisruptionData(filepath.Join(artifactDir, fmt.Sprintf("backend-disruption%s.json", timeSuffix)), backendDisruption)

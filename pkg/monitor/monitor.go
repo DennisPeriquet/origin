@@ -79,6 +79,9 @@ func (m *Monitor) AddSampler(fn SamplerFunc) {
 	m.samplers = append(m.samplers, fn)
 }
 
+// CurrentResourceState returns a copy of the recorded resources in the monitor m; this
+// represents the current resource state for the resources we track; the two tracked
+// Resource Types are pods and events.
 func (m *Monitor) CurrentResourceState() monitorapi.ResourcesMap {
 	m.recordedResourceLock.Lock()
 	defer m.recordedResourceLock.Unlock()

@@ -279,8 +279,12 @@ func renderHTML(events monitorapi.Intervals) ([]byte, error) {
 	return e2eChartHTML, nil
 }
 
+// loadKnownPods takes a junit/resource_pods_<date>-<tag>.zip file and returns a ResourcesMap
+// We can use loadKnownPods for TRT-238; but where do we get the filename or opt.JUnitDir?
 func loadKnownPods(filename string) (monitorapi.ResourcesMap, error) {
 
+	// Remember filename referes to a zip file; in that zip file, there is one directory
+	// per pod.
 	zipReader, err := zip.OpenReader(filename)
 	if err != nil {
 		return nil, err
@@ -288,6 +292,8 @@ func loadKnownPods(filename string) (monitorapi.ResourcesMap, error) {
 	defer zipReader.Close()
 
 	pods := monitorapi.InstanceMap{}
+
+	// zipReader.File refers to all the directories that were inside the zip file.
 	for _, f := range zipReader.File {
 		rc, err := f.Open()
 		if err != nil {

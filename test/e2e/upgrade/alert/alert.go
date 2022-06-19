@@ -44,6 +44,8 @@ func (t *UpgradeTest) Setup(f *framework.Framework) {
 // Test checks if alerts are firing at various points during upgrade.
 // An alert firing during an upgrade is a high severity bug - it either points to a real issue in
 // a dependency, or a failure of the component, and therefore must be fixed.
+// For TRT-238, this is where I end up; look for "\.Test\(" to see where all the Test() methods
+// are run that satisfy the Test interface.
 func (t *UpgradeTest) Test(f *framework.Framework, done <-chan struct{}, upgrade upgrades.UpgradeType) {
 	tolerateDuringSkew := exutil.TolerateVersionSkewInTests()
 	firingAlertsWithBugs := helper.MetricConditions{
