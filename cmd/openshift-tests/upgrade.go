@@ -30,7 +30,10 @@ var upgradeSuites = testSuites{
 				}
 				return strings.Contains(name, "[Feature:ClusterUpgrade]") && !strings.Contains(name, "[Suite:k8s]")
 			},
-			TestTimeout:         240 * time.Minute,
+			TestTimeout: 240 * time.Minute,
+
+			// DP: note how we're passing in a function (i.e., synthetictests.SystemUpgradeEventInvariants)
+			// for the JUnitForEventsFunc type.
 			SyntheticEventTests: ginkgo.JUnitForEventsFunc(synthetictests.SystemUpgradeEventInvariants),
 		},
 		PreSuite: upgradeTestPreSuite,

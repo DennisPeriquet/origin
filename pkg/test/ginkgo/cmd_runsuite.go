@@ -41,6 +41,9 @@ const (
 
 // Options is used to run a suite of tests by invoking each test
 // as a call to a child worker (the run-tests command).
+// Instances of Options are created in NewRunOptions
+//   which is called by newRunCommand() (run SUITE) and newRunUpgradeCommand() (run-upgrade SUITE command)
+//     both of which are located in openshift-tests.go
 type Options struct {
 	Parallelism int
 	Count       int
@@ -171,6 +174,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	// By the time we got here, opt.SyntheticEventTests and suite.SyntheticEventTests has
 	// already been set.
 	// Follow these two variables and you can see the top level of where tests are run.
+	// opt.SyntheticEventTests is a slice of JUnitsForEvents
+	// suite.SyntheticEventTests is a slice of JUnitsForEvents
+	// JUnitsForAllEvents is a []JUnitsForEvents
 	syntheticEventTests := JUnitsForAllEvents{
 		opt.SyntheticEventTests,
 		suite.SyntheticEventTests,
@@ -503,6 +509,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 
 		// Left off here June 5, 2022; I think this is where we
 		// This line runs the rest of the synthetic tests using the events as input.
+		// The function signature matches StableSystemEventInvariants.
+		// TRT-238: for testAlerts to get theMonitor contents, we need to pass it here so that when we
+		// call testAlerts in StableSystmeEventInvariants, we can pass it there.
 		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name)
 		syntheticTestResults = append(syntheticTestResults, testCases...)
 

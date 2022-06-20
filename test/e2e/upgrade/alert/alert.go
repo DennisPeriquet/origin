@@ -46,6 +46,8 @@ func (t *UpgradeTest) Setup(f *framework.Framework) {
 // a dependency, or a failure of the component, and therefore must be fixed.
 // For TRT-238, this is where I end up; look for "\.Test\(" to see where all the Test() methods
 // are run that satisfy the Test interface.
+// Need to set a breakpoint here to see what's around and what's in the callstack (i.e., what called
+// this function) and see if we can get opt.JUnitDir.
 func (t *UpgradeTest) Test(f *framework.Framework, done <-chan struct{}, upgrade upgrades.UpgradeType) {
 	tolerateDuringSkew := exutil.TolerateVersionSkewInTests()
 	firingAlertsWithBugs := helper.MetricConditions{

@@ -24,6 +24,7 @@ type JUnitsForEvents interface {
 // JUnitForEventsFunc converts a function into the JUnitForEvents interface.
 // kubeClientConfig may or may not be present.  The JUnit evaluation needs to tolerate a missing *rest.Config
 // and an unavailable cluster without crashing.
+// DP: this is strange to me
 type JUnitForEventsFunc func(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase
 
 func (fn JUnitForEventsFunc) JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase {
@@ -34,6 +35,8 @@ func (fn JUnitForEventsFunc) JUnitsForEvents(events monitorapi.Intervals, durati
 // the result of all invocations. It ignores nil interfaces.
 type JUnitsForAllEvents []JUnitsForEvents
 
+// JUnitsForEvents goes through all JUnitsForEvents, runs them, and returns a list of the JUnitTestCases.  It
+// is called with syntheticEventTests.
 func (a JUnitsForAllEvents) JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase {
 	var all []*junitapi.JUnitTestCase
 	for _, obj := range a {
@@ -55,6 +58,8 @@ func createSyntheticTestsFromMonitor(events monitorapi.Intervals, monitorDuratio
 	fmt.Fprintf(buf, "\nTimeline:\n\n")
 
 	// Count any EventIntervals that have an error level of Error
+	// The output and failure output is stored in the byte buffers to add in
+	// the returned junit
 	errorCount := 0
 	for _, event := range events {
 		if event.Level == monitorapi.Error {
