@@ -87,7 +87,7 @@ type TestSuite struct {
 	MaximumAllowedFlakes int
 
 	// SyntheticEventTests is a set of suite level synthetics applied
-	// SyntheticEventTests will be a slice of JUnitsForEvents interfaces (or a JUnitsForAllEvents
+	// SyntheticEventTests will be a []JUnitsForEvents interfaces (or a JUnitsForAllEvents
 	// which also implements the JUnitsForEvents interface).
 	SyntheticEventTests JUnitsForEvents
 

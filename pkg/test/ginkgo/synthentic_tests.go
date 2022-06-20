@@ -27,8 +27,8 @@ type JUnitsForEvents interface {
 // and an unavailable cluster without crashing.
 // DP: this is strange to me
 // JUnitForEventsFunc implements the JUnitsForEvents interface.
-// StableSystemEventInvariants is of this type.
-// SystemUpgradeEventInvariants is of this type.
+// StableSystemEventInvariants is of this type and implements the JUnitsForEvents interface.
+// SystemUpgradeEventInvariants is of this type and implements the JUnitsForEvents interface.
 type JUnitForEventsFunc func(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase
 
 // JUnitsForEvents for JUnitForEventsFunc calls the function with parameters passed and returns

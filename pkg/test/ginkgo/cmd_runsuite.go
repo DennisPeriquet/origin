@@ -60,7 +60,7 @@ type Options struct {
 
 	// SyntheticEventTests allows the caller to translate events or outside
 	// context into a failure.
-	// SyntheticEventTests will be a slice of JUnitsForEvents interfaces (or a JUnitsForAllEvents
+	// SyntheticEventTests will be a []JUnitsForEvents interfaces (or a JUnitsForAllEvents
 	// which also implements the JUnitsForEvents interface).
 	SyntheticEventTests JUnitsForEvents
 
@@ -173,11 +173,12 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	}
 
 	// Setup the synthetic test list.
-	// By the time we got here, opt.SyntheticEventTests and suite.SyntheticEventTests has
-	// already been set.
+	// The opt.SyntheticEventTests and suite.SyntheticEventTests variables are set in
+	// cmd/openshift-tests/e2e.go or upgrade.go when the global upgradeSuites and
+	// staticSuites variables were initialized.
 	// Follow these two variables and you can see the top level of where tests are run.
-	// opt.SyntheticEventTests is a slice of JUnitsForEvents
-	// suite.SyntheticEventTests is a slice of JUnitsForEvents
+	// opt.SyntheticEventTests is a []JUnitsForEvents (or JUnitsForAllEvents)
+	// suite.SyntheticEventTests is a []JUnitsForEvents (or JUnitsForAllEvents)
 	// JUnitsForAllEvents is a []JUnitsForEvents
 	syntheticEventTests := JUnitsForAllEvents{
 		opt.SyntheticEventTests,
@@ -509,7 +510,6 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		// Create the first synthetic test that just checks for any Events with level == Error.
 		syntheticTestResults, buf, _ = createSyntheticTestsFromMonitor(events, duration)
 
-		// Left off here June 5, 2022; I think this is where we
 		// This line runs the rest of the synthetic tests using the events as input.
 		// The function signature matches StableSystemEventInvariants.
 		// TRT-238: for testAlerts to get theMonitor contents, we need to pass it here so that when we
