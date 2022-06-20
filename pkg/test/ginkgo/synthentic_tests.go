@@ -39,6 +39,7 @@ func (fn JUnitForEventsFunc) JUnitsForEvents(events monitorapi.Intervals, durati
 
 // JUnitsForAllEvents aggregates multiple JUnitsForEvent interfaces and returns
 // the result of all invocations. It ignores nil interfaces.
+// JUnitForAllEvents implements the JUnitsForEvents interface.
 type JUnitsForAllEvents []JUnitsForEvents
 
 // JUnitsForEvents goes through all JUnitsForEvents, runs them, and returns a list of the JUnitTestCases.  It

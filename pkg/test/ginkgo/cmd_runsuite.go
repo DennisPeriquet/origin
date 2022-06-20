@@ -60,6 +60,8 @@ type Options struct {
 
 	// SyntheticEventTests allows the caller to translate events or outside
 	// context into a failure.
+	// SyntheticEventTests will be a slice of JUnitsForEvents interfaces (or a JUnitsForAllEvents
+	// which also implements the JUnitsForEvents interface).
 	SyntheticEventTests JUnitsForEvents
 
 	RunDataWriters []RunDataWriter
