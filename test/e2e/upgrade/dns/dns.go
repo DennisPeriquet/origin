@@ -20,6 +20,9 @@ import (
 	imageutils "k8s.io/kubernetes/test/utils/image"
 )
 
+// Explicitly show that dns.UpgradeTest implements upgrades.Test
+var _ upgrades.Test = &UpgradeTest{}
+
 type UpgradeTest struct{}
 
 var appName string
