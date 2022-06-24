@@ -43,6 +43,11 @@ type additionalTest struct {
 	Duration time.Duration
 }
 
+// Explicitly mention what interface is implmented.
+var _ framework.TestDataSummary = additionalTest{}
+var _ framework.TestDataSummary = flakeSummary("")
+var _ framework.TestDataSummary = additionalEvents{}
+
 func (s additionalTest) PrintHumanReadable() string { return fmt.Sprintf("%s: %s", s.Name, s.Failure) }
 func (s additionalTest) SummaryKind() string        { return "AdditionalTest" }
 func (s additionalTest) PrintJSON() string          { data, _ := json.Marshal(s); return string(data) }
@@ -197,7 +202,7 @@ func (cma *chaosMonkeyAdapter) Test(sem *chaosmonkey.Semaphore) {
 	cma.test.Setup(cma.framework)
 	defer cma.test.Teardown(cma.framework)
 	ready()
-	cma.test.Test(cma.framework, sem.StopCh, cma.UpgradeType)
+	cma.test.Test(cma.framework, sem.StopCh, cma.UpgradeType) // I believe TRT-238 call is from here
 }
 
 func finalizeTest(start time.Time, tc *junit.TestCase, ts *junit.TestSuite, f *framework.Framework) {
@@ -207,6 +212,13 @@ func finalizeTest(start time.Time, tc *junit.TestCase, ts *junit.TestSuite, f *f
 
 	// if the framework contains additional test results, add them to the parent suite or write them to disk
 	for _, summary := range f.TestSummaries {
+
+		// golang tip:
+		// This is a type assertion that summary (of type TestDataSummary interface) is of type
+		// addtionalTest.  The type assertion returns two values, the second of which tells you
+		// if the assertion is ok.  If the assertion is ok, then we create a variable "test" of
+		// type addtionalTest and use it to create a TestCase by extracting just Name and Duration.
+		// awesome explaination: https://www.sohamkamani.com/golang/type-assertions-vs-type-conversions/
 		if test, ok := summary.(additionalTest); ok {
 			testCase := &junit.TestCase{
 				Name: test.Name,
@@ -222,6 +234,11 @@ func finalizeTest(start time.Time, tc *junit.TestCase, ts *junit.TestSuite, f *f
 			continue
 		}
 
+		// This is where the artifacts/e2e/artifacts/junit/AddtionalEvents_*.json file are written.
+		// It's a little hard to find because summary.SummaryKind() returns "AdditonalEvents" and the
+		// filename is created here.
+		// We probably saved this info so we can write it later because at the time we had the info,
+		// the ReportDir was not created yet. See definition at type Framework struct for TestSummaries
 		filePath := filepath.Join(framework.TestContext.ReportDir, fmt.Sprintf("%s_%s_%s.json", summary.SummaryKind(), filesystemSafeName(tc.Name), now.Format(time.RFC3339)))
 		if err := ioutil.WriteFile(filePath, []byte(summary.PrintJSON()), 0644); err != nil {
 			fmt.Fprintf(os.Stderr, "error: Failed to write file %v with test data: %v\n", filePath, err)
