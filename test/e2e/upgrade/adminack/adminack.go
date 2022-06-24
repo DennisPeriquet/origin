@@ -15,6 +15,9 @@ import (
 	"k8s.io/kubernetes/test/e2e/upgrades"
 )
 
+// Explicitly test/show that UpgradeTest implements the upgrades.Test interface.
+var _ upgrades.Test = &UpgradeTest{}
+
 // UpgradeTest contains artifacts used during test
 type UpgradeTest struct {
 	oc     *exutil.CLI
