@@ -69,6 +69,9 @@ var (
 
 			// https://bugzilla.redhat.com/show_bug.cgi?id=2070929
 			`\[sig-network\]\[Feature:EgressIP\] \[internal-targets\]`,
+
+			// https://bugzilla.redhat.com/show_bug.cgi?id=2093339
+			`\[sig-storage\].* provisioning should provision storage with any volume data source`,
 		},
 		// tests that may work, but we don't support them
 		"[Disabled:Unsupported]": {
@@ -339,29 +342,6 @@ var (
 			// Currently ibm-master-proxy-static and imbcloud-block-storage-plugin tolerate all taints
 			// https://bugzilla.redhat.com/show_bug.cgi?id=1825027
 			`\[Feature:Platform\] Managed cluster should ensure control plane operators do not make themselves unevictable`,
-		},
-
-		// TODO: to facilitate v.14 rebase, skip the following tests until June 07 2022,
-		//  the following key should be removed after the rebase PR lands
-		//  BZs to keep track of these issues:
-		//   - [sig-api-machinery] API data in etcd should be: https://bugzilla.redhat.com/show_bug.cgi?id=2081021
-		//   - [sig-instrumentation] Events API should ensure that: https://bugzilla.redhat.com/show_bug.cgi?id=2081084
-		//   - [sig-auth] ServiceAccounts : https//bugzilla.redhat.com/show_bug.cgi?id=2081087
-		"[SkippedUntil:06182022:blocker-bz/2081087]": {
-			`\[sig-auth\] ServiceAccounts should allow opting out of API token automount`,
-		},
-		"[SkippedUntil:06182022:blocker-bz/2081084]": {
-			`\[sig-instrumentation\] Events API should ensure that an event can be fetched, patched, deleted, and listed`,
-		},
-		"[SkippedUntil:06182022:blocker-bz/2081021]": {
-			`\[sig-api-machinery\] API data in etcd should be stored at the correct location and version for all resources`,
-		},
-
-		// TODO: these CSI tests are disabled until June June 18 since Pods
-		//  created by these tests pull image directly:
-		//  https://bugzilla.redhat.com/show_bug.cgi?id=2093339
-		"[SkippedUntil:06182022:blocker-bz/2093339]": {
-			`provisioning should provision storage with any volume data source`,
 		},
 	}
 
