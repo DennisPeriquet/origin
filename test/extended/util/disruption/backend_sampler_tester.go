@@ -101,6 +101,9 @@ func (t *backendDisruptionTest) historicalP95Disruption(f *framework.Framework) 
 // returns allowedDuration, detailsString(for display), error
 type AllowedDisruptionFunc func(f *framework.Framework) (*time.Duration, string, error)
 
+// Explicitly indicate that backendDisruptionTest implements upgrades.Test
+var _ upgrades.Test = &backendDisruptionTest{}
+
 // availableTest tests that route frontends are available before, during, and
 // after a cluster upgrade.
 type backendDisruptionTest struct {
