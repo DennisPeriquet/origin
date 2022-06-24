@@ -38,6 +38,9 @@ import (
 )
 
 func main() {
+	fmt.Println("DP-DEBUG: openshift-tests is being invoked ...")
+	fmt.Println("Sleep for 30 seconds so you can get ready and attach to a test in your debugger ...")
+	time.Sleep(30 * time.Second)
 	// KUBE_TEST_REPO_LIST is calculated during package initialization and prevents
 	// proper mirroring of images referenced by tests. Clear the value and re-exec the
 	// current process to ensure we can verify from a known state.

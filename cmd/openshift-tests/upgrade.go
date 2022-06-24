@@ -20,6 +20,21 @@ import (
 var upgradeSuites = testSuites{
 	{
 		TestSuite: ginkgo.TestSuite{
+			Name: "just-upgrade",
+			Description: templates.LongDesc(`
+		Run just the upgrade test; for debugging with DennisP.
+		`),
+			Matches: func(name string) bool {
+				return strings.Contains(name, "[sig-arch][Feature:ClusterUpgrade]")
+			},
+			TestTimeout: 240 * time.Minute,
+
+			SyntheticEventTests: ginkgo.JUnitForEventsFunc(synthetictests.SystemUpgradeEventInvariants),
+		},
+		PreSuite: upgradeTestPreSuite,
+	},
+	{
+		TestSuite: ginkgo.TestSuite{
 			Name: "all",
 			Description: templates.LongDesc(`
 		Run all tests.

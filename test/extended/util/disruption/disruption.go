@@ -100,6 +100,7 @@ func Run(f *framework.Framework, description, testname string, adapter TestData,
 		//},
 		fn()
 	})
+	fmt.Println("DP-DEBUG: Running runChaosmonkey ...")
 	runChaosmonkey(cm, adapter, invariants, testSuite)
 }
 
@@ -170,6 +171,7 @@ func runChaosmonkey(
 			xml.NewEncoder(f).Encode(testSuite)
 		}
 	}()
+	fmt.Println("DP-DEBUG: Running cmd.Do ...")
 	cm.Do()
 }
 

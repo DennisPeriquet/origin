@@ -156,6 +156,7 @@ var _ = g.Describe("[sig-arch][Feature:ClusterUpgrade]", func() {
 	f.SkipNamespaceCreation = true
 	f.SkipPrivilegedPSPBinding = true
 
+	fmt.Println("DP-DEBUG: Before running cluster should remain test ...")
 	g.It("Cluster should remain functional during upgrade [Disruptive]", func() {
 		config, err := framework.LoadConfig()
 		framework.ExpectNoError(err)
@@ -165,6 +166,7 @@ var _ = g.Describe("[sig-arch][Feature:ClusterUpgrade]", func() {
 		upgCtx, err := getUpgradeContext(client, upgradeToImage)
 		framework.ExpectNoError(err, "determining what to upgrade to version=%s image=%s", "", upgradeToImage)
 
+		fmt.Println("DP-DEBUG: Running disruption.Run ...")
 		disruption.Run(f, "Cluster upgrade", "upgrade",
 			disruption.TestData{
 				UpgradeType:    upgrades.ClusterUpgrade,
@@ -174,6 +176,7 @@ var _ = g.Describe("[sig-arch][Feature:ClusterUpgrade]", func() {
 			// The list of tests to use (also referred to as invariants)
 			upgradeTests,
 			func() {
+				fmt.Println("DP-DEBUG: Running disruption.Run() upgrade loop ...")
 				for i := 1; i < len(upgCtx.Versions); i++ {
 					framework.ExpectNoError(clusterUpgrade(f, client, dynamicClient, config, upgCtx.Versions[i]), fmt.Sprintf("during upgrade to %s", upgCtx.Versions[i].NodeImage))
 				}
