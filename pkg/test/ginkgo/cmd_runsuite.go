@@ -94,6 +94,7 @@ func NewOptions() *Options {
 
 			// Re: TRT-238, note that WriteTrackedResourcesForJobRun has written the tracked resources to the
 			// artifacts/e2e/junits directory.
+			// These are called in WriteRunDataToArtifactsDir
 			RunDataWriterFunc(monitor.WriteTrackedResourcesForJobRun),
 			RunDataWriterFunc(monitor.WriteBackendDisruptionForJobRun),
 			RunDataWriterFunc(allowedalerts.WriteAlertDataForJobRun),
