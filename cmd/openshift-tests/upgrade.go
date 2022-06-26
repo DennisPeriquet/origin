@@ -10,6 +10,7 @@ import (
 	"github.com/openshift/origin/pkg/synthetictests"
 	"github.com/openshift/origin/pkg/test/ginkgo"
 	"github.com/openshift/origin/test/e2e/upgrade"
+	"github.com/openshift/origin/test/e2e/upgrade/alert"
 	"github.com/openshift/origin/test/extended/util/disruption/controlplane"
 	"github.com/spf13/pflag"
 	"k8s.io/kubectl/pkg/util/templates"
@@ -20,12 +21,15 @@ import (
 var upgradeSuites = testSuites{
 	{
 		TestSuite: ginkgo.TestSuite{
-			Name: "just-upgrade",
+			Name: "alerts",
 			Description: templates.LongDesc(`
-		Run just the upgrade test; for debugging with DennisP.
+		Run just the upgrade test; for debugging with DennisP and TRT-238.
 		`),
 			Matches: func(name string) bool {
-				return strings.Contains(name, "[sig-arch][Feature:ClusterUpgrade]")
+				if isStandardEarlyTest(name) {
+					return true
+				}
+				return strings.Contains(name, "[Feature:ClusterUpgrade]") && !strings.Contains(name, "[Suite:k8s]")
 			},
 			TestTimeout: 240 * time.Minute,
 
@@ -118,9 +122,15 @@ func upgradeTestPreTest() error {
 		return filterUpgrade(upgrade.AllTests(), func(name string) bool {
 			return name == controlplane.NewKubeAvailableWithNewConnectionsTest().Name() || name == controlplane.NewKubeAvailableWithConnectionReuseTest().Name()
 		})
+	case "alerts":
+		return filterUpgrade(upgrade.AllTests(), func(name string) bool {
+
+			// For testing TRT-238, given only the alert tests.
+			return name == alert.UpgradeTest{}.Name()
+		})
 	default:
 
-		// This is the most common one.
+		// This is the most common one and is referred to as "all".
 		return filterUpgrade(upgrade.AllTests(), func(string) bool { return true })
 	}
 }
@@ -161,6 +171,7 @@ func (o *UpgradeOptions) ToEnv() string {
 	return string(out)
 }
 
+// filterUpgrades is called for opt.Suite being one of "none" (no disruption tests), "platform" (just Kube new/reused), or "default" (all tests).
 func filterUpgrade(tests []upgrades.Test, match func(string) bool) error {
 	var scope []upgrades.Test
 	for _, test := range tests {
