@@ -3,11 +3,15 @@ package alert
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
+	"os"
 	"strings"
 	"time"
 
 	g "github.com/onsi/ginkgo"
 	o "github.com/onsi/gomega"
+	"github.com/openshift/origin/pkg/monitor/monitor_cmd"
+	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/openshift/origin/pkg/synthetictests/allowedalerts"
 	exutil "github.com/openshift/origin/test/extended/util"
 	"github.com/openshift/origin/test/extended/util/disruption"
@@ -39,6 +43,35 @@ func (t *UpgradeTest) Setup(f *framework.Framework) {
 	t.oc = oc
 	t.prometheusClient = oc.NewPrometheusClient(context.TODO())
 	framework.Logf("Post-upgrade alert test setup complete")
+}
+
+func loadResourcesMaps(junitDir string) []monitorapi.ResourcesMap {
+	if len(junitDir) == 0 {
+		framework.Logf("DP-DEBUG: TEST_JUNIT_DIR is not set")
+		return nil
+	}
+	framework.Logf("DP-DEBUG: TEST_JUNIT_DIR is set to: %s", junitDir)
+	files, err := ioutil.ReadDir(junitDir)
+	if err != nil {
+		framework.Logf("DP-DEBUG: Unable to read %s", junitDir)
+		return nil
+	}
+	ret := make([]monitorapi.ResourcesMap, 0)
+
+	framework.Logf("DP-DEBUG: Length of files: %d", len(files))
+	for _, file := range files {
+		if strings.HasPrefix(file.Name(), "resource-tmp-pods") {
+			resMap, err := monitor_cmd.LoadKnownPods(file.Name())
+			if err != nil {
+				framework.Logf("DP-DEBUG: Unable to read %s", file.Name())
+				continue
+			}
+			ret = append(ret, resMap)
+		} else {
+			framework.Logf("DP-DEBUG: Found file but skipped: %s", file.Name())
+		}
+	}
+	return ret
 }
 
 // Test checks if alerts are firing at various points during upgrade.
@@ -198,13 +231,36 @@ func (t *UpgradeTest) Test(f *framework.Framework, done <-chan struct{}, upgrade
 
 	// Block until upgrade is done
 	g.By("Waiting for upgrade to finish before checking for alerts")
+	fmt.Printf("%s: DP-DEBUG: before waiting for upgrade...\n", time.Now().String())
 	<-done
+	fmt.Printf("%s: DP-DEBUG: after waiting for upgrade...\n", time.Now().String())
 
 	// Additonal delay after upgrade completion to allow pending alerts to settle
 	g.By("Waiting before checking for alerts")
 	time.Sleep(1 * time.Minute)
 
 	testDuration := time.Now().Sub(start).Round(time.Second)
+
+	junitDir := os.Getenv("TEST_JUNIT_DIR")
+	lenWait := make(chan int)
+	go func() {
+		for {
+			resourcesMaps := loadResourcesMaps(junitDir)
+			if len(resourcesMaps) > 0 {
+				lenWait <- len(resourcesMaps)
+				break
+			}
+			fmt.Printf("%s: DP-DEBUG: No resourceMaps yet, sleeping ...\n", time.Now().String())
+			time.Sleep(2 * time.Minute)
+		}
+	}()
+
+	select {
+	case <-time.After(30 * time.Minute):
+		fmt.Println("DP-DEBUG: seems we timed out waiting for resourceMap data")
+	case len := <-lenWait:
+		fmt.Printf("DP-DEBUG Length: %d\n", len)
+	}
 
 	// Invariant: No non-info level alerts should have fired during the upgrade
 	firingAlertQuery := fmt.Sprintf(`
