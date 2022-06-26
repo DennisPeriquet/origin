@@ -51,6 +51,8 @@ func NoTests() []upgrades.Test {
 }
 
 // AllTests includes all tests (minimal + disruption)
+// Referenced in cmd/openshift-tests/upgrade.go where we select one of none, platform, all
+// and filter these.
 func AllTests() []upgrades.Test {
 	return []upgrades.Test{
 		&adminack.UpgradeTest{},
@@ -61,7 +63,7 @@ func AllTests() []upgrades.Test {
 		controlplane.NewOpenShiftAvailableWithConnectionReuseTest(),
 		controlplane.NewOAuthAvailableWithConnectionReuseTest(),
 		&manifestdelete.UpgradeTest{},
-		&alert.UpgradeTest{},
+		&alert.UpgradeTest{}, // TRT-238 calls (UpgradeTest.Test() in test/e2e/upgrade/alert.go
 		frontends.NewOAuthRouteAvailableWithNewConnectionsTest(),
 		frontends.NewOAuthRouteAvailableWithConnectionReuseTest(),
 		frontends.NewConsoleRouteAvailableWithNewConnectionsTest(),
@@ -101,6 +103,8 @@ const defaultCVOUpdateAckTimeout = 2 * time.Minute
 
 // SetTests controls the list of tests to run during an upgrade. See AllTests for the supported
 // suite.
+// Called in filterUpgrade where we determine what disruption tests to run depending on the suite:
+// none, platform, default
 func SetTests(tests []upgrades.Test) {
 	upgradeTests = tests
 }
