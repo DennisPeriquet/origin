@@ -83,22 +83,25 @@ type TestData struct {
 // Run executes the provided fn in a test context, ensuring that invariants are preserved while the
 // test is being executed. Description is used to populate the JUnit suite name, and testname is
 // used to define the overall test that will be run.
-func Run(f *framework.Framework, description, testname string, adapter TestData, invariants []upgrades.Test, fn func()) {
+func Run(f *framework.Framework, description, testname string, adapter TestData, invariants []upgrades.Test, upgradeFunc func()) {
 	testSuite := &junit.TestSuite{Name: description, Package: testname}
 	test := &junit.TestCase{Name: testname, Classname: testname}
 	testSuite.TestCases = append(testSuite.TestCases, test)
+
+	// Declare a new chaosmonkey where disruption is set to this function that wraps the function we
+	// passed in.  The function passed in (called "fn" originally but now renamed to "upgradeFunc")
+	// is a function that causes a "disruption".
 	cm := chaosmonkey.New(func() {
 		start := time.Now()
 		defer finalizeTest(start, test, testSuite, f)
 		defer g.GinkgoRecover()
 
-		// This is passed in and is the function that does this:
-		// func() {
-		//	for i := 1; i < len(upgCtx.Versions); i++ {
-		//		framework.ExpectNoError(clusterUpgrade(f, client, dynamicClient, config, upgCtx.Versions[i]), fmt.Sprintf("during upgrade to %s", upgCtx.Versions[i].NodeImage))
-		//	}
-		//},
-		fn()
+		// The upgradeFunc is passed in several places:
+		// 1) for upgrades where we pass a function that calls clusterUpgrade
+		// 2) In RunUpgradeSuite (which is not called anywhere)
+		// ...
+		// Click on "Goto References" on the "Run" in "func Run above to see them".
+		upgradeFunc()
 	})
 	fmt.Println("DP-DEBUG: Running runChaosmonkey ...")
 	runChaosmonkey(cm, adapter, invariants, testSuite)

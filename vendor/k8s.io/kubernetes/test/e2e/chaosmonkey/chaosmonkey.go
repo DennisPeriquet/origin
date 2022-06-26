@@ -91,9 +91,11 @@ func (cm *Chaosmonkey) Do() {
 			defer ginkgo.GinkgoRecover()
 			defer sem.done()
 
-			// Ths calls func (cma *chaosMonkeyAdapter) Test(sem *chaosmonkey.Semaphore)
+			// This calls func (cma *chaosMonkeyAdapter) Test(sem *chaosmonkey.Semaphore)
 			// to startup the disruption test.  The semaphore is used to signal the disruption
 			// test is ready.
+			// I believe this is the entrypoint for all tests defined in upgrade.AllTests (or the
+			// subset of those tests that were selected from SetTests).
 			test(sem)
 		}()
 	}

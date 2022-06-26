@@ -53,6 +53,7 @@ func NoTests() []upgrades.Test {
 // AllTests includes all tests (minimal + disruption)
 // Referenced in cmd/openshift-tests/upgrade.go where we select one of none, platform, all
 // and filter these.
+// Every one of these satisfies the upgrades.Test interface.
 func AllTests() []upgrades.Test {
 	return []upgrades.Test{
 		&adminack.UpgradeTest{},
