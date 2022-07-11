@@ -20,11 +20,19 @@ func IntervalsFromEvents_OperatorDegraded(intervals monitorapi.Intervals, _ moni
 	return intervalsFromEvents_OperatorStatus(intervals, beginning, end, configv1.OperatorDegraded, configv1.ConditionFalse, monitorapi.Error)
 }
 
+// intervalsFromEvents_OperatorStatus is called by the 3 functions above and creates the event intervals for the Operator Unavailable,
+// Operator Degraded, and Operator Progressing sections in the spyglass chart.
 func intervalsFromEvents_OperatorStatus(intervals monitorapi.Intervals, beginning, end time.Time, conditionType configv1.ClusterStatusConditionType, conditionGoodState configv1.ConditionStatus, level monitorapi.EventLevel) monitorapi.Intervals {
 	ret := monitorapi.Intervals{}
+
+	// map for operatorName to condition.  As we walk the events, this will change until
+	// get to the final operator condition.
 	operatorToInterestingBadCondition := map[string]*configv1.ClusterOperatorStatusCondition{}
 
 	for _, event := range intervals {
+
+		// Get operator name and condition; if events have nothing to do with operators or
+		// conditions, we skip them.
 		operatorName, ok := monitorapi.OperatorFromLocator(event.Locator)
 		if !ok {
 			continue
