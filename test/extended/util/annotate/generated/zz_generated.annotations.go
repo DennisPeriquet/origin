@@ -2011,8 +2011,6 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should restore itself after quorum loss": "[Feature:EtcdRecovery] Cluster should restore itself after quorum loss [Serial]",
 
-	"[Top Level] [sig-etcd][Serial] etcd is able to vertically scale up and down with a single node [Timeout:60m]": "is able to vertically scale up and down with a single node [Timeout:60m] [Suite:openshift/conformance/serial]",
-
 	"[Top Level] [sig-imageregistry] Image registry should redirect on blob pull": "should redirect on blob pull [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-imageregistry][Feature:ImageAppend] Image append should create images by appending them": "should create images by appending them [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
@@ -2781,7 +2779,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] pods should keep the assigned EgressIPs when being rescheduled to another node": "pods should keep the assigned EgressIPs when being rescheduled to another node [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [internal-targets] EgressIP pods should query hostNetwork pods with the local node's SNAT": "EgressIP pods should query hostNetwork pods with the local node's SNAT [Disabled:Broken] [Serial]",
+	"[Top Level] [sig-network][Feature:EgressIP] [internal-targets] EgressIP pods should reach hostNetwork pods on other nodes [Skipped:azure][Skipped:gce]": "EgressIP pods should reach hostNetwork pods on other nodes [Skipped:azure][Skipped:gce] [Serial] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-network][Feature:EgressRouterCNI] should ensure ipv4 egressrouter cni resources are created": "should ensure ipv4 egressrouter cni resources are created [Suite:openshift/conformance/parallel]",
 
