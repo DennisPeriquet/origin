@@ -20,8 +20,7 @@ type Monitor struct {
 
 	// These are added in calls to AddSampler near where the SharedIndexInformers are created
 	// for Pods and Nodes.
-	samplers            []SamplerFunc
-	intervalCreationFns []IntervalCreationFunc
+	samplers []SamplerFunc
 
 	lock           sync.Mutex
 	events         monitorapi.Intervals
