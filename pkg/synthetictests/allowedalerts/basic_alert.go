@@ -31,7 +31,7 @@ type AlertTest interface {
 	AlertState() AlertState
 
 	TestAlert(ctx context.Context, prometheusClient prometheusv1.API, restConfig *rest.Config) error
-	InvariantCheck(ctx context.Context, restConfig *rest.Config, intervals monitorapi.Intervals, m *monitor.Monitor) ([]*junitapi.JUnitTestCase, error)
+	InvariantCheck(ctx context.Context, restConfig *rest.Config, intervals monitorapi.Intervals, p monitorapi.InstanceMap) ([]*junitapi.JUnitTestCase, error)
 }
 
 // AlertState is the state of the alert. They are logically ordered, so if a test says it limits on "pending", then
@@ -286,7 +286,15 @@ func monitorEventMatchesNamespace(namespace string) func(event monitorapi.EventI
 	}
 }
 
-func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Config, alertIntervals monitorapi.Intervals, m *monitor.Monitor) ([]*junitapi.JUnitTestCase, error) {
+func kPNRDueToImagePullBackoff(podResources monitorapi.InstanceMap, firingIntervals monitorapi.Intervals) bool {
+	return false
+}
+
+func redhatOperatorPodsNotPending(podResources monitorapi.InstanceMap, firingIntervals monitorapi.Intervals) bool {
+	return false
+}
+
+func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Config, alertIntervals monitorapi.Intervals, podResources monitorapi.InstanceMap) ([]*junitapi.JUnitTestCase, error) {
 	// Walk the alertIntervals looking for pending alerts for this alert name.
 	pendingIntervals := alertIntervals.Filter(
 		monitorapi.And(
@@ -326,15 +334,18 @@ func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Co
 	// Determine the state based on the firing and pending intervals.
 	state, message := a.failOrFlake(ctx, restConfig, firingIntervals, pendingIntervals)
 
-	// If KubePodNotReady alert failed but it was transient for this and namespace, then suppress
-	// this failure.
 	switch a.alertName {
 	case "KubePodNotReady":
-		fmt.Println(m)
-		state = flake
+		if kPNRDueToImagePullBackoff(podResources, firingIntervals) {
+
+			// Since this is due to imagePullBackoff, change the state to flake instead of fail
+			state = flake
+		}
 	case "RedhatOperatorsCatalogError":
-		fmt.Println(m)
-		state = flake
+		if redhatOperatorPodsNotPending(podResources, firingIntervals) {
+			// Since this is due to pending pods, change the state to flake instead of fail
+			state = flake
+		}
 	}
 
 	switch state {

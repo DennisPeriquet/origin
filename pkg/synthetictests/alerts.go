@@ -17,10 +17,14 @@ func testAlerts(events monitorapi.Intervals, restConfig *rest.Config, duration t
 	ret := []*junitapi.JUnitTestCase{}
 
 	alertTests := allowedalerts.AllAlertTests(context.TODO(), restConfig, duration)
+
+	currResourceState := m.CurrentResourceState()
+	podResources := currResourceState["pods"]
+
 	for i := range alertTests {
 		alertTest := alertTests[i]
 
-		junit, err := alertTest.InvariantCheck(context.TODO(), restConfig, events, m)
+		junit, err := alertTest.InvariantCheck(context.TODO(), restConfig, events, podResources)
 		if err != nil {
 			ret = append(ret, &junitapi.JUnitTestCase{
 				Name: alertTest.InvariantTestName(),
