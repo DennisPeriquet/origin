@@ -416,7 +416,9 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	timeSuffix := fmt.Sprintf("_%s", start.UTC().Format("20060102-150405"))
 
 	// Create a list of eventIntervals
-	events := m.Intervals(time.Time{}, time.Time{})
+	fromTime, endTime := time.Time{}, time.Time{}
+	events := m.Intervals(fromTime, endTime)
+	events = intervalcreation.InsertCalculatedIntervals(events, m.CurrentResourceState(), fromTime, endTime)
 
 	// Apparently, we had collected events on disk in the junit dir.  Read them from each
 	// dir and construct an additionalEvents list.

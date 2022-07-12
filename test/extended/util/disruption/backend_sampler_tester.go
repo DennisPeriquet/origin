@@ -192,6 +192,8 @@ func (t *backendDisruptionTest) Test(f *framework.Framework, done <-chan struct{
 	allowedDisruption, disruptionDetails, err := t.getAllowedDisruption(f)
 	framework.ExpectNoError(err)
 
+	fromTime, endTime := time.Time{}, time.Time{}
+	events := m.Intervals(fromTime, endTime)
 	ginkgo.By(fmt.Sprintf("writing results: %s", t.backend.GetLocator()))
 
 	// The check to see if we exceeded the max duration for disruption.
@@ -199,7 +201,7 @@ func (t *backendDisruptionTest) Test(f *framework.Framework, done <-chan struct{
 		f,
 		*allowedDisruption,
 		end.Sub(start),
-		m.Intervals(time.Time{}, time.Time{}),
+		events,
 		fmt.Sprintf("%s was unreachable during disruption: %v", t.backend.GetLocator(), disruptionDetails),
 	)
 
