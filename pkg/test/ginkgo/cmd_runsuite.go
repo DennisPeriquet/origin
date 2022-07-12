@@ -525,7 +525,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		// The function signature matches StableSystemEventInvariants.
 		// TRT-238: for testAlerts to get theMonitor contents, we need to pass it here so that when we
 		// call testAlerts in StableSystmeEventInvariants, we can pass it there.
-		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name)
+		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name, theMonitor)
 		syntheticTestResults = append(syntheticTestResults, testCases...)
 
 		if len(syntheticTestResults) > 0 {

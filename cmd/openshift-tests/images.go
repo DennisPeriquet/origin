@@ -10,6 +10,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/openshift/origin/pkg/monitor"
 	"github.com/openshift/origin/pkg/test/ginkgo/junitapi"
 
 	configv1client "github.com/openshift/client-go/config/clientset/versioned/typed/config/v1"
@@ -214,7 +215,7 @@ func pulledInvalidImages(fromRepository string) ginkgo.JUnitForEventsFunc {
 
 	// any image not in the allowed prefixes is considered a failure, as the user
 	// may have added a new test image without calling the appropriate helpers
-	return func(events monitorapi.Intervals, _ time.Duration, cfg *rest.Config, testSuite string) []*junitapi.JUnitTestCase {
+	return func(events monitorapi.Intervals, _ time.Duration, cfg *rest.Config, testSuite string, _ *monitor.Monitor) []*junitapi.JUnitTestCase {
 		imageStreamPrefixes, err := imagePrefixesFromNamespaceImageStreams("openshift")
 		if err != nil {
 			klog.Errorf("Unable to identify image prefixes from the openshift namespace: %v", err)

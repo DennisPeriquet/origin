@@ -12,6 +12,7 @@ import (
 
 	configv1 "github.com/openshift/api/config/v1"
 	configclient "github.com/openshift/client-go/config/clientset/versioned"
+	"github.com/openshift/origin/pkg/monitor"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/openshift/origin/pkg/test/ginkgo/junitapi"
 	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
@@ -97,7 +98,7 @@ func isSNOUpgradeTest(ctx context.Context, restConfig *rest.Config) (bool, error
 	return len(clusterVersion.Status.History) > 1, nil
 }
 
-func (a *watchdogAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Config, alertIntervals monitorapi.Intervals) ([]*junitapi.JUnitTestCase, error) {
+func (a *watchdogAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Config, alertIntervals monitorapi.Intervals, _ *monitor.Monitor) ([]*junitapi.JUnitTestCase, error) {
 
 	// Skip this test when SNO is being upgraded
 	isSNOUpgrade, err := isSNOUpgradeTest(ctx, restConfig)
