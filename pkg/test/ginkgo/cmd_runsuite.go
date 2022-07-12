@@ -458,7 +458,6 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	var syntheticTestResults []*junitapi.JUnitTestCase
 	var syntheticFailure bool
 	timeSuffix := fmt.Sprintf("_%s", start.UTC().Format("20060102-150405"))
-	events := theMonitor.Intervals(time.Time{}, time.Time{})
 
 	// If there are any additional events (produced by disruption testing and placed on disk),
 	// read them in and merge them into our event list.  This the use of the AddtionalEvents files
@@ -466,6 +465,10 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	// artifact to disk, then we use that artifact for another activity later by reading it from
 	// the disk.  Note that we could've just created a  global variable that spanned the two activities.
 	// opt.JUnitDir is in artifacts/e2e.../artifacts/junit
+	fromTime, endTime := time.Time{}, time.Time{}
+	events := theMonitor.Intervals(fromTime, endTime)
+	events = intervalcreation.InsertCalculatedIntervals(events, theMonitor.CurrentResourceState(), fromTime, endTime)
+
 	if len(opt.JUnitDir) > 0 {
 		var additionalEvents monitorapi.Intervals
 		filepath.WalkDir(opt.JUnitDir, func(path string, d fs.DirEntry, err error) error {
