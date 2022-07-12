@@ -287,6 +287,7 @@ func monitorEventMatchesNamespace(namespace string) func(event monitorapi.EventI
 }
 
 func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Config, alertIntervals monitorapi.Intervals) ([]*junitapi.JUnitTestCase, error) {
+	// Walk the alertIntervals looking for pending alerts for this alert name.
 	pendingIntervals := alertIntervals.Filter(
 		monitorapi.And(
 			func(eventInterval monitorapi.EventInterval) bool {
@@ -303,6 +304,8 @@ func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Co
 			monitorEventMatchesNamespace(a.namespace),
 		),
 	)
+
+	// Walk the alertIntervals looking for firing alerts for this alert name.
 	firingIntervals := alertIntervals.Filter(
 		monitorapi.And(
 			func(eventInterval monitorapi.EventInterval) bool {
@@ -320,6 +323,7 @@ func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Co
 		),
 	)
 
+	// Determine the state based on the firing and pending intervals.
 	state, message := a.failOrFlake(ctx, restConfig, firingIntervals, pendingIntervals)
 	switch state {
 	case pass:
@@ -330,6 +334,7 @@ func (a *basicAlertTest) InvariantCheck(ctx context.Context, restConfig *rest.Co
 		}, nil
 
 	case flake:
+		// this is a flake so return a pass and fail junit test.
 		return []*junitapi.JUnitTestCase{
 			{
 				Name: a.InvariantTestName(),
