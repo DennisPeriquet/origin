@@ -1511,6 +1511,10 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-builds][Feature:JenkinsRHELImagesOnly][Feature:Jenkins][Feature:Builds][sig-devex][Slow] openshift pipeline build  jenkins pipeline build config strategy using a jenkins instance launched with the ephemeral template": "using a jenkins instance launched with the ephemeral template",
 
+	"[Top Level] [sig-ci] [Early] prow job name should match network type": "should match network type [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-ci] [Early] prow job name should match platform type": "should match platform type [Suite:openshift/conformance/parallel]",
+
 	"[Top Level] [sig-cli] Kubectl Port forwarding With a server listening on 0.0.0.0 should support forwarding over websockets": "should support forwarding over websockets [Skipped:Proxy] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-cli] Kubectl Port forwarding With a server listening on 0.0.0.0 that expects NO client request should support a client that connects, sends DATA, and disconnects": "should support a client that connects, sends DATA, and disconnects [Suite:openshift/conformance/parallel] [Suite:k8s]",
@@ -2779,7 +2783,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] pods should keep the assigned EgressIPs when being rescheduled to another node": "pods should keep the assigned EgressIPs when being rescheduled to another node [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [internal-targets] EgressIP pods should reach hostNetwork pods on other nodes [Skipped:azure][Skipped:gce]": "EgressIP pods should reach hostNetwork pods on other nodes [Skipped:azure][Skipped:gce] [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network][Feature:EgressIP] [internal-targets] EgressIP pods should query hostNetwork pods with the local node's SNAT": "EgressIP pods should query hostNetwork pods with the local node's SNAT [Disabled:Broken] [Serial]",
 
 	"[Top Level] [sig-network][Feature:EgressRouterCNI] should ensure ipv4 egressrouter cni resources are created": "should ensure ipv4 egressrouter cni resources are created [Suite:openshift/conformance/parallel]",
 
