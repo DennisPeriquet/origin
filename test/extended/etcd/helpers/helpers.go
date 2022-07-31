@@ -75,7 +75,9 @@ func CreateNewMasterMachine(ctx context.Context, t TestingT, machineClient machi
 
 func EnsureMasterMachine(ctx context.Context, t TestingT, machineName string, machineClient machinev1beta1client.MachineInterface) error {
 	waitPollInterval := 15 * time.Second
-	waitPollTimeout := 10 * time.Minute
+	// This timeout should be tuned for the platform that takes the longest to provision a node and result
+	// in a Running machine phase.
+	waitPollTimeout := 25 * time.Minute
 	t.Logf("Waiting up to %s for %q machine to be in the Running state", waitPollTimeout.String(), machineName)
 
 	return wait.Poll(waitPollInterval, waitPollTimeout, func() (bool, error) {
@@ -360,10 +362,7 @@ func SkipIfUnsupportedPlatform(ctx context.Context, oc *exutil.CLI) {
 	o.Expect(err).ToNot(o.HaveOccurred())
 	machineClient := machineClientSet.MachineV1beta1().Machines("openshift-machine-api")
 	skipUnlessFunctionalMachineAPI(ctx, machineClient)
-	skipIfAzure(oc)
 	skipIfSingleNode(oc)
-	skipIfBareMetal(oc)
-	skipIfVsphere(oc)
 }
 
 func skipUnlessFunctionalMachineAPI(ctx context.Context, machineClient machinev1beta1client.MachineInterface) {
