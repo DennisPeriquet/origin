@@ -937,6 +937,10 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-arch][bz-openshift-controller-manager][Late] Alerts alert/KubePodNotReady should not be at or above pending in ns/openshift-controller-manager-operator": "alert/KubePodNotReady should not be at or above pending in ns/openshift-controller-manager-operator [Suite:openshift/conformance/parallel]",
 
+	"[Top Level] [sig-arch][bz-samples][Late] Alerts alert/SamplesImagestreamImportFailing should not be at or above info": "alert/SamplesImagestreamImportFailing should not be at or above info [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-arch][bz-samples][Late] Alerts alert/SamplesImagestreamImportFailing should not be at or above pending": "alert/SamplesImagestreamImportFailing should not be at or above pending [Suite:openshift/conformance/parallel]",
+
 	"[Top Level] [sig-arch][bz-service-ca][Late] Alerts alert/KubePodNotReady should not be at or above info in ns/openshift-service-ca": "alert/KubePodNotReady should not be at or above info in ns/openshift-service-ca [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch][bz-service-ca][Late] Alerts alert/KubePodNotReady should not be at or above info in ns/openshift-service-ca-operator": "alert/KubePodNotReady should not be at or above info in ns/openshift-service-ca-operator [Suite:openshift/conformance/parallel]",
@@ -2014,6 +2018,8 @@ var annotations = map[string]string{
 	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another": "[Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another [Serial]",
 
 	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should restore itself after quorum loss": "[Feature:EtcdRecovery] Cluster should restore itself after quorum loss [Serial]",
+
+	"[Top Level] [sig-etcd][Serial] etcd is able to vertically scale up and down with a single node [Timeout:60m]": "is able to vertically scale up and down with a single node [Timeout:60m] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-imageregistry] Image registry should redirect on blob pull": "should redirect on blob pull [Suite:openshift/conformance/parallel]",
 
@@ -3273,13 +3279,17 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-scheduling][Early] The openshift-authentication pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-console pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-console console pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-scheduling][Early] The openshift-console downloads pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-scheduling][Early] The openshift-etcd pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-scheduling][Early] The openshift-image-registry pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-monitoring pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-monitoring prometheus-adapter pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-scheduling][Early] The openshift-monitoring thanos-querier pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-scheduling][Early] The openshift-oauth-apiserver pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
