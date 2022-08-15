@@ -10,6 +10,8 @@ import (
 
 	g "github.com/onsi/ginkgo"
 	o "github.com/onsi/gomega"
+	configv1 "github.com/openshift/api/config/v1"
+	configclient "github.com/openshift/client-go/config/clientset/versioned"
 	"github.com/openshift/origin/pkg/monitor/monitor_cmd"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/openshift/origin/pkg/synthetictests/allowedalerts"
@@ -18,6 +20,7 @@ import (
 	helper "github.com/openshift/origin/test/extended/util/prometheus"
 	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 	"github.com/prometheus/common/model"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/kubernetes/test/e2e/framework"
 	"k8s.io/kubernetes/test/e2e/upgrades"
@@ -28,6 +31,7 @@ import (
 type UpgradeTest struct {
 	oc               *exutil.CLI
 	prometheusClient prometheusv1.API
+	configClient     configclient.Interface
 }
 
 func (UpgradeTest) Name() string { return "check-for-alerts" }
@@ -42,6 +46,7 @@ func (t *UpgradeTest) Setup(f *framework.Framework) {
 	oc := exutil.NewCLIWithFramework(f)
 	t.oc = oc
 	t.prometheusClient = oc.NewPrometheusClient(context.TODO())
+	t.configClient = oc.AdminConfigClient()
 	framework.Logf("Post-upgrade alert test setup complete")
 }
 
@@ -190,6 +195,18 @@ func (t *UpgradeTest) Test(f *framework.Framework, done <-chan struct{}, upgrade
 			Selector: map[string]string{"alertname": "etcdMemberCommunicationSlow"},
 			Text:     "Excluded because it triggers during upgrade (detects ~5m of high latency immediately preceeding the end of the test), and we don't want to change the alert because it is correct",
 		},
+	}
+
+	if featureGates, err := t.configClient.ConfigV1().FeatureGates().Get(context.TODO(), "cluster", metav1.GetOptions{}); err == nil {
+		switch featureGates.Spec.FeatureSet {
+		case configv1.TechPreviewNoUpgrade:
+			allowedFiringAlerts = append(allowedFiringAlerts,
+				helper.MetricCondition{
+					Selector: map[string]string{"alertname": "TechPreviewNoUpgrade", "namespace": "openshift-kube-apiserver-operator"},
+					Text:     "When running as TechPreviewNoUpgrade, we allow TechPreviewNoUpgrade alert to be firing.",
+				},
+			)
+		}
 	}
 
 	// we exclude alerts that have their own separate tests.
