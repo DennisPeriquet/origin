@@ -2609,6 +2609,8 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] Services should be able to change the type from NodePort to ExternalName [Conformance]": "should be able to change the type from NodePort to ExternalName [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
+	"[Top Level] [sig-network] Services should be able to connect to terminating and unready endpoints if PublishNotReadyAddresses is true": "should be able to connect to terminating and unready endpoints if PublishNotReadyAddresses is true [Suite:openshift/conformance/parallel] [Suite:k8s]",
+
 	"[Top Level] [sig-network] Services should be able to create a functioning NodePort service [Conformance]": "should be able to create a functioning NodePort service [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should be able to switch session affinity for NodePort service [LinuxOnly] [Conformance]": "should be able to switch session affinity for NodePort service [LinuxOnly] [Conformance] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
@@ -2620,6 +2622,8 @@ var annotations = map[string]string{
 	"[Top Level] [sig-network] Services should be able to update service type to NodePort listening on same port number but different protocols": "should be able to update service type to NodePort listening on same port number but different protocols [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should be possible to connect to a service via ExternalIP when the external IP is not assigned to a node": "should be possible to connect to a service via ExternalIP when the external IP is not assigned to a node [Suite:openshift/conformance/parallel] [Suite:k8s]",
+
+	"[Top Level] [sig-network] Services should be rejected for evicted pods (no endpoints exist)": "should be rejected for evicted pods (no endpoints exist) [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should be rejected when no endpoints exist": "should be rejected when no endpoints exist [Skipped:ibmroks] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -2654,6 +2658,8 @@ var annotations = map[string]string{
 	"[Top Level] [sig-network] Services should implement service.kubernetes.io/headless": "should implement service.kubernetes.io/headless [Disabled:Broken] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should implement service.kubernetes.io/service-proxy-name": "should implement service.kubernetes.io/service-proxy-name [Disabled:Broken] [Suite:k8s]",
+
+	"[Top Level] [sig-network] Services should not be able to connect to terminating and unready endpoints if PublishNotReadyAddresses is false": "should not be able to connect to terminating and unready endpoints if PublishNotReadyAddresses is false [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should preserve source pod IP for traffic thru service cluster IP [LinuxOnly]": "should preserve source pod IP for traffic thru service cluster IP [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -2733,21 +2739,21 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] multicast when using one of the OpenshiftSDN modes 'redhat/openshift-ovs-subnet' should block multicast traffic": "should block multicast traffic [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that does not isolate namespaces by default should allow communication between pods in different namespaces on different nodes": "should allow communication between pods in different namespaces on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that does not isolate namespaces by default should allow communication between pods in different namespaces on different nodes": "should allow communication between pods in different namespaces on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that does not isolate namespaces by default should allow communication between pods in different namespaces on the same node": "should allow communication between pods in different namespaces on the same node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that does not isolate namespaces by default should allow communication between pods in different namespaces on the same node": "should allow communication between pods in different namespaces on the same node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that isolates namespaces by default should allow communication from default to non-default namespace on a different node": "should allow communication from default to non-default namespace on a different node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that isolates namespaces by default should allow communication from default to non-default namespace on a different node": "should allow communication from default to non-default namespace on a different node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that isolates namespaces by default should allow communication from default to non-default namespace on the same node": "should allow communication from default to non-default namespace on the same node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that isolates namespaces by default should allow communication from default to non-default namespace on the same node": "should allow communication from default to non-default namespace on the same node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that isolates namespaces by default should allow communication from non-default to default namespace on a different node": "should allow communication from non-default to default namespace on a different node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that isolates namespaces by default should allow communication from non-default to default namespace on a different node": "should allow communication from non-default to default namespace on a different node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that isolates namespaces by default should allow communication from non-default to default namespace on the same node": "should allow communication from non-default to default namespace on the same node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that isolates namespaces by default should allow communication from non-default to default namespace on the same node": "should allow communication from non-default to default namespace on the same node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that isolates namespaces by default should prevent communication between pods in different namespaces on different nodes": "should prevent communication between pods in different namespaces on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that isolates namespaces by default should prevent communication between pods in different namespaces on different nodes": "should prevent communication between pods in different namespaces on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] network isolation when using OpenshiftSDN in a mode that isolates namespaces by default should prevent communication between pods in different namespaces on the same node": "should prevent communication between pods in different namespaces on the same node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] network isolation when using a plugin in a mode that isolates namespaces by default should prevent communication between pods in different namespaces on the same node": "should prevent communication between pods in different namespaces on the same node [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network] services basic functionality should allow connections to another pod on a different node via a service IP": "should allow connections to another pod on a different node via a service IP [Suite:openshift/conformance/parallel]",
 
@@ -2757,21 +2763,21 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] services when running openshift ipv4 cluster on bare metal ensures external auto assign cidr is configured correctly on the cluster [Serial]": "ensures external auto assign cidr is configured correctly on the cluster [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that does not isolate namespaces by default should allow connections to pods in different namespaces on different nodes via service IPs": "should allow connections to pods in different namespaces on different nodes via service IPs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that does not isolate namespaces by default should allow connections to pods in different namespaces on different nodes via service IPs": "should allow connections to pods in different namespaces on different nodes via service IPs [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that does not isolate namespaces by default should allow connections to pods in different namespaces on the same node via service IPs": "should allow connections to pods in different namespaces on the same node via service IPs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that does not isolate namespaces by default should allow connections to pods in different namespaces on the same node via service IPs": "should allow connections to pods in different namespaces on the same node via service IPs [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should allow connections from pods in the default namespace to a service in another namespace on a different node": "should allow connections from pods in the default namespace to a service in another namespace on a different node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should allow connections from pods in the default namespace to a service in another namespace on a different node": "should allow connections from pods in the default namespace to a service in another namespace on a different node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should allow connections from pods in the default namespace to a service in another namespace on the same node": "should allow connections from pods in the default namespace to a service in another namespace on the same node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should allow connections from pods in the default namespace to a service in another namespace on the same node": "should allow connections from pods in the default namespace to a service in another namespace on the same node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should allow connections to services in the default namespace from a pod in another namespace on a different node": "should allow connections to services in the default namespace from a pod in another namespace on a different node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should allow connections to services in the default namespace from a pod in another namespace on a different node": "should allow connections to services in the default namespace from a pod in another namespace on a different node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should allow connections to services in the default namespace from a pod in another namespace on the same node": "should allow connections to services in the default namespace from a pod in another namespace on the same node [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should allow connections to services in the default namespace from a pod in another namespace on the same node": "should allow connections to services in the default namespace from a pod in another namespace on the same node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on different nodes via service IPs": "should prevent connections to pods in different namespaces on different nodes via service IPs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on different nodes via service IPs": "should prevent connections to pods in different namespaces on different nodes via service IPs [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network] services when using OpenshiftSDN in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on the same node via service IPs": "should prevent connections to pods in different namespaces on the same node via service IPs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on the same node via service IPs": "should prevent connections to pods in different namespaces on the same node via service IPs [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network][Feature:EgressFirewall] egressFirewall should have no impact outside its namespace": "egressFirewall should have no impact outside its namespace [Suite:openshift/conformance/parallel]",
 
@@ -2997,6 +3003,8 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-node] Pods Extended Pod Container Status should never report success for a pending container": "should never report success for a pending container [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
+	"[Top Level] [sig-node] Pods Extended Pod Container lifecycle evicted pods should be terminal": "evicted pods should be terminal [Suite:openshift/conformance/parallel] [Suite:k8s]",
+
 	"[Top Level] [sig-node] Pods Extended Pod Container lifecycle should not create extra sandbox if all containers are done": "should not create extra sandbox if all containers are done [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-node] Pods Extended Pods Set QOS Class should be set on Pods with matching resource requests and limits for memory and cpu [Conformance]": "should be set on Pods with matching resource requests and limits for memory and cpu [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
@@ -3062,6 +3070,10 @@ var annotations = map[string]string{
 	"[Top Level] [sig-node] Probing container should be restarted with an exec liveness probe with timeout [MinimumKubeletVersion:1.20] [NodeConformance]": "should be restarted with an exec liveness probe with timeout [MinimumKubeletVersion:1.20] [NodeConformance] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-node] Probing container should have monotonically increasing restart count [NodeConformance] [Conformance]": "should have monotonically increasing restart count [NodeConformance] [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
+
+	"[Top Level] [sig-node] Probing container should mark readiness on pods to false and disable liveness probes while pod is in progress of terminating": "should mark readiness on pods to false and disable liveness probes while pod is in progress of terminating [Suite:openshift/conformance/parallel] [Suite:k8s]",
+
+	"[Top Level] [sig-node] Probing container should mark readiness on pods to false while pod is in progress of terminating when a pod has a readiness probe": "should mark readiness on pods to false while pod is in progress of terminating when a pod has a readiness probe [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-node] Probing container should not be ready with an exec readiness probe timeout [MinimumKubeletVersion:1.20] [NodeConformance]": "should not be ready with an exec readiness probe timeout [MinimumKubeletVersion:1.20] [NodeConformance] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
