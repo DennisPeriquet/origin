@@ -118,6 +118,9 @@ var allowedRepeatedEventPatterns = []*regexp.Regexp{
 
 	// Separated out in testErrorUpdatingEndpointSlices
 	regexp.MustCompile(errorUpdatingEndpointSlicesRegex),
+
+	// Separated out in testInsufficientInstanceCapacity and made to pass.
+	regexp.MustCompile(insufficientInstanceCapacityRegex),
 }
 
 var allowedRepeatedEventFns = []isRepeatedEventOKFunc{
@@ -185,16 +188,9 @@ var knownEventsBugs = []knownProblem{
 		BZ:       "https://bugzilla.redhat.com/show_bug.cgi?id=2017435",
 		Topology: topologyPointer(v1.SingleReplicaTopologyMode),
 	},
-	// builds tests trigger many changes in the config which creates new rollouts -> event for each pod
-	// working as intended (not a bug) and needs to be tolerated
-	{
-		Regexp:    regexp.MustCompile(`ns/openshift-route-controller-manager deployment/route-controller-manager - reason/ScalingReplicaSet \(combined from similar events\): Scaled (down|up) replica set route-controller-manager-[a-z0-9-]+ to [0-9]+`),
-		TestSuite: stringPointer("openshift/build"),
-	},
-	// builds tests trigger many changes in the config which creates new rollouts -> event for each pod
-	// working as intended (not a bug) and needs to be tolerated
 	{
 		Regexp:    regexp.MustCompile(`ns/openshift-controller-manager daemonset/controller-manager - reason/SuccessfulDelete \(combined from similar events\): Deleted pod: controller-manager-[a-z0-9-]+`),
+		BZ:        "https://bugzilla.redhat.com/show_bug.cgi?id=2034984",
 		TestSuite: stringPointer("openshift/build"),
 	},
 	//{ TODO this should only be skipped for single-node

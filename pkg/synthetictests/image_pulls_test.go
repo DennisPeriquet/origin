@@ -254,3 +254,56 @@ func Test_testErrorUpdatingEndpointSlices(t *testing.T) {
 		})
 	}
 }
+
+func Test_testInsufficientInstanceCapacity(t *testing.T) {
+	tests := []struct {
+		name    string
+		message string
+		kind    string
+	}{
+		{
+			name: "pass",
+			// Get this message from something like http://.../artifacts/e2e-aws-ovn-serial/openshift-e2e-test/artifacts/junit/e2e-events_20220830-004553.json
+			message: "reason/FailedCreate ci-op-1: reconciler failed to Create machine: failed to launch instance: error creating EC2 instance: InsufficientInstanceCapacity: We currently do not have sufficient m6a.xlarge capacity in the Availability Zone you requested (us-east-1c). Our system will be working on provisioning additional capacity. You can currently get m6a.xlarge capacity by not specifying an Availability Zone in your request or choosing us-east-1a, us-east-1b, us-east-1d, us-east-1f.\n\tstatus code: 500, request id: c19d038c-b71a-4417-a558-539f021b8916  (2 times)",
+			kind:    "pass",
+		},
+		{
+			name:    "fail",
+			message: "reason/FailedCreate ci-op-1: reconciler failed to Create machine: failed to launch instance: error creating EC2 instance: InsufficientInstanceCapacity: We currently do not have sufficient m6a.xlarge capacity in the Availability Zone you requested (us-east-1c). Our system will be working on provisioning additional capacity. You can currently get m6a.xlarge capacity by not specifying an Availability Zone in your request or choosing us-east-1a, us-east-1b, us-east-1d, us-east-1f.\n\tstatus code: 500, request id: c19d038c-b71a-4417-a558-539f021b8916 (66 times)",
+			kind:    "pass",
+		},
+		{
+			name:    "flake",
+			message: "reason/FailedCreate ci-op-1: reconciler failed to Create machine: failed to launch instance: error creating EC2 instance: InsufficientInstanceCapacity: We currently do not have sufficient m6a.xlarge capacity in the Availability Zone you requested (us-east-1c). Our system will be working on provisioning additional capacity. You can currently get m6a.xlarge capacity by not specifying an Availability Zone in your request or choosing us-east-1a, us-east-1b, us-east-1d, us-east-1f.\n\tstatus code: 500, request id: c19d038c-b71a-4417-a558-539f021b8916 (10 times)",
+			kind:    "pass",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			e := monitorapi.Intervals{
+				{
+					Condition: monitorapi.Condition{
+						Message: tt.message,
+						// Get this from a place like http://.../artifacts/e2e-aws-ovn-serial/openshift-e2e-test/artifacts/junit/e2e-events_20220830-004553.json
+						Locator: "ns/openshift-machine-api machine/ci-op-f1rdy654-0a238-w6v9x-worker-us-east-1c-9shbn",
+					},
+					From: time.Unix(1, 0),
+					To:   time.Unix(1, 0),
+				},
+			}
+			junit_tests := testInsufficientInstanceCapacity(e)
+			switch tt.kind {
+			case "pass":
+				if len(junit_tests) != 1 {
+					t.Errorf("This should've been a single passing test, but got %d tests", len(junit_tests))
+				}
+				if len(junit_tests[0].SystemOut) != 0 {
+					t.Errorf("This should've been a pass, but got %s", junit_tests[0].SystemErr)
+				}
+			default:
+				t.Errorf("Unknown test kind")
+			}
+
+		})
+	}
+}

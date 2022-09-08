@@ -20,6 +20,7 @@ const (
 	backoffRestartingFlakeThreshold           = 10
 	errorUpdatingEndpointSlicesRegex          = `reason/FailedToUpdateEndpointSlices Error updating Endpoint Slices`
 	errorUpdatingEndpointSlicesFlakeThreshold = 10
+	insufficientInstanceCapacityRegex         = `reason/FailedCreate .* error creating EC2 instance: InsufficientInstanceCapacity: We currently do not have sufficient .* capacity in the Availability Zone you requested`
 )
 
 type eventRecognizerFunc func(event monitorapi.EventInterval) bool
@@ -138,4 +139,17 @@ func testErrorUpdatingEndpointSlices(events monitorapi.Intervals) []*junitapi.JU
 
 	return newSingleEventCheckRegex(testName, errorUpdatingEndpointSlicesRegex, duplicateEventThreshold, errorUpdatingEndpointSlicesFlakeThreshold).
 		test(events.Filter(monitorapi.IsInNamespaces(sets.NewString("openshift-ovn-kubernetes"))))
+}
+
+// testInsufficientInstanceCapacity creates a junit test that allows us to count the number of times the retry logic ran
+// for the InsufficientInstanceCapacity symptom on aws.
+func testInsufficientInstanceCapacity(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+	testName := "[sig-networking] Ensure InsufficientInstanceCapacity retry logic worked on aws"
+
+	// If you see events for "reason/FailedCreate .* reconciler failed to Create machine: failed to launch instance: error
+	// creating EC2 instance: InsufficientInstanceCapacity: We currently do not have sufficient m6a.xlarge ...",
+	// it means enough was working to get that event which implies enough retries happened to allow initial openshift
+	// installation to succeed. Hence, we don't need to fail or flake this test -- so we make their thresholds as maxInt.
+	return newSingleEventCheckRegex(testName, insufficientInstanceCapacityRegex, math.MaxInt, math.MaxInt).
+		test(events.Filter(monitorapi.IsInNamespaces(sets.NewString("openshift-machine-api"))))
 }
