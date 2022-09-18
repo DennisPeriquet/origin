@@ -19,7 +19,7 @@ type JUnitsForEvents interface {
 	// JUnitsForEvents returns a set of additional test passes or failures implied by the
 	// events sent during the test suite run. If passed is false, the entire suite is failed.
 	// To set a test as flaky, return a passing and failing JUnitTestCase with the same name.
-	JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase
+	JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string, recordedResource *monitorapi.ResourcesMap) []*junitapi.JUnitTestCase
 }
 
 // JUnitForEventsFunc converts a function into the JUnitForEvents interface.
@@ -29,12 +29,12 @@ type JUnitsForEvents interface {
 // JUnitForEventsFunc implements the JUnitsForEvents interface.
 // StableSystemEventInvariants is of this type and implements the JUnitsForEvents interface.
 // SystemUpgradeEventInvariants is of this type and implements the JUnitsForEvents interface.
-type JUnitForEventsFunc func(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase
+type JUnitForEventsFunc func(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string, recordedResource *monitorapi.ResourcesMap) []*junitapi.JUnitTestCase
 
 // JUnitsForEvents for JUnitForEventsFunc calls the function with parameters passed and returns
 // the resulting JUnitTestCases.
-func (fn JUnitForEventsFunc) JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase {
-	return fn(events, duration, kubeClientConfig, testSuite)
+func (fn JUnitForEventsFunc) JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string, recordedResource *monitorapi.ResourcesMap) []*junitapi.JUnitTestCase {
+	return fn(events, duration, kubeClientConfig, testSuite, recordedResource)
 }
 
 // JUnitsForAllEvents aggregates multiple JUnitsForEvent interfaces and returns
@@ -45,13 +45,13 @@ type JUnitsForAllEvents []JUnitsForEvents
 // JUnitsForEvents goes through all JUnitsForEvents, runs them, and returns a list of the JUnitTestCases.  It
 // is called with syntheticEventTests.
 // JUnitForAllEvents implements the JUnitsForEvents interface.
-func (a JUnitsForAllEvents) JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string) []*junitapi.JUnitTestCase {
+func (a JUnitsForAllEvents) JUnitsForEvents(events monitorapi.Intervals, duration time.Duration, kubeClientConfig *rest.Config, testSuite string, recordedResource *monitorapi.ResourcesMap) []*junitapi.JUnitTestCase {
 	var all []*junitapi.JUnitTestCase
 	for _, obj := range a {
 		if obj == nil {
 			continue
 		}
-		results := obj.JUnitsForEvents(events, duration, kubeClientConfig, testSuite)
+		results := obj.JUnitsForEvents(events, duration, kubeClientConfig, testSuite, recordedResource)
 		all = append(all, results...)
 	}
 	return all

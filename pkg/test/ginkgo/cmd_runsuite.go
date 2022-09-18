@@ -169,6 +169,25 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		return err
 	}
 
+	discoveryClient, err := getDiscoveryClient()
+	if err != nil {
+		if opt.DryRun {
+			fmt.Fprintf(opt.ErrOut, "Unable to get discovery client, skipping apigroup check in the dry-run mode: %v\n", err)
+		} else {
+			return err
+		}
+	} else {
+		apiGroupFilter, err := newApiGroupFilter(discoveryClient)
+		if err != nil {
+			return fmt.Errorf("unable to build api group filter: %v", err)
+		}
+
+		// Skip tests with [apigroup:GROUP] labels for apigroups which are not
+		// served by a cluster. E.g. MicroShift is not serving most of the openshift.io
+		// apigroups. Other installations might be serving only a subset of the api groups.
+		apiGroupFilter.markSkippedWhenAPIGroupNotServed(tests)
+	}
+
 	// This ensures that tests in the identified paths do not run in parallel, because
 	// the test suite reuses shared resources without considering whether another test
 	// could be running at the same time. While these are technically [Serial], ginkgo
@@ -461,12 +480,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 
 		// Create the first synthetic test that just checks for any Events with level == Error.
 		syntheticTestResults, buf, _ = createSyntheticTestsFromMonitor(events, duration)
-
-		// This line runs the rest of the synthetic tests using the events as input.
-		// The function signature matches StableSystemEventInvariants.
-		// TRT-238: for testAlerts to get theMonitor contents, we need to pass it here so that when we
-		// call testAlerts in StableSystmeEventInvariants, we can pass it there.
-		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name)
+		currResState := opt.MonitorEventsOptions.GetRecordedResources()
+		testCases := syntheticEventTests.JUnitsForEvents(events, duration, restConfig, suite.Name, &currResState)
 		syntheticTestResults = append(syntheticTestResults, testCases...)
 
 		if len(syntheticTestResults) > 0 {

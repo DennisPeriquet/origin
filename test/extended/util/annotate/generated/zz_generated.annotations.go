@@ -7,19 +7,19 @@ import (
 )
 
 var annotations = map[string]string{
-	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"lb-ext.kubeconfig\" should be present on all masters and work": "\"lb-ext.kubeconfig\" should be present on all masters and work [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"lb-ext.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io]": "\"lb-ext.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"lb-int.kubeconfig\" should be present on all masters and work": "\"lb-int.kubeconfig\" should be present on all masters and work [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"lb-int.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io]": "\"lb-int.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"localhost-recovery.kubeconfig\" should be present on all masters and work": "\"localhost-recovery.kubeconfig\" should be present on all masters and work [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"localhost-recovery.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io]": "\"localhost-recovery.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"localhost.kubeconfig\" should be present on all masters and work": "\"localhost.kubeconfig\" should be present on all masters and work [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [Conformance][sig-api-machinery][Feature:APIServer] local kubeconfig \"localhost.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io]": "\"localhost.kubeconfig\" should be present on all masters and work [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [Conformance][sig-sno][Serial] Cluster should allow a fast rollout of kube-apiserver with no pods restarts during API disruption": "should allow a fast rollout of kube-apiserver with no pods restarts during API disruption [Suite:openshift/conformance/serial/minimal]",
+	"[Top Level] [Conformance][sig-sno][Serial] Cluster should allow a fast rollout of kube-apiserver with no pods restarts during API disruption [apigroup:config.openshift.io][apigroup:operator.openshift.io]": "should allow a fast rollout of kube-apiserver with no pods restarts during API disruption [apigroup:config.openshift.io][apigroup:operator.openshift.io] [Suite:openshift/conformance/serial/minimal]",
 
-	"[Top Level] [Serial] [sig-auth][Feature:OAuthServer] [RequestHeaders] [IdP] test RequestHeaders IdP": "test RequestHeaders IdP [Suite:openshift/conformance/serial]",
+	"[Top Level] [Serial] [sig-auth][Feature:OAuthServer] [RequestHeaders] [IdP] test RequestHeaders IdP [apigroup:config.openshift.io][apigroup:user.openshift.io][apigroup:apps.openshift.io]": "test RequestHeaders IdP [apigroup:config.openshift.io][apigroup:user.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-api-machinery] API data in etcd should be stored at the correct location and version for all resources [Serial]": "should be stored at the correct location and version for all resources [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-api-machinery] API data in etcd should be stored at the correct location and version for all resources [Serial][apigroup:config.openshift.io]": "should be stored at the correct location and version for all resources [Serial][apigroup:config.openshift.io] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-api-machinery] API priority and fairness should ensure that requests can be classified by adding FlowSchema and PriorityLevelConfiguration": "should ensure that requests can be classified by adding FlowSchema and PriorityLevelConfiguration [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -27,7 +27,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-api-machinery] API priority and fairness should ensure that requests can't be drowned out (priority)": "should ensure that requests can't be drowned out (priority) [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-api-machinery] APIServer CR fields validation additionalCORSAllowedOrigins": "additionalCORSAllowedOrigins [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery] APIServer CR fields validation additionalCORSAllowedOrigins [apigroup:config.openshift.io]": "additionalCORSAllowedOrigins [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-api-machinery] AdmissionWebhook [Privileged:ClusterAdmin] listing mutating webhooks should work [Conformance]": "listing mutating webhooks should work [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
@@ -263,7 +263,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and don't send request early": "API LBs follow /readyz of kube-apiserver and don't send request early [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and stop sending requests before server shutdowns for external clients": "API LBs follow /readyz of kube-apiserver and stop sending requests before server shutdowns for external clients [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and stop sending requests before server shutdowns for external clients [apigroup:config.openshift.io]": "API LBs follow /readyz of kube-apiserver and stop sending requests before server shutdowns for external clients [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-api-machinery][Feature:APIServer][Late] API LBs follow /readyz of kube-apiserver and stop sending requests": "API LBs follow /readyz of kube-apiserver and stop sending requests [Suite:openshift/conformance/parallel]",
 
@@ -273,9 +273,9 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-api-machinery][Feature:Audit] Basic audit should audit API calls": "should audit API calls [Disabled:SpecialConfig]",
 
-	"[Top Level] [sig-api-machinery][Feature:ClusterResourceQuota] Cluster resource quota should control resource limits across namespaces": "should control resource limits across namespaces [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ClusterResourceQuota] Cluster resource quota should control resource limits across namespaces [apigroup:quota.openshift.io][apigroup:image.openshift.io]": "should control resource limits across namespaces [apigroup:quota.openshift.io][apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ResourceQuota] Object count should properly count the number of imagestreams resources": "should properly count the number of imagestreams resources [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ResourceQuota] Object count should properly count the number of imagestreams resources [apigroup:image.openshift.io]": "should properly count the number of imagestreams resources [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for apps.openshift.io/v1, Resource=deploymentconfigs": "should work for apps.openshift.io/v1, Resource=deploymentconfigs [Suite:openshift/conformance/parallel]",
 
@@ -513,83 +513,85 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-apps] TTLAfterFinished job should be deleted once it finishes after TTL seconds": "job should be deleted once it finishes after TTL seconds [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs  should adhere to Three Laws of Controllers": "should adhere to Three Laws of Controllers [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs  should adhere to Three Laws of Controllers [apigroup:apps.openshift.io]": "should adhere to Three Laws of Controllers [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs adoption will orphan all RCs and adopt them back when recreated": "will orphan all RCs and adopt them back when recreated [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs adoption will orphan all RCs and adopt them back when recreated [apigroup:apps.openshift.io]": "will orphan all RCs and adopt them back when recreated [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs generation should deploy based on a status version bump": "should deploy based on a status version bump [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs generation should deploy based on a status version bump [apigroup:apps.openshift.io]": "should deploy based on a status version bump [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs ignores deployer and lets the config with a NewReplicationControllerCreated reason should let the deployment config with a NewReplicationControllerCreated reason": "should let the deployment config with a NewReplicationControllerCreated reason [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs ignores deployer and lets the config with a NewReplicationControllerCreated reason should let the deployment config with a NewReplicationControllerCreated reason [apigroup:apps.openshift.io]": "should let the deployment config with a NewReplicationControllerCreated reason [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs initially should not deploy if pods never transition to ready": "should not deploy if pods never transition to ready [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs initially should not deploy if pods never transition to ready [apigroup:apps.openshift.io]": "should not deploy if pods never transition to ready [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs keep the deployer pod invariant valid should deal with cancellation after deployer pod succeeded": "should deal with cancellation after deployer pod succeeded [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs keep the deployer pod invariant valid should deal with cancellation after deployer pod succeeded [apigroup:apps.openshift.io]": "should deal with cancellation after deployer pod succeeded [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs keep the deployer pod invariant valid should deal with cancellation of running deployment": "should deal with cancellation of running deployment [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs keep the deployer pod invariant valid should deal with cancellation of running deployment [apigroup:apps.openshift.io]": "should deal with cancellation of running deployment [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs keep the deployer pod invariant valid should deal with config change in case the deployment is still running": "should deal with config change in case the deployment is still running [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs keep the deployer pod invariant valid should deal with config change in case the deployment is still running [apigroup:apps.openshift.io]": "should deal with config change in case the deployment is still running [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs paused should disable actions on deployments": "should disable actions on deployments [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs paused should disable actions on deployments [apigroup:apps.openshift.io]": "should disable actions on deployments [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs reaper [Slow] should delete all failed deployer pods and hook pods": "should delete all failed deployer pods and hook pods",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs reaper [Slow] should delete all failed deployer pods and hook pods [apigroup:apps.openshift.io]": "should delete all failed deployer pods and hook pods [apigroup:apps.openshift.io]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs rolled back should rollback to an older deployment": "should rollback to an older deployment [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs rolled back should rollback to an older deployment [apigroup:apps.openshift.io]": "should rollback to an older deployment [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs should respect image stream tag reference policy resolve the image pull spec": "resolve the image pull spec [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs should respect image stream tag reference policy resolve the image pull spec [apigroup:apps.openshift.io][apigroup:image.openshift.io]": "resolve the image pull spec [apigroup:apps.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs viewing rollout history should print the rollout history": "should print the rollout history [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs viewing rollout history should print the rollout history [apigroup:apps.openshift.io]": "should print the rollout history [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when changing image change trigger should successfully trigger from an updated image": "should successfully trigger from an updated image [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when changing image change trigger should successfully trigger from an updated image [apigroup:apps.openshift.io][apigroup:image.openshift.io]": "should successfully trigger from an updated image [apigroup:apps.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when run iteratively should immediately start a new deployment": "should immediately start a new deployment [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when run iteratively should immediately start a new deployment [apigroup:apps.openshift.io]": "should immediately start a new deployment [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when run iteratively should only deploy the last deployment": "should only deploy the last deployment [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when run iteratively should only deploy the last deployment [apigroup:apps.openshift.io]": "should only deploy the last deployment [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when tagging images should successfully tag the deployed image": "should successfully tag the deployed image [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs when tagging images should successfully tag the deployed image [apigroup:apps.openshift.io][apigroup:authorization.openshift.io][apigroup:image.openshift.io]": "should successfully tag the deployed image [apigroup:apps.openshift.io][apigroup:authorization.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with custom deployments should run the custom deployment steps": "should run the custom deployment steps [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with custom deployments should run the custom deployment steps [apigroup:apps.openshift.io]": "should run the custom deployment steps [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with enhanced status should include various info in status": "should include various info in status [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with enhanced status should include various info in status [apigroup:apps.openshift.io]": "should include various info in status [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with env in params referencing the configmap should expand the config map key to a value": "should expand the config map key to a value [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with env in params referencing the configmap should expand the config map key to a value [apigroup:apps.openshift.io]": "should expand the config map key to a value [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with failing hook should get all logs from retried hooks": "should get all logs from retried hooks [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with failing hook should get all logs from retried hooks [apigroup:apps.openshift.io]": "should get all logs from retried hooks [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with minimum ready seconds set should not transition the deployment to Complete before satisfied": "should not transition the deployment to Complete before satisfied [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with minimum ready seconds set should not transition the deployment to Complete before satisfied [apigroup:apps.openshift.io]": "should not transition the deployment to Complete before satisfied [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with multiple image change triggers should run a successful deployment with a trigger used by different containers": "should run a successful deployment with a trigger used by different containers [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with multiple image change triggers should run a successful deployment with a trigger used by different containers [apigroup:apps.openshift.io][apigroup:image.openshift.io]": "should run a successful deployment with a trigger used by different containers [apigroup:apps.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with multiple image change triggers should run a successful deployment with multiple triggers": "should run a successful deployment with multiple triggers [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with multiple image change triggers should run a successful deployment with multiple triggers [apigroup:apps.openshift.io][apigroup:image.openshift.io]": "should run a successful deployment with multiple triggers [apigroup:apps.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with revision history limits should never persist more old deployments than acceptable after being observed by the controller": "should never persist more old deployments than acceptable after being observed by the controller [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with revision history limits should never persist more old deployments than acceptable after being observed by the controller [apigroup:apps.openshift.io]": "should never persist more old deployments than acceptable after being observed by the controller [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with test deployments should run a deployment to completion and then scale to zero": "should run a deployment to completion and then scale to zero [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs with test deployments should run a deployment to completion and then scale to zero [apigroup:apps.openshift.io]": "should run a deployment to completion and then scale to zero [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs won't deploy RC with unresolved images when patched with empty image": "when patched with empty image [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:DeploymentConfig] deploymentconfigs won't deploy RC with unresolved images when patched with empty image [apigroup:apps.openshift.io]": "when patched with empty image [apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-apps][Feature:Jobs] Users should be able to create and run a job in a user project": "Users should be able to create and run a job in a user project [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestDeployScale": "TestDeployScale [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestDeployScale [apigroup:apps.openshift.io]": "TestDeployScale [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestDeploymentConfigDefaults": "TestDeploymentConfigDefaults [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestDeploymentConfigDefaults [apigroup:apps.openshift.io]": "TestDeploymentConfigDefaults [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_MultipleICTs": "TestTriggers_MultipleICTs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_MultipleICTs [apigroup:apps.openshift.io][apigroup:images.openshift.io]": "TestTriggers_MultipleICTs [apigroup:apps.openshift.io][apigroup:images.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_configChange": "TestTriggers_configChange [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_configChange [apigroup:apps.openshift.io]": "TestTriggers_configChange [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_imageChange": "TestTriggers_imageChange [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_imageChange [apigroup:apps.openshift.io][apigroup:image.openshift.io]": "TestTriggers_imageChange [apigroup:apps.openshift.io][apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_imageChange_nonAutomatic": "TestTriggers_imageChange_nonAutomatic [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_imageChange_nonAutomatic [apigroup:image.openshift.io][apigroup:apps.openshift.io]": "TestTriggers_imageChange_nonAutomatic [apigroup:image.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_manual": "TestTriggers_manual [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-apps][Feature:OpenShiftControllerManager] TestTriggers_manual [apigroup:apps.openshift.io]": "TestTriggers_manual [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] Cluster topology single node tests Verify that OpenShift components deploy one replica in SingleReplica topology mode": "Verify that OpenShift components deploy one replica in SingleReplica topology mode [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] Cluster topology single node tests [apigroup:config.openshift.io] Verify that OpenShift components deploy one replica in SingleReplica topology mode": "Verify that OpenShift components deploy one replica in SingleReplica topology mode [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] ClusterOperators should define at least one namespace in their lists of related objects": "at least one namespace in their lists of related objects [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] ClusterOperators [apigroup:config.openshift.io] should define at least one namespace in their lists of related objects": "at least one namespace in their lists of related objects [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] ClusterOperators should define at least one related object that is not a namespace": "at least one related object that is not a namespace [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] ClusterOperators [apigroup:config.openshift.io] should define at least one related object that is not a namespace": "at least one related object that is not a namespace [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] ClusterOperators should define valid related objects": "valid related objects [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] ClusterOperators [apigroup:config.openshift.io] should define valid related objects": "valid related objects [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-arch] Managed cluster should [apigroup:apps.openshift.io] should expose cluster services outside the cluster [apigroup:route.openshift.io]": "should expose cluster services outside the cluster [apigroup:route.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch] Managed cluster should ensure control plane operators do not make themselves unevictable": "ensure control plane operators do not make themselves unevictable [Suite:openshift/conformance/parallel]",
 
@@ -599,17 +601,15 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-arch] Managed cluster should ensure pods use downstream images from our release image with proper ImagePullPolicy": "should ensure pods use downstream images from our release image with proper ImagePullPolicy [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] Managed cluster should have operators on the cluster version": "have operators on the cluster version [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] Managed cluster should have operators on the cluster version [apigroup:config.openshift.io]": "have operators on the cluster version [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] Managed cluster should only include cluster daemonsets that have maxUnavailable update of 10 or 33 percent": "should only include cluster daemonsets that have maxUnavailable update of 10 or 33 percent [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] Managed cluster should only include cluster daemonsets that have maxUnavailable update of 10 or 33 percent [apigroup:config.openshift.io]": "should only include cluster daemonsets that have maxUnavailable update of 10 or 33 percent [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] Managed cluster should recover when operator-owned objects are deleted [Disruptive]": "when operator-owned objects are deleted [Disruptive] [Serial]",
+	"[Top Level] [sig-arch] Managed cluster should recover when operator-owned objects are deleted [Disruptive][apigroup:config.openshift.io]": "when operator-owned objects are deleted [Disruptive][apigroup:config.openshift.io] [Serial]",
 
 	"[Top Level] [sig-arch] Managed cluster should set requests but not limits": "should set requests but not limits [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch] Managed cluster should should expose cluster services outside the cluster": "should expose cluster services outside the cluster [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
-
-	"[Top Level] [sig-arch] [Conformance] FIPS TestFIPS": "TestFIPS [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [sig-arch] [Conformance] FIPS TestFIPS [apigroup:config.openshift.io]": "TestFIPS [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
 	"[Top Level] [sig-arch] [Conformance] sysctl pod should not start for sysctl not on whitelist kernel.msgmax": "kernel.msgmax [Suite:openshift/conformance/parallel/minimal]",
 
@@ -625,19 +625,19 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-arch] [Conformance] sysctl whitelists net.ipv4.tcp_syncookies": "net.ipv4.tcp_syncookies [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [sig-arch] ocp payload should be based on existing source OLM version should contain the source commit id": "OLM version should contain the source commit id [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch] ocp payload should be based on existing source OLM version should contain the source commit id [apigroup:config.openshift.io]": "OLM version should contain the source commit id [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch][Early] CRDs for openshift.io should have a status in the CRD schema": "should have a status in the CRD schema [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch][Early] CRDs for openshift.io should have subresource.status": "should have subresource.status [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch][Early] Managed cluster should start all core operators": "start all core operators [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch][Early] Managed cluster should [apigroup:config.openshift.io] start all core operators": "start all core operators [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch][Feature:ClusterUpgrade] Cluster should remain functional during upgrade [Disruptive]": "Cluster should remain functional during upgrade [Disruptive] [Serial]",
 
-	"[Top Level] [sig-arch][Late] clients should not use APIs that are removed in upcoming releases": "clients should not use APIs that are removed in upcoming releases [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch][Late] clients should not use APIs that are removed in upcoming releases [apigroup:config.openshift.io]": "clients should not use APIs that are removed in upcoming releases [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-arch][Late] operators should not create watch channels very often": "operators should not create watch channels very often [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-arch][Late] operators should not create watch channels very often [apigroup:config.openshift.io]": "operators should not create watch channels very often [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-arch][bz-Cloud Compute][Late] Alerts alert/KubePodNotReady should not be at or above info in ns/openshift-cloud-controller-manager": "alert/KubePodNotReady should not be at or above info in ns/openshift-cloud-controller-manager [Suite:openshift/conformance/parallel]",
 
@@ -1003,131 +1003,131 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-auth] [Feature:NodeAuthorizer] Getting an existing secret should exit with the Forbidden error": "Getting an existing secret should exit with the Forbidden error [Skipped:ibmroks] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-auth][Feature:Authentication]  TestFrontProxy should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:Authentication]  TestFrontProxy should succeed [apigroup:config.openshift.io]": "should succeed [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-auth][Feature:BootstrapUser] The bootstrap user should successfully login with password decoded from kubeadmin secret [Disruptive]": "should successfully login with password decoded from kubeadmin secret [Disruptive] [Serial]",
 
-	"[Top Level] [sig-auth][Feature:HTPasswdAuth] HTPasswd IDP should successfully configure htpasswd and be responsive": "should successfully configure htpasswd and be responsive [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:HTPasswdAuth] HTPasswd IDP should successfully configure htpasswd and be responsive [apigroup:user.openshift.io][apigroup:route.openshift.io]": "should successfully configure htpasswd and be responsive [apigroup:user.openshift.io][apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:LDAP] LDAP IDP should authenticate against an ldap server": "should authenticate against an ldap server [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:LDAP] LDAP IDP should authenticate against an ldap server [apigroup:user.openshift.io][apigroup:route.openshift.io]": "should authenticate against an ldap server [apigroup:user.openshift.io][apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:LDAP] LDAP should start an OpenLDAP test server": "should start an OpenLDAP test server [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:LDAP] LDAP should start an OpenLDAP test server [apigroup:user.openshift.io][apigroup:security.openshift.io][apigroup:authorization.openshift.io]": "should start an OpenLDAP test server [apigroup:user.openshift.io][apigroup:security.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:LDAP][Serial] ldap group sync can sync groups from ldap": "can sync groups from ldap [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-auth][Feature:LDAP][Serial] ldap group sync can sync groups from ldap [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:security.openshift.io]": "can sync groups from ldap [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:security.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] ClientSecretWithPlus should create oauthclient": "should create oauthclient [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] ClientSecretWithPlus should create oauthclient [apigroup:config.openshift.io][apigroup:oauth.openshift.io][apigroup:user.openshift.io]": "should create oauthclient [apigroup:config.openshift.io][apigroup:oauth.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] OAuth Authenticator accepts sha256 access tokens": "accepts sha256 access tokens [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] OAuth Authenticator accepts sha256 access tokens [apigroup:user.openshift.io][apigroup:oauth.openshift.io]": "accepts sha256 access tokens [apigroup:user.openshift.io][apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] OAuth server has the correct token and certificate fallback semantics": "has the correct token and certificate fallback semantics [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] OAuth server has the correct token and certificate fallback semantics [apigroup:config.openshift.io][apigroup:user.openshift.io]": "has the correct token and certificate fallback semantics [apigroup:config.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-auth][Feature:OAuthServer] OAuth server should use http1.1 only to prevent http2 connection reuse": "should use http1.1 only to prevent http2 connection reuse [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the authorize URL": "authorize URL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the authorize URL": "authorize URL [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the grant URL": "grant URL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the grant URL": "grant URL [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the login URL for the allow all IDP": "login URL for the allow all IDP [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the login URL for the allow all IDP": "login URL for the allow all IDP [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the login URL for the bootstrap IDP": "login URL for the bootstrap IDP [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the login URL for the bootstrap IDP": "login URL for the bootstrap IDP [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the login URL for when there is only one IDP": "login URL for when there is only one IDP [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the login URL for when there is only one IDP": "login URL for when there is only one IDP [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the logout URL": "logout URL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the logout URL": "logout URL [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the root URL": "root URL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the root URL": "root URL [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the token URL": "token URL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the token URL": "token URL [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers] expected headers returned from the token request URL": "token request URL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Headers][apigroup:route.openshift.io] expected headers returned from the token request URL": "token request URL [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age to generate tokens that do not expire works as expected when using a code authorization flow": "works as expected when using a code authorization flow [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age [apigroup:oauth.openshift.io] to generate tokens that do not expire works as expected when using a code authorization flow [apigroup:user.openshift.io]": "works as expected when using a code authorization flow [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age to generate tokens that do not expire works as expected when using a token authorization flow": "works as expected when using a token authorization flow [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age [apigroup:oauth.openshift.io] to generate tokens that do not expire works as expected when using a token authorization flow [apigroup:user.openshift.io]": "works as expected when using a token authorization flow [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age to generate tokens that expire shortly works as expected when using a code authorization flow": "works as expected when using a code authorization flow [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age [apigroup:oauth.openshift.io] to generate tokens that expire shortly works as expected when using a code authorization flow [apigroup:user.openshift.io]": "works as expected when using a code authorization flow [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age to generate tokens that expire shortly works as expected when using a token authorization flow": "works as expected when using a token authorization flow [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] [Token Expiration] Using a OAuth client with a non-default token max age [apigroup:oauth.openshift.io] to generate tokens that expire shortly works as expected when using a token authorization flow [apigroup:user.openshift.io]": "works as expected when using a token authorization flow [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OAuthServer] well-known endpoint should be reachable": "should be reachable [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OAuthServer] well-known endpoint should be reachable [apigroup:config.openshift.io][apigroup:route.openshift.io]": "should be reachable [apigroup:config.openshift.io][apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyClusterRoleBindingEndpoint should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyClusterRoleBindingEndpoint should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyClusterRoleEndpoint should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyClusterRoleEndpoint should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyEndpointConfirmNoEscalation should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyEndpointConfirmNoEscalation [apigroup:authorization.openshift.io] should succeed": "should succeed [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyLocalRoleBindingEndpoint should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyLocalRoleBindingEndpoint should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyLocalRoleEndpoint should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] RBAC proxy for openshift authz  RunLegacyLocalRoleEndpoint should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] The default cluster RBAC policy should have correct RBAC rules": "should have correct RBAC rules [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestAuthorizationSubjectAccessReview should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestAuthorizationSubjectAccessReview should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestAuthorizationSubjectAccessReviewAPIGroup should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestAuthorizationSubjectAccessReviewAPIGroup should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestBrowserSafeAuthorizer should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestBrowserSafeAuthorizer should succeed [apigroup:user.openshift.io]": "should succeed [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] authorization  TestClusterReaderCoverage should succeed": "should succeed [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestScopeEscalations should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestScopeEscalations should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:build.openshift.io][apigroup:oauth.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:build.openshift.io][apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestScopedImpersonation should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestScopedImpersonation should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:build.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestScopedTokens should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestScopedTokens should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:oauth.openshift.io][apigroup:build.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:oauth.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestTokensWithIllegalScopes should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestTokensWithIllegalScopes should succeed [apigroup:oauth.openshift.io]": "should succeed [apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestUnknownScopes should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] scopes TestUnknownScopes should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:project.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] self-SAR compatibility  TestBootstrapPolicySelfSubjectAccessReviews should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] self-SAR compatibility  TestBootstrapPolicySelfSubjectAccessReviews should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] self-SAR compatibility  TestSelfSubjectAccessReviewsNonExistingNamespace should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization] self-SAR compatibility  TestSelfSubjectAccessReviewsNonExistingNamespace should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization][Serial] authorization  TestAuthorizationResourceAccessReview should succeed": "should succeed [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-auth][Feature:OpenShiftAuthorization][Serial] authorization  TestAuthorizationResourceAccessReview should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-auth][Feature:PodSecurity] restricted-v2 SCC should mutate empty securityContext to match restricted PSa profile": "restricted-v2 SCC should mutate empty securityContext to match restricted PSa profile [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestInvalidRoleRefs should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestInvalidRoleRefs should succeed [apigroup:authorization.openshift.io][apigroup:user.openshift.io][apigroup:project.openshift.io]": "should succeed [apigroup:authorization.openshift.io][apigroup:user.openshift.io][apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestProjectIsNamespace should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestProjectIsNamespace should succeed [apigroup:project.openshift.io]": "should succeed [apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestProjectWatch should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestProjectWatch should succeed [apigroup:project.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "should succeed [apigroup:project.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestProjectWatchWithSelectionPredicate should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestProjectWatchWithSelectionPredicate should succeed [apigroup:project.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "should succeed [apigroup:project.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestScopedProjectAccess should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestScopedProjectAccess should succeed [apigroup:user.openshift.io][apigroup:project.openshift.io][apigroup:authorization.openshift.io]": "should succeed [apigroup:user.openshift.io][apigroup:project.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestUnprivilegedNewProject": "TestUnprivilegedNewProject [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI]  TestUnprivilegedNewProject [apigroup:project.openshift.io]": "TestUnprivilegedNewProject [apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:ProjectAPI][Serial]  TestUnprivilegedNewProjectDenied": "TestUnprivilegedNewProjectDenied [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-auth][Feature:ProjectAPI][Serial]  TestUnprivilegedNewProjectDenied [apigroup:authorization.openshift.io][apigroup:project.openshift.io]": "TestUnprivilegedNewProjectDenied [apigroup:authorization.openshift.io][apigroup:project.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a RBAC rolebinding when subject is not already bound and is not permitted by any RBR should fail": "should fail [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a RBAC rolebinding when subject is not already bound and is not permitted by any RBR should fail [apigroup:authorization.openshift.io]": "should fail [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding that also contains system:non-existing users should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding that also contains system:non-existing users should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when subject is already bound should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when subject is already bound should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when subject is not already bound and is not permitted by any RBR should fail": "should fail [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when subject is not already bound and is not permitted by any RBR should fail [apigroup:authorization.openshift.io]": "should fail [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when subject is permitted by RBR should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when subject is permitted by RBR should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when there are no restrictions should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Create a rolebinding when there are no restrictions should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Rolebinding restrictions tests single project should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:RoleBindingRestrictions] RoleBindingRestrictions should be functional  Rolebinding restrictions tests single project should succeed [apigroup:authorization.openshift.io]": "should succeed [apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-auth][Feature:SCC][Early] should not have pod creation failures during install": "should not have pod creation failures during install [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:SecurityContextConstraints]  TestAllowedSCCViaRBAC": "TestAllowedSCCViaRBAC [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:SecurityContextConstraints]  TestAllowedSCCViaRBAC [apigroup:project.openshift.io][apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:security.openshift.io]": "TestAllowedSCCViaRBAC [apigroup:project.openshift.io][apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:security.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-auth][Feature:SecurityContextConstraints]  TestPodDefaultCapabilities": "TestPodDefaultCapabilities [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:SecurityContextConstraints]  TestPodUpdateSCCEnforcement": "TestPodUpdateSCCEnforcement [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:SecurityContextConstraints]  TestPodUpdateSCCEnforcement [apigroup:user.openshift.io][apigroup:authorization.openshift.io]": "TestPodUpdateSCCEnforcement [apigroup:user.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:UserAPI] groups should work": "groups should work [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:UserAPI] groups should work [apigroup:user.openshift.io][apigroup:project.openshift.io][apigroup:authorization.openshift.io]": "groups should work [apigroup:user.openshift.io][apigroup:project.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-auth][Feature:UserAPI] users can manipulate groups": "users can manipulate groups [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-auth][Feature:UserAPI] users can manipulate groups [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:project.openshift.io]": "users can manipulate groups [apigroup:user.openshift.io][apigroup:authorization.openshift.io][apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-autoscaling] Cluster size autoscaler scalability [Slow] CA ignores unschedulable pods while scheduling schedulable pods [Feature:ClusterAutoscalerScalability6]": "CA ignores unschedulable pods while scheduling schedulable pods [Feature:ClusterAutoscalerScalability6] [Suite:k8s]",
 
@@ -1243,79 +1243,79 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-autoscaling] [HPA] Horizontal pod autoscaling (scale resource: Custom Metrics from Stackdriver) should scale up with two metrics of type Pod from Stackdriver [Feature:CustomMetricsAutoscaling]": "should scale up with two metrics of type Pod from Stackdriver [Feature:CustomMetricsAutoscaling] [Skipped:gce] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-builds][Feature:Builds] Multi-stage image builds should succeed": "should succeed [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] Multi-stage image builds should succeed [apigroup:build.openshift.io]": "should succeed [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] Optimized image builds  should succeed": "should succeed [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] Optimized image builds  should succeed [apigroup:build.openshift.io]": "should succeed [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] build can reference a cluster service  with a build being created from new-build should be able to run a build that references a cluster service": "should be able to run a build that references a cluster service [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] build can reference a cluster service  with a build being created from new-build should be able to run a build that references a cluster service [apigroup:build.openshift.io]": "should be able to run a build that references a cluster service [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] build have source revision metadata  started build should contain source revision information": "should contain source revision information [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] build have source revision metadata  started build should contain source revision information [apigroup:build.openshift.io]": "should contain source revision information [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] build with empty source  started build should build even with an empty source in build config": "should build even with an empty source in build config [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] build with empty source  started build should build even with an empty source in build config [apigroup:build.openshift.io]": "should build even with an empty source in build config [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] build without output image  building from templates should create an image from a S2i template without an output image reference defined": "should create an image from a S2i template without an output image reference defined [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] build without output image  building from templates should create an image from a S2i template without an output image reference defined [apigroup:build.openshift.io]": "should create an image from a S2i template without an output image reference defined [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] build without output image  building from templates should create an image from a docker template without an output image reference defined": "should create an image from a docker template without an output image reference defined [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] build without output image  building from templates should create an image from a docker template without an output image reference defined [apigroup:build.openshift.io]": "should create an image from a docker template without an output image reference defined [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] buildconfig secret injector  should inject secrets to the appropriate buildconfigs": "should inject secrets to the appropriate buildconfigs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] buildconfig secret injector  should inject secrets to the appropriate buildconfigs [apigroup:build.openshift.io]": "should inject secrets to the appropriate buildconfigs [apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] clone repository using git:// protocol  should clone using git:// if no proxy is configured": "should clone using git:// if no proxy is configured [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] custom build with buildah  being created from new-build should complete build with custom builder image": "should complete build with custom builder image [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] custom build with buildah  being created from new-build should complete build with custom builder image [apigroup:build.openshift.io]": "should complete build with custom builder image [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] imagechangetriggers  imagechangetriggers should trigger builds of all types": "imagechangetriggers should trigger builds of all types [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] imagechangetriggers  imagechangetriggers should trigger builds of all types [apigroup:build.openshift.io]": "imagechangetriggers should trigger builds of all types [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should fail with a --name longer than 58 characters": "should fail with a --name longer than 58 characters [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should succeed with a --name of 58 characters": "should succeed with a --name of 58 characters [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should succeed with a --name of 58 characters [apigroup:build.openshift.io]": "should succeed with a --name of 58 characters [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should succeed with an imagestream": "should succeed with an imagestream [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  buildconfigs should have a default history limit set when created via the group api": "buildconfigs should have a default history limit set when created via the group api [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  buildconfigs should have a default history limit set when created via the group api [apigroup:build.openshift.io]": "buildconfigs should have a default history limit set when created via the group api [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune builds after a buildConfig change": "should prune builds after a buildConfig change [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune builds after a buildConfig change [apigroup:build.openshift.io]": "should prune builds after a buildConfig change [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune canceled builds based on the failedBuildsHistoryLimit setting": "should prune canceled builds based on the failedBuildsHistoryLimit setting [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune canceled builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io]": "should prune canceled builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune completed builds based on the successfulBuildsHistoryLimit setting": "should prune completed builds based on the successfulBuildsHistoryLimit setting [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune completed builds based on the successfulBuildsHistoryLimit setting [apigroup:build.openshift.io]": "should prune completed builds based on the successfulBuildsHistoryLimit setting [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune errored builds based on the failedBuildsHistoryLimit setting": "should prune errored builds based on the failedBuildsHistoryLimit setting [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune failed builds based on the failedBuildsHistoryLimit setting": "should prune failed builds based on the failedBuildsHistoryLimit setting [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune failed builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io]": "should prune failed builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] remove all builds when build configuration is removed  oc delete buildconfig should start builds and delete the buildconfig": "should start builds and delete the buildconfig [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] remove all builds when build configuration is removed  oc delete buildconfig should start builds and delete the buildconfig [apigroup:build.openshift.io]": "should start builds and delete the buildconfig [apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] result image should have proper labels set  Docker build from a template should create a image from \"test-docker-build.json\" template with proper Docker labels": "should create a image from \"test-docker-build.json\" template with proper Docker labels [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] result image should have proper labels set  Docker build from a template should create a image from \"test-docker-build.json\" template with proper Docker labels [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should create a image from \"test-docker-build.json\" template with proper Docker labels [apigroup:build.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] result image should have proper labels set  S2I build from a template should create a image from \"test-s2i-build.json\" template with proper Docker labels": "should create a image from \"test-s2i-build.json\" template with proper Docker labels [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] result image should have proper labels set  S2I build from a template should create a image from \"test-s2i-build.json\" template with proper Docker labels [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should create a image from \"test-s2i-build.json\" template with proper Docker labels [apigroup:build.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] s2i build with a quota  Building from a template should create an s2i build with a quota and run it": "should create an s2i build with a quota and run it [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] s2i build with a quota  Building from a template should create an s2i build with a quota and run it [apigroup:build.openshift.io]": "should create an s2i build with a quota and run it [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] s2i build with a root user image should create a root build and fail without a privileged SCC": "should create a root build and fail without a privileged SCC [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] s2i build with a root user image should create a root build and fail without a privileged SCC [apigroup:build.openshift.io]": "should create a root build and fail without a privileged SCC [apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] s2i build with a root user image should create a root build and pass with a privileged SCC": "should create a root build and pass with a privileged SCC [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] s2i build with a root user image should create a root build and pass with a privileged SCC [apigroup:build.openshift.io]": "should create a root build and pass with a privileged SCC [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] verify /run filesystem contents  are writeable using a simple Docker Strategy Build": "using a simple Docker Strategy Build [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] verify /run filesystem contents  are writeable using a simple Docker Strategy Build [apigroup:build.openshift.io]": "using a simple Docker Strategy Build [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] verify /run filesystem contents  do not have unexpected content using a simple Docker Strategy Build": "using a simple Docker Strategy Build [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] verify /run filesystem contents  do not have unexpected content using a simple Docker Strategy Build [apigroup:build.openshift.io]": "using a simple Docker Strategy Build [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config no ocm rollout Apply default proxy configuration to docker build pod through env vars": "Apply default proxy configuration to docker build pod through env vars",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config no ocm rollout [apigroup:config.openshift.io] Apply default proxy configuration to docker build pod through env vars [apigroup:build.openshift.io]": "Apply default proxy configuration to docker build pod through env vars [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config no ocm rollout Apply default proxy configuration to source build pod through env vars": "Apply default proxy configuration to source build pod through env vars",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config no ocm rollout [apigroup:config.openshift.io] Apply default proxy configuration to source build pod through env vars [apigroup:build.openshift.io]": "Apply default proxy configuration to source build pod through env vars [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config no ocm rollout Apply git proxy configuration to build pod": "Apply git proxy configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config no ocm rollout [apigroup:config.openshift.io] Apply git proxy configuration to build pod [apigroup:build.openshift.io]": "Apply git proxy configuration to build pod [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout Apply default image label configuration to build pod": "Apply default image label configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout [apigroup:config.openshift.io] Apply default image label configuration to build pod": "Apply default image label configuration to build pod",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout Apply env configuration to build pod": "Apply env configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout [apigroup:config.openshift.io] Apply env configuration to build pod": "Apply env configuration to build pod",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout Apply node selector configuration to build pod": "Apply node selector configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout [apigroup:config.openshift.io] Apply node selector configuration to build pod": "Apply node selector configuration to build pod",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout Apply override image label configuration to build pod": "Apply override image label configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout [apigroup:config.openshift.io] Apply override image label configuration to build pod [apigroup:build.openshift.io]": "Apply override image label configuration to build pod [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout Apply resource configuration to build pod": "Apply resource configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout [apigroup:config.openshift.io] Apply resource configuration to build pod": "Apply resource configuration to build pod",
 
-	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout Apply toleration override configuration to build pod": "Apply toleration override configuration to build pod",
+	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  build config with ocm rollout [apigroup:config.openshift.io] Apply toleration override configuration to build pod": "Apply toleration override configuration to build pod",
 
 	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  registries config context should allow registries to be blacklisted": "should allow registries to be blacklisted",
 
@@ -1323,201 +1323,203 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-builds][Feature:Builds][Serial][Slow][Disruptive] alter builds via cluster configuration  registries config context should default registry search to docker.io for image pulls": "should default registry search to docker.io for image pulls",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] Capabilities should be dropped for s2i builders  s2i build with a rootable builder should not be able to switch to root with an assemble script": "should not be able to switch to root with an assemble script",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] Capabilities should be dropped for s2i builders  s2i build with a rootable builder should not be able to switch to root with an assemble script [apigroup:build.openshift.io]": "should not be able to switch to root with an assemble script [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build should be able to start a build from Dockerfile with FROM reference to scratch": "should be able to start a build from Dockerfile with FROM reference to scratch",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build should be able to start a build from Dockerfile with FROM reference to scratch [apigroup:build.openshift.io]": "should be able to start a build from Dockerfile with FROM reference to scratch [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build should create a image via new-build and infer the origin tag": "should create a image via new-build and infer the origin tag",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build should create a image via new-build [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should create a image via new-build [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build should create a image via new-build": "should create a image via new-build",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build should create a image via new-build and infer the origin tag [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should create a image via new-build and infer the origin tag [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build testing build image with dockerfile contains a file path uses a variable in its name": "testing build image with dockerfile contains a file path uses a variable in its name",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build testing build image with dockerfile contains a file path uses a variable in its name [apigroup:build.openshift.io]": "testing build image with dockerfile contains a file path uses a variable in its name [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build testing build image with invalid dockerfile content": "testing build image with invalid dockerfile content",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have Dockerfile input  being created from new-build testing build image with invalid dockerfile content [apigroup:build.openshift.io]": "testing build image with invalid dockerfile content [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source  buildconfig with input source image and docker strategy should complete successfully and contain the expected file": "should complete successfully and contain the expected file",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source [apigroup:image.openshift.io] buildconfig with input source image and docker strategy should complete successfully and contain the expected file [apigroup:build.openshift.io]": "should complete successfully and contain the expected file [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source  buildconfig with input source image and s2i strategy should complete successfully and contain the expected file": "should complete successfully and contain the expected file",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source [apigroup:image.openshift.io] buildconfig with input source image and s2i strategy should complete successfully and contain the expected file [apigroup:build.openshift.io]": "should complete successfully and contain the expected file [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source  creating a build with an input source image and custom strategy should resolve the imagestream references and secrets": "should resolve the imagestream references and secrets",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source [apigroup:image.openshift.io] creating a build with an input source image and custom strategy should resolve the imagestream references and secrets [apigroup:build.openshift.io]": "should resolve the imagestream references and secrets [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source  creating a build with an input source image and docker strategy should resolve the imagestream references and secrets": "should resolve the imagestream references and secrets",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source [apigroup:image.openshift.io] creating a build with an input source image and docker strategy should resolve the imagestream references and secrets [apigroup:build.openshift.io]": "should resolve the imagestream references and secrets [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source  creating a build with an input source image and s2i strategy should resolve the imagestream references and secrets": "should resolve the imagestream references and secrets",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build can have container image source [apigroup:image.openshift.io] creating a build with an input source image and s2i strategy should resolve the imagestream references and secrets [apigroup:build.openshift.io]": "should resolve the imagestream references and secrets [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build controller  RunBuildCompletePodDeleteTest should succeed": "should succeed",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build controller  RunBuildCompletePodDeleteTest should succeed [apigroup:build.openshift.io]": "should succeed [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build controller  RunBuildDeleteTest should succeed": "should succeed",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build controller  RunBuildDeleteTest should succeed [apigroup:build.openshift.io]": "should succeed [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] build controller  RunBuildRunningPodDeleteTest should succeed": "should succeed",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] build controller  RunBuildRunningPodDeleteTest should succeed [apigroup:build.openshift.io]": "should succeed [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should have deadlines  oc start-build docker-build --wait Docker: should start a build and wait for the build failed and build pod being killed by kubelet": "Docker: should start a build and wait for the build failed and build pod being killed by kubelet",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should have deadlines  oc start-build docker-build --wait Docker: should start a build and wait for the build failed and build pod being killed by kubelet [apigroup:build.openshift.io]": "Docker: should start a build and wait for the build failed and build pod being killed by kubelet [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should have deadlines  oc start-build source-build --wait Source: should start a build and wait for the build failed and build pod being killed by kubelet": "Source: should start a build and wait for the build failed and build pod being killed by kubelet",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should have deadlines  oc start-build source-build --wait Source: should start a build and wait for the build failed and build pod being killed by kubelet [apigroup:build.openshift.io]": "Source: should start a build and wait for the build failed and build pod being killed by kubelet [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with broken proxy and a no_proxy override should start a docker build and wait for the build to succeed": "should start a docker build and wait for the build to succeed",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with broken proxy and a no_proxy override should start a docker build and wait for the build to succeed [apigroup:build.openshift.io]": "should start a docker build and wait for the build to succeed [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with broken proxy and a no_proxy override should start an s2i build and wait for the build to succeed": "should start an s2i build and wait for the build to succeed",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with broken proxy and a no_proxy override should start an s2i build and wait for the build to succeed [apigroup:build.openshift.io]": "should start an s2i build and wait for the build to succeed [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with broken proxy should start a build and wait for the build to fail": "should start a build and wait for the build to fail",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with broken proxy should start a build and wait for the build to fail [apigroup:build.openshift.io]": "should start a build and wait for the build to fail [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with cluster-wide custom PKI should mount the custom PKI into the build if specified": "should mount the custom PKI into the build if specified",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds should support proxies  start build with cluster-wide custom PKI should mount the custom PKI into the build if specified [apigroup:config.openshift.io][apigroup:build.openshift.io]": "should mount the custom PKI into the build if specified [apigroup:config.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds with a context directory  docker context directory build should docker build an application using a context directory": "should docker build an application using a context directory",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds with a context directory  docker context directory build should docker build an application using a context directory [apigroup:build.openshift.io]": "should docker build an application using a context directory [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] builds with a context directory  s2i context directory build should s2i build an application using a context directory": "should s2i build an application using a context directory",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] builds with a context directory  s2i context directory build should s2i build an application using a context directory [apigroup:build.openshift.io]": "should s2i build an application using a context directory [apigroup:build.openshift.io]",
 
 	"[Top Level] [sig-builds][Feature:Builds][Slow] can use build secrets  build with secrets and configMaps should contain secrets during the docker strategy build": "should contain secrets during the docker strategy build",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] can use build secrets  build with secrets and configMaps should contain secrets during the source strategy build": "should contain secrets during the source strategy build",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] can use build secrets  build with secrets and configMaps should contain secrets during the source strategy build [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should contain secrets during the source strategy build [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] can use private repositories as build input  build using an HTTP token should be able to clone source code via an HTTP token": "should be able to clone source code via an HTTP token",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] can use private repositories as build input  build using an HTTP token should be able to clone source code via an HTTP token [apigroup:build.openshift.io]": "should be able to clone source code via an HTTP token [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] can use private repositories as build input  build using an ssh private key should be able to clone source code via ssh using SCP-style URIs": "should be able to clone source code via ssh using SCP-style URIs",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] can use private repositories as build input  build using an ssh private key should be able to clone source code via ssh [apigroup:build.openshift.io]": "should be able to clone source code via ssh [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] can use private repositories as build input  build using an ssh private key should be able to clone source code via ssh": "should be able to clone source code via ssh",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] can use private repositories as build input  build using an ssh private key should be able to clone source code via ssh using SCP-style URIs [apigroup:build.openshift.io]": "should be able to clone source code via ssh using SCP-style URIs [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  Docker build started with log level >5 should save the image digest when finished": "should save the image digest when finished",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  Docker build started with log level >5 should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  Docker build started with normal log level should save the image digest when finished": "should save the image digest when finished",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  Docker build started with normal log level should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  S2I build started with log level >5 should save the image digest when finished": "should save the image digest when finished",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  S2I build started with log level >5 should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  S2I build started with normal log level should save the image digest when finished": "should save the image digest when finished",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] completed builds should have digest of the image in their status  S2I build started with normal log level should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should save the image digest when finished [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] incremental s2i build  Building from a template should create a build from \"incremental-auth-build.json\" template and run it": "should create a build from \"incremental-auth-build.json\" template and run it",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] incremental s2i build  Building from a template should create a build from \"incremental-auth-build.json\" template and run it [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should create a build from \"incremental-auth-build.json\" template and run it [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] s2i build with environment file in sources  Building from a template should create a image from \"test-env-build.json\" template and run it in a pod": "should create a image from \"test-env-build.json\" template and run it in a pod",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] s2i build with environment file in sources  Building from a template should create a image from \"test-env-build.json\" template and run it in a pod [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should create a image from \"test-env-build.json\" template and run it in a pod [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Setting build-args on Docker builds Should accept build args that are specified in the Dockerfile": "Should accept build args that are specified in the Dockerfile",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Setting build-args on Docker builds Should accept build args that are specified in the Dockerfile [apigroup:build.openshift.io]": "Should accept build args that are specified in the Dockerfile [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Setting build-args on Docker builds Should complete with a warning on non-existent build-arg": "Should complete with a warning on non-existent build-arg",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Setting build-args on Docker builds Should complete with a warning on non-existent build-arg [apigroup:build.openshift.io]": "Should complete with a warning on non-existent build-arg [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Setting build-args on Docker builds Should copy build args from BuildConfig to Build": "Should copy build args from BuildConfig to Build",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Setting build-args on Docker builds Should copy build args from BuildConfig to Build [apigroup:build.openshift.io]": "Should copy build args from BuildConfig to Build [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Trigger builds with branch refs matching directories on master branch Should checkout the config branch, not config directory": "Should checkout the config branch, not config directory",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context Trigger builds with branch refs matching directories on master branch Should checkout the config branch, not config directory [apigroup:build.openshift.io]": "Should checkout the config branch, not config directory [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds shoud accept --from-archive with https URL as an input": "shoud accept --from-archive with https URL as an input",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds shoud accept --from-archive with https URL as an input [apigroup:build.openshift.io]": "shoud accept --from-archive with https URL as an input [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds shoud accept --from-file with https URL as an input": "shoud accept --from-file with https URL as an input",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds shoud accept --from-file with https URL as an input [apigroup:build.openshift.io]": "shoud accept --from-file with https URL as an input [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-dir as input": "should accept --from-dir as input",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-dir as input [apigroup:build.openshift.io]": "should accept --from-dir as input [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-file as input": "should accept --from-file as input",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-file as input [apigroup:build.openshift.io]": "should accept --from-file as input [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-repo as input": "should accept --from-repo as input",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-repo as input [apigroup:build.openshift.io]": "should accept --from-repo as input [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-repo with --commit as input": "should accept --from-repo with --commit as input",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should accept --from-repo with --commit as input [apigroup:build.openshift.io]": "should accept --from-repo with --commit as input [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should reject binary build requests without a --from-xxxx value": "should reject binary build requests without a --from-xxxx value",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context binary builds should reject binary build requests without a --from-xxxx value [apigroup:build.openshift.io]": "should reject binary build requests without a --from-xxxx value [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context cancel a binary build that doesn't start running in 5 minutes should start a build and wait for the build to be cancelled": "should start a build and wait for the build to be cancelled",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context cancel a binary build that doesn't start running in 5 minutes should start a build and wait for the build to be cancelled [apigroup:build.openshift.io]": "should start a build and wait for the build to be cancelled [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context cancel a build started by oc start-build --wait should start a build and wait for the build to cancel": "should start a build and wait for the build to cancel",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context cancel a build started by oc start-build --wait should start a build and wait for the build to cancel [apigroup:build.openshift.io]": "should start a build and wait for the build to cancel [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context oc start-build --wait should start a build and wait for the build to complete": "should start a build and wait for the build to complete",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context oc start-build --wait should start a build and wait for the build to complete [apigroup:build.openshift.io]": "should start a build and wait for the build to complete [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context oc start-build --wait should start a build and wait for the build to fail": "should start a build and wait for the build to fail",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context oc start-build --wait should start a build and wait for the build to fail [apigroup:build.openshift.io]": "should start a build and wait for the build to fail [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context oc start-build with pr ref should start a build from a PR ref, wait for the build to complete, and confirm the right level was used": "should start a build from a PR ref, wait for the build to complete, and confirm the right level was used",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context oc start-build with pr ref should start a build from a PR ref, wait for the build to complete, and confirm the right level was used [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should start a build from a PR ref, wait for the build to complete, and confirm the right level was used [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context override environment BUILD_LOGLEVEL in buildconfig can be overridden by build-loglevel": "BUILD_LOGLEVEL in buildconfig can be overridden by build-loglevel",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context override environment BUILD_LOGLEVEL in buildconfig can be overridden by build-loglevel [apigroup:build.openshift.io]": "BUILD_LOGLEVEL in buildconfig can be overridden by build-loglevel [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context override environment BUILD_LOGLEVEL in buildconfig should create verbose output": "BUILD_LOGLEVEL in buildconfig should create verbose output",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context override environment BUILD_LOGLEVEL in buildconfig should create verbose output [apigroup:build.openshift.io]": "BUILD_LOGLEVEL in buildconfig should create verbose output [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context override environment should accept environment variables": "should accept environment variables",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context override environment should accept environment variables [apigroup:build.openshift.io]": "should accept environment variables [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context s2i build maintaining symlinks should s2i build image and maintain symlinks": "should s2i build image and maintain symlinks",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context s2i build maintaining symlinks should s2i build image and maintain symlinks [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should s2i build image and maintain symlinks [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context start a build via a webhook should be able to start builds via the webhook with valid secrets and fail with invalid secrets": "should be able to start builds via the webhook with valid secrets and fail with invalid secrets",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] starting a build using CLI  start-build test context start a build via a webhook should be able to start builds via the webhook with valid secrets and fail with invalid secrets [apigroup:build.openshift.io]": "should be able to start builds via the webhook with valid secrets and fail with invalid secrets [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] testing build configuration hooks  testing postCommit hook should run docker postCommit hooks": "should run docker postCommit hooks",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] testing build configuration hooks  testing postCommit hook should run docker postCommit hooks [apigroup:build.openshift.io]": "should run docker postCommit hooks [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] testing build configuration hooks  testing postCommit hook should run s2i postCommit hooks": "should run s2i postCommit hooks",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] testing build configuration hooks  testing postCommit hook should run s2i postCommit hooks [apigroup:build.openshift.io]": "should run s2i postCommit hooks [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status Docker fetch image content failure should contain the Docker build fetch image content reason and message": "should contain the Docker build fetch image content reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status Docker fetch image content failure should contain the Docker build fetch image content reason and message [apigroup:build.openshift.io]": "should contain the Docker build fetch image content reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status Docker fetch source failure should contain the Docker build fetch source failure reason and message": "should contain the Docker build fetch source failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status Docker fetch source failure should contain the Docker build fetch source failure reason and message [apigroup:build.openshift.io]": "should contain the Docker build fetch source failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status OutOfMemoryKilled should contain OutOfMemoryKilled failure reason and message": "should contain OutOfMemoryKilled failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status OutOfMemoryKilled should contain OutOfMemoryKilled failure reason and message [apigroup:build.openshift.io]": "should contain OutOfMemoryKilled failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status S2I bad context dir failure should contain the S2I bad context dir failure reason and message": "should contain the S2I bad context dir failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status S2I bad context dir failure should contain the S2I bad context dir failure reason and message [apigroup:build.openshift.io]": "should contain the S2I bad context dir failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status S2I fetch source failure should contain the S2I fetch source failure reason and message": "should contain the S2I fetch source failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status S2I fetch source failure should contain the S2I fetch source failure reason and message [apigroup:build.openshift.io]": "should contain the S2I fetch source failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status failed assemble container should contain the failure reason related to an assemble script failing in s2i": "should contain the failure reason related to an assemble script failing in s2i",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status failed assemble container should contain the failure reason related to an assemble script failing in s2i [apigroup:build.openshift.io]": "should contain the failure reason related to an assemble script failing in s2i [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status failed https proxy invalid url should contain the generic failure reason and message": "should contain the generic failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status failed https proxy invalid url should contain the generic failure reason and message [apigroup:build.openshift.io]": "should contain the generic failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status fetch builder image failure should contain the fetch builder image failure reason and message": "should contain the fetch builder image failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status fetch builder image failure should contain the fetch builder image failure reason and message [apigroup:build.openshift.io]": "should contain the fetch builder image failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status postcommit hook failure should contain the post commit hook failure reason and message": "should contain the post commit hook failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status postcommit hook failure should contain the post commit hook failure reason and message [apigroup:build.openshift.io]": "should contain the post commit hook failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status push image to registry failure should contain the image push to registry failure reason and message": "should contain the image push to registry failure reason and message",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] update failure status  Build status push image to registry failure should contain the image push to registry failure reason and message [apigroup:build.openshift.io]": "should contain the image push to registry failure reason and message [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Parallel build run policy runs the builds in parallel": "runs the builds in parallel",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Parallel build run policy runs the builds in parallel [apigroup:build.openshift.io]": "runs the builds in parallel [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy handling cancellation starts the next build immediately after one is canceled": "starts the next build immediately after one is canceled",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy handling cancellation starts the next build immediately after one is canceled [apigroup:build.openshift.io]": "starts the next build immediately after one is canceled [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy handling deletion starts the next build immediately after running one is deleted": "starts the next build immediately after running one is deleted",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy handling deletion starts the next build immediately after running one is deleted [apigroup:build.openshift.io]": "starts the next build immediately after running one is deleted [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy handling failure starts the next build immediately after one fails": "starts the next build immediately after one fails",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy handling failure starts the next build immediately after one fails [apigroup:build.openshift.io]": "starts the next build immediately after one fails [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy runs the builds in serial order": "runs the builds in serial order",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with Serial build run policy runs the builds in serial order [apigroup:build.openshift.io]": "runs the builds in serial order [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with SerialLatestOnly build run policy runs the builds in serial order but cancel previous builds": "runs the builds in serial order but cancel previous builds",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using build configuration runPolicy  build configuration with SerialLatestOnly build run policy runs the builds in serial order but cancel previous builds [apigroup:build.openshift.io]": "runs the builds in serial order but cancel previous builds [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using pull secrets in a build  start-build test context binary builds should be able to run a build that is implicitly pulling from the internal registry": "should be able to run a build that is implicitly pulling from the internal registry",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using pull secrets in a build  start-build test context binary builds should be able to run a build that is implicitly pulling from the internal registry [apigroup:build.openshift.io]": "should be able to run a build that is implicitly pulling from the internal registry [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using pull secrets in a build  start-build test context pulling from an external authenticated registry should be able to use a pull secret in a build": "should be able to use a pull secret in a build",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using pull secrets in a build  start-build test context pulling from an external authenticated registry should be able to use a pull secret in a build [apigroup:build.openshift.io]": "should be able to use a pull secret in a build [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][Slow] using pull secrets in a build  start-build test context pulling from an external authenticated registry should be able to use a pull secret linked to the builder service account": "should be able to use a pull secret linked to the builder service account",
+	"[Top Level] [sig-builds][Feature:Builds][Slow] using pull secrets in a build  start-build test context pulling from an external authenticated registry should be able to use a pull secret linked to the builder service account [apigroup:build.openshift.io]": "should be able to use a pull secret linked to the builder service account [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-builds][Feature:Builds][pullsearch] docker build where the registry is not specified  Building from a Dockerfile whose FROM image ref does not specify the image registry should create a docker build that has buildah search from our predefined list of image registries and succeed": "should create a docker build that has buildah search from our predefined list of image registries and succeed [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][pullsearch] docker build where the registry is not specified  Building from a Dockerfile whose FROM image ref does not specify the image registry should create a docker build that has buildah search from our predefined list of image registries and succeed [apigroup:build.openshift.io]": "should create a docker build that has buildah search from our predefined list of image registries and succeed [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][pullsecret] docker build using a pull secret  Building from a template should create a docker build that pulls using a secret run it": "should create a docker build that pulls using a secret run it [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][pullsecret] docker build using a pull secret  Building from a template should create a docker build that pulls using a secret run it [apigroup:build.openshift.io]": "should create a docker build that pulls using a secret run it [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][timing] capture build stages and durations  should record build stages and durations for docker": "should record build stages and durations for docker [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][timing] capture build stages and durations  should record build stages and durations for docker [apigroup:build.openshift.io]": "should record build stages and durations for docker [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][timing] capture build stages and durations  should record build stages and durations for s2i": "should record build stages and durations for s2i [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][timing] capture build stages and durations  should record build stages and durations for s2i [apigroup:build.openshift.io]": "should record build stages and durations for s2i [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should fail resolving unresolvable valueFrom in docker build environment variable references": "should fail resolving unresolvable valueFrom in docker build environment variable references [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should fail resolving unresolvable valueFrom in docker build environment variable references [apigroup:build.openshift.io]": "should fail resolving unresolvable valueFrom in docker build environment variable references [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should fail resolving unresolvable valueFrom in sti build environment variable references": "should fail resolving unresolvable valueFrom in sti build environment variable references [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should fail resolving unresolvable valueFrom in sti build environment variable references [apigroup:build.openshift.io]": "should fail resolving unresolvable valueFrom in sti build environment variable references [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should successfully resolve valueFrom in docker build environment variables": "should successfully resolve valueFrom in docker build environment variables [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should successfully resolve valueFrom in docker build environment variables [apigroup:build.openshift.io]": "should successfully resolve valueFrom in docker build environment variables [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should successfully resolve valueFrom in s2i build environment variables": "should successfully resolve valueFrom in s2i build environment variables [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][valueFrom] process valueFrom in build strategy environment variables  should successfully resolve valueFrom in s2i build environment variables [apigroup:build.openshift.io]": "should successfully resolve valueFrom in s2i build environment variables [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] build volumes  should mount given secrets and configmaps into the build pod for docker strategy builds": "should mount given secrets and configmaps into the build pod for docker strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] build volumes  should mount given secrets and configmaps into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should mount given secrets and configmaps into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] build volumes  should mount given secrets and configmaps into the build pod for source strategy builds": "should mount given secrets and configmaps into the build pod for source strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] build volumes  should mount given secrets and configmaps into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should mount given secrets and configmaps into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview disabled clusters  should fail mounting given csi shared resource secret into the build pod for docker strategy builds": "should fail mounting given csi shared resource secret into the build pod for docker strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview disabled clusters [apigroup:config.openshift.io] should fail mounting given csi shared resource secret into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io]": "should fail mounting given csi shared resource secret into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview disabled clusters  should fail mounting given csi shared resource secret into the build pod for source strategy builds": "should fail mounting given csi shared resource secret into the build pod for source strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview disabled clusters [apigroup:config.openshift.io] should fail mounting given csi shared resource secret into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io]": "should fail mounting given csi shared resource secret into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster  should mount given csi shared resource secret into the build pod for docker strategy builds": "should mount given csi shared resource secret into the build pod for docker strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster [apigroup:config.openshift.io] should mount given csi shared resource secret into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should mount given csi shared resource secret into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster  should mount given csi shared resource secret into the build pod for source strategy builds": "should mount given csi shared resource secret into the build pod for source strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster [apigroup:config.openshift.io] should mount given csi shared resource secret into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should mount given csi shared resource secret into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster  should mount given csi shared resource secret without resource refresh into the build pod for docker strategy builds": "should mount given csi shared resource secret without resource refresh into the build pod for docker strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster [apigroup:config.openshift.io] should mount given csi shared resource secret without resource refresh into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should mount given csi shared resource secret without resource refresh into the build pod for docker strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster  should mount given csi shared resource secret without resource refresh into the build pod for source strategy builds": "should mount given csi shared resource secret without resource refresh into the build pod for source strategy builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][volumes] csi build volumes within Tech Preview enabled cluster [apigroup:config.openshift.io] should mount given csi shared resource secret without resource refresh into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should mount given csi shared resource secret without resource refresh into the build pod for source strategy builds [apigroup:image.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhook": "TestWebhook [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhook [apigroup:build.openshift.io][apigroup:image.openshift.io]": "TestWebhook [apigroup:build.openshift.io][apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPing": "TestWebhookGitHubPing [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPing [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestWebhookGitHubPing [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPushWithImage": "TestWebhookGitHubPushWithImage [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPushWithImage [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestWebhookGitHubPushWithImage [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPushWithImageStream": "TestWebhookGitHubPushWithImageStream [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds][webhook] TestWebhookGitHubPushWithImageStream [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestWebhookGitHubPushWithImageStream [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:JenkinsRHELImagesOnly][Feature:Jenkins][Feature:Builds][sig-devex][Slow] openshift pipeline build  jenkins pipeline build config strategy using a jenkins instance launched with the ephemeral template": "using a jenkins instance launched with the ephemeral template",
+	"[Top Level] [sig-builds][Feature:JenkinsRHELImagesOnly][Feature:Jenkins][Feature:Builds][sig-devex][Slow] openshift pipeline build  jenkins pipeline build config strategy using a jenkins instance launched with the ephemeral template [apigroup:build.openshift.io]": "using a jenkins instance launched with the ephemeral template [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-ci] [Early] prow job name should match network type": "should match network type [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-ci] [Early] prow job name should match cluster version [apigroup:config.openshift.io]": "should match cluster version [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-ci] [Early] prow job name should match platform type": "should match platform type [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-ci] [Early] prow job name should match network type [apigroup:config.openshift.io]": "should match network type [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-ci] [Early] prow job name should match platform type [apigroup:config.openshift.io]": "should match platform type [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] Kubectl Port forwarding With a server listening on 0.0.0.0 should support forwarding over websockets": "should support forwarding over websockets [Skipped:Proxy] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -1631,43 +1633,43 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-cli] Kubectl client kubectl wait should ignore not found error with --for=delete": "should ignore not found error with --for=delete [Disabled:Broken] [Suite:k8s]",
 
-	"[Top Level] [sig-cli] oc --request-timeout works as expected": "works as expected [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc --request-timeout works as expected [apigroup:apps.openshift.io]": "works as expected [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm build-chain": "build-chain [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm build-chain [apigroup:build.openshift.io][apigroup:image.openshift.io][apigroup:project.openshift.io]": "build-chain [apigroup:build.openshift.io][apigroup:image.openshift.io][apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm cluster-role-reapers [Serial]": "cluster-role-reapers [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-cli] oc adm cluster-role-reapers [Serial][apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "cluster-role-reapers [Serial][apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-cli] oc adm groups": "groups [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm groups [apigroup:user.openshift.io]": "groups [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm images": "images [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm images [apigroup:image.openshift.io]": "images [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm must-gather runs successfully for audit logs": "runs successfully for audit logs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm must-gather runs successfully [apigroup:config.openshift.io]": "runs successfully [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm must-gather runs successfully with options": "runs successfully with options [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm must-gather runs successfully for audit logs [apigroup:config.openshift.io][apigroup:oauth.openshift.io]": "runs successfully for audit logs [apigroup:config.openshift.io][apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm must-gather runs successfully": "runs successfully [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm must-gather runs successfully with options [apigroup:config.openshift.io]": "runs successfully with options [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm must-gather when looking at the audit logs [sig-node] kubelet runs apiserver processes strictly sequentially in order to not risk audit log corruption": "runs apiserver processes strictly sequentially in order to not risk audit log corruption [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm must-gather when looking at the audit logs [sig-node] kubelet runs apiserver processes strictly sequentially in order to not risk audit log corruption [apigroup:config.openshift.io]": "runs apiserver processes strictly sequentially in order to not risk audit log corruption [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm new-project": "new-project [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm new-project [apigroup:project.openshift.io][apigroup:authorization.openshift.io]": "new-project [apigroup:project.openshift.io][apigroup:authorization.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc adm node-logs": "node-logs [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm policy": "policy [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm policy [apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "policy [apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm role-reapers": "role-reapers [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm role-reapers [apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "role-reapers [apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc adm role-selectors": "role-selectors [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc adm serviceaccounts": "serviceaccounts [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm storage-admin": "storage-admin [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm storage-admin [apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "storage-admin [apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm ui-project-commands": "ui-project-commands [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm ui-project-commands [apigroup:project.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "ui-project-commands [apigroup:project.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm user-creation": "user-creation [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm user-creation [apigroup:user.openshift.io]": "user-creation [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc adm who-can": "who-can [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc adm who-can [apigroup:authorization.openshift.io][apigroup:user.openshift.io]": "who-can [apigroup:authorization.openshift.io][apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc annotate pod": "pod [Suite:openshift/conformance/parallel]",
 
@@ -1689,31 +1691,35 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-cli] oc basics can process templates": "can process templates [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc builds complex build start-build": "start-build [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc basics can show correct whoami result": "can show correct whoami result [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc builds complex build webhooks CRUD": "webhooks CRUD [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc builds complex build start-build [apigroup:build.openshift.io]": "start-build [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc builds get buildconfig": "get buildconfig [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc builds complex build webhooks CRUD [apigroup:build.openshift.io]": "webhooks CRUD [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc builds new-build": "new-build [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc builds get buildconfig [apigroup:build.openshift.io]": "get buildconfig [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc builds patch buildconfig": "patch buildconfig [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc builds new-build [apigroup:build.openshift.io]": "new-build [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-cli] oc builds patch buildconfig [apigroup:build.openshift.io]": "patch buildconfig [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc can get list of nodes": "can get list of nodes [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc can run inside of a busybox container": "can run inside of a busybox container [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc debug deployment configs from a build": "deployment configs from a build [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc completion returns expected help messages": "returns expected help messages [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc debug dissect deployment config debug": "dissect deployment config debug [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc debug deployment configs from a build [apigroup:image.openshift.io][apigroup:apps.openshift.io]": "deployment configs from a build [apigroup:image.openshift.io][apigroup:apps.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-cli] oc debug dissect deployment config debug [apigroup:apps.openshift.io]": "dissect deployment config debug [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc debug does not require a real resource on the server": "does not require a real resource on the server [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc debug ensure debug does not depend on a container actually existing for the selected resource": "ensure debug does not depend on a container actually existing for the selected resource [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc debug ensure debug does not depend on a container actually existing for the selected resource [apigroup:apps.openshift.io]": "ensure debug does not depend on a container actually existing for the selected resource [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc debug ensure it works with image streams": "ensure it works with image streams [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc debug ensure it works with image streams [apigroup:image.openshift.io]": "ensure it works with image streams [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc env can set environment variables": "can set environment variables [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc env can set environment variables [apigroup:apps.openshift.io][apigroup:image.openshift.io][apigroup:build.openshift.io]": "can set environment variables [apigroup:apps.openshift.io][apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc explain list uncovered GroupVersionResources": "list uncovered GroupVersionResources [Suite:openshift/conformance/parallel]",
 
@@ -1721,23 +1727,25 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-cli] oc explain should contain proper fields description for special types": "should contain proper fields description for special types [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc explain should contain proper spec+status for CRDs": "should contain proper spec+status for CRDs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc explain should contain proper spec+status for CRDs [apigroup:config.openshift.io]": "should contain proper spec+status for CRDs [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc explain should contain spec+status for builtinTypes": "should contain spec+status for builtinTypes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc expose can ensure the expose command is functioning as expected": "can ensure the expose command is functioning as expected [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc expose can ensure the expose command is functioning as expected [apigroup:route.openshift.io]": "can ensure the expose command is functioning as expected [apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc help works as expected": "works as expected [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc label pod": "pod [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc observe works as expected": "works as expected [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc observe works as expected [apigroup:config.openshift.io]": "works as expected [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc probe can ensure the probe command is functioning as expected on deploymentconfigs": "can ensure the probe command is functioning as expected on deploymentconfigs [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc probe can ensure the probe command is functioning as expected on pods": "can ensure the probe command is functioning as expected on pods [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc project --show-labels works for projects": "--show-labels works for projects [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc project --show-labels works for projects [apigroup:project.openshift.io]": "--show-labels works for projects [apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-cli] oc project can switch between different projects [apigroup:authorization.openshift.io][apigroup:user.openshift.io][apigroup:project.openshift.io]": "can switch between different projects [apigroup:authorization.openshift.io][apigroup:user.openshift.io][apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-cli] oc rsh specific flags should work well when access to a remote shell": "should work well when access to a remote shell [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
@@ -1747,107 +1755,103 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-cli] oc statefulset creates and deletes statefulsets": "creates and deletes statefulsets [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli] oc status returns expected help messages": "returns expected help messages [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cli] oc status returns expected help messages [apigroup:project.openshift.io][apigroup:build.openshift.io][apigroup:image.openshift.io][apigroup:apps.openshift.io][apigroup:route.openshift.io]": "returns expected help messages [apigroup:project.openshift.io][apigroup:build.openshift.io][apigroup:image.openshift.io][apigroup:apps.openshift.io][apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/authentication.sh": "test/cmd/authentication.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/authentication.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/authentication.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/builds.sh": "test/cmd/builds.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/builds.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/builds.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/completions.sh": "test/cmd/completions.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/config.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/config.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/config.sh": "test/cmd/config.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/deployments.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/deployments.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/deployments.sh": "test/cmd/deployments.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/describer.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/describer.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/describer.sh": "test/cmd/describer.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/edit.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/edit.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/edit.sh": "test/cmd/edit.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/env.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/env.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/env.sh": "test/cmd/env.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/framework-test.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/framework-test.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/framework-test.sh": "test/cmd/framework-test.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/get.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/get.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/get.sh": "test/cmd/get.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/idle.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/idle.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/idle.sh": "test/cmd/idle.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/image-lookup.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/image-lookup.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/image-lookup.sh": "test/cmd/image-lookup.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/images.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/images.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/images.sh": "test/cmd/images.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/printer.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/printer.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/printer.sh": "test/cmd/printer.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/quota.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/quota.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/projects.sh": "test/cmd/projects.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/routes.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/routes.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/quota.sh": "test/cmd/quota.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/run.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/run.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/routes.sh": "test/cmd/routes.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/secrets.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/secrets.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/run.sh": "test/cmd/run.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/services.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/services.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/secrets.sh": "test/cmd/secrets.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/set-data.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/set-data.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/services.sh": "test/cmd/services.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/set-image.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/set-image.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/set-data.sh": "test/cmd/set-data.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/set-liveness-probe.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/set-liveness-probe.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/set-image.sh": "test/cmd/set-image.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/setbuildhook.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/setbuildhook.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/set-liveness-probe.sh": "test/cmd/set-liveness-probe.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/setbuildsecret.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/setbuildsecret.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/setbuildhook.sh": "test/cmd/setbuildhook.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/status.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/status.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/setbuildsecret.sh": "test/cmd/setbuildsecret.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/templates.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/templates.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/status.sh": "test/cmd/status.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/triggers.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/triggers.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/templates.sh": "test/cmd/templates.sh",
+	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/volumes.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]": "test/cmd/volumes.sh [apigroup:image.openshift.io][apigroup:config.openshift.io]",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/triggers.sh": "test/cmd/triggers.sh",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] copy by strategy should copy files with the rsync strategy": "should copy files with the rsync strategy",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/volumes.sh": "test/cmd/volumes.sh",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] copy by strategy should copy files with the rsync-daemon strategy": "should copy files with the rsync-daemon strategy",
 
-	"[Top Level] [sig-cli][Feature:LegacyCommandTests][Disruptive][Serial] test-cmd: test/cmd/whoami.sh": "test/cmd/whoami.sh",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] copy by strategy should copy files with the tar strategy": "should copy files with the tar strategy",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods copy by strategy should copy files with the rsync strategy": "should copy files with the rsync strategy",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] rsync specific flags should honor multiple --exclude flags": "should honor multiple --exclude flags",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods copy by strategy should copy files with the rsync-daemon strategy": "should copy files with the rsync-daemon strategy",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] rsync specific flags should honor multiple --include flags": "should honor multiple --include flags",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods copy by strategy should copy files with the tar strategy": "should copy files with the tar strategy",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] rsync specific flags should honor the --exclude flag": "should honor the --exclude flag",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods rsync specific flags should honor multiple --exclude flags": "should honor multiple --exclude flags",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] rsync specific flags should honor the --include flag": "should honor the --include flag",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods rsync specific flags should honor multiple --include flags": "should honor multiple --include flags",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] rsync specific flags should honor the --no-perms flag": "should honor the --no-perms flag",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods rsync specific flags should honor the --exclude flag": "should honor the --exclude flag",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] rsync specific flags should honor the --progress flag": "should honor the --progress flag",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods rsync specific flags should honor the --include flag": "should honor the --include flag",
+	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods [apigroup:template.openshift.io] using a watch should watch for changes and rsync them": "should watch for changes and rsync them",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods rsync specific flags should honor the --no-perms flag": "should honor the --no-perms flag",
+	"[Top Level] [sig-cloud-provider][Feature:OpenShiftCloudControllerManager][Late] Deploy an external cloud provider": "Deploy an external cloud provider [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods rsync specific flags should honor the --progress flag": "should honor the --progress flag",
+	"[Top Level] [sig-cluster-lifecycle] CSRs from machines that are not recognized by the cloud provider are not approved [apigroup:config.openshift.io]": "CSRs from machines that are not recognized by the cloud provider are not approved [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cli][Slow] can use rsync to upload files to pods using a watch should watch for changes and rsync them": "should watch for changes and rsync them",
+	"[Top Level] [sig-cluster-lifecycle] Pods cannot access the /config/master API endpoint [apigroup:config.openshift.io]": "Pods cannot access the /config/master API endpoint [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cluster-lifecycle] CSRs from machines that are not recognized by the cloud provider are not approved": "CSRs from machines that are not recognized by the cloud provider are not approved [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cluster-lifecycle] TestAdminAck should succeed [apigroup:config.openshift.io]": "should succeed [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cluster-lifecycle] Pods cannot access the /config/master API endpoint": "Pods cannot access the /config/master API endpoint [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cluster-lifecycle][Feature:DisasterRecovery][Disruptive] [Feature:NodeRecovery] Cluster should survive master and worker failure and recover with machine health checks [apigroup:machine.openshift.io]": "[Feature:NodeRecovery] Cluster should survive master and worker failure and recover with machine health checks [apigroup:machine.openshift.io] [Serial]",
 
-	"[Top Level] [sig-cluster-lifecycle] TestAdminAck should succeed": "should succeed [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cluster-lifecycle][Feature:Machines] Managed cluster should have machine resources [apigroup:machine.openshift.io]": "have machine resources [apigroup:machine.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cluster-lifecycle][Feature:DisasterRecovery][Disruptive] [Feature:NodeRecovery] Cluster should survive master and worker failure and recover with machine health checks": "[Feature:NodeRecovery] Cluster should survive master and worker failure and recover with machine health checks [Serial]",
+	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Disruptive] Managed cluster should recover from deleted worker machines [apigroup:machine.openshift.io]": "recover from deleted worker machines [apigroup:machine.openshift.io] [Serial]",
 
-	"[Top Level] [sig-cluster-lifecycle][Feature:Machines] Managed cluster should have machine resources": "have machine resources [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Early] Managed cluster should have same number of Machines and Nodes [apigroup:machine.openshift.io]": "have same number of Machines and Nodes [apigroup:machine.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Disruptive] Managed cluster should recover from deleted worker machines": "recover from deleted worker machines [Serial]",
-
-	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Early] Managed cluster should have same number of Machines and Nodes": "have same number of Machines and Nodes [Suite:openshift/conformance/parallel]",
-
-	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Serial] Managed cluster should grow and decrease when scaling different machineSets simultaneously [Timeout:30m]": "grow and decrease when scaling different machineSets simultaneously [Timeout:30m] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Serial] Managed cluster should grow and decrease when scaling different machineSets simultaneously [Timeout:30m][apigroup:machine.openshift.io]": "grow and decrease when scaling different machineSets simultaneously [Timeout:30m][apigroup:machine.openshift.io] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-coreos] [Conformance] CoreOS bootimages TestBootimagesPresent": "TestBootimagesPresent [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [sig-devex] check registry.redhat.io is available and samples operator can import sample imagestreams run sample related validations": "run sample related validations [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex] check registry.redhat.io is available and samples operator can import sample imagestreams run sample related validations [apigroup:config.openshift.io][apigroup:image.openshift.io]": "run sample related validations [apigroup:config.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  returning s2i usage when running the image \"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-el7\" should print the usage": "\"image-registry.openshift-image-registry.svc:5000/openshift/dotnet:3.1-el7\" should print the usage",
 
@@ -1957,81 +1961,81 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift images should be SCL enabled  using the SCL in s2i images \"image-registry.openshift-image-registry.svc:5000/openshift/ruby:3.0-ubi8\" should be SCL enabled": "\"image-registry.openshift-image-registry.svc:5000/openshift/ruby:3.0-ubi8\" should be SCL enabled",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][nodejs] test nodejs images with nodejs-rest-http-crud db repo  Building nodejs-postgresql app from new-app should build a nodejs-postgresql image and run it in a pod": "should build a nodejs-postgresql image and run it in a pod",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][nodejs] test nodejs images with nodejs-rest-http-crud db repo  Building nodejs-postgresql app from new-app should build a nodejs-postgresql image and run it in a pod [apigroup:build.openshift.io]": "should build a nodejs-postgresql image and run it in a pod [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][php] test php images with cakephp-ex db repo  Building cakephp-mysql app from new-app should build a cakephp-mysql image and run it in a pod": "should build a cakephp-mysql image and run it in a pod",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][php] test php images with cakephp-ex db repo  Building cakephp-mysql app from new-app should build a cakephp-mysql image and run it in a pod [apigroup:build.openshift.io]": "should build a cakephp-mysql image and run it in a pod [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][python] test python images with django-ex db repo  Building django-psql app from new-app should build a django-psql image and run it in a pod": "should build a django-psql image and run it in a pod",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][python] test python images with django-ex db repo  Building django-psql app from new-app should build a django-psql image and run it in a pod [apigroup:build.openshift.io]": "should build a django-psql image and run it in a pod [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][ruby] test ruby images with rails-ex db repo  Building rails-postgresql app from new-app should build a rails-postgresql image and run it in a pod": "should build a rails-postgresql image and run it in a pod",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][Slow] openshift sample application repositories [sig-devex][Feature:ImageEcosystem][ruby] test ruby images with rails-ex db repo  Building rails-postgresql app from new-app should build a rails-postgresql image and run it in a pod [apigroup:build.openshift.io]": "should build a rails-postgresql image and run it in a pod [apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][mariadb][Slow] openshift mariadb image  Creating from a template should instantiate the template": "should instantiate the template",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][mariadb][Slow] openshift mariadb image  Creating from a template should instantiate the template [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:apps.openshift.io]": "should instantiate the template [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:apps.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][mysql][Slow] openshift mysql image  Creating from a template should instantiate the template": "should instantiate the template",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][mysql][Slow] openshift mysql image  Creating from a template should instantiate the template [apigroup:apps.openshift.io]": "should instantiate the template [apigroup:apps.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][perl][Slow] hot deploy for openshift perl image  hot deploy test should work": "should work",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][perl][Slow] hot deploy for openshift perl image  hot deploy test should work [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]": "should work [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io][apigroup:apps.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][php][Slow] hot deploy for openshift php image  CakePHP example should work with hot deploy": "should work with hot deploy",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][php][Slow] hot deploy for openshift php image  CakePHP example should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]": "should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][python][Slow] hot deploy for openshift python image  Django example should work with hot deploy": "should work with hot deploy",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][python][Slow] hot deploy for openshift python image  Django example should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]": "should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:ImageEcosystem][ruby][Slow] hot deploy for openshift ruby image  Rails example should work with hot deploy": "should work with hot deploy",
+	"[Top Level] [sig-devex][Feature:ImageEcosystem][ruby][Slow] hot deploy for openshift ruby image  Rails example should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]": "should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestAutomaticCreationOfPullSecrets": "TestAutomaticCreationOfPullSecrets [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestAutomaticCreationOfPullSecrets [apigroup:config.openshift.io]": "TestAutomaticCreationOfPullSecrets [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestDockercfgTokenDeletedController": "TestDockercfgTokenDeletedController [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] template-api TestTemplate": "TestTemplate [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] template-api TestTemplate [apigroup:template.openshift.io]": "TestTemplate [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] template-api TestTemplateTransformationFromConfig": "TestTemplateTransformationFromConfig [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] template-api TestTemplateTransformationFromConfig [apigroup:template.openshift.io]": "TestTemplateTransformationFromConfig [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance creation with invalid object reports error  should report a failure on creation": "should report a failure on creation [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance creation with invalid object reports error  should report a failure on creation [apigroup:template.openshift.io]": "should report a failure on creation [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance cross-namespace test should create and delete objects across namespaces": "should create and delete objects across namespaces [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance cross-namespace test should create and delete objects across namespaces [apigroup:user.openshift.io][apigroup:template.openshift.io]": "should create and delete objects across namespaces [apigroup:user.openshift.io][apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance impersonation tests should pass impersonation creation tests": "should pass impersonation creation tests [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance impersonation tests [apigroup:user.openshift.io][apigroup:authorization.openshift.io] should pass impersonation creation tests [apigroup:template.openshift.io]": "should pass impersonation creation tests [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance impersonation tests should pass impersonation deletion tests": "should pass impersonation deletion tests [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance impersonation tests [apigroup:user.openshift.io][apigroup:authorization.openshift.io] should pass impersonation deletion tests [apigroup:template.openshift.io]": "should pass impersonation deletion tests [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance impersonation tests should pass impersonation update tests": "should pass impersonation update tests [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance impersonation tests [apigroup:user.openshift.io][apigroup:authorization.openshift.io] should pass impersonation update tests [apigroup:template.openshift.io]": "should pass impersonation update tests [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance object kinds test should create and delete objects from varying API groups": "should create and delete objects from varying API groups [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance object kinds test should create and delete objects from varying API groups [apigroup:template.openshift.io][apigroup:route.openshift.io]": "should create and delete objects from varying API groups [apigroup:template.openshift.io][apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance readiness test  should report failed soon after an annotated objects has failed": "should report failed soon after an annotated objects has failed [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance readiness test  should report failed soon after an annotated objects has failed [apigroup:template.openshift.io][apigroup:build.openshift.io]": "should report failed soon after an annotated objects has failed [apigroup:template.openshift.io][apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance readiness test  should report ready soon after all annotated objects are ready": "should report ready soon after all annotated objects are ready [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance readiness test  should report ready soon after all annotated objects are ready [apigroup:template.openshift.io][apigroup:build.openshift.io]": "should report ready soon after all annotated objects are ready [apigroup:template.openshift.io][apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateinstance security tests  should pass security tests": "should pass security tests [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateinstance security tests [apigroup:authorization.openshift.io][apigroup:template.openshift.io] should pass security tests [apigroup:route.openshift.io]": "should pass security tests [apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateservicebroker bind test  should pass bind tests": "should pass bind tests [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateservicebroker bind test [apigroup:authorization.openshift.io][apigroup:template.openshift.io] should pass bind tests": "should pass bind tests [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateservicebroker end-to-end test  should pass an end-to-end test": "should pass an end-to-end test [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateservicebroker end-to-end test [apigroup:template.openshift.io][apigroup:authorization.openshift.io]  should pass an end-to-end test": "should pass an end-to-end test [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:Templates] templateservicebroker security test  should pass security tests": "should pass security tests [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:Templates] templateservicebroker security test [apigroup:template.openshift.io][apigroup:authorization.openshift.io]  should pass security tests": "should pass security tests [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-etcd] etcd cluster has the same number of master nodes and voting members from the endpoints configmap [Early]": "cluster has the same number of master nodes and voting members from the endpoints configmap [Early] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-etcd] etcd cluster has the same number of master nodes and voting members from the endpoints configmap [Early][apigroup:config.openshift.io]": "cluster has the same number of master nodes and voting members from the endpoints configmap [Early][apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-etcd] etcd leader changes are not excessive [Late]": "leader changes are not excessive [Late] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-etcd] etcd leader changes are not excessive [Late][apigroup:config.openshift.io]": "leader changes are not excessive [Late][apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-etcd] etcd record the start revision of the etcd-operator [Early]": "record the start revision of the etcd-operator [Early] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another": "[Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another [Serial]",
+	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another [apigroup:operator.openshift.io]": "[Feature:EtcdRecovery] Cluster should recover from a backup taken on one node and recovered on another [apigroup:operator.openshift.io] [Serial]",
 
-	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should restore itself after quorum loss": "[Feature:EtcdRecovery] Cluster should restore itself after quorum loss [Serial]",
+	"[Top Level] [sig-etcd][Feature:DisasterRecovery][Disruptive] [Feature:EtcdRecovery] Cluster should restore itself after quorum loss [apigroup:machine.openshift.io][apigroup:operator.openshift.io]": "[Feature:EtcdRecovery] Cluster should restore itself after quorum loss [apigroup:machine.openshift.io][apigroup:operator.openshift.io] [Serial]",
 
-	"[Top Level] [sig-etcd][Serial] etcd is able to vertically scale up and down with a single node [Timeout:60m]": "is able to vertically scale up and down with a single node [Timeout:60m] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-etcd][Serial] etcd [apigroup:config.openshift.io] is able to vertically scale up and down with a single node [Timeout:60m][apigroup:machine.openshift.io]": "is able to vertically scale up and down with a single node [Timeout:60m][apigroup:machine.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry] Image registry should redirect on blob pull": "should redirect on blob pull [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry] Image registry [apigroup:route.openshift.io] should redirect on blob pull [apigroup:image.openshift.io]": "should redirect on blob pull [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageAppend] Image append should create images by appending them": "should create images by appending them [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageAppend] Image append should create images by appending them [apigroup:image.openshift.io]": "should create images by appending them [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageExtract] Image extract should extract content from an image": "should extract content from an image [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageExtract] Image extract should extract content from an image [apigroup:image.openshift.io]": "should extract content from an image [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-imageregistry][Feature:ImageInfo] Image info should display information about images": "should display information about images [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageLayers] Image layer subresource should identify a deleted image as missing": "should identify a deleted image as missing [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageLayers] Image layer subresource should identify a deleted image as missing [apigroup:image.openshift.io]": "should identify a deleted image as missing [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageLayers] Image layer subresource should return layers from tagged images": "should return layers from tagged images [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageLayers] Image layer subresource should return layers from tagged images [apigroup:image.openshift.io][apigroup:build.openshift.io]": "should return layers from tagged images [apigroup:image.openshift.io][apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should perform lookup when the Deployment gets the resolve-names annotation later": "should perform lookup when the Deployment gets the resolve-names annotation later [Suite:openshift/conformance/parallel]",
 
@@ -2039,83 +2043,83 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should update OpenShift object image fields when local names are on": "should update OpenShift object image fields when local names are on [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should update standard Kube object image fields when local names are on": "should update standard Kube object image fields when local names are on [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should update standard Kube object image fields when local names are on [apigroup:image.openshift.io][apigroup:apps.openshift.io]": "should update standard Kube object image fields when local names are on [apigroup:image.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageMirror][Slow] Image mirror mirror image from integrated registry into few external registries": "mirror image from integrated registry into few external registries",
+	"[Top Level] [sig-imageregistry][Feature:ImageMirror][Slow] Image mirror mirror image from integrated registry into few external registries [apigroup:image.openshift.io][apigroup:build.openshift.io]": "mirror image from integrated registry into few external registries [apigroup:image.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageMirror][Slow] Image mirror mirror image from integrated registry to external registry": "mirror image from integrated registry to external registry",
+	"[Top Level] [sig-imageregistry][Feature:ImageMirror][Slow] Image mirror mirror image from integrated registry to external registry [apigroup:image.openshift.io][apigroup:build.openshift.io]": "mirror image from integrated registry to external registry [apigroup:image.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image hard prune should delete orphaned blobs": "should delete orphaned blobs",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image hard prune [apigroup:apps.openshift.io][apigroup:user.openshift.io] should delete orphaned blobs [apigroup:image.openshift.io]": "should delete orphaned blobs [apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image hard prune should show orphaned blob deletions in dry-run mode": "should show orphaned blob deletions in dry-run mode",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image hard prune [apigroup:apps.openshift.io][apigroup:user.openshift.io] should show orphaned blob deletions in dry-run mode [apigroup:image.openshift.io]": "should show orphaned blob deletions in dry-run mode [apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune of schema 1 should prune old image": "should prune old image",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune [apigroup:user.openshift.io] of schema 1 should prune old image [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should prune old image [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune of schema 2 should prune old image with config": "should prune old image with config",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune [apigroup:user.openshift.io] of schema 2 should prune old image with config [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should prune old image with config [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune with --all=false flag should prune only internally managed images": "should prune only internally managed images",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune [apigroup:user.openshift.io] with --all=false flag should prune only internally managed images [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should prune only internally managed images [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune with --prune-registry==false should prune old image but skip registry": "should prune old image but skip registry",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune [apigroup:user.openshift.io] with --prune-registry==false should prune old image but skip registry [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should prune old image but skip registry [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune with default --all flag should prune both internally managed and external images": "should prune both internally managed and external images",
+	"[Top Level] [sig-imageregistry][Feature:ImagePrune][Serial][Suite:openshift/registry/serial][Local] Image prune [apigroup:user.openshift.io] with default --all flag should prune both internally managed and external images [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should prune both internally managed and external images [apigroup:build.openshift.io][apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageQuota] Image resource quota should deny a push of built image exceeding openshift.io/imagestreams quota": "should deny a push of built image exceeding openshift.io/imagestreams quota [Disabled:SpecialConfig]",
+	"[Top Level] [sig-imageregistry][Feature:ImageQuota] Image resource quota should deny a push of built image exceeding openshift.io/imagestreams quota [apigroup:image.openshift.io]": "should deny a push of built image exceeding openshift.io/imagestreams quota [apigroup:image.openshift.io] [Disabled:SpecialConfig]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range should deny a container image reference exceeding limit on openshift.io/image-tags resource": "should deny a container image reference exceeding limit on openshift.io/image-tags resource [Disabled:SpecialConfig]",
+	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range [apigroup:config.openshift.io][apigroup:image.openshift.io][apigroup:operator.openshift.io] should deny a container image reference exceeding limit on openshift.io/image-tags resource [apigroup:build.openshift.io]": "should deny a container image reference exceeding limit on openshift.io/image-tags resource [apigroup:build.openshift.io] [Disabled:SpecialConfig]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range should deny a push of built image exceeding limit on openshift.io/images resource": "should deny a push of built image exceeding limit on openshift.io/images resource [Disabled:SpecialConfig]",
+	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range [apigroup:config.openshift.io][apigroup:image.openshift.io][apigroup:operator.openshift.io] should deny a push of built image exceeding limit on openshift.io/images resource [apigroup:build.openshift.io]": "should deny a push of built image exceeding limit on openshift.io/images resource [apigroup:build.openshift.io] [Disabled:SpecialConfig]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range should deny a push of built image exceeding openshift.io/Image limit": "should deny a push of built image exceeding openshift.io/Image limit [Disabled:SpecialConfig]",
+	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range [apigroup:config.openshift.io][apigroup:image.openshift.io][apigroup:operator.openshift.io] should deny a push of built image exceeding openshift.io/Image limit [apigroup:build.openshift.io]": "should deny a push of built image exceeding openshift.io/Image limit [apigroup:build.openshift.io] [Disabled:SpecialConfig]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range should deny an import of a repository exceeding limit on openshift.io/image-tags resource": "should deny an import of a repository exceeding limit on openshift.io/image-tags resource [Disabled:SpecialConfig]",
+	"[Top Level] [sig-imageregistry][Feature:ImageQuota][Serial][Suite:openshift/registry/serial] Image limit range [apigroup:config.openshift.io][apigroup:image.openshift.io][apigroup:operator.openshift.io] should deny an import of a repository exceeding limit on openshift.io/image-tags resource [apigroup:build.openshift.io]": "should deny an import of a repository exceeding limit on openshift.io/image-tags resource [apigroup:build.openshift.io] [Disabled:SpecialConfig]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API TestImportImageFromBlockedRegistry": "TestImportImageFromBlockedRegistry",
+	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API [apigroup:config.openshift.io] TestImportImageFromBlockedRegistry [apigroup:image.openshift.io]": "TestImportImageFromBlockedRegistry [apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API TestImportImageFromInsecureRegistry": "TestImportImageFromInsecureRegistry",
+	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API [apigroup:config.openshift.io] TestImportImageFromInsecureRegistry [apigroup:image.openshift.io]": "TestImportImageFromInsecureRegistry [apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API TestImportRepositoryFromBlockedRegistry": "TestImportRepositoryFromBlockedRegistry",
+	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API [apigroup:config.openshift.io] TestImportRepositoryFromBlockedRegistry [apigroup:image.openshift.io]": "TestImportRepositoryFromBlockedRegistry [apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API TestImportRepositoryFromInsecureRegistry": "TestImportRepositoryFromInsecureRegistry",
+	"[Top Level] [sig-imageregistry][Feature:ImageStreamImport][Serial][Slow] ImageStream API [apigroup:config.openshift.io] TestImportRepositoryFromInsecureRegistry [apigroup:image.openshift.io]": "TestImportRepositoryFromInsecureRegistry [apigroup:image.openshift.io]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Annotation trigger reconciles after the image is overwritten": "reconciles after the image is overwritten [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Annotation trigger reconciles after the image is overwritten [apigroup:image.openshift.io]": "reconciles after the image is overwritten [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestMultipleImageChangeBuildTriggers": "TestMultipleImageChangeBuildTriggers [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestMultipleImageChangeBuildTriggers [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestMultipleImageChangeBuildTriggers [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagCustom": "TestSimpleImageChangeBuildTriggerFromImageStreamTagCustom [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagCustom [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestSimpleImageChangeBuildTriggerFromImageStreamTagCustom [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagCustomWithConfigChange": "TestSimpleImageChangeBuildTriggerFromImageStreamTagCustomWithConfigChange [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagCustomWithConfigChange [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestSimpleImageChangeBuildTriggerFromImageStreamTagCustomWithConfigChange [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagDocker": "TestSimpleImageChangeBuildTriggerFromImageStreamTagDocker [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagDocker [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestSimpleImageChangeBuildTriggerFromImageStreamTagDocker [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagDockerWithConfigChange": "TestSimpleImageChangeBuildTriggerFromImageStreamTagDockerWithConfigChange [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagDockerWithConfigChange [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestSimpleImageChangeBuildTriggerFromImageStreamTagDockerWithConfigChange [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagSTI": "TestSimpleImageChangeBuildTriggerFromImageStreamTagSTI [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagSTI [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestSimpleImageChangeBuildTriggerFromImageStreamTagSTI [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagSTIWithConfigChange": "TestSimpleImageChangeBuildTriggerFromImageStreamTagSTIWithConfigChange [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers] Image change build triggers TestSimpleImageChangeBuildTriggerFromImageStreamTagSTIWithConfigChange [apigroup:image.openshift.io][apigroup:build.openshift.io]": "TestSimpleImageChangeBuildTriggerFromImageStreamTagSTIWithConfigChange [apigroup:image.openshift.io][apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream API TestImageStreamMappingCreate": "TestImageStreamMappingCreate [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream API TestImageStreamMappingCreate [apigroup:image.openshift.io]": "TestImageStreamMappingCreate [apigroup:image.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream API TestImageStreamTagLifecycleHook": "TestImageStreamTagLifecycleHook [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream API TestImageStreamTagLifecycleHook [apigroup:image.openshift.io]": "TestImageStreamTagLifecycleHook [apigroup:image.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream API TestImageStreamWithoutDockerImageConfig": "TestImageStreamWithoutDockerImageConfig [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream API TestImageStreamWithoutDockerImageConfig [apigroup:image.openshift.io]": "TestImageStreamWithoutDockerImageConfig [apigroup:image.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream admission TestImageStreamAdmitSpecUpdate": "TestImageStreamAdmitSpecUpdate [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream admission TestImageStreamAdmitSpecUpdate [apigroup:image.openshift.io]": "TestImageStreamAdmitSpecUpdate [apigroup:image.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream admission TestImageStreamAdmitStatusUpdate": "TestImageStreamAdmitStatusUpdate [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream admission TestImageStreamAdmitStatusUpdate [apigroup:image.openshift.io]": "TestImageStreamAdmitStatusUpdate [apigroup:image.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream admission TestImageStreamTagsAdmission": "TestImageStreamTagsAdmission [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Feature:ImageTriggers][Serial] ImageStream admission TestImageStreamTagsAdmission [apigroup:image.openshift.io]": "TestImageStreamTagsAdmission [apigroup:image.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-imageregistry][Feature:Image] oc tag should change image reference for internal images": "should change image reference for internal images [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:Image] oc tag should change image reference for internal images [apigroup:build.openshift.io][apigroup:image.openshift.io]": "should change image reference for internal images [apigroup:build.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:Image] oc tag should preserve image reference for external images": "should preserve image reference for external images [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:Image] oc tag should preserve image reference for external images [apigroup:image.openshift.io]": "should preserve image reference for external images [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:Image] oc tag should work when only imagestreams api is available": "should work when only imagestreams api is available [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:Image] oc tag should work when only imagestreams api is available [apigroup:image.openshift.io][apigroup:authorization.openshift.io]": "should work when only imagestreams api is available [apigroup:image.openshift.io][apigroup:authorization.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:Image] signature TestImageAddSignature": "TestImageAddSignature [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:Image] signature TestImageAddSignature [apigroup:image.openshift.io]": "TestImageAddSignature [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:Image] signature TestImageRemoveSignature": "TestImageRemoveSignature [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:Image] signature TestImageRemoveSignature [apigroup:image.openshift.io]": "TestImageRemoveSignature [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Serial][Suite:openshift/registry/serial] Image signature workflow can push a signed image to openshift registry and verify it": "can push a signed image to openshift registry and verify it [Skipped:Disconnected] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-imageregistry][Serial][Suite:openshift/registry/serial] Image signature workflow can push a signed image to openshift registry and verify it [apigroup:user.openshift.io][apigroup:image.openshift.io]": "can push a signed image to openshift registry and verify it [apigroup:user.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should have baremetalhost resources": "have baremetalhost resources [Suite:openshift/conformance/parallel]",
 
@@ -2126,6 +2130,10 @@ var annotations = map[string]string{
 	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should not allow updating BootMacAddress": "not allow updating BootMacAddress [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-installer][Feature:baremetal] Baremetal/OpenStack/vSphere/None platforms  have a metal3 deployment": "have a metal3 deployment [Suite:openshift/conformance/parallel]",
+
+	"[Top Level] [sig-installer][Feature:baremetal][Serial] A baremetal deployment without a provisioning network should allow setting the ProvisioningNetwork to 'Managed' with valid settings": "allow setting the ProvisioningNetwork to 'Managed' with valid settings [Suite:openshift/conformance/serial]",
+
+	"[Top Level] [sig-installer][Feature:baremetal][Serial] A baremetal deployment without a provisioning network should show the Provisioning Network as 'Disabled'": "show the Provisioning Network as 'Disabled' [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-installer][Feature:baremetal][Serial] Baremetal platform should ensure cluster baremetal operator and metal3 deployment return back healthy after they are deleted": "cluster baremetal operator and metal3 deployment return back healthy after they are deleted [Suite:openshift/conformance/serial]",
 
@@ -2151,21 +2159,21 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have a AlertmanagerReceiversNotConfigured alert in firing state": "should have a AlertmanagerReceiversNotConfigured alert in firing state [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have important platform topology metrics": "should have important platform topology metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have important platform topology metrics [apigroup:config.openshift.io]": "should have important platform topology metrics [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have non-Pod host cAdvisor metrics": "should have non-Pod host cAdvisor metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should provide ingress metrics": "should provide ingress metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should provide named network metrics": "should provide named network metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should provide named network metrics [apigroup:project.openshift.io]": "should provide named network metrics [apigroup:project.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should report telemetry if a cloud.openshift.com token is present [Late]": "should report telemetry if a cloud.openshift.com token is present [Late] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should start and expose a secured proxy and unsecured metrics": "should start and expose a secured proxy and unsecured metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should start and expose a secured proxy and unsecured metrics [apigroup:config.openshift.io]": "should start and expose a secured proxy and unsecured metrics [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster shouldn't have failing rules evaluation": "shouldn't have failing rules evaluation [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early]": "shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early][apigroup:config.openshift.io]": "shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early][apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster when using openshift-sdn should be able to get the sdn ovs flows": "should be able to get the sdn ovs flows [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
@@ -2183,29 +2191,29 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-instrumentation][Late] Alerts shouldn't exceed the 650 series limit of total series sent via telemetry from each cluster": "shouldn't exceed the 650 series limit of total series sent via telemetry from each cluster [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation][Late] Alerts shouldn't report any unexpected alerts in firing or pending state": "shouldn't report any unexpected alerts in firing or pending state [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation][Late] Alerts shouldn't report any unexpected alerts in firing or pending state [apigroup:config.openshift.io]": "shouldn't report any unexpected alerts in firing or pending state [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation][Late] OpenShift alerting rules should have a runbook_url annotation if the alert is critical": "should have a runbook_url annotation if the alert is critical [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation][Late] OpenShift alerting rules [apigroup:image.openshift.io] should have a runbook_url annotation if the alert is critical": "should have a runbook_url annotation if the alert is critical [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation][Late] OpenShift alerting rules should have a valid severity label": "should have a valid severity label [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation][Late] OpenShift alerting rules [apigroup:image.openshift.io] should have a valid severity label": "should have a valid severity label [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation][Late] OpenShift alerting rules should have description and summary annotations": "should have description and summary annotations [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation][Late] OpenShift alerting rules [apigroup:image.openshift.io] should have description and summary annotations": "should have description and summary annotations [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation][sig-builds][Feature:Builds] Prometheus when installed on the cluster should start and expose a secured proxy and verify build metrics": "should start and expose a secured proxy and verify build metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation][sig-builds][Feature:Builds] Prometheus when installed on the cluster should start and expose a secured proxy and verify build metrics [apigroup:config.openshift.io][apigroup:build.openshift.io]": "should start and expose a secured proxy and verify build metrics [apigroup:config.openshift.io][apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network-edge] DNS should answer A and AAAA queries for a dual-stack service": "should answer A and AAAA queries for a dual-stack service [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network-edge] DNS should answer A and AAAA queries for a dual-stack service [apigroup:config.openshift.io]": "should answer A and AAAA queries for a dual-stack service [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network-edge] DNS should answer endpoint and wildcard queries for the cluster": "should answer endpoint and wildcard queries for the cluster [Disabled:Broken]",
 
-	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router] The HAProxy router should be able to connect to a service that is idled because a GET on the route will unidle it": "should be able to connect to a service that is idled because a GET on the route will unidle it [Skipped:Disconnected] [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router] The HAProxy router should be able to connect to a service that is idled because a GET on the route will unidle it [apigroup:config.openshift.io][apigroup:template.openshift.io]": "should be able to connect to a service that is idled because a GET on the route will unidle it [apigroup:config.openshift.io][apigroup:template.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router] The HAProxy router should pass the gRPC interoperability tests": "should pass the gRPC interoperability tests [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router] The HAProxy router should pass the gRPC interoperability tests [apigroup:config.openshift.io][apigroup:route.openshift.io][apigroup:template.openshift.io]": "should pass the gRPC interoperability tests [apigroup:config.openshift.io][apigroup:route.openshift.io][apigroup:template.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router] The HAProxy router should pass the h2spec conformance tests": "should pass the h2spec conformance tests [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router][apigroup:route.openshift.io] The HAProxy router should pass the h2spec conformance tests [apigroup:config.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io][apigroup:security.openshift.io][apigroup:template.openshift.io]": "should pass the h2spec conformance tests [apigroup:config.openshift.io][apigroup:authorization.openshift.io][apigroup:user.openshift.io][apigroup:security.openshift.io][apigroup:template.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router] The HAProxy router should pass the http2 tests": "should pass the http2 tests [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [sig-network-edge][Conformance][Area:Networking][Feature:Router][apigroup:route.openshift.io][apigroup:config.openshift.io] The HAProxy router should pass the http2 tests [apigroup:image.openshift.io][apigroup:template.openshift.io]": "should pass the http2 tests [apigroup:image.openshift.io][apigroup:template.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
-	"[Top Level] [sig-network-edge][Feature:Idling] Idling with a single service and DeploymentConfig should idle the service and DeploymentConfig properly": "should idle the service and DeploymentConfig properly [Disabled:Broken]",
+	"[Top Level] [sig-network-edge][Feature:Idling] Idling with a single service and DeploymentConfig should idle the service and DeploymentConfig properly [apigroup:apps.openshift.io]": "should idle the service and DeploymentConfig properly [apigroup:apps.openshift.io] [Disabled:Broken]",
 
 	"[Top Level] [sig-network-edge][Feature:Idling] Idling with a single service and ReplicationController should idle the service and ReplicationController properly": "should idle the service and ReplicationController properly [Suite:openshift/conformance/parallel]",
 
@@ -2285,7 +2293,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] IngressClass [Feature:Ingress] should not set default value if no default IngressClass [Serial]": "should not set default value if no default IngressClass [Serial] [Suite:openshift/conformance/serial] [Suite:k8s]",
 
-	"[Top Level] [sig-network] IngressClass [Feature:Ingress] should prevent Ingress creation if more than 1 IngressClass marked as default [Serial]": "should prevent Ingress creation if more than 1 IngressClass marked as default [Serial] [Suite:openshift/conformance/serial] [Suite:k8s]",
+	"[Top Level] [sig-network] IngressClass [Feature:Ingress] should prevent Ingress creation if more than 1 IngressClass marked as default [Serial]": "should prevent Ingress creation if more than 1 IngressClass marked as default [Serial] [Disabled:Broken] [Suite:k8s]",
 
 	"[Top Level] [sig-network] IngressClass [Feature:Ingress] should set default value on new IngressClass [Serial]": "should set default value on new IngressClass [Serial] [Suite:openshift/conformance/serial] [Suite:k8s]",
 
@@ -2669,11 +2677,11 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] Services should release NodePorts on delete": "should release NodePorts on delete [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Services should respect internalTrafficPolicy=Local Pod (hostNetwork: true) to Pod [Feature:ServiceInternalTrafficPolicy]": "should respect internalTrafficPolicy=Local Pod (hostNetwork: true) to Pod [Feature:ServiceInternalTrafficPolicy] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-network] Services should respect internalTrafficPolicy=Local Pod (hostNetwork: true) to Pod [Feature:ServiceInternalTrafficPolicy]": "should respect internalTrafficPolicy=Local Pod (hostNetwork: true) to Pod [Feature:ServiceInternalTrafficPolicy] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Services should respect internalTrafficPolicy=Local Pod and Node, to Pod (hostNetwork: true) [Feature:ServiceInternalTrafficPolicy]": "should respect internalTrafficPolicy=Local Pod and Node, to Pod (hostNetwork: true) [Feature:ServiceInternalTrafficPolicy] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-network] Services should respect internalTrafficPolicy=Local Pod and Node, to Pod (hostNetwork: true) [Feature:ServiceInternalTrafficPolicy]": "should respect internalTrafficPolicy=Local Pod and Node, to Pod (hostNetwork: true) [Feature:ServiceInternalTrafficPolicy] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Services should respect internalTrafficPolicy=Local Pod to Pod [Feature:ServiceInternalTrafficPolicy]": "should respect internalTrafficPolicy=Local Pod to Pod [Feature:ServiceInternalTrafficPolicy] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-network] Services should respect internalTrafficPolicy=Local Pod to Pod [Feature:ServiceInternalTrafficPolicy]": "should respect internalTrafficPolicy=Local Pod to Pod [Feature:ServiceInternalTrafficPolicy] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should serve a basic endpoint from pods  [Conformance]": "should serve a basic endpoint from pods  [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
@@ -2733,6 +2741,8 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] [Feature:Topology Hints] should distribute endpoints evenly": "should distribute endpoints evenly [Disabled:SpecialConfig] [Suite:k8s]",
 
+	"[Top Level] [sig-network] external gateway address when using openshift ovn-kubernetes should match the address family of the pod": "should match the address family of the pod [Suite:openshift/conformance/parallel]",
+
 	"[Top Level] [sig-network] multicast when using one of the OpenshiftSDN modes 'redhat/openshift-ovs-multitenant, redhat/openshift-ovs-networkpolicy' should allow multicast traffic in namespaces where it is enabled": "should allow multicast traffic in namespaces where it is enabled [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network] multicast when using one of the OpenshiftSDN modes 'redhat/openshift-ovs-multitenant, redhat/openshift-ovs-networkpolicy' should block multicast traffic in namespaces where it is disabled": "should block multicast traffic in namespaces where it is disabled [Suite:openshift/conformance/parallel]",
@@ -2761,7 +2771,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] services when running openshift ipv4 cluster ensures external ip policy is configured correctly on the cluster [Serial]": "ensures external ip policy is configured correctly on the cluster [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network] services when running openshift ipv4 cluster on bare metal ensures external auto assign cidr is configured correctly on the cluster [Serial]": "ensures external auto assign cidr is configured correctly on the cluster [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network] services when running openshift ipv4 cluster on bare metal [apigroup:config.openshift.io] ensures external auto assign cidr is configured correctly on the cluster [Serial]": "ensures external auto assign cidr is configured correctly on the cluster [Serial] [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-network] services when using a plugin in a mode that does not isolate namespaces by default should allow connections to pods in different namespaces on different nodes via service IPs": "should allow connections to pods in different namespaces on different nodes via service IPs [Suite:openshift/conformance/parallel]",
 
@@ -2779,69 +2789,69 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] services when using a plugin in a mode that isolates namespaces by default should prevent connections to pods in different namespaces on the same node via service IPs": "should prevent connections to pods in different namespaces on the same node via service IPs [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:EgressFirewall] egressFirewall should have no impact outside its namespace": "egressFirewall should have no impact outside its namespace [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:EgressFirewall] egressFirewall should have no impact outside its namespace [apigroup:config.openshift.io]": "egressFirewall should have no impact outside its namespace [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network][Feature:EgressFirewall] when using openshift ovn-kubernetes should ensure egressfirewall is created": "should ensure egressfirewall is created [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:EgressFirewall] when using openshift-sdn should ensure egressnetworkpolicy is created": "should ensure egressnetworkpolicy is created [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:EgressFirewall] when using openshift-sdn should ensure egressnetworkpolicy is created [apigroup:network.openshift.io]": "should ensure egressnetworkpolicy is created [apigroup:network.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] EgressIPs can be assigned automatically [Skipped:Network/OVNKubernetes]": "EgressIPs can be assigned automatically [Skipped:Network/OVNKubernetes] [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network][Feature:EgressIP][apigroup:config.openshift.io] [external-targets][apigroup:user.openshift.io][apigroup:security.openshift.io] EgressIPs can be assigned automatically [Skipped:Network/OVNKubernetes]": "EgressIPs can be assigned automatically [Skipped:Network/OVNKubernetes] [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] only pods matched by the pod selector should have the EgressIPs [Skipped:Network/OpenShiftSDN]": "only pods matched by the pod selector should have the EgressIPs [Skipped:Network/OpenShiftSDN] [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network][Feature:EgressIP][apigroup:config.openshift.io] [external-targets][apigroup:user.openshift.io][apigroup:security.openshift.io] only pods matched by the pod selector should have the EgressIPs [Skipped:Network/OpenShiftSDN]": "only pods matched by the pod selector should have the EgressIPs [Skipped:Network/OpenShiftSDN] [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] pods should have the assigned EgressIPs and EgressIPs can be deleted and recreated [Skipped:azure]": "pods should have the assigned EgressIPs and EgressIPs can be deleted and recreated [Skipped:azure] [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network][Feature:EgressIP][apigroup:config.openshift.io] [external-targets][apigroup:user.openshift.io][apigroup:security.openshift.io] pods should have the assigned EgressIPs and EgressIPs can be deleted and recreated [Skipped:azure][apigroup:route.openshift.io]": "pods should have the assigned EgressIPs and EgressIPs can be deleted and recreated [Skipped:azure][apigroup:route.openshift.io] [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] pods should have the assigned EgressIPs and EgressIPs can be updated [Skipped:Network/OpenShiftSDN]": "pods should have the assigned EgressIPs and EgressIPs can be updated [Skipped:Network/OpenShiftSDN] [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network][Feature:EgressIP][apigroup:config.openshift.io] [external-targets][apigroup:user.openshift.io][apigroup:security.openshift.io] pods should have the assigned EgressIPs and EgressIPs can be updated [Skipped:Network/OpenShiftSDN]": "pods should have the assigned EgressIPs and EgressIPs can be updated [Skipped:Network/OpenShiftSDN] [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [external-targets] pods should keep the assigned EgressIPs when being rescheduled to another node": "pods should keep the assigned EgressIPs when being rescheduled to another node [Serial] [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-network][Feature:EgressIP][apigroup:config.openshift.io] [external-targets][apigroup:user.openshift.io][apigroup:security.openshift.io] pods should keep the assigned EgressIPs when being rescheduled to another node": "pods should keep the assigned EgressIPs when being rescheduled to another node [Serial] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-network][Feature:EgressIP] [internal-targets] EgressIP pods should query hostNetwork pods with the local node's SNAT": "EgressIP pods should query hostNetwork pods with the local node's SNAT [Disabled:Broken] [Serial]",
+	"[Top Level] [sig-network][Feature:EgressIP][apigroup:config.openshift.io] [internal-targets] EgressIP pods should query hostNetwork pods with the local node's SNAT": "EgressIP pods should query hostNetwork pods with the local node's SNAT [Disabled:Broken] [Serial]",
 
-	"[Top Level] [sig-network][Feature:EgressRouterCNI] should ensure ipv4 egressrouter cni resources are created": "should ensure ipv4 egressrouter cni resources are created [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:EgressRouterCNI] should ensure ipv4 egressrouter cni resources are created [apigroup:operator.openshift.io]": "should ensure ipv4 egressrouter cni resources are created [apigroup:operator.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:EgressRouterCNI] when using openshift ovn-kubernetes should ensure ipv6 egressrouter cni resources are created": "should ensure ipv6 egressrouter cni resources are created [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:EgressRouterCNI] when using openshift ovn-kubernetes should ensure ipv6 egressrouter cni resources are created [apigroup:operator.openshift.io]": "should ensure ipv6 egressrouter cni resources are created [apigroup:operator.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network][Feature:Multus] should use multus to create net1 device from network-attachment-definition": "should use multus to create net1 device from network-attachment-definition [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Network Policy Audit logging] when using openshift ovn-kubernetes should ensure acl logs are created and correct": "should ensure acl logs are created and correct [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Network Policy Audit logging] when using openshift ovn-kubernetes should ensure acl logs are created and correct [apigroup:project.openshift.io][apigroup:network.openshift.io]": "should ensure acl logs are created and correct [apigroup:project.openshift.io][apigroup:network.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router converges when multiple routers are writing conflicting status": "converges when multiple routers are writing conflicting status [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:config.openshift.io] The HAProxy router should enable openshift-monitoring to pull metrics": "should enable openshift-monitoring to pull metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router converges when multiple routers are writing status": "converges when multiple routers are writing status [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:config.openshift.io] The HAProxy router should expose a health check on the metrics port": "should expose a health check on the metrics port [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router reports the expected host names in admitted routes' statuses": "reports the expected host names in admitted routes' statuses [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:config.openshift.io] The HAProxy router should expose prometheus metrics for a route [apigroup:route.openshift.io]": "should expose prometheus metrics for a route [apigroup:route.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should enable openshift-monitoring to pull metrics": "should enable openshift-monitoring to pull metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:config.openshift.io] The HAProxy router should expose the profiling endpoints": "should expose the profiling endpoints [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should expose a health check on the metrics port": "should expose a health check on the metrics port [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:config.openshift.io][apigroup:image.openshift.io] The HAProxy router should serve a route that points to two services and respect weights": "should serve a route that points to two services and respect weights [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should expose prometheus metrics for a route": "should expose prometheus metrics for a route [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:config.openshift.io][apigroup:operator.openshift.io][apigroup:apps.openshift.io] The HAProxy router should set Forwarded headers appropriately": "should set Forwarded headers appropriately [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should expose the profiling endpoints": "should expose the profiling endpoints [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:operator.openshift.io][apigroup:apps.openshift.io] The HAProxy router should respond with 503 to unrecognized hosts": "should respond with 503 to unrecognized hosts [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should override the route host for overridden domains with a custom value": "should override the route host for overridden domains with a custom value [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:operator.openshift.io][apigroup:apps.openshift.io] The HAProxy router should serve routes that were created from an ingress [apigroup:route.openshift.io]": "should serve routes that were created from an ingress [apigroup:route.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should override the route host with a custom value": "should override the route host with a custom value [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io] The HAProxy router converges when multiple routers are writing conflicting status": "converges when multiple routers are writing conflicting status [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should respond with 503 to unrecognized hosts": "should respond with 503 to unrecognized hosts [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io] The HAProxy router converges when multiple routers are writing status": "converges when multiple routers are writing status [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should run even if it has no access to update status": "should run even if it has no access to update status [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io] when FIPS is disabled the HAProxy router should serve routes when configured with a 1024-bit RSA key [apigroup:template.openshift.io]": "should serve routes when configured with a 1024-bit RSA key [apigroup:template.openshift.io] [Feature:Networking-IPv4] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should serve a route that points to two services and respect weights": "should serve a route that points to two services and respect weights [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io] when FIPS is enabled the HAProxy router should not work when configured with a 1024-bit RSA key [apigroup:template.openshift.io]": "should not work when configured with a 1024-bit RSA key [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should serve routes that were created from an ingress": "should serve routes that were created from an ingress [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:config.openshift.io] The HAProxy router reports the expected host names in admitted routes' statuses": "reports the expected host names in admitted routes' statuses [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should serve the correct routes when running with the haproxy config manager": "should serve the correct routes when running with the haproxy config manager [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:config.openshift.io] The HAProxy router should serve the correct routes when running with the haproxy config manager": "should serve the correct routes when running with the haproxy config manager [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should serve the correct routes when scoped to a single namespace and label set": "should serve the correct routes when scoped to a single namespace and label set [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:config.openshift.io][apigroup:template.openshift.io] The HAProxy router should run even if it has no access to update status [apigroup:image.openshift.io]": "should run even if it has no access to update status [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should set Forwarded headers appropriately": "should set Forwarded headers appropriately [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:operator.openshift.io][apigroup:apps.openshift.io] The HAProxy router should support reencrypt to services backed by a serving certificate automatically": "should support reencrypt to services backed by a serving certificate automatically [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] The HAProxy router should support reencrypt to services backed by a serving certificate automatically": "should support reencrypt to services backed by a serving certificate automatically [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:template.openshift.io] The HAProxy router should override the route host for overridden domains with a custom value [apigroup:image.openshift.io]": "should override the route host for overridden domains with a custom value [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] when FIPS is disabled the HAProxy router should serve routes when configured with a 1024-bit RSA key": "should serve routes when configured with a 1024-bit RSA key [Feature:Networking-IPv4] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:template.openshift.io] The HAProxy router should override the route host with a custom value": "should override the route host with a custom value [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][Feature:Router] when FIPS is enabled the HAProxy router should not work when configured with a 1024-bit RSA key": "should not work when configured with a 1024-bit RSA key [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][Feature:Router][apigroup:route.openshift.io][apigroup:template.openshift.io] The HAProxy router should serve the correct routes when scoped to a single namespace and label set": "should serve the correct routes when scoped to a single namespace and label set [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-network][Feature:Whereabouts] should assign unique IP addresses to each pod in the event of a race condition case": "should assign unique IP addresses to each pod in the event of a race condition case [Suite:openshift/conformance/parallel]",
 
@@ -2859,9 +2869,9 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network][Feature:tuning] pod sysctls should not affect node": "pod sysctls should not affect node [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][endpoints] admission blocks manual creation of EndpointSlices pointing to the cluster or service network": "blocks manual creation of EndpointSlices pointing to the cluster or service network [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][endpoints] admission [apigroup:config.openshift.io] blocks manual creation of EndpointSlices pointing to the cluster or service network": "blocks manual creation of EndpointSlices pointing to the cluster or service network [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-network][endpoints] admission blocks manual creation of Endpoints pointing to the cluster or service network": "blocks manual creation of Endpoints pointing to the cluster or service network [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-network][endpoints] admission [apigroup:config.openshift.io] blocks manual creation of Endpoints pointing to the cluster or service network": "blocks manual creation of Endpoints pointing to the cluster or service network [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-node] AppArmor load AppArmor profiles can disable an AppArmor profile, using unconfined": "can disable an AppArmor profile, using unconfined [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -3203,7 +3213,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-node] should override timeoutGracePeriodSeconds when annotation is set": "should override timeoutGracePeriodSeconds when annotation is set [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-node] supplemental groups Ensure supplemental groups propagate to docker should propagate requested groups to the container [Local]": "should propagate requested groups to the container [Local]",
+	"[Top Level] [sig-node] supplemental groups Ensure supplemental groups propagate to docker should propagate requested groups to the container [Local][apigroup:user.openshift.io][apigroup:security.openshift.io]": "should propagate requested groups to the container [Local][apigroup:user.openshift.io][apigroup:security.openshift.io]",
 
 	"[Top Level] [sig-node][Late] should not have pod creation failures due to systemd timeouts": "should not have pod creation failures due to systemd timeouts [Suite:openshift/conformance/parallel]",
 
@@ -3221,17 +3231,17 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-operator] OLM should be installed with subscriptions at version v1alpha1": "be installed with subscriptions at version v1alpha1 [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should have imagePullPolicy:IfNotPresent on thier deployments": "have imagePullPolicy:IfNotPresent on thier deployments [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should have imagePullPolicy:IfNotPresent on thier deployments [apigroup:config.openshift.io]": "have imagePullPolicy:IfNotPresent on thier deployments [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-operator] an end user can use OLM Report Upgradeable in OLM ClusterOperators status": "Report Upgradeable in OLM ClusterOperators status [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] an end user can use OLM can subscribe to the operator": "can subscribe to the operator [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] an end user can use OLM can subscribe to the operator [apigroup:config.openshift.io]": "can subscribe to the operator [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scalability][Feature:Performance] Load cluster should populate the cluster [Slow][Serial]": "should populate the cluster [Slow][Serial]",
+	"[Top Level] [sig-scalability][Feature:Performance] Load cluster should populate the cluster [Slow][Serial][apigroup:template.openshift.io][apigroup:apps.openshift.io][apigroup:build.openshift.io]": "should populate the cluster [Slow][Serial][apigroup:template.openshift.io][apigroup:apps.openshift.io][apigroup:build.openshift.io]",
 
 	"[Top Level] [sig-scalability][Feature:Performance][Serial][Slow] Load cluster concurrently with templates": "concurrently with templates",
 
-	"[Top Level] [sig-scalability][Feature:Performance][Serial][Slow] Mirror cluster it should read the cluster apps": "it should read the cluster apps",
+	"[Top Level] [sig-scalability][Feature:Performance][Serial][Slow] Mirror cluster it should read the cluster apps [apigroup:apps.openshift.io]": "it should read the cluster apps [apigroup:apps.openshift.io]",
 
 	"[Top Level] [sig-scalability][Feature:Performance][Serial][Slow] Mirror cluster it should read the node info": "it should read the node info",
 
@@ -5651,495 +5661,495 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-disk] [Testpattern: Pre-provisioned PV (xfs)][Slow] volumes should store data": "should store data [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)(allowExpansion)] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)(allowExpansion)] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)(allowExpansion)] volume-expand should resize volume when PVC is edited while pod is using it": "should resize volume when PVC is edited while pod is using it [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)(allowExpansion)] volume-expand should resize volume when PVC is edited while pod is using it": "should resize volume when PVC is edited while pod is using it [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should mount multiple PV pointing to the same storage on the same node": "should mount multiple PV pointing to the same storage on the same node [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should mount multiple PV pointing to the same storage on the same node": "should mount multiple PV pointing to the same storage on the same node [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with any volume data source [Serial]": "should provision storage with any volume data source [Serial] [Disabled:Broken] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with any volume data source [Serial]": "should provision storage with any volume data source [Serial] [Disabled:Broken] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with mount options": "should provision storage with mount options [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with mount options": "should provision storage with mount options [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with pvc data source in parallel [Slow]": "should provision storage with pvc data source in parallel [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with pvc data source in parallel [Slow]": "should provision storage with pvc data source in parallel [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with pvc data source": "should provision storage with pvc data source [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with pvc data source": "should provision storage with pvc data source [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource]": "should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] provisioning should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource]": "should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volume-expand should not allow expansion of pvcs without AllowVolumeExpansion property": "should not allow expansion of pvcs without AllowVolumeExpansion property [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volume-expand should not allow expansion of pvcs without AllowVolumeExpansion property": "should not allow expansion of pvcs without AllowVolumeExpansion property [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volume-stress multiple pods should access different volumes repeatedly [Slow] [Serial]": "multiple pods should access different volumes repeatedly [Slow] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volume-stress multiple pods should access different volumes repeatedly [Slow] [Serial]": "multiple pods should access different volumes repeatedly [Slow] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumeMode should fail in binding dynamic provisioned PV to PVC [Slow][LinuxOnly]": "should fail in binding dynamic provisioned PV to PVC [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumeMode should fail in binding dynamic provisioned PV to PVC [Slow][LinuxOnly]": "should fail in binding dynamic provisioned PV to PVC [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (block volmode)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand should resize volume when PVC is edited while pod is using it": "should resize volume when PVC is edited while pod is using it [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)(allowExpansion)] volume-expand should resize volume when PVC is edited while pod is using it": "should resize volume when PVC is edited while pod is using it [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] capacity provides storage capacity information": "provides storage capacity information [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] capacity provides storage capacity information": "provides storage capacity information [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (Always)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents": "(Always)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (Always)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents": "(Always)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents": "(Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents": "(Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup applied to the volume contents": "(Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup applied to the volume contents [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup applied to the volume contents": "(Always)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup applied to the volume contents [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents": "(OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents": "(OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, new pod fsgroup applied to volume contents [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents": "(OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents": "(OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with different fsgroup applied to the volume contents [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup skips ownership changes to the volume contents": "(OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup skips ownership changes to the volume contents [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] fsgroupchangepolicy (OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup skips ownership changes to the volume contents": "(OnRootMismatch)[LinuxOnly], pod created with an initial fsgroup, volume contents ownership changed via chgrp in first pod, new pod with same fsgroup skips ownership changes to the volume contents [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should mount multiple PV pointing to the same storage on the same node": "should mount multiple PV pointing to the same storage on the same node [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should mount multiple PV pointing to the same storage on the same node": "should mount multiple PV pointing to the same storage on the same node [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with any volume data source [Serial]": "should provision storage with any volume data source [Serial] [Disabled:Broken] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with any volume data source [Serial]": "should provision storage with any volume data source [Serial] [Disabled:Broken] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with mount options": "should provision storage with mount options [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with mount options": "should provision storage with mount options [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with pvc data source in parallel [Slow]": "should provision storage with pvc data source in parallel [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with pvc data source in parallel [Slow]": "should provision storage with pvc data source in parallel [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with pvc data source": "should provision storage with pvc data source [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with pvc data source": "should provision storage with pvc data source [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource]": "should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] provisioning should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource]": "should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support existing directory": "should support existing directory [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support existing directory": "should support existing directory [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support non-existent path": "should support non-existent path [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support non-existent path": "should support non-existent path [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volume-expand should not allow expansion of pvcs without AllowVolumeExpansion property": "should not allow expansion of pvcs without AllowVolumeExpansion property [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volume-expand should not allow expansion of pvcs without AllowVolumeExpansion property": "should not allow expansion of pvcs without AllowVolumeExpansion property [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volume-stress multiple pods should access different volumes repeatedly [Slow] [Serial]": "multiple pods should access different volumes repeatedly [Slow] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volume-stress multiple pods should access different volumes repeatedly [Slow] [Serial]": "multiple pods should access different volumes repeatedly [Slow] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (default fs)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (delayed binding)] topology should fail to schedule a pod which has topologies that conflict with AllowedTopologies": "should fail to schedule a pod which has topologies that conflict with AllowedTopologies [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (delayed binding)] topology should fail to schedule a pod which has topologies that conflict with AllowedTopologies": "should fail to schedule a pod which has topologies that conflict with AllowedTopologies [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (delayed binding)] topology should provision a volume and schedule a pod with AllowedTopologies": "should provision a volume and schedule a pod with AllowedTopologies [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (delayed binding)] topology should provision a volume and schedule a pod with AllowedTopologies": "should provision a volume and schedule a pod with AllowedTopologies [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext3)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext3)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext3)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext3)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ext4)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeLimits should support volume limits [Serial]": "should support volume limits [Serial] [Skipped:azure] [Suite:openshift/conformance/serial] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeLimits should support volume limits [Serial]": "should support volume limits [Serial] [Suite:openshift/conformance/serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeLimits should verify that all csinodes have volume limits": "should verify that all csinodes have volume limits [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeLimits should verify that all csinodes have volume limits": "should verify that all csinodes have volume limits [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (filesystem volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (immediate binding)] topology should fail to schedule a pod which has topologies that conflict with AllowedTopologies": "should fail to schedule a pod which has topologies that conflict with AllowedTopologies [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (immediate binding)] topology should fail to schedule a pod which has topologies that conflict with AllowedTopologies": "should fail to schedule a pod which has topologies that conflict with AllowedTopologies [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (immediate binding)] topology should provision a volume and schedule a pod with AllowedTopologies": "should provision a volume and schedule a pod with AllowedTopologies [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (immediate binding)] topology should provision a volume and schedule a pod with AllowedTopologies": "should provision a volume and schedule a pod with AllowedTopologies [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)(allowExpansion)][Feature:Windows] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)(allowExpansion)][Feature:Windows] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)(allowExpansion)][Feature:Windows] volume-expand should resize volume when PVC is edited while pod is using it": "should resize volume when PVC is edited while pod is using it [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)(allowExpansion)][Feature:Windows] volume-expand should resize volume when PVC is edited while pod is using it": "should resize volume when PVC is edited while pod is using it [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should mount multiple PV pointing to the same storage on the same node": "should mount multiple PV pointing to the same storage on the same node [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should mount multiple PV pointing to the same storage on the same node": "should mount multiple PV pointing to the same storage on the same node [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with any volume data source [Serial]": "should provision storage with any volume data source [Serial] [Disabled:Broken] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with any volume data source [Serial]": "should provision storage with any volume data source [Serial] [Disabled:Broken] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with mount options": "should provision storage with mount options [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with mount options": "should provision storage with mount options [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with pvc data source in parallel [Slow]": "should provision storage with pvc data source in parallel [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with pvc data source in parallel [Slow]": "should provision storage with pvc data source in parallel [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with pvc data source": "should provision storage with pvc data source [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with pvc data source": "should provision storage with pvc data source [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource]": "should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] provisioning should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource]": "should provision storage with snapshot data source [Feature:VolumeSnapshotDataSource] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support existing directory": "should support existing directory [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support existing directory": "should support existing directory [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support non-existent path": "should support non-existent path [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support non-existent path": "should support non-existent path [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volume-expand should not allow expansion of pvcs without AllowVolumeExpansion property": "should not allow expansion of pvcs without AllowVolumeExpansion property [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volume-expand should not allow expansion of pvcs without AllowVolumeExpansion property": "should not allow expansion of pvcs without AllowVolumeExpansion property [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (ntfs)][Feature:Windows] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] volumes should store data": "should store data [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Dynamic PV (xfs)][Slow] volumes should store data": "should store data [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should create read/write inline ephemeral volume": "should create read/write inline ephemeral volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should create read/write inline ephemeral volume": "should create read/write inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should support multiple inline ephemeral volumes": "should support multiple inline ephemeral volumes [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should support multiple inline ephemeral volumes": "should support multiple inline ephemeral volumes [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should support two pods which have the same volume definition": "should support two pods which have the same volume definition [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (block volmode) (late-binding)] ephemeral should support two pods which have the same volume definition": "should support two pods which have the same volume definition [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should create read/write inline ephemeral volume": "should create read/write inline ephemeral volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should create read/write inline ephemeral volume": "should create read/write inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should support multiple inline ephemeral volumes": "should support multiple inline ephemeral volumes [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should support multiple inline ephemeral volumes": "should support multiple inline ephemeral volumes [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should support two pods which have the same volume definition": "should support two pods which have the same volume definition [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (immediate-binding)] ephemeral should support two pods which have the same volume definition": "should support two pods which have the same volume definition [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should create read/write inline ephemeral volume": "should create read/write inline ephemeral volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should create read/write inline ephemeral volume": "should create read/write inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should support multiple inline ephemeral volumes": "should support multiple inline ephemeral volumes [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should support multiple inline ephemeral volumes": "should support multiple inline ephemeral volumes [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should support two pods which have the same volume definition": "should support two pods which have the same volume definition [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs) (late-binding)] ephemeral should support two pods which have the same volume definition": "should support two pods which have the same volume definition [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs)] volumeLimits should support volume limits [Serial]": "should support volume limits [Serial] [Skipped:azure] [Suite:openshift/conformance/serial] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs)] volumeLimits should support volume limits [Serial]": "should support volume limits [Serial] [Suite:openshift/conformance/serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs)] volumeLimits should verify that all csinodes have volume limits": "should verify that all csinodes have volume limits [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Generic Ephemeral-volume (default fs)] volumeLimits should verify that all csinodes have volume limits": "should verify that all csinodes have volume limits [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support existing directory": "should support existing directory [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support existing directory": "should support existing directory [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support non-existent path": "should support non-existent path [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support non-existent path": "should support non-existent path [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (default fs)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext3)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext3)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext3)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext3)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext4)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext4)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext4)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ext4)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ntfs)][Feature:Windows] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ntfs)][Feature:Windows] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ntfs)][Feature:Windows] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (ntfs)][Feature:Windows] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (xfs)][Slow] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (xfs)][Slow] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (xfs)][Slow] volumes should store data": "should store data [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Inline-volume (xfs)][Slow] volumes should store data": "should store data [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns.": "Should test that pv used in a pod that is force deleted while the kubelet is down cleans up when the kubelet returns. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumeMode should fail to create pod by failing to mount volume [Slow]": "should fail to create pod by failing to mount volume [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumeMode should fail to create pod by failing to mount volume [Slow]": "should fail to create pod by failing to mount volume [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (block volmode)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should be able to unmount after the subpath directory is deleted [LinuxOnly]": "should be able to unmount after the subpath directory is deleted [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if non-existent subpath is outside the volume [Slow][LinuxOnly]": "should fail if non-existent subpath is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if subpath directory is outside the volume [Slow][LinuxOnly]": "should fail if subpath directory is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if subpath file is outside the volume [Slow][LinuxOnly]": "should fail if subpath file is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly]": "should fail if subpath with backstepping is outside the volume [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support creating multiple subpath from same volumes [Slow]": "should support creating multiple subpath from same volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support existing directories when readOnly specified in the volumeSource": "should support existing directories when readOnly specified in the volumeSource [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support existing directory": "should support existing directory [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support existing directory": "should support existing directory [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support existing single file [LinuxOnly]": "should support existing single file [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support file as subpath [LinuxOnly]": "should support file as subpath [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support non-existent path": "should support non-existent path [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support non-existent path": "should support non-existent path [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support readOnly directory specified in the volumeMount": "should support readOnly directory specified in the volumeMount [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support readOnly file specified in the volumeMount [LinuxOnly]": "should support readOnly file specified in the volumeMount [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support restarting containers using directory as subpath [Slow]": "should support restarting containers using directory as subpath [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should support restarting containers using file as subpath [Slow][LinuxOnly]": "should support restarting containers using file as subpath [Slow][LinuxOnly] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is force deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly]": "should unmount if pod is gracefully deleted while kubelet is down [Disruptive][Slow][LinuxOnly] [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] subPath should verify container cannot write to subpath readonly volumes [Slow]": "should verify container cannot write to subpath readonly volumes [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] volumeIO should write files of various sizes, verify size, validate content [Slow]": "should write files of various sizes, verify size, validate content [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (default fs)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext3)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext3)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext3)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext3)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext4)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext4)] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext4)] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ext4)] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] disruptive[Disruptive][LinuxOnly] Should test that pv written before kubelet restart is readable after restart.": "Should test that pv written before kubelet restart is readable after restart. [Serial] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on different node": "should access to two volumes with different volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with different volume mode and retain data across pod recreation on the same node": "should access to two volumes with different volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on different node": "should access to two volumes with the same volume mode and retain data across pod recreation on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should access to two volumes with the same volume mode and retain data across pod recreation on the same node": "should access to two volumes with the same volume mode and retain data across pod recreation on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single read-only volume from pods on the same node": "should concurrently access the single read-only volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on different node": "should concurrently access the single volume from pods on different node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the single volume from pods on the same node": "should concurrently access the single volume from pods on the same node [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and its clone from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] multiVolume [Slow] should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS]": "should concurrently access the volume and restored snapshot from pods on the same node [LinuxOnly][Feature:VolumeSnapshotDataSource][Feature:VolumeSourceXFS] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] volumeMode should fail to use a volume in a pod with mismatched mode [Slow]": "should fail to use a volume in a pod with mismatched mode [Slow] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (filesystem volmode)] volumeMode should not mount / map unused volumes in a pod [LinuxOnly]": "should not mount / map unused volumes in a pod [LinuxOnly] [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ntfs)][Feature:Windows] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ntfs)][Feature:Windows] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ntfs)][Feature:Windows] volumes should store data": "should store data [Skipped:azure] [Suite:openshift/conformance/parallel] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (ntfs)][Feature:Windows] volumes should store data": "should store data [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (xfs)][Slow] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (xfs)][Slow] volumes should allow exec of files on the volume": "should allow exec of files on the volume [Suite:k8s]",
 
-	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (xfs)][Slow] volumes should store data": "should store data [Skipped:azure] [Suite:k8s]",
+	"[Top Level] [sig-storage] In-tree Volumes [Driver: azure-file] [Testpattern: Pre-provisioned PV (xfs)][Slow] volumes should store data": "should store data [Suite:k8s]",
 
 	"[Top Level] [sig-storage] In-tree Volumes [Driver: ceph][Feature:Volumes][Serial] [Testpattern: Dynamic PV (block volmode)(allowExpansion)] volume-expand Verify if offline PVC expansion works": "Verify if offline PVC expansion works [Disabled:Unsupported] [Suite:k8s]",
 
