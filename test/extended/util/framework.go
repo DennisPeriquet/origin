@@ -39,6 +39,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	batchv1client "k8s.io/client-go/kubernetes/typed/batch/v1"
 	corev1client "k8s.io/client-go/kubernetes/typed/core/v1"
+	"k8s.io/client-go/rest"
 	e2e "k8s.io/kubernetes/test/e2e/framework"
 	e2epod "k8s.io/kubernetes/test/e2e/framework/pod"
 	"k8s.io/kubernetes/test/e2e/framework/skipper"
@@ -1388,7 +1389,7 @@ func KubeConfigPath() string {
 	return os.Getenv("KUBECONFIG")
 }
 
-//ArtifactDirPath returns the value of ARTIFACT_DIR environment variable
+// ArtifactDirPath returns the value of ARTIFACT_DIR environment variable
 func ArtifactDirPath() string {
 	path := os.Getenv("ARTIFACT_DIR")
 	o.Expect(path).NotTo(o.BeNil())
@@ -1396,8 +1397,8 @@ func ArtifactDirPath() string {
 	return path
 }
 
-//ArtifactPath returns the absolute path to the fix artifact file
-//The path is relative to ARTIFACT_DIR
+// ArtifactPath returns the absolute path to the fix artifact file
+// The path is relative to ARTIFACT_DIR
 func ArtifactPath(elem ...string) string {
 	return filepath.Join(append([]string{ArtifactDirPath()}, elem...)...)
 }
@@ -2044,8 +2045,8 @@ func SkipIfExternalControlplaneTopology(oc *CLI, reason string) {
 
 // DoesApiResourceExist searches the list of ApiResources and returns "true" if a given
 // apiResourceName Exists. Valid search strings are for example "cloudprivateipconfigs" or "machines".
-func DoesApiResourceExist(oc *CLI, apiResourceName string) (bool, error) {
-	discoveryClient, err := discovery.NewDiscoveryClientForConfig(oc.AdminConfig())
+func DoesApiResourceExist(config *rest.Config, apiResourceName string) (bool, error) {
+	discoveryClient, err := discovery.NewDiscoveryClientForConfig(config)
 	if err != nil {
 		return false, err
 	}

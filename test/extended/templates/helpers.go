@@ -2,9 +2,7 @@ package templates
 
 import (
 	"context"
-	"crypto/tls"
 	"fmt"
-	"net/http"
 	"strconv"
 	"strings"
 
@@ -33,8 +31,6 @@ import (
 	"github.com/openshift/library-go/pkg/apps/appsutil"
 
 	buildv1client "github.com/openshift/client-go/build/clientset/versioned"
-
-	osbclient "github.com/openshift/origin/test/extended/templates/openservicebroker/client"
 
 	exutil "github.com/openshift/origin/test/extended/util"
 )
@@ -143,22 +139,6 @@ func setUser(cli *exutil.CLI, user *userv1.User) {
 	}
 }
 
-// TSBClient returns a client to the running template service broker
-func TSBClient(oc *exutil.CLI) (osbclient.Client, error) {
-	svc, err := oc.AdminKubeClient().CoreV1().Services("openshift-template-service-broker").Get(context.Background(), "apiserver", metav1.GetOptions{})
-	if err != nil {
-		return nil, err
-	}
-
-	return osbclient.NewClient(&http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-		},
-	}, "https://"+svc.Spec.ClusterIP+"/brokers/template.openshift.io"), nil
-}
-
 // readinessCheckers maps GroupKinds to the appropriate function.  Note that in
 // some cases more than one GK maps to the same function.
 var readinessCheckers = map[schema.GroupVersionKind]func(runtime.Object) (bool, bool, error){
@@ -178,7 +158,7 @@ var readinessCheckers = map[schema.GroupVersionKind]func(runtime.Object) (bool, 
 	groupVersionKind(batchv1.SchemeGroupVersion, "Job"):         checkJobReadiness,
 }
 
-//TODO candidate for openshift/library-go
+// TODO candidate for openshift/library-go
 func isTerminalPhase(phase buildv1.BuildPhase) bool {
 	switch phase {
 	case buildv1.BuildPhaseNew,
@@ -189,7 +169,7 @@ func isTerminalPhase(phase buildv1.BuildPhase) bool {
 	return true
 }
 
-//TODO candidate for openshift/library-go
+// TODO candidate for openshift/library-go
 func checkBuildReadiness(obj runtime.Object) (bool, bool, error) {
 	b, ok := obj.(*buildv1.Build)
 	if !ok {
@@ -205,7 +185,7 @@ func checkBuildReadiness(obj runtime.Object) (bool, bool, error) {
 	return ready, failed, nil
 }
 
-//TODO candidate for openshift/library-go
+// TODO candidate for openshift/library-go
 func labelValue(name string) string {
 	if len(name) <= validation.DNS1123LabelMaxLength {
 		return name
@@ -213,7 +193,7 @@ func labelValue(name string) string {
 	return name[:validation.DNS1123LabelMaxLength]
 }
 
-//TODO candidate for openshift/library-go
+// TODO candidate for openshift/library-go
 func buildConfigSelector(name string) labels.Selector {
 	return labels.Set{buildv1.BuildConfigLabel: labelValue(name)}.AsSelector()
 }
@@ -286,7 +266,7 @@ func checkDeploymentReadiness(obj runtime.Object) (bool, bool, error) {
 	return ready, failed, nil
 }
 
-//TODO candidate for openshift/library-go
+// TODO candidate for openshift/library-go
 func checkDeploymentConfigReadiness(obj runtime.Object) (bool, bool, error) {
 	dc, ok := obj.(*appsv1.DeploymentConfig)
 	if !ok {
