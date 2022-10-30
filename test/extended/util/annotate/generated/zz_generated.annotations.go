@@ -277,39 +277,39 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-api-machinery][Feature:ResourceQuota] Object count should properly count the number of imagestreams resources [apigroup:image.openshift.io]": "should properly count the number of imagestreams resources [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for apps.openshift.io/v1, Resource=deploymentconfigs": "should work for apps.openshift.io/v1, Resource=deploymentconfigs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for apps.openshift.io/v1, Resource=deploymentconfigs [apigroup:apps.openshift.io]": "should work for apps.openshift.io/v1, Resource=deploymentconfigs [apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for build.openshift.io/v1, Resource=buildconfigs": "should work for build.openshift.io/v1, Resource=buildconfigs [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for build.openshift.io/v1, Resource=buildconfigs [apigroup:build.openshift.io]": "should work for build.openshift.io/v1, Resource=buildconfigs [apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for build.openshift.io/v1, Resource=builds": "should work for build.openshift.io/v1, Resource=builds [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for build.openshift.io/v1, Resource=builds [apigroup:build.openshift.io]": "should work for build.openshift.io/v1, Resource=builds [apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for image.openshift.io/v1, Resource=images": "should work for image.openshift.io/v1, Resource=images [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for image.openshift.io/v1, Resource=images [apigroup:image.openshift.io]": "should work for image.openshift.io/v1, Resource=images [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for image.openshift.io/v1, Resource=imagestreams": "should work for image.openshift.io/v1, Resource=imagestreams [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for image.openshift.io/v1, Resource=imagestreams [apigroup:image.openshift.io]": "should work for image.openshift.io/v1, Resource=imagestreams [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthaccesstokens": "should work for oauth.openshift.io/v1, Resource=oauthaccesstokens [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthaccesstokens [apigroup:oauth.openshift.io]": "should work for oauth.openshift.io/v1, Resource=oauthaccesstokens [apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthauthorizetokens": "should work for oauth.openshift.io/v1, Resource=oauthauthorizetokens [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthauthorizetokens [apigroup:oauth.openshift.io]": "should work for oauth.openshift.io/v1, Resource=oauthauthorizetokens [apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthclientauthorizations": "should work for oauth.openshift.io/v1, Resource=oauthclientauthorizations [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthclientauthorizations [apigroup:oauth.openshift.io]": "should work for oauth.openshift.io/v1, Resource=oauthclientauthorizations [apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthclients": "should work for oauth.openshift.io/v1, Resource=oauthclients [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for oauth.openshift.io/v1, Resource=oauthclients [apigroup:oauth.openshift.io]": "should work for oauth.openshift.io/v1, Resource=oauthclients [apigroup:oauth.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for route.openshift.io/v1, Resource=routes": "should work for route.openshift.io/v1, Resource=routes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for route.openshift.io/v1, Resource=routes [apigroup:route.openshift.io]": "should work for route.openshift.io/v1, Resource=routes [apigroup:route.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for security.openshift.io/v1, Resource=rangeallocations": "should work for security.openshift.io/v1, Resource=rangeallocations [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for security.openshift.io/v1, Resource=rangeallocations [apigroup:security.openshift.io]": "should work for security.openshift.io/v1, Resource=rangeallocations [apigroup:security.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for template.openshift.io/v1, Resource=brokertemplateinstances": "should work for template.openshift.io/v1, Resource=brokertemplateinstances [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for template.openshift.io/v1, Resource=brokertemplateinstances [apigroup:template.openshift.io]": "should work for template.openshift.io/v1, Resource=brokertemplateinstances [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for template.openshift.io/v1, Resource=templateinstances": "should work for template.openshift.io/v1, Resource=templateinstances [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for template.openshift.io/v1, Resource=templateinstances [apigroup:template.openshift.io]": "should work for template.openshift.io/v1, Resource=templateinstances [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for template.openshift.io/v1, Resource=templates": "should work for template.openshift.io/v1, Resource=templates [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for template.openshift.io/v1, Resource=templates [apigroup:template.openshift.io]": "should work for template.openshift.io/v1, Resource=templates [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for user.openshift.io/v1, Resource=groups": "should work for user.openshift.io/v1, Resource=groups [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for user.openshift.io/v1, Resource=groups [apigroup:user.openshift.io]": "should work for user.openshift.io/v1, Resource=groups [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for user.openshift.io/v1, Resource=identities": "should work for user.openshift.io/v1, Resource=identities [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for user.openshift.io/v1, Resource=identities [apigroup:user.openshift.io]": "should work for user.openshift.io/v1, Resource=identities [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for user.openshift.io/v1, Resource=users": "should work for user.openshift.io/v1, Resource=users [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-api-machinery][Feature:ServerSideApply] Server-Side Apply should work for user.openshift.io/v1, Resource=users [apigroup:user.openshift.io]": "should work for user.openshift.io/v1, Resource=users [apigroup:user.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-apps] CronJob should be able to schedule after more than 100 missed schedule": "should be able to schedule after more than 100 missed schedule [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -1259,17 +1259,15 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-builds][Feature:Builds] buildconfig secret injector  should inject secrets to the appropriate buildconfigs [apigroup:build.openshift.io]": "should inject secrets to the appropriate buildconfigs [apigroup:build.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] clone repository using git:// protocol  should clone using git:// if no proxy is configured": "should clone using git:// if no proxy is configured [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
-
 	"[Top Level] [sig-builds][Feature:Builds] custom build with buildah  being created from new-build should complete build with custom builder image [apigroup:build.openshift.io]": "should complete build with custom builder image [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] imagechangetriggers  imagechangetriggers should trigger builds of all types [apigroup:build.openshift.io]": "imagechangetriggers should trigger builds of all types [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should fail with a --name longer than 58 characters": "should fail with a --name longer than 58 characters [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should fail with a --name longer than 58 characters [apigroup:build.openshift.io]": "should fail with a --name longer than 58 characters [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should succeed with a --name of 58 characters [apigroup:build.openshift.io]": "should succeed with a --name of 58 characters [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should succeed with an imagestream": "should succeed with an imagestream [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] oc new-app  should succeed with an imagestream [apigroup:build.openshift.io]": "should succeed with an imagestream [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  buildconfigs should have a default history limit set when created via the group api [apigroup:build.openshift.io]": "buildconfigs should have a default history limit set when created via the group api [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
@@ -1279,7 +1277,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune completed builds based on the successfulBuildsHistoryLimit setting [apigroup:build.openshift.io]": "should prune completed builds based on the successfulBuildsHistoryLimit setting [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune errored builds based on the failedBuildsHistoryLimit setting": "should prune errored builds based on the failedBuildsHistoryLimit setting [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune errored builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io]": "should prune errored builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-builds][Feature:Builds] prune builds based on settings in the buildconfig  should prune failed builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io]": "should prune failed builds based on the failedBuildsHistoryLimit setting [apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
@@ -1849,7 +1847,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-cluster-lifecycle][Feature:Machines][Serial] Managed cluster should grow and decrease when scaling different machineSets simultaneously [Timeout:30m][apigroup:machine.openshift.io]": "grow and decrease when scaling different machineSets simultaneously [Timeout:30m][apigroup:machine.openshift.io] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-coreos] [Conformance] CoreOS bootimages TestBootimagesPresent": "TestBootimagesPresent [Suite:openshift/conformance/parallel/minimal]",
+	"[Top Level] [sig-coreos] [Conformance] CoreOS bootimages TestBootimagesPresent [apigroup:machineconfiguration.openshift.io]": "TestBootimagesPresent [apigroup:machineconfiguration.openshift.io] [Suite:openshift/conformance/parallel/minimal]",
 
 	"[Top Level] [sig-devex] check registry.redhat.io is available and samples operator can import sample imagestreams run sample related validations [apigroup:config.openshift.io][apigroup:image.openshift.io]": "run sample related validations [apigroup:config.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
@@ -1981,9 +1979,9 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-devex][Feature:ImageEcosystem][ruby][Slow] hot deploy for openshift ruby image  Rails example should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]": "should work with hot deploy [apigroup:image.openshift.io][apigroup:operator.openshift.io][apigroup:config.openshift.io][apigroup:build.openshift.io]",
 
-	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestAutomaticCreationOfPullSecrets [apigroup:config.openshift.io]": "TestAutomaticCreationOfPullSecrets [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestAutomaticCreationOfPullSecrets [apigroup:config.openshift.io][apigroup:image.openshift.io]": "TestAutomaticCreationOfPullSecrets [apigroup:config.openshift.io][apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestDockercfgTokenDeletedController": "TestDockercfgTokenDeletedController [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-devex][Feature:OpenShiftControllerManager] TestDockercfgTokenDeletedController [apigroup:image.openshift.io]": "TestDockercfgTokenDeletedController [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-devex][Feature:Templates] template-api TestTemplate [apigroup:template.openshift.io]": "TestTemplate [apigroup:template.openshift.io] [Suite:openshift/conformance/parallel]",
 
@@ -2031,17 +2029,17 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-imageregistry][Feature:ImageExtract] Image extract should extract content from an image [apigroup:image.openshift.io]": "should extract content from an image [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageInfo] Image info should display information about images": "should display information about images [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageInfo] Image info should display information about images [apigroup:image.openshift.io]": "should display information about images [apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-imageregistry][Feature:ImageLayers] Image layer subresource should identify a deleted image as missing [apigroup:image.openshift.io]": "should identify a deleted image as missing [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-imageregistry][Feature:ImageLayers] Image layer subresource should return layers from tagged images [apigroup:image.openshift.io][apigroup:build.openshift.io]": "should return layers from tagged images [apigroup:image.openshift.io][apigroup:build.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should perform lookup when the Deployment gets the resolve-names annotation later": "should perform lookup when the Deployment gets the resolve-names annotation later [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should perform lookup when the Deployment gets the resolve-names annotation later [apigroup:image.openshift.io]": "should perform lookup when the Deployment gets the resolve-names annotation later [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should perform lookup when the object has the resolve-names annotation": "should perform lookup when the object has the resolve-names annotation [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should perform lookup when the object has the resolve-names annotation [apigroup:image.openshift.io]": "should perform lookup when the object has the resolve-names annotation [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should update OpenShift object image fields when local names are on": "should update OpenShift object image fields when local names are on [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should update OpenShift object image fields when local names are on [apigroup:image.openshift.io]": "should update OpenShift object image fields when local names are on [apigroup:image.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-imageregistry][Feature:ImageLookup] Image policy should update standard Kube object image fields when local names are on [apigroup:image.openshift.io][apigroup:apps.openshift.io]": "should update standard Kube object image fields when local names are on [apigroup:image.openshift.io][apigroup:apps.openshift.io] [Suite:openshift/conformance/parallel]",
 
@@ -2121,23 +2119,19 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-imageregistry][Serial][Suite:openshift/registry/serial] Image signature workflow can push a signed image to openshift registry and verify it [apigroup:user.openshift.io][apigroup:image.openshift.io]": "can push a signed image to openshift registry and verify it [apigroup:user.openshift.io][apigroup:image.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should have baremetalhost resources": "have baremetalhost resources [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should [apigroup:config.openshift.io] have baremetalhost resources": "have baremetalhost resources [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should have hostfirmwaresetting resources": "have hostfirmwaresetting resources [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should [apigroup:config.openshift.io] have hostfirmwaresetting resources": "have hostfirmwaresetting resources [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should have preprovisioning images for workers": "have preprovisioning images for workers [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should [apigroup:config.openshift.io] have preprovisioning images for workers": "have preprovisioning images for workers [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should not allow updating BootMacAddress": "not allow updating BootMacAddress [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-installer][Feature:baremetal] Baremetal platform should [apigroup:config.openshift.io] not allow updating BootMacAddress": "not allow updating BootMacAddress [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-installer][Feature:baremetal] Baremetal/OpenStack/vSphere/None platforms  have a metal3 deployment": "have a metal3 deployment [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-installer][Feature:baremetal] Baremetal/OpenStack/vSphere/None platforms [apigroup:config.openshift.io] have a metal3 deployment": "have a metal3 deployment [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-installer][Feature:baremetal][Serial] A baremetal deployment without a provisioning network should allow setting the ProvisioningNetwork to 'Managed' with valid settings": "allow setting the ProvisioningNetwork to 'Managed' with valid settings [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-installer][Feature:baremetal][Serial] Baremetal platform should [apigroup:config.openshift.io] skip inspection when disabled by annotation": "skip inspection when disabled by annotation [Suite:openshift/conformance/serial]",
 
-	"[Top Level] [sig-installer][Feature:baremetal][Serial] A baremetal deployment without a provisioning network should show the Provisioning Network as 'Disabled'": "show the Provisioning Network as 'Disabled' [Suite:openshift/conformance/serial]",
-
-	"[Top Level] [sig-installer][Feature:baremetal][Serial] Baremetal platform should ensure cluster baremetal operator and metal3 deployment return back healthy after they are deleted": "cluster baremetal operator and metal3 deployment return back healthy after they are deleted [Suite:openshift/conformance/serial]",
-
-	"[Top Level] [sig-installer][Feature:baremetal][Serial] Baremetal platform should skip inspection when disabled by annotation": "skip inspection when disabled by annotation [Suite:openshift/conformance/serial]",
+	"[Top Level] [sig-installer][Feature:baremetal][Serial] Baremetal platform should ensure [apigroup:config.openshift.io] cluster baremetal operator and metal3 deployment return back healthy after they are deleted": "cluster baremetal operator and metal3 deployment return back healthy after they are deleted [Suite:openshift/conformance/serial]",
 
 	"[Top Level] [sig-instrumentation] Events API should delete a collection of events [Conformance]": "should delete a collection of events [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
@@ -2157,25 +2151,25 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-instrumentation] MetricsGrabber should grab all metrics from a Scheduler.": "should grab all metrics from a Scheduler. [Disabled:Broken] [Suite:k8s]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have a AlertmanagerReceiversNotConfigured alert in firing state": "should have a AlertmanagerReceiversNotConfigured alert in firing state [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should have a AlertmanagerReceiversNotConfigured alert in firing state": "should have a AlertmanagerReceiversNotConfigured alert in firing state [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have important platform topology metrics [apigroup:config.openshift.io]": "should have important platform topology metrics [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should have important platform topology metrics [apigroup:config.openshift.io]": "should have important platform topology metrics [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should have non-Pod host cAdvisor metrics": "should have non-Pod host cAdvisor metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should have non-Pod host cAdvisor metrics": "should have non-Pod host cAdvisor metrics [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should provide ingress metrics": "should provide ingress metrics [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should provide ingress metrics": "should provide ingress metrics [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should provide named network metrics [apigroup:project.openshift.io]": "should provide named network metrics [apigroup:project.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should provide named network metrics [apigroup:project.openshift.io]": "should provide named network metrics [apigroup:project.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should report telemetry if a cloud.openshift.com token is present [Late]": "should report telemetry if a cloud.openshift.com token is present [Late] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should report telemetry [Late]": "should report telemetry [Late] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster should start and expose a secured proxy and unsecured metrics [apigroup:config.openshift.io]": "should start and expose a secured proxy and unsecured metrics [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster should start and expose a secured proxy and unsecured metrics [apigroup:config.openshift.io]": "should start and expose a secured proxy and unsecured metrics [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster shouldn't have failing rules evaluation": "shouldn't have failing rules evaluation [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster shouldn't have failing rules evaluation": "shouldn't have failing rules evaluation [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early][apigroup:config.openshift.io]": "shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early][apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early][apigroup:config.openshift.io]": "shouldn't report any alerts in firing state apart from Watchdog and AlertmanagerReceiversNotConfigured [Early][apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-instrumentation] Prometheus when installed on the cluster when using openshift-sdn should be able to get the sdn ovs flows": "should be able to get the sdn ovs flows [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-instrumentation] Prometheus [apigroup:image.openshift.io] when installed on the cluster when using openshift-sdn should be able to get the sdn ovs flows": "should be able to get the sdn ovs flows [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-instrumentation] Stackdriver Monitoring should have accelerator metrics [Feature:StackdriverAcceleratorMonitoring]": "should have accelerator metrics [Feature:StackdriverAcceleratorMonitoring] [Disabled:Unimplemented] [Suite:k8s]",
 
@@ -2655,9 +2649,9 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-network] Services should find a service from listing all namespaces [Conformance]": "should find a service from listing all namespaces [Conformance] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Services should have session affinity timeout work for NodePort service [LinuxOnly] [Conformance]": "should have session affinity timeout work for NodePort service [LinuxOnly] [Conformance] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
+	"[Top Level] [sig-network] Services should have session affinity timeout work for NodePort service [LinuxOnly] [Conformance]": "should have session affinity timeout work for NodePort service [LinuxOnly] [Conformance] [Skipped:Network/OVNKuberenetes] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
-	"[Top Level] [sig-network] Services should have session affinity timeout work for service with type clusterIP [LinuxOnly] [Conformance]": "should have session affinity timeout work for service with type clusterIP [LinuxOnly] [Conformance] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
+	"[Top Level] [sig-network] Services should have session affinity timeout work for service with type clusterIP [LinuxOnly] [Conformance]": "should have session affinity timeout work for service with type clusterIP [LinuxOnly] [Conformance] [Skipped:Network/OVNKuberenetes] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
 	"[Top Level] [sig-network] Services should have session affinity work for NodePort service [LinuxOnly] [Conformance]": "should have session affinity work for NodePort service [LinuxOnly] [Conformance] [Skipped:Network/OVNKubernetes] [Suite:openshift/conformance/parallel/minimal] [Suite:k8s]",
 
@@ -2973,7 +2967,7 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-node] Managed cluster record the number of nodes at the beginning of the tests [Early]": "record the number of nodes at the beginning of the tests [Early] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-node] Managed cluster should report ready nodes the entire duration of the test run [Late]": "should report ready nodes the entire duration of the test run [Late] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-node] Managed cluster should report ready nodes the entire duration of the test run [Late][apigroup:monitoring.coreos.com]": "should report ready nodes the entire duration of the test run [Late][apigroup:monitoring.coreos.com] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-node] Mount propagation should propagate mounts within defined scopes": "should propagate mounts within defined scopes [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
@@ -3217,23 +3211,23 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-node][Late] should not have pod creation failures due to systemd timeouts": "should not have pod creation failures due to systemd timeouts [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should Implement packages API server and list packagemanifest info with namespace not NULL": "Implement packages API server and list packagemanifest info with namespace not NULL [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should Implement packages API server and list packagemanifest info with namespace not NULL [apigroup:packages.operators.coreos.com]": "Implement packages API server and list packagemanifest info with namespace not NULL [apigroup:packages.operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should be installed with catalogsources at version v1alpha1": "be installed with catalogsources at version v1alpha1 [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should be installed with catalogsources at version v1alpha1 [apigroup:operators.coreos.com]": "be installed with catalogsources at version v1alpha1 [apigroup:operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should be installed with clusterserviceversions at version v1alpha1": "be installed with clusterserviceversions at version v1alpha1 [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should be installed with clusterserviceversions at version v1alpha1 [apigroup:operators.coreos.com]": "be installed with clusterserviceversions at version v1alpha1 [apigroup:operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should be installed with installplans at version v1alpha1": "be installed with installplans at version v1alpha1 [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should be installed with installplans at version v1alpha1 [apigroup:operators.coreos.com]": "be installed with installplans at version v1alpha1 [apigroup:operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should be installed with operatorgroups at version v1": "be installed with operatorgroups at version v1 [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should be installed with operatorgroups at version v1 [apigroup:operators.coreos.com]": "be installed with operatorgroups at version v1 [apigroup:operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should be installed with packagemanifests at version v1": "be installed with packagemanifests at version v1 [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should be installed with packagemanifests at version v1 [apigroup:packages.operators.coreos.com]": "be installed with packagemanifests at version v1 [apigroup:packages.operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] OLM should be installed with subscriptions at version v1alpha1": "be installed with subscriptions at version v1alpha1 [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] OLM should be installed with subscriptions at version v1alpha1 [apigroup:operators.coreos.com]": "be installed with subscriptions at version v1alpha1 [apigroup:operators.coreos.com] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-operator] OLM should have imagePullPolicy:IfNotPresent on thier deployments [apigroup:config.openshift.io]": "have imagePullPolicy:IfNotPresent on thier deployments [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-operator] an end user can use OLM Report Upgradeable in OLM ClusterOperators status": "Report Upgradeable in OLM ClusterOperators status [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-operator] an end user can use OLM Report Upgradeable in OLM ClusterOperators status [apigroup:config.openshift.io]": "Report Upgradeable in OLM ClusterOperators status [apigroup:config.openshift.io] [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-operator] an end user can use OLM can subscribe to the operator [apigroup:config.openshift.io]": "can subscribe to the operator [apigroup:config.openshift.io] [Skipped:Disconnected] [Suite:openshift/conformance/parallel]",
 
@@ -3295,27 +3289,27 @@ var annotations = map[string]string{
 
 	"[Top Level] [sig-scheduling] [Feature:GPUDevicePlugin] run Nvidia GPU Device Plugin tests": "run Nvidia GPU Device Plugin tests [Disabled:SpecialConfig] [Suite:k8s]",
 
-	"[Top Level] [sig-scheduling][Early] The HAProxy router pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The HAProxy router pods [apigroup:route.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-apiserver pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-apiserver pods [apigroup:apps.openshift.io][apigroup:authorization.openshift.io][apigroup:build.openshift.io][apigroup:image.openshift.io][apigroup:project.openshift.io][apigroup:quota.openshift.io][apigroup:route.openshift.io][apigroup:security.openshift.io][apigroup:template.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-authentication pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-authentication pods [apigroup:oauth.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-console console pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-console console pods [apigroup:console.openshift.io should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-console downloads pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-console downloads pods [apigroup:console.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-etcd pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-etcd pods [apigroup:operator.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-image-registry pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-image-registry pods [apigroup:imageregistry.operator.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-monitoring prometheus-adapter pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-monitoring prometheus-adapter pods [apigroup:monitoring.coreos.com] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-monitoring thanos-querier pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-monitoring thanos-querier pods [apigroup:monitoring.coreos.com] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-oauth-apiserver pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-oauth-apiserver pods [apigroup:oauth.openshift.io][apigroup:user.openshift.io] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
-	"[Top Level] [sig-scheduling][Early] The openshift-operator-lifecycle-manager pods should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
+	"[Top Level] [sig-scheduling][Early] The openshift-operator-lifecycle-manager pods [apigroup:packages.operators.coreos.com] should be scheduled on different nodes": "should be scheduled on different nodes [Suite:openshift/conformance/parallel]",
 
 	"[Top Level] [sig-storage] CSI Volumes [Driver: csi-hostpath] [Testpattern: CSI Ephemeral-volume (default fs)] ephemeral should create read-only inline ephemeral volume": "should create read-only inline ephemeral volume [Suite:openshift/conformance/parallel] [Suite:k8s]",
 
