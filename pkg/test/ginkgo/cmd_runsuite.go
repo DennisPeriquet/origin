@@ -400,7 +400,6 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		for _, test := range failing {
 			retry := test.Retry()
 			retries = append(retries, retry)
-			tests = append(tests, retry)
 			if len(retries) > suite.MaximumAllowedFlakes {
 				break
 			}
@@ -415,6 +414,12 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 				flaky = append(flaky, test.name)
 			} else {
 				repeatFailures = append(repeatFailures, test)
+			}
+		}
+		for _, retry := range retries {
+			// Retry tests that flaked are omitted so that the original test is counted as a failure.
+			if !retry.flake {
+				tests = append(tests, retry)
 			}
 		}
 		if len(flaky) > 0 {
