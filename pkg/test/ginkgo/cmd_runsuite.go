@@ -408,6 +408,8 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 			}
 		}
 
+		fmt.Fprintf(opt.Out, "Retry count: %d\n", len(retries))
+
 		// Run the tests in the retries list.
 		q := newParallelTestQueue(testRunnerContext)
 		q.Execute(testCtx, retries, parallelism, testOutputConfig, abortFn)
@@ -426,9 +428,10 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 		for _, retry := range retries {
 			if retry.flake {
 				// Retry tests that flaked are omitted so that the original test is counted as a failure.
-				fmt.Fprintf(opt.Out, "Ignoring retry that returned a flake, original failure should be authoritative for test: %s", retry.name)
+				fmt.Fprintf(opt.Out, "Ignoring retry that returned a flake, original failure should be authoritative for test: %s\n", retry.name)
 				continue
 			}
+			fmt.Fprintf(opt.Out, "Retry did not flake; treating it as normal failure: %s\n", retry.name)
 			tests = append(tests, retry)
 		}
 		if len(flaky) > 0 {
