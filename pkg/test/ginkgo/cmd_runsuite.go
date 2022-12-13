@@ -424,10 +424,12 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 
 		// Add the list of retries into the list of all tests.
 		for _, retry := range retries {
-			// Retry tests that flaked are omitted so that the original test is counted as a failure.
-			if !retry.flake {
-				tests = append(tests, retry)
+			if retry.flake {
+				// Retry tests that flaked are omitted so that the original test is counted as a failure.
+				fmt.Fprintf(opt.Out, "Ignoring retry that returned a flake, original failure should be authoritative for test: %s", retry.name)
+				continue
 			}
+			tests = append(tests, retry)
 		}
 		if len(flaky) > 0 {
 			failing = repeatFailures
