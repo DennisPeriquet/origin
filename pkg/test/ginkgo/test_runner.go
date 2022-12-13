@@ -17,7 +17,7 @@ import (
 )
 
 type testSuiteRunner interface {
-	RunOneTest(ctx context.Context, test *testCase)
+	RunOneTest(ctx context.Context, test *testCase, retryMode bool)
 }
 
 // testRunner contains all the content required to run a test.  It must be threadsafe and must be re-useable
@@ -30,7 +30,7 @@ type testSuiteRunnerImpl struct {
 }
 
 // RunOneTest runs a test, mutates the testCase with result, and reports the result
-func (r *testSuiteRunnerImpl) RunOneTest(ctx context.Context, test *testCase) {
+func (r *testSuiteRunnerImpl) RunOneTest(ctx context.Context, test *testCase, retryMode bool) {
 	// this construct is a little odd, but the defer statements that ensure we run at the end have the variables
 	// assigned/resolved at the time defer statement is created, which means that pointer must remain consistent.
 	// however, we can change the values of the content, so we assign the content lower down to have a cleaner set of
@@ -54,7 +54,7 @@ func (r *testSuiteRunnerImpl) RunOneTest(ctx context.Context, test *testCase) {
 	defer r.testSuiteProgress.TestEnded(test.name, testRunResult)
 	defer recordTestResultInLogWithoutOverlap(testRunResult, r.testOutput.testOutputLock, r.testOutput.out, r.testOutput.includeSuccessfulOutput)
 
-	testRunResult.testRunResult = r.commandContext.RunTestInNewProcess(ctx, test)
+	testRunResult.testRunResult = r.commandContext.RunTestInNewProcess(ctx, test, retryMode)
 	mutateTestCaseWithResults(test, testRunResult)
 }
 
@@ -275,7 +275,7 @@ func recordTestResultInMonitor(testRunResult *testRunResultHandle, monitorRecord
 }
 
 // RunTestInNewProcess runs a test case in a different process and returns a result
-func (c *commandContext) RunTestInNewProcess(ctx context.Context, test *testCase) *testRunResult {
+func (c *commandContext) RunTestInNewProcess(ctx context.Context, test *testCase, retryMode bool) *testRunResult {
 	ret := &testRunResult{
 		name:      test.name,
 		testState: TestUnknown,
@@ -302,6 +302,12 @@ func (c *commandContext) RunTestInNewProcess(ctx context.Context, test *testCase
 	ret.testOutputBytes = testOutputBytes
 	if err == nil {
 		ret.testState = TestSucceeded
+		if retryMode {
+			if (time.Now().Second() % 2) == 0 {
+				// Flake instead of fail 50% of the time to test logic to discard flaked retries.
+				ret.testState = TestFlaked
+			}
+		}
 		return ret
 	}
 

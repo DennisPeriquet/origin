@@ -66,7 +66,7 @@ func queueAllTests(remainingParallelTests chan *testCase, tests []*testCase) {
 }
 
 // runTestsUntilChannelEmpty reads from the channel to consume tests, run them, and return when the channel is closed.
-func runTestsUntilChannelEmpty(ctx context.Context, remainingParallelTests chan *testCase, testSuiteRunner testSuiteRunner) {
+func runTestsUntilChannelEmpty(ctx context.Context, remainingParallelTests chan *testCase, testSuiteRunner testSuiteRunner, retryMode bool) {
 	for {
 		select {
 		// if the context is finished, simply return
@@ -81,13 +81,13 @@ func runTestsUntilChannelEmpty(ctx context.Context, remainingParallelTests chan 
 			if ctx.Err() != nil {
 				return
 			}
-			testSuiteRunner.RunOneTest(ctx, test)
+			testSuiteRunner.RunOneTest(ctx, test, retryMode)
 		}
 	}
 }
 
 // tests are currently being mutated during the run process.
-func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase, parallelism int, testOutput testOutputConfig, maybeAbortOnFailureFn testAbortFunc) {
+func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase, parallelism int, testOutput testOutputConfig, maybeAbortOnFailureFn testAbortFunc, retryMode bool) {
 	testSuiteProgress := newTestSuiteProgress(len(tests))
 	testSuiteRunner := &testSuiteRunnerImpl{
 		commandContext:        q.commandContext,
@@ -96,11 +96,11 @@ func (q *parallelByFileTestQueue) Execute(ctx context.Context, tests []*testCase
 		maybeAbortOnFailureFn: maybeAbortOnFailureFn,
 	}
 
-	execute(ctx, testSuiteRunner, tests, parallelism)
+	execute(ctx, testSuiteRunner, tests, parallelism, retryMode)
 }
 
 // execute is a convenience for unit testing
-func execute(ctx context.Context, testSuiteRunner testSuiteRunner, tests []*testCase, parallelism int) {
+func execute(ctx context.Context, testSuiteRunner testSuiteRunner, tests []*testCase, parallelism int, retryMode bool) {
 	if ctx.Err() != nil {
 		return
 	}
@@ -115,7 +115,7 @@ func execute(ctx context.Context, testSuiteRunner testSuiteRunner, tests []*test
 		wg.Add(1)
 		go func(ctx context.Context) {
 			defer wg.Done()
-			runTestsUntilChannelEmpty(ctx, remainingParallelTests, testSuiteRunner)
+			runTestsUntilChannelEmpty(ctx, remainingParallelTests, testSuiteRunner, retryMode)
 		}(ctx)
 	}
 	wg.Wait()
@@ -124,7 +124,7 @@ func execute(ctx context.Context, testSuiteRunner testSuiteRunner, tests []*test
 		if ctx.Err() != nil {
 			return
 		}
-		testSuiteRunner.RunOneTest(ctx, test)
+		testSuiteRunner.RunOneTest(ctx, test, retryMode)
 	}
 }
 

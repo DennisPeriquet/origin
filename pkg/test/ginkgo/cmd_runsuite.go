@@ -331,7 +331,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 
 	// run our Early tests
 	q := newParallelTestQueue(testRunnerContext)
-	q.Execute(testCtx, early, parallelism, testOutputConfig, abortFn)
+	q.Execute(testCtx, early, parallelism, testOutputConfig, abortFn, false)
 	tests = append(tests, early...)
 
 	// TODO: will move to the monitor
@@ -341,21 +341,21 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	// we loop indefinitely.
 	for i := 0; (i < 1 || count == -1) && testCtx.Err() == nil; i++ {
 		kubeTestsCopy := copyTests(kubeTests)
-		q.Execute(testCtx, kubeTestsCopy, parallelism, testOutputConfig, abortFn)
+		q.Execute(testCtx, kubeTestsCopy, parallelism, testOutputConfig, abortFn, false)
 		tests = append(tests, kubeTestsCopy...)
 
 		// I thought about randomizing the order of the kube, storage, and openshift tests, but storage dominates our e2e runs, so it doesn't help much.
 		storageTestsCopy := copyTests(storageTests)
-		q.Execute(testCtx, storageTestsCopy, max(1, parallelism/2), testOutputConfig, abortFn) // storage tests only run at half the parallelism, so we can avoid cloud provider quota problems.
+		q.Execute(testCtx, storageTestsCopy, max(1, parallelism/2), testOutputConfig, abortFn, false) // storage tests only run at half the parallelism, so we can avoid cloud provider quota problems.
 		tests = append(tests, storageTestsCopy...)
 
 		openshiftTestsCopy := copyTests(openshiftTests)
-		q.Execute(testCtx, openshiftTestsCopy, parallelism, testOutputConfig, abortFn)
+		q.Execute(testCtx, openshiftTestsCopy, parallelism, testOutputConfig, abortFn, false)
 		tests = append(tests, openshiftTestsCopy...)
 
 		// run the must-gather tests after parallel tests to reduce resource contention
 		mustGatherTestsCopy := copyTests(mustGatherTests)
-		q.Execute(testCtx, mustGatherTestsCopy, parallelism, testOutputConfig, abortFn)
+		q.Execute(testCtx, mustGatherTestsCopy, parallelism, testOutputConfig, abortFn, false)
 		tests = append(tests, mustGatherTestsCopy...)
 	}
 
@@ -363,7 +363,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 	pc.SetEvents([]string{postUpgradeEvent})
 
 	// run Late test suits after everything else
-	q.Execute(testCtx, late, parallelism, testOutputConfig, abortFn)
+	q.Execute(testCtx, late, parallelism, testOutputConfig, abortFn, false)
 	tests = append(tests, late...)
 
 	// TODO: will move to the monitor
@@ -412,7 +412,7 @@ func (opt *Options) Run(suite *TestSuite, junitSuiteName string) error {
 
 		// Run the tests in the retries list.
 		q := newParallelTestQueue(testRunnerContext)
-		q.Execute(testCtx, retries, parallelism, testOutputConfig, abortFn)
+		q.Execute(testCtx, retries, parallelism, testOutputConfig, abortFn, true)
 
 		var flaky []string
 		var repeatFailures []*testCase
