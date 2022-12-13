@@ -314,12 +314,7 @@ func (c *commandContext) RunTestInNewProcess(ctx context.Context, test *testCase
 		switch exitErr.ProcessState.Sys().(syscall.WaitStatus).ExitStatus() {
 		case 1:
 			// failed
-			if (time.Now().Second() % 2) == 0 {
-				// Flake instead of fail 50% of the time to test logic to discard flaked retries.
-				ret.testState = TestFlaked
-			} else {
-				ret.testState = TestFailed
-			}
+			ret.testState = TestFailed
 		case 2:
 			// timeout (ABRT is an exit code 2)
 			ret.testState = TestFailedTimeout
@@ -334,8 +329,12 @@ func (c *commandContext) RunTestInNewProcess(ctx context.Context, test *testCase
 		}
 		return ret
 	}
-
-	ret.testState = TestFailed
+	if (time.Now().Second() % 2) == 0 {
+		// Flake instead of fail 50% of the time to test logic to discard flaked retries.
+		ret.testState = TestFlaked
+	} else {
+		ret.testState = TestFailed
+	}
 	return ret
 }
 
