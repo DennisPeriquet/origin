@@ -95,6 +95,11 @@ func recordAddOrUpdateEvent(
 			obj.Reason, obj.InvolvedObject.Name, obj.LastTimestamp.Format(time.RFC3339))
 
 	}
+	t := obj.LastTimestamp.Time
+	if t.IsZero() {
+		t = obj.EventTime.Time
+	}
+
 	from := obj.FirstTimestamp.Time
 	if from.IsZero() {
 		from = obj.EventTime.Time
@@ -102,9 +107,12 @@ func recordAddOrUpdateEvent(
 	if from.IsZero() {
 		from = obj.CreationTimestamp.Time
 	}
-	to := from.Add(time.Second * 1)
 
-	if to.Before(significantlyBeforeNow) {
+	if t.IsZero() {
+		t = obj.CreationTimestamp.Time
+	}
+
+	if t.Before(significantlyBeforeNow) {
 		if osEvent {
 			fmt.Printf("OS update event filtered for being too old: %s - %s - %s (now: %s)\n",
 				obj.Reason, obj.InvolvedObject.Name, obj.LastTimestamp.Format(time.RFC3339),
@@ -155,8 +163,10 @@ func recordAddOrUpdateEvent(
 		message = fmt.Sprintf("reason/%s %s", obj.Reason, message)
 	}
 
+	to := t
 	if pathologicalMessagePattern.MatchString(message) {
 		message = fmt.Sprintf("pathological/true %s", message)
+		to = from.Add(time.Second * 1)
 	}
 
 	condition := monitorapi.Condition{

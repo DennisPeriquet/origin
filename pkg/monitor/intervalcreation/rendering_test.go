@@ -47,7 +47,7 @@ func TestIsPathologicalEvent(t *testing.T) {
 					Condition: monitorapi.Condition{
 						Level:   monitorapi.Warning,
 						Locator: "ns/openshift-oauth-apiserver pod/apiserver-6b7664f788-cs9fs node/ci-op-65yws62g-aa502-59ww5-master-1",
-						Message: "reason/ProbeError Readiness probe error: Get \"https://10.128.0.59:8443/readyz\": dial tcp 10.128.0.59:8443: connect: connection refused\nbody: \n (19 times)",
+						Message: "pathological/true reason/ProbeError Readiness probe error: Get \"https://10.128.0.59:8443/readyz\": dial tcp 10.128.0.59:8443: connect: connection refused\nbody: \n (19 times)",
 					},
 					From: time.Now(),
 					To:   time.Now().Add(time.Second),
