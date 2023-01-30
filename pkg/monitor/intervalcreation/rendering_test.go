@@ -73,7 +73,7 @@ func TestIsPathologicalEvent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := IsPathologicalEvent(tt.args.eventInterval); got != tt.want {
+			if got := IsChartworthyPathologicalEvent(tt.args.eventInterval); got != tt.want {
 				t.Errorf("IsPathologicalEvent() = %v, want %v", got, tt.want)
 			}
 		})

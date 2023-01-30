@@ -71,6 +71,8 @@ func startEventMonitoring(ctx context.Context, m Recorder, client kubernetes.Int
 	go reflector.Run(ctx.Done())
 }
 
+var pathologicalMessagePattern = regexp.MustCompile(`(?s)(.*) \((\d+) times\).*`)
+
 func recordAddOrUpdateEvent(
 	ctx context.Context,
 	m Recorder,
@@ -93,14 +95,16 @@ func recordAddOrUpdateEvent(
 			obj.Reason, obj.InvolvedObject.Name, obj.LastTimestamp.Format(time.RFC3339))
 
 	}
-	t := obj.LastTimestamp.Time
-	if t.IsZero() {
-		t = obj.EventTime.Time
+	from := obj.FirstTimestamp.Time
+	if from.IsZero() {
+		from = obj.EventTime.Time
 	}
-	if t.IsZero() {
-		t = obj.CreationTimestamp.Time
+	if from.IsZero() {
+		from = obj.CreationTimestamp.Time
 	}
-	if t.Before(significantlyBeforeNow) {
+	to := from.Add(time.Second * 1)
+
+	if to.Before(significantlyBeforeNow) {
 		if osEvent {
 			fmt.Printf("OS update event filtered for being too old: %s - %s - %s (now: %s)\n",
 				obj.Reason, obj.InvolvedObject.Name, obj.LastTimestamp.Format(time.RFC3339),
@@ -150,6 +154,11 @@ func recordAddOrUpdateEvent(
 	default:
 		message = fmt.Sprintf("reason/%s %s", obj.Reason, message)
 	}
+
+	if pathologicalMessagePattern.MatchString(message) {
+		message = fmt.Sprintf("pathological/true %s", message)
+	}
+
 	condition := monitorapi.Condition{
 		Level:   monitorapi.Info,
 		Locator: locateEvent(obj),
@@ -158,7 +167,12 @@ func recordAddOrUpdateEvent(
 	if obj.Type == corev1.EventTypeWarning {
 		condition.Level = monitorapi.Warning
 	}
-	m.RecordAt(t, condition)
+
+	fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, from, to)
+
+	// Re-using the interval code, we already know our start/end time here.
+	inter := m.StartInterval(from, condition)
+	m.EndInterval(inter, to)
 
 }
 
