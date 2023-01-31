@@ -26,7 +26,12 @@ func TestMonitorEventsOptions_WriteRunDataToArtifactsDir(t *testing.T) {
 	// We will take this .json file and turn it into one with pathological/true annotation for any event that ends in "(n times)".
 	// You can then embed that into an html template.
 	//recordedEvents, err := monitorserialization.EventsFromFile("/home/dperique/mygit/dperique/NG/Dennis/Redhat/PR/origin/e2e-events_20230127-133940.json")
-	recordedEvents, err := monitorserialization.EventsFromFile("/home/dperique/mygit/dperique/NG/Dennis/Redhat/PR/origin/e2e-events_20230130-213035.json")
+	//recordedEvents, err := monitorserialization.EventsFromFile("/home/dperique/mygit/dperique/NG/Dennis/Redhat/PR/origin/e2e-events_20230130-213035.json")
+
+	// interesting picture
+	//recordedEvents, err := monitorserialization.EventsFromFile("/home/dperique/mygit/dperique/NG/Dennis/Redhat/PR/origin/e2e-events_20230130-212059.json")
+
+	recordedEvents, err := monitorserialization.EventsFromFile("/home/dperique/mygit/dperique/NG/Dennis/Redhat/PR/origin/e2e-events_20230130-223114.json")
 
 	// no (n times) here
 	//recordedEvents, err := monitorserialization.EventsFromFile("/home/dperique/mygit/dperique/NG/Dennis/Redhat/PR/origin/e2e-timelines_openshift-control-plane_20230109-153744.json")
