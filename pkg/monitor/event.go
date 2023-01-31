@@ -100,18 +100,17 @@ func recordAddOrUpdateEvent(
 		t = obj.EventTime.Time
 	}
 
-	from := obj.FirstTimestamp.Time
-	if from.IsZero() {
-		from = obj.EventTime.Time
+	pathoFrom := obj.FirstTimestamp.Time
+	if pathoFrom.IsZero() {
+		pathoFrom = obj.EventTime.Time
 	}
-	if from.IsZero() {
-		from = obj.CreationTimestamp.Time
+	if pathoFrom.IsZero() {
+		pathoFrom = obj.CreationTimestamp.Time
 	}
 
 	if t.IsZero() {
 		t = obj.CreationTimestamp.Time
 	}
-
 	if t.Before(significantlyBeforeNow) {
 		if osEvent {
 			fmt.Printf("OS update event filtered for being too old: %s - %s - %s (now: %s)\n",
@@ -162,13 +161,6 @@ func recordAddOrUpdateEvent(
 	default:
 		message = fmt.Sprintf("reason/%s %s", obj.Reason, message)
 	}
-
-	to := t
-	if pathologicalMessagePattern.MatchString(message) {
-		message = fmt.Sprintf("pathological/true %s", message)
-		to = from.Add(time.Second * 1)
-	}
-
 	condition := monitorapi.Condition{
 		Level:   monitorapi.Info,
 		Locator: locateEvent(obj),
@@ -178,12 +170,17 @@ func recordAddOrUpdateEvent(
 		condition.Level = monitorapi.Warning
 	}
 
-	fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, from, to)
+	if pathologicalMessagePattern.MatchString(message) {
+		condition.Message = fmt.Sprintf("pathological/true %s", message)
+		to := pathoFrom.Add(1 * time.Second)
+		fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
 
-	// Re-using the interval code, we already know our start/end time here.
-	inter := m.StartInterval(from, condition)
-	m.EndInterval(inter, to)
-
+		// Re-using the interval code, we already know our start/end time here.
+		inter := m.StartInterval(pathoFrom, condition)
+		m.EndInterval(inter, to)
+	} else {
+		m.RecordAt(t, condition)
+	}
 }
 
 func eventForContainer(fieldPath string) (string, bool) {
