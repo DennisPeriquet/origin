@@ -394,7 +394,7 @@ func (d duplicateEventsEvaluator) testDuplicatedEvents(testName string, flakeOnl
 				continue
 			}
 
-			eventMessageString := eventDisplayMessage + " From: " + event.From.Format("2006-01-02T15:04:05Z") + " To: " + event.To.Format("2006-01-02T15:04:05Z")
+			eventMessageString := eventDisplayMessage + " From: " + event.From.Format("15:04:05Z") + " To: " + event.To.Format("15:04:05Z")
 			if _, ok := displayToCount[eventMessageString]; !ok {
 				tmp := &pathologicalEvents{
 					count:        times,

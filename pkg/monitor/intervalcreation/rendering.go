@@ -87,9 +87,6 @@ func BelongsInSpyglass(eventInterval monitorapi.EventInterval) bool {
 	if IsPodLifecycle(eventInterval) {
 		return false
 	}
-	if IsChartworthyPathologicalEvent(eventInterval) {
-		return true
-	}
 
 	return true
 }
@@ -129,8 +126,8 @@ func BelongsInKubeAPIServer(eventInterval monitorapi.EventInterval) bool {
 }
 
 // IsChartworthyPathologicalEvent returns true if the event message matches the pattern where the message
-// says "(n times)"" where n is a number.  Even if n is less than the failure threshold, it is still
-// counted as a pathological event (to be displayed in the spyglass chart).
+// says "(n times)" where n is a number greater than some threshold (20).  These messages were marked as
+// "pathological/true" earlier when the Interval was created so they can be displayed in a spyglass chart.
 func IsChartworthyPathologicalEvent(eventInterval monitorapi.EventInterval) bool {
 	return strings.Contains(eventInterval.Message, "pathological/true")
 }
