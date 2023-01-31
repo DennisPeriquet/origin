@@ -111,7 +111,6 @@ func recordAddOrUpdateEvent(
 	if t.IsZero() {
 		t = obj.CreationTimestamp.Time
 	}
-
 	if t.Before(significantlyBeforeNow) {
 		if osEvent {
 			fmt.Printf("OS update event filtered for being too old: %s - %s - %s (now: %s)\n",
@@ -162,7 +161,6 @@ func recordAddOrUpdateEvent(
 	default:
 		message = fmt.Sprintf("reason/%s %s", obj.Reason, message)
 	}
-
 	condition := monitorapi.Condition{
 		Level:   monitorapi.Info,
 		Locator: locateEvent(obj),
