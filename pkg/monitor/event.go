@@ -72,6 +72,7 @@ func startEventMonitoring(ctx context.Context, m Recorder, client kubernetes.Int
 }
 
 var pathologicalMessagePattern = regexp.MustCompile(`(?s)(.*) \((\d+) times\).*`)
+const duplicateEventThreshold int32 = 20
 
 func recordAddOrUpdateEvent(
 	ctx context.Context,
@@ -98,14 +99,6 @@ func recordAddOrUpdateEvent(
 	t := obj.LastTimestamp.Time
 	if t.IsZero() {
 		t = obj.EventTime.Time
-	}
-
-	pathoFrom := obj.FirstTimestamp.Time
-	if pathoFrom.IsZero() {
-		pathoFrom = obj.EventTime.Time
-	}
-	if pathoFrom.IsZero() {
-		pathoFrom = obj.CreationTimestamp.Time
 	}
 
 	if t.IsZero() {
@@ -170,7 +163,15 @@ func recordAddOrUpdateEvent(
 		condition.Level = monitorapi.Warning
 	}
 
-	if pathologicalMessagePattern.MatchString(message) {
+	if pathologicalMessagePattern.MatchString(message) && obj.Count > duplicateEventThreshold {
+		pathoFrom := obj.FirstTimestamp.Time
+		if pathoFrom.IsZero() {
+			pathoFrom = obj.EventTime.Time
+		}
+		if pathoFrom.IsZero() {
+			pathoFrom = obj.CreationTimestamp.Time
+		}
+
 		condition.Message = fmt.Sprintf("pathological/true %s", message)
 		to := pathoFrom.Add(1 * time.Second)
 		fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
