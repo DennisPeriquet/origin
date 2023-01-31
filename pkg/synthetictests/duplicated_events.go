@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	v1 "github.com/openshift/api/config/v1"
 	configclient "github.com/openshift/client-go/config/clientset/versioned"
@@ -367,8 +368,15 @@ func appendToFirstLine(s string, add string) string {
 func (d duplicateEventsEvaluator) testDuplicatedEvents(testName string, flakeOnly bool, events monitorapi.Intervals, kubeClientConfig *rest.Config) []*junitapi.JUnitTestCase {
 	allowedRepeatedEventsRegex := combinedRegexp(d.allowedRepeatedEventPatterns...)
 
+	type pathologicalEvents struct {
+		count        int
+		eventMessage string
+		from         time.Time
+		to           time.Time
+	}
+
 	var failures []string
-	displayToCount := map[string]int{}
+	displayToCount := map[string]*pathologicalEvents{}
 	for _, event := range events {
 		eventDisplayMessage, times := getTimesAnEventHappened(fmt.Sprintf("%s - %s", event.Locator, event.Message))
 		if times > duplicateEventThreshold {
@@ -393,18 +401,28 @@ func (d duplicateEventsEvaluator) testDuplicatedEvents(testName string, flakeOnl
 				continue
 			}
 
-			if times > displayToCount[eventDisplayMessage] {
-				displayToCount[eventDisplayMessage] = times
+			eventMessageString := eventDisplayMessage + " From: " + event.From.Format("15:04:05Z") + " To: " + event.To.Format("15:04:05Z")
+			if _, ok := displayToCount[eventMessageString]; !ok {
+				tmp := &pathologicalEvents{
+					count:        times,
+					eventMessage: eventDisplayMessage,
+					from:         event.From,
+					to:           event.To,
+				}
+				displayToCount[eventMessageString] = tmp
+			}
+			if times > displayToCount[eventMessageString].count {
+				displayToCount[eventMessageString].count = times
 			}
 		}
 	}
 
 	var flakes []string
-	for display, count := range displayToCount {
-		msg := fmt.Sprintf("event happened %d times, something is wrong: %v", count, display)
+	for msgWithTime, pathoItem := range displayToCount {
+		msg := fmt.Sprintf("event happened %d times, something is wrong: %v", pathoItem.count, msgWithTime)
 		flake := false
 		for _, kp := range d.knownRepeatedEventsBugs {
-			if kp.Regexp != nil && kp.Regexp.MatchString(display) {
+			if kp.Regexp != nil && kp.Regexp.MatchString(pathoItem.eventMessage) {
 				// Check if this exception only applies to our specific platform
 				if kp.Platform != nil && *kp.Platform != d.platform {
 					continue

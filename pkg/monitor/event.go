@@ -71,6 +71,10 @@ func startEventMonitoring(ctx context.Context, m Recorder, client kubernetes.Int
 	go reflector.Run(ctx.Done())
 }
 
+var pathologicalMessagePattern = regexp.MustCompile(`(?s)(.*) \((\d+) times\).*`)
+
+const duplicateEventThreshold int32 = 20
+
 func recordAddOrUpdateEvent(
 	ctx context.Context,
 	m Recorder,
@@ -97,6 +101,7 @@ func recordAddOrUpdateEvent(
 	if t.IsZero() {
 		t = obj.EventTime.Time
 	}
+
 	if t.IsZero() {
 		t = obj.CreationTimestamp.Time
 	}
@@ -158,8 +163,30 @@ func recordAddOrUpdateEvent(
 	if obj.Type == corev1.EventTypeWarning {
 		condition.Level = monitorapi.Warning
 	}
-	m.RecordAt(t, condition)
 
+	if pathologicalMessagePattern.MatchString(message) && obj.Count > duplicateEventThreshold {
+		// For pathological events that exceed the threshold, we add an interval of 1 second
+		// and mark it with pathological/true.
+		// Pathological implies that the message occurred greater than the threshold; those
+		// messages end with (n times) where n > threshold.
+		pathoFrom := obj.FirstTimestamp.Time
+		if pathoFrom.IsZero() {
+			pathoFrom = obj.EventTime.Time
+		}
+		if pathoFrom.IsZero() {
+			pathoFrom = obj.CreationTimestamp.Time
+		}
+
+		condition.Message = fmt.Sprintf("pathological/true %s", message)
+		to := pathoFrom.Add(1 * time.Second)
+		fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
+
+		// Re-using the interval code, we already know our start/end time here.
+		inter := m.StartInterval(pathoFrom, condition)
+		m.EndInterval(inter, to)
+	} else {
+		m.RecordAt(t, condition)
+	}
 }
 
 func eventForContainer(fieldPath string) (string, bool) {

@@ -125,6 +125,13 @@ func BelongsInKubeAPIServer(eventInterval monitorapi.EventInterval) bool {
 	return true
 }
 
+// IsChartworthyPathologicalEvent returns true if the event message matches the pattern where the message
+// says "(n times)" where n is a number greater than some threshold (20).  These messages were marked as
+// "pathological/true" earlier when the Interval was created so they can be displayed in a spyglass chart.
+func IsChartworthyPathologicalEvent(eventInterval monitorapi.EventInterval) bool {
+	return strings.Contains(eventInterval.Message, "pathological/true")
+}
+
 func IsPodLifecycle(eventInterval monitorapi.EventInterval) bool {
 	return strings.Contains(eventInterval.Message, "constructed/true")
 }
