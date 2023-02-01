@@ -8,6 +8,7 @@ import (
 	"time"
 
 	v1 "github.com/openshift/api/config/v1"
+	"github.com/openshift/origin/pkg/duplicateevents"
 	"github.com/openshift/origin/pkg/monitor/backenddisruption"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/openshift/origin/pkg/test/ginkgo/junitapi"
@@ -257,7 +258,7 @@ func getPodDeletionTime(events monitorapi.Intervals, podLocator string) *time.Ti
 // bug is tracked here: https://bugzilla.redhat.com/show_bug.cgi?id=2057181
 func testOvnNodeReadinessProbe(events monitorapi.Intervals, kubeClientConfig *rest.Config) []*junitapi.JUnitTestCase {
 	const testName = "[bz-networking] ovnkube-node readiness probe should not fail repeatedly"
-	regExp := regexp.MustCompile(ovnReadinessRegExpStr)
+	regExp := regexp.MustCompile(duplicateevents.OvnReadinessRegExpStr)
 	var tests []*junitapi.JUnitTestCase
 	var failureOutput string
 	msgMap := map[string]bool{}

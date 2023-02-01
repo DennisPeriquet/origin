@@ -8,6 +8,7 @@ import (
 	"time"
 
 	v1 "github.com/openshift/api/config/v1"
+	"github.com/openshift/origin/pkg/duplicateevents"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/stretchr/testify/assert"
 )
@@ -54,7 +55,7 @@ func TestEventCountExtractor(t *testing.T) {
 }
 
 func TestEventRegexExcluder(t *testing.T) {
-	allowedRepeatedEventsRegex := combinedRegexp(allowedRepeatedEventPatterns...)
+	allowedRepeatedEventsRegex := duplicateevents.CombinedRegexp(duplicateevents.AllowedRepeatedEventPatterns...)
 
 	tests := []struct {
 		name    string
@@ -102,7 +103,7 @@ func TestEventRegexExcluder(t *testing.T) {
 }
 
 func TestUpgradeEventRegexExcluder(t *testing.T) {
-	allowedRepeatedEventsRegex := combinedRegexp(allowedUpgradeRepeatedEventPatterns...)
+	allowedRepeatedEventsRegex := duplicateevents.CombinedRegexp(duplicateevents.AllowedUpgradeRepeatedEventPatterns...)
 
 	tests := []struct {
 		name    string
@@ -127,7 +128,7 @@ func TestUpgradeEventRegexExcluder(t *testing.T) {
 
 func TestKnownBugEvents(t *testing.T) {
 	evaluator := duplicateEventsEvaluator{
-		allowedRepeatedEventPatterns: allowedRepeatedEventPatterns,
+		allowedRepeatedEventPatterns: duplicateevents.AllowedRepeatedEventPatterns,
 		knownRepeatedEventsBugs: []knownProblem{
 			{
 				Regexp: regexp.MustCompile(`ns/.* reason/SomeEvent1.*`),
@@ -246,7 +247,7 @@ func TestKnownBugEvents(t *testing.T) {
 
 func TestKnownBugEventsGroup(t *testing.T) {
 	evaluator := duplicateEventsEvaluator{
-		allowedRepeatedEventPatterns: allowedRepeatedEventPatterns,
+		allowedRepeatedEventPatterns: duplicateevents.AllowedRepeatedEventPatterns,
 		knownRepeatedEventsBugs: []knownProblem{
 			{
 				Regexp: regexp.MustCompile(`ns/.* reason/SomeEvent1.*`),

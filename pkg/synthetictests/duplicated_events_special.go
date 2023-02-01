@@ -8,28 +8,23 @@ import (
 
 	"k8s.io/apimachinery/pkg/util/sets"
 
+	"github.com/openshift/origin/pkg/duplicateevents"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/openshift/origin/pkg/test/ginkgo/junitapi"
 )
 
 const (
-	imagePullRedhatRegEx                       = `reason/[a-zA-Z]+ .*Back-off pulling image .*registry.redhat.io`
 	imagePullRedhatFlakeThreshold              = 5
-	requiredResourcesMissingRegEx              = `reason/RequiredInstallerResourcesMissing secrets: etcd-all-certs-[0-9]+`
 	requiredResourceMissingFlakeThreshold      = 10
-	backoffRestartingFailedRegEx               = `reason/BackOff Back-off restarting failed container`
 	backoffRestartingFlakeThreshold            = 10
-	errorUpdatingEndpointSlicesRegex           = `reason/FailedToUpdateEndpointSlices Error updating Endpoint Slices`
 	errorUpdatingEndpointSlicesFailedThreshold = -1 // flake only
 	errorUpdatingEndpointSlicesFlakeThreshold  = 10
-	readinessFailedMessageRegExpStr            = "reason/ReadinessFailed.*Get.*healthz.*net/http.*request canceled while waiting for connection.*Client.Timeout exceeded"
-	probeErrorReadinessMessageRegExpStr        = "reason/ProbeError.*Readiness probe error.*Client.Timeout exceeded while awaiting headers"
-	probeErrorLivenessMessageRegExpStr         = "reason/(ProbeError|Unhealthy).*Liveness probe error.*Client.Timeout exceeded while awaiting headers"
-	probeErrorConnectionRefusedRegExpStr       = "reason/ProbeError.*Readiness probe error.*connection refused"
-	nodeHasNoDiskPressureRegExpStr             = "reason/NodeHasNoDiskPressure.*status is now: NodeHasNoDiskPressure"
-	nodeHasSufficientMemoryRegExpStr           = "reason/NodeHasSufficientMemory.*status is now: NodeHasSufficientMemory"
-	nodeHasSufficientPIDRegExpStr              = "reason/NodeHasSufficientPID.*status is now: NodeHasSufficientPID"
-	singleNodeErrorConnectionRefusedRegExpStr  = "reason/.*dial tcp.*connection refused"
+
+	readinessFailedMessageRegExpStr           = "reason/ReadinessFailed.*Get.*healthz.*net/http.*request canceled while waiting for connection.*Client.Timeout exceeded"
+	probeErrorReadinessMessageRegExpStr       = "reason/ProbeError.*Readiness probe error.*Client.Timeout exceeded while awaiting headers"
+	probeErrorLivenessMessageRegExpStr        = "reason/(ProbeError|Unhealthy).*Liveness probe error.*Client.Timeout exceeded while awaiting headers"
+	probeErrorConnectionRefusedRegExpStr      = "reason/ProbeError.*Readiness probe error.*connection refused"
+	singleNodeErrorConnectionRefusedRegExpStr = "reason/.*dial tcp.*connection refused"
 )
 
 type eventRecognizerFunc func(event monitorapi.EventInterval) bool
@@ -111,7 +106,7 @@ func newSingleEventCheckRegex(testName, regex string, failThreshold, flakeThresh
 // to happen over a certain threshold and marks it as a failure or flake accordingly.
 func testBackoffPullingRegistryRedhatImage(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-arch] should not see excessive pull back-off on registry.redhat.io"
-	return newSingleEventCheckRegex(testName, imagePullRedhatRegEx, math.MaxInt, imagePullRedhatFlakeThreshold).test(events)
+	return newSingleEventCheckRegex(testName, duplicateevents.ImagePullRedhatRegEx, math.MaxInt, imagePullRedhatFlakeThreshold).test(events)
 }
 
 // testRequiredInstallerResourcesMissing looks for this symptom:
@@ -122,7 +117,7 @@ func testBackoffPullingRegistryRedhatImage(events monitorapi.Intervals) []*junit
 // flake threshold.  See https://bugzilla.redhat.com/show_bug.cgi?id=2031564.
 func testRequiredInstallerResourcesMissing(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[bz-etcd] should not see excessive RequiredInstallerResourcesMissing secrets"
-	return newSingleEventCheckRegex(testName, requiredResourcesMissingRegEx, duplicateEventThreshold, requiredResourceMissingFlakeThreshold).test(events)
+	return newSingleEventCheckRegex(testName, duplicateevents.RequiredResourcesMissingRegEx, duplicateEventThreshold, requiredResourceMissingFlakeThreshold).test(events)
 }
 
 // testBackoffStartingFailedContainer looks for this symptom in core namespaces:
@@ -131,7 +126,7 @@ func testRequiredInstallerResourcesMissing(events monitorapi.Intervals) []*junit
 func testBackoffStartingFailedContainer(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-cluster-lifecycle] should not see excessive Back-off restarting failed containers"
 
-	return newSingleEventCheckRegex(testName, backoffRestartingFailedRegEx, duplicateEventThreshold, backoffRestartingFlakeThreshold).
+	return newSingleEventCheckRegex(testName, duplicateevents.BackoffRestartingFailedRegEx, duplicateEventThreshold, backoffRestartingFlakeThreshold).
 		test(events.Filter(monitorapi.Not(monitorapi.IsInE2ENamespace)))
 }
 
@@ -142,14 +137,14 @@ func testBackoffStartingFailedContainerForE2ENamespaces(events monitorapi.Interv
 	testName := "[sig-cluster-lifecycle] should not see excessive Back-off restarting failed containers in e2e namespaces"
 
 	// always flake for now
-	return newSingleEventCheckRegex(testName, backoffRestartingFailedRegEx, math.MaxInt, backoffRestartingFlakeThreshold).
+	return newSingleEventCheckRegex(testName, duplicateevents.BackoffRestartingFailedRegEx, math.MaxInt, backoffRestartingFlakeThreshold).
 		test(events.Filter(monitorapi.IsInE2ENamespace))
 }
 
 func testErrorUpdatingEndpointSlices(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-networking] should not see excessive FailedToUpdateEndpointSlices Error updating Endpoint Slices"
 
-	return newSingleEventCheckRegex(testName, errorUpdatingEndpointSlicesRegex, errorUpdatingEndpointSlicesFailedThreshold, errorUpdatingEndpointSlicesFlakeThreshold).
+	return newSingleEventCheckRegex(testName, duplicateevents.ErrorUpdatingEndpointSlicesRegex, errorUpdatingEndpointSlicesFailedThreshold, errorUpdatingEndpointSlicesFlakeThreshold).
 		test(events.Filter(monitorapi.IsInNamespaces(sets.NewString("openshift-ovn-kubernetes"))))
 }
 
@@ -170,17 +165,17 @@ func testConfigOperatorReadinessProbe(events monitorapi.Intervals) []*junitapi.J
 
 func testNodeHasNoDiskPressure(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] Test the NodeHasNoDiskPressure condition does not occur too often"
-	return eventExprMatchThresholdTest(testName, events, nodeHasNoDiskPressureRegExpStr, duplicateEventThreshold)
+	return eventExprMatchThresholdTest(testName, events, duplicateevents.NodeHasNoDiskPressureRegExpStr, duplicateEventThreshold)
 }
 
 func testNodeHasSufficientMemory(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] Test the NodeHasSufficeintMemory condition does not occur too often"
-	return eventExprMatchThresholdTest(testName, events, nodeHasSufficientMemoryRegExpStr, duplicateEventThreshold)
+	return eventExprMatchThresholdTest(testName, events, duplicateevents.NodeHasSufficientMemoryRegExpStr, duplicateEventThreshold)
 }
 
 func testNodeHasSufficientPID(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] Test the NodeHasSufficientPID condition does not occur too often"
-	return eventExprMatchThresholdTest(testName, events, nodeHasSufficientPIDRegExpStr, duplicateEventThreshold)
+	return eventExprMatchThresholdTest(testName, events, duplicateevents.NodeHasSufficientPIDRegExpStr, duplicateEventThreshold)
 }
 
 func makeProbeTest(testName string, events monitorapi.Intervals, operatorName string, regExStr string, eventFlakeThreshold int) []*junitapi.JUnitTestCase {
