@@ -12,26 +12,6 @@ import (
 	"github.com/openshift/origin/pkg/test/ginkgo/junitapi"
 )
 
-const (
-	imagePullRedhatRegEx                       = `reason/[a-zA-Z]+ .*Back-off pulling image .*registry.redhat.io`
-	imagePullRedhatFlakeThreshold              = 5
-	requiredResourcesMissingRegEx              = `reason/RequiredInstallerResourcesMissing secrets: etcd-all-certs-[0-9]+`
-	requiredResourceMissingFlakeThreshold      = 10
-	backoffRestartingFailedRegEx               = `reason/BackOff Back-off restarting failed container`
-	backoffRestartingFlakeThreshold            = 10
-	errorUpdatingEndpointSlicesRegex           = `reason/FailedToUpdateEndpointSlices Error updating Endpoint Slices`
-	errorUpdatingEndpointSlicesFailedThreshold = -1 // flake only
-	errorUpdatingEndpointSlicesFlakeThreshold  = 10
-	readinessFailedMessageRegExpStr            = "reason/ReadinessFailed.*Get.*healthz.*net/http.*request canceled while waiting for connection.*Client.Timeout exceeded"
-	probeErrorReadinessMessageRegExpStr        = "reason/ProbeError.*Readiness probe error.*Client.Timeout exceeded while awaiting headers"
-	probeErrorLivenessMessageRegExpStr         = "reason/(ProbeError|Unhealthy).*Liveness probe error.*Client.Timeout exceeded while awaiting headers"
-	probeErrorConnectionRefusedRegExpStr       = "reason/ProbeError.*Readiness probe error.*connection refused"
-	nodeHasNoDiskPressureRegExpStr             = "reason/NodeHasNoDiskPressure.*status is now: NodeHasNoDiskPressure"
-	nodeHasSufficientMemoryRegExpStr           = "reason/NodeHasSufficientMemory.*status is now: NodeHasSufficientMemory"
-	nodeHasSufficientPIDRegExpStr              = "reason/NodeHasSufficientPID.*status is now: NodeHasSufficientPID"
-	singleNodeErrorConnectionRefusedRegExpStr  = "reason/.*dial tcp.*connection refused"
-)
-
 type eventRecognizerFunc func(event monitorapi.EventInterval) bool
 
 func matchEventForRegexOrDie(regex string) eventRecognizerFunc {
