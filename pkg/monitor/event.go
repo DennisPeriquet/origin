@@ -73,8 +73,6 @@ func startEventMonitoring(ctx context.Context, m Recorder, client kubernetes.Int
 
 var pathologicalMessagePattern = regexp.MustCompile(`(?s)(.*) \((\d+) times\).*`)
 
-const duplicateEventThreshold int32 = 20
-
 func recordAddOrUpdateEvent(
 	ctx context.Context,
 	m Recorder,
@@ -164,11 +162,9 @@ func recordAddOrUpdateEvent(
 		condition.Level = monitorapi.Warning
 	}
 
-	if pathologicalMessagePattern.MatchString(message) && obj.Count > duplicateEventThreshold {
-		// For pathological events that exceed the threshold, we add an interval of 1 second
-		// and mark it with pathological/true.
-		// Pathological implies that the message occurred greater than the threshold; those
-		// messages end with (n times) where n > threshold.
+	if pathologicalMessagePattern.MatchString(message) {
+		// For pathological events, we add an interval of 1 second and mark it with pathological/true.
+		// Pathological events have a message that ends with (n times).
 		pathoFrom := obj.FirstTimestamp.Time
 		if pathoFrom.IsZero() {
 			pathoFrom = obj.EventTime.Time
