@@ -8,6 +8,7 @@ import (
 	"time"
 
 	v1 "github.com/openshift/api/config/v1"
+	"github.com/openshift/origin/pkg/monitor"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	"github.com/stretchr/testify/assert"
 )
@@ -396,7 +397,7 @@ func TestMakeProbeTestEventsGroup(t *testing.T) {
 				)
 			}
 
-			junits := makeProbeTest("test test", events, test.operator, test.regEx, duplicateEventThreshold)
+			junits := monitor.MakeProbeTest("test test", events, test.operator, test.regEx, monitor.DuplicateEventThreshold)
 
 			if len(junits) < 1 {
 				t.Fatal("didn't get junit for duplicated event")

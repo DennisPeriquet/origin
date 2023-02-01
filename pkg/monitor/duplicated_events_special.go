@@ -1,4 +1,4 @@
-package synthetictests
+package monitor
 
 import (
 	"fmt"
@@ -103,42 +103,42 @@ func newSingleEventCheckRegex(testName, regex string, failThreshold, flakeThresh
 	}
 }
 
-// testBackoffPullingRegistryRedhatImage looks for this symptom:
+// TestBackoffPullingRegistryRedhatImage looks for this symptom:
 //
 //	reason/ContainerWait ... Back-off pulling image "registry.redhat.io/openshift4/ose-oauth-proxy:latest"
 //	reason/BackOff Back-off pulling image "registry.redhat.io/openshift4/ose-oauth-proxy:latest"
 //
 // to happen over a certain threshold and marks it as a failure or flake accordingly.
-func testBackoffPullingRegistryRedhatImage(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestBackoffPullingRegistryRedhatImage(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-arch] should not see excessive pull back-off on registry.redhat.io"
 	return newSingleEventCheckRegex(testName, imagePullRedhatRegEx, math.MaxInt, imagePullRedhatFlakeThreshold).test(events)
 }
 
-// testRequiredInstallerResourcesMissing looks for this symptom:
+// TestRequiredInstallerResourcesMissing looks for this symptom:
 //
 //	reason/RequiredInstallerResourcesMissing secrets: etcd-all-certs-3
 //
 // and fails if it happens more than the failure threshold count of 20 and flakes more than the
 // flake threshold.  See https://bugzilla.redhat.com/show_bug.cgi?id=2031564.
-func testRequiredInstallerResourcesMissing(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestRequiredInstallerResourcesMissing(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[bz-etcd] should not see excessive RequiredInstallerResourcesMissing secrets"
-	return newSingleEventCheckRegex(testName, requiredResourcesMissingRegEx, duplicateEventThreshold, requiredResourceMissingFlakeThreshold).test(events)
+	return newSingleEventCheckRegex(testName, requiredResourcesMissingRegEx, monitor.DuplicateEventThreshold, requiredResourceMissingFlakeThreshold).test(events)
 }
 
-// testBackoffStartingFailedContainer looks for this symptom in core namespaces:
+// TestBackoffStartingFailedContainer looks for this symptom in core namespaces:
 //
 //	reason/BackOff Back-off restarting failed container
-func testBackoffStartingFailedContainer(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestBackoffStartingFailedContainer(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-cluster-lifecycle] should not see excessive Back-off restarting failed containers"
 
-	return newSingleEventCheckRegex(testName, backoffRestartingFailedRegEx, duplicateEventThreshold, backoffRestartingFlakeThreshold).
+	return newSingleEventCheckRegex(testName, backoffRestartingFailedRegEx, monitor.DuplicateEventThreshold, backoffRestartingFlakeThreshold).
 		test(events.Filter(monitorapi.Not(monitorapi.IsInE2ENamespace)))
 }
 
-// testBackoffStartingFailedContainerForE2ENamespaces looks for this symptom in e2e namespaces:
+// TestBackoffStartingFailedContainerForE2ENamespaces looks for this symptom in e2e namespaces:
 //
 //	reason/BackOff Back-off restarting failed container
-func testBackoffStartingFailedContainerForE2ENamespaces(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestBackoffStartingFailedContainerForE2ENamespaces(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-cluster-lifecycle] should not see excessive Back-off restarting failed containers in e2e namespaces"
 
 	// always flake for now
@@ -146,44 +146,44 @@ func testBackoffStartingFailedContainerForE2ENamespaces(events monitorapi.Interv
 		test(events.Filter(monitorapi.IsInE2ENamespace))
 }
 
-func testErrorUpdatingEndpointSlices(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestErrorUpdatingEndpointSlices(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	testName := "[sig-networking] should not see excessive FailedToUpdateEndpointSlices Error updating Endpoint Slices"
 
 	return newSingleEventCheckRegex(testName, errorUpdatingEndpointSlicesRegex, errorUpdatingEndpointSlicesFailedThreshold, errorUpdatingEndpointSlicesFlakeThreshold).
 		test(events.Filter(monitorapi.IsInNamespaces(sets.NewString("openshift-ovn-kubernetes"))))
 }
 
-func testConfigOperatorProbeErrorReadinessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestConfigOperatorProbeErrorReadinessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] openshift-config-operator should not get probe error on readiness probe due to timeout"
-	return makeProbeTest(testName, events, "openshift-config-operator", probeErrorReadinessMessageRegExpStr, duplicateEventThreshold)
+	return monitor.MakeProbeTest(testName, events, "openshift-config-operator", probeErrorReadinessMessageRegExpStr, monitor.DuplicateEventThreshold)
 }
 
-func testConfigOperatorProbeErrorLivenessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestConfigOperatorProbeErrorLivenessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] openshift-config-operator should not get probe error on liveness probe due to timeout"
-	return makeProbeTest(testName, events, "openshift-config-operator", probeErrorLivenessMessageRegExpStr, duplicateEventThreshold)
+	return monitor.MakeProbeTest(testName, events, "openshift-config-operator", probeErrorLivenessMessageRegExpStr, monitor.DuplicateEventThreshold)
 }
 
-func testConfigOperatorReadinessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestConfigOperatorReadinessProbe(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] openshift-config-operator readiness probe should not fail due to timeout"
-	return makeProbeTest(testName, events, "openshift-config-operator", readinessFailedMessageRegExpStr, duplicateEventThreshold)
+	return monitor.MakeProbeTest(testName, events, "openshift-config-operator", readinessFailedMessageRegExpStr, monitor.DuplicateEventThreshold)
 }
 
-func testNodeHasNoDiskPressure(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestNodeHasNoDiskPressure(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] Test the NodeHasNoDiskPressure condition does not occur too often"
-	return eventExprMatchThresholdTest(testName, events, nodeHasNoDiskPressureRegExpStr, duplicateEventThreshold)
+	return eventExprMatchThresholdTest(testName, events, nodeHasNoDiskPressureRegExpStr, monitor.DuplicateEventThreshold)
 }
 
-func testNodeHasSufficientMemory(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestNodeHasSufficientMemory(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] Test the NodeHasSufficeintMemory condition does not occur too often"
-	return eventExprMatchThresholdTest(testName, events, nodeHasSufficientMemoryRegExpStr, duplicateEventThreshold)
+	return eventExprMatchThresholdTest(testName, events, nodeHasSufficientMemoryRegExpStr, monitor.DuplicateEventThreshold)
 }
 
-func testNodeHasSufficientPID(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
+func TestNodeHasSufficientPID(events monitorapi.Intervals) []*junitapi.JUnitTestCase {
 	const testName = "[sig-node] Test the NodeHasSufficientPID condition does not occur too often"
-	return eventExprMatchThresholdTest(testName, events, nodeHasSufficientPIDRegExpStr, duplicateEventThreshold)
+	return eventExprMatchThresholdTest(testName, events, nodeHasSufficientPIDRegExpStr, monitor.DuplicateEventThreshold)
 }
 
-func makeProbeTest(testName string, events monitorapi.Intervals, operatorName string, regExStr string, eventFlakeThreshold int) []*junitapi.JUnitTestCase {
+func MakeProbeTest(testName string, events monitorapi.Intervals, operatorName string, regExStr string, eventFlakeThreshold int) []*junitapi.JUnitTestCase {
 	messageRegExp := regexp.MustCompile(regExStr)
 	return eventMatchThresholdTest(testName, events, func(event monitorapi.EventInterval) bool {
 		return isOperatorMatchRegexMessage(event, operatorName, messageRegExp)
