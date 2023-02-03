@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/openshift/origin/pkg/duplicateevents"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -69,6 +70,60 @@ func startEventMonitoring(ctx context.Context, m Recorder, client kubernetes.Int
 	}
 	reflector := cache.NewReflector(listWatch, &corev1.Event{}, customStore, 0)
 	go reflector.Run(ctx.Done())
+}
+
+var allRepeatedEventPatterns = combinedDuplicateEventPatterns()
+
+func combinedDuplicateEventPatterns() *regexp.Regexp {
+	s := ""
+	for _, r := range duplicateevents.AllowedRepeatedEventPatterns {
+		if s != "" {
+			s += "|"
+		}
+		s += r.String()
+	}
+	for _, r := range duplicateevents.AllowedUpgradeRepeatedEventPatterns {
+		if s != "" {
+			s += "|"
+		}
+		s += r.String()
+	}
+	for _, r := range duplicateevents.KnownEventsBugs {
+		if s != "" {
+			s += "|"
+		}
+		s += r.Regexp.String()
+	}
+	return regexp.MustCompile(s)
+}
+
+// checkAllowedRepeatedEventOKFns loops through all of the IsRepeatedEventOKFunc funcs
+// and returns true if this event is an event we already know about.  Some functions
+// require a kubeconfig, but also handle the kubeconfig being nil (in case we cannot
+// successfully get a kubeconfig).
+func checkAllowedRepeatedEventOKFns(event monitorapi.EventInterval, times int32) bool {
+
+	kubeClient, err := GetMonitorRESTConfig()
+	if err != nil {
+		// If we couldn't get a kube client, we won't be able to run functions that require a kube config
+		// but we can still pass a nil so that the rest of the functions can run.
+		fmt.Printf("error getting kubeclient: [%v] when processing event %s - %s\n", err, event.Locator, event.Message)
+		kubeClient = nil
+	}
+	for _, isRepeatedEventOKFuncList := range [][]duplicateevents.IsRepeatedEventOKFunc{duplicateevents.AllowedRepeatedEventFns, duplicateevents.AllowedSingleNodeRepeatedEventFns} {
+		for _, allowRepeatedEventFn := range isRepeatedEventOKFuncList {
+			allowed, err := allowRepeatedEventFn(event, kubeClient, int(times))
+			if err != nil {
+				// for errors, we'll default to no match.
+				fmt.Printf("Error processing pathological event: %v\n", err)
+				return false
+			}
+			if allowed {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 func recordAddOrUpdateEvent(
@@ -158,8 +213,41 @@ func recordAddOrUpdateEvent(
 	if obj.Type == corev1.EventTypeWarning {
 		condition.Level = monitorapi.Warning
 	}
-	m.RecordAt(t, condition)
 
+	pathoFrom := obj.FirstTimestamp.Time
+	if pathoFrom.IsZero() {
+		pathoFrom = obj.EventTime.Time
+	}
+	if pathoFrom.IsZero() {
+		pathoFrom = obj.CreationTimestamp.Time
+	}
+	to := pathoFrom.Add(1 * time.Second)
+
+	event := monitorapi.EventInterval{
+		Condition: condition,
+	}
+
+	// The matching here needs to mimic what is being done in the synthetictests/testDuplicatedEvents function.
+	eventDisplayMessage := fmt.Sprintf("%s - %s", event.Locator, event.Message)
+	if obj.Count > 1 && (allRepeatedEventPatterns.MatchString(eventDisplayMessage) || checkAllowedRepeatedEventOKFns(event, obj.Count)) {
+		// For pathological/repeated events that we know about
+		// we add an interval of 1 second and mark it with the PathologicalMark
+		condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, message)
+		fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
+
+		inter := m.StartInterval(pathoFrom, condition)
+		m.EndInterval(inter, to)
+	} else if obj.Count > duplicateevents.DuplicateEventThreshold && duplicateevents.EventCountExtractor.MatchString(eventDisplayMessage) {
+		// For pathological/repeated events that we don't know about with count > threshold,
+		// we add an interval of 1 second and mark it with the PathologicalNewMark.
+		condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalNewMark, message)
+		fmt.Printf("processed event: %+v\nresulting new interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
+
+		inter := m.StartInterval(pathoFrom, condition)
+		m.EndInterval(inter, to)
+	} else {
+		m.RecordAt(t, condition)
+	}
 }
 
 func eventForContainer(fieldPath string) (string, bool) {
