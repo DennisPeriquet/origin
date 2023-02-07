@@ -43,7 +43,7 @@ const (
 	DuplicateEventThreshold           = 20
 	DuplicateSingleNodeEventThreshold = 30
 	PathologicalMark                  = "pathological/true"
-	PathologicalNewMark               = "pathologicalNew/true"
+	InterestingMark                   = "interesting/true"
 )
 
 var EventCountExtractor = regexp.MustCompile(`(?s)(.*) \((\d+) times\).*`)

@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/openshift/origin/pkg/duplicateevents"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
 	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
 	"github.com/openshift/origin/test/extended/testdata"
@@ -124,14 +123,6 @@ func BelongsInKubeAPIServer(eventInterval monitorapi.EventInterval) bool {
 	}
 
 	return true
-}
-
-// IsPathologicalEvent returns true if the event message matched a set of known regexes for
-// repeating events or if a message repeasts greater than some threshold (20).  These messages were
-// marked with PathologicalMark or PathologicalNewMark earlier when the Interval was created so
-// they can be displayed in a spyglass chart.
-func IsPathologicalEvent(eventInterval monitorapi.EventInterval) bool {
-	return strings.Contains(eventInterval.Message, duplicateevents.PathologicalMark) || strings.Contains(eventInterval.Message, duplicateevents.PathologicalNewMark)
 }
 
 func IsPodLifecycle(eventInterval monitorapi.EventInterval) bool {

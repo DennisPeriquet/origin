@@ -214,7 +214,7 @@ func recordAddOrUpdateEvent(
 		condition.Level = monitorapi.Warning
 	}
 
-	pathoFrom := obj.FirstTimestamp.Time
+	pathoFrom := obj.LastTimestamp.Time
 	if pathoFrom.IsZero() {
 		pathoFrom = obj.EventTime.Time
 	}
@@ -227,24 +227,27 @@ func recordAddOrUpdateEvent(
 		Condition: condition,
 	}
 
-	// The matching here needs to mimic what is being done in the synthetictests/testDuplicatedEvents function.
-	eventDisplayMessage := fmt.Sprintf("%s - %s", event.Locator, event.Message)
-	if obj.Count > 1 && (allRepeatedEventPatterns.MatchString(eventDisplayMessage) || checkAllowedRepeatedEventOKFns(event, obj.Count)) {
-		// For pathological/repeated events that we know about
-		// we add an interval of 1 second and mark it with the PathologicalMark
-		condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, message)
-		fmt.Printf("processed event: %+v\nresulting interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
+	if obj.Count > 1 {
 
-		inter := m.StartInterval(pathoFrom, condition)
-		m.EndInterval(inter, to)
-	} else if obj.Count > duplicateevents.DuplicateEventThreshold && duplicateevents.EventCountExtractor.MatchString(eventDisplayMessage) {
-		// For pathological/repeated events that we don't know about with count > threshold,
-		// we add an interval of 1 second and mark it with the PathologicalNewMark.
-		condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalNewMark, message)
+		// The matching here needs to mimic what is being done in the synthetictests/testDuplicatedEvents function.
+		eventDisplayMessage := fmt.Sprintf("%s - %s", event.Locator, event.Message)
+
+		if allRepeatedEventPatterns.MatchString(eventDisplayMessage) || checkAllowedRepeatedEventOKFns(event, obj.Count) {
+			// This is a repeated event that we know about
+			condition.Message = fmt.Sprintf("%s %s", duplicateevents.InterestingMark, message)
+		}
+
+		if obj.Count > duplicateevents.DuplicateEventThreshold && duplicateevents.EventCountExtractor.MatchString(eventDisplayMessage) {
+			// This is a repeated event that exceeds threshold
+			condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, message)
+		}
+
 		fmt.Printf("processed event: %+v\nresulting new interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
 
+		// we add an interval of 1 second and mark it with the PathologicalMark
 		inter := m.StartInterval(pathoFrom, condition)
 		m.EndInterval(inter, to)
+
 	} else {
 		m.RecordAt(t, condition)
 	}
