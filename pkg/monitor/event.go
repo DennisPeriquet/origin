@@ -233,23 +233,25 @@ func recordAddOrUpdateEvent(
 		// The matching here needs to mimic what is being done in the synthetictests/testDuplicatedEvents function.
 		eventDisplayMessage := fmt.Sprintf("%s - %s", event.Locator, event.Message)
 
+		updatedMessage := event.Message
 		if allRepeatedEventPatterns.MatchString(eventDisplayMessage) || checkAllowedRepeatedEventOKFns(event, obj.Count) {
 			// This is a repeated event that we know about
-			condition.Message = fmt.Sprintf("%s %s", duplicateevents.InterestingMark, message)
+			updatedMessage = fmt.Sprintf("%s %s", duplicateevents.InterestingMark, updatedMessage)
 		}
 
 		if obj.Count > duplicateevents.DuplicateEventThreshold && duplicateevents.EventCountExtractor.MatchString(eventDisplayMessage) {
 			// This is a repeated event that exceeds threshold
-			condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, message)
+			updatedMessage = fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, updatedMessage)
 		}
 
+		condition.Message = updatedMessage
 		if strings.Contains(condition.Message, duplicateevents.InterestingMark) || strings.Contains(condition.Message, duplicateevents.PathologicalMark) {
 
 			// Remove the "(n times)" portion of the message, and get the first 10 characters of the hash of the message
 			// so we can add it to the locator. This incorporates the message into the locator without the resulting
 			// string being too much longer and makes it so that the spyglass chart shows locators that incorporate the message.
 			removeNTimes := regexp.MustCompile(`\s+\(\d+ times\)`)
-			newMessage := removeNTimes.ReplaceAllString(event.Message, "")
+			newMessage := removeNTimes.ReplaceAllString(condition.Message, "")
 
 			hash := sha256.Sum256([]byte(newMessage))
 			hashStr := fmt.Sprintf("%x", hash)[:10]
