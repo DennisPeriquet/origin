@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"context"
+	"crypto/sha256"
 	"fmt"
 	"regexp"
 	"strings"
@@ -242,9 +243,23 @@ func recordAddOrUpdateEvent(
 			condition.Message = fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, message)
 		}
 
+		if strings.Contains(condition.Message, duplicateevents.InterestingMark) || strings.Contains(condition.Message, duplicateevents.PathologicalMark) {
+
+			// Remove the "(n times)" portion of the message, and get the first 10 characters of the hash of the message
+			// so we can add it to the locator. This incorporates the message into the locator without the resulting
+			// string being too much longer and makes it so that the spyglass chart shows locators that incorporate the message.
+			removeNTimes := regexp.MustCompile(`\s+\(\d+ times\)`)
+			newMessage := removeNTimes.ReplaceAllString(event.Message, "")
+
+			hash := sha256.Sum256([]byte(newMessage))
+			hashStr := fmt.Sprintf("%x", hash)[:10]
+
+			condition.Locator = fmt.Sprintf("%s hmsg/%s", condition.Locator, hashStr)
+		}
+
 		fmt.Printf("processed event: %+v\nresulting new interval: %s from: %s to %s\n", *obj, message, pathoFrom, to)
 
-		// we add an interval of 1 second and mark it with the PathologicalMark
+		// Add the interval.
 		inter := m.StartInterval(pathoFrom, condition)
 		m.EndInterval(inter, to)
 
