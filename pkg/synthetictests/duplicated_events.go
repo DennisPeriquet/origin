@@ -151,9 +151,9 @@ func (d duplicateEventsEvaluator) testDuplicatedEvents(testName string, flakeOnl
 		eventDisplayMessage, times := getTimesAnEventHappened(fmt.Sprintf("%s - %s", event.Locator, event.Message))
 		if times > duplicateevents.DuplicateEventThreshold {
 
-			// If we marked this message earlier in recordAddOrUpdateEvent, we know it matched one of
+			// If we marked this message earlier in recordAddOrUpdateEvent as interesting/true, we know it matched one of
 			// the existing patterns or one of the AllowedRepeatedEventFns functions returned true.
-			if strings.Contains(eventDisplayMessage, duplicateevents.PathologicalMark) {
+			if strings.Contains(eventDisplayMessage, duplicateevents.InterestingMark) {
 				continue
 			}
 
