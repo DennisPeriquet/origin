@@ -21,7 +21,7 @@ type Monitor struct {
 
 	lock           sync.Mutex
 	events         monitorapi.Intervals
-	unsortedEvents monitorapi.Intervals
+	UnsortedEvents monitorapi.Intervals
 	samples        []*sample
 
 	recordedResourceLock sync.Mutex
@@ -192,11 +192,11 @@ func (m *Monitor) Record(conditions ...monitorapi.Condition) {
 func (m *Monitor) StartInterval(t time.Time, condition monitorapi.Condition) int {
 	m.lock.Lock()
 	defer m.lock.Unlock()
-	m.unsortedEvents = append(m.unsortedEvents, monitorapi.EventInterval{
+	m.UnsortedEvents = append(m.UnsortedEvents, monitorapi.EventInterval{
 		Condition: condition,
 		From:      t,
 	})
-	return len(m.unsortedEvents) - 1
+	return len(m.UnsortedEvents) - 1
 }
 
 // EndInterval updates the To of the interval started by StartInterval if t is greater than
@@ -204,9 +204,9 @@ func (m *Monitor) StartInterval(t time.Time, condition monitorapi.Condition) int
 func (m *Monitor) EndInterval(startedInterval int, t time.Time) {
 	m.lock.Lock()
 	defer m.lock.Unlock()
-	if startedInterval < len(m.unsortedEvents) {
-		if m.unsortedEvents[startedInterval].From.Before(t) {
-			m.unsortedEvents[startedInterval].To = t
+	if startedInterval < len(m.UnsortedEvents) {
+		if m.UnsortedEvents[startedInterval].From.Before(t) {
+			m.UnsortedEvents[startedInterval].To = t
 		}
 	}
 }
@@ -220,7 +220,7 @@ func (m *Monitor) RecordAt(t time.Time, conditions ...monitorapi.Condition) {
 	m.lock.Lock()
 	defer m.lock.Unlock()
 	for _, condition := range conditions {
-		m.unsortedEvents = append(m.unsortedEvents, monitorapi.EventInterval{
+		m.UnsortedEvents = append(m.UnsortedEvents, monitorapi.EventInterval{
 			Condition: condition,
 			From:      t,
 			To:        t,
@@ -256,7 +256,7 @@ func (m *Monitor) sample(hasPrevious bool) bool {
 func (m *Monitor) snapshot() ([]*sample, monitorapi.Intervals, monitorapi.Intervals) {
 	m.lock.Lock()
 	defer m.lock.Unlock()
-	return m.samples, m.events, m.unsortedEvents
+	return m.samples, m.events, m.UnsortedEvents
 }
 
 // Conditions returns all conditions that were sampled in the interval

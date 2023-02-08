@@ -9,6 +9,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/openshift/origin/pkg/monitor/intervalcreation"
+	monitorserialization "github.com/openshift/origin/pkg/monitor/serialization"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -24,8 +26,11 @@ func Test_recordAddOrUpdateEvent(t *testing.T) {
 	// You can possible get panics due to timeout of KAAS kube configs.
 	// Get the json file for all events from artifacts/gather-extra.  Or by using using
 	// "oc -n aNamespace get event" after setting KUBECONFIG.
-	kubeconfig := "/tmp/k.txt"
-	jsonFile := "/tmp/kube_events.json"
+	prefix := "/tmp/f/"
+	kubeconfig := prefix + "k.txt"
+	jsonFile := prefix + "events.json"
+	artifactDir := prefix + "junit"
+	jsonOutFile := prefix + "out.json"
 
 	file, err := os.Open(jsonFile)
 	if err != nil {
@@ -59,7 +64,7 @@ func Test_recordAddOrUpdateEvent(t *testing.T) {
 	}
 	type args struct {
 		ctx                    context.Context
-		m                      Recorder
+		m                      *Monitor
 		client                 kubernetes.Interface
 		reMatchFirstQuote      *regexp.Regexp
 		significantlyBeforeNow time.Time
@@ -67,12 +72,14 @@ func Test_recordAddOrUpdateEvent(t *testing.T) {
 	}
 
 	tests := []struct {
-		name string
-		args args
-		skip bool
+		name    string
+		args    args
+		skip    bool
+		writeIt bool
 	}{
 		{
 			name: "Single Event test",
+			skip: true,
 			args: args{
 				ctx:                    context.TODO(),
 				m:                      NewMonitorWithInterval(time.Second),
@@ -83,8 +90,9 @@ func Test_recordAddOrUpdateEvent(t *testing.T) {
 			},
 		},
 		{
-			name: "Multiple Event (from file) test",
-			skip: true, // skip in case we don't have a file
+			name:    "Multiple Event (from file) test",
+			skip:    false, // skip in case we don't have a file
+			writeIt: true,
 			args: args{
 				ctx:               context.TODO(),
 				m:                 NewMonitorWithInterval(time.Second),
@@ -105,6 +113,15 @@ func Test_recordAddOrUpdateEvent(t *testing.T) {
 			for _, event := range tt.args.kubeEventList.Items {
 				recordAddOrUpdateEvent(tt.args.ctx, tt.args.m, tt.args.client, tt.args.reMatchFirstQuote, tt.args.significantlyBeforeNow, &event)
 			}
+			if tt.writeIt {
+				writeOutJson(tt.args.m, jsonOutFile, artifactDir)
+			}
 		})
 	}
+}
+
+func writeOutJson(m *Monitor, jsonOutFile string, artifactDir string) {
+	monitorserialization.EventsToFile(jsonOutFile, m.UnsortedEvents)
+	eir := intervalcreation.NewSpyglassEventIntervalRenderer("spyglass", intervalcreation.BelongsInSpyglass)
+	eir.WriteRunData(artifactDir, m.recordedResources, m.UnsortedEvents, "-0001")
 }
