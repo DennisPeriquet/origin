@@ -2,7 +2,6 @@ package ginkgo
 
 import (
 	"context"
-	"crypto/sha256"
 	"fmt"
 	"io"
 	"io/fs"
@@ -106,6 +105,7 @@ func (o *MonitorEventsOptions) Start(ctx context.Context, restConfig *rest.Confi
 }
 
 var removeNTimes = regexp.MustCompile(`\s+\(\d+ times\)`)
+var removeHmsg = regexp.MustCompile(`\s+(hmsg/[0-9a-f]+)`)
 
 // markMissedPathologicalEvents goes through the list of events looking for all events marked
 // as "pathological/true" (this implies the event was previously unknown and happened > 20 times).
@@ -114,7 +114,9 @@ var removeNTimes = regexp.MustCompile(`\s+\(\d+ times\)`)
 // show in the spyglass chart.
 func markMissedPathologicalEvents(events monitorapi.Intervals) {
 	// Get the list of events already marked (abbreviated as "am") as pathological/true (this implies times > 20).
-	amPathoEventList := []monitorapi.EventInterval{}
+	//amPathoEventList := []monitorapi.EventInterval{}
+	amPathoEventList := map[string]string{}
+
 	for _, pathologicalEvent := range events {
 		if !strings.Contains(pathologicalEvent.Message, duplicateevents.PathologicalMark) {
 			// We only are interested in those EventIntervals with pathological/true
@@ -125,49 +127,67 @@ func markMissedPathologicalEvents(events monitorapi.Intervals) {
 			// created an interval when it came in initially.
 			continue
 		}
-		amPathoEventList = append(amPathoEventList, pathologicalEvent)
+		//amPathoEventList = append(amPathoEventList, pathologicalEvent)
+
+		// Events marked as pathological/true have the mark and times number on the message
+		// and the locator ends with hmsg/xxxxxxxxxx.
+		// hash = "pathological/true..."+"locator"
+		msgWithoutTimes := removeNTimes.ReplaceAllString(pathologicalEvent.Message, "")
+		locWithoutHmsg := removeHmsg.ReplaceAllString(pathologicalEvent.Locator, "")
+		amPathoEventList[msgWithoutTimes+"//"+locWithoutHmsg] = pathologicalEvent.Locator
 	}
+	logrus.Infof("Number of keys: %d", len(amPathoEventList))
 
-	logrus.Infof("Scanning the sorted events (%d) looking for those marked only as pathological/true (%d)", len(events), len(amPathoEventList))
-	for _, amPathoEvent := range amPathoEventList {
-		// Search back for any matching EventIntervals that are less than threshold.
-
-		// EventIntervals marked with pathological/true alone have a hmsg/HASH on the end of the locator
-		// and happened more than threshold times.
-		pathoMsgWithoutTimes := removeNTimes.ReplaceAllString(amPathoEvent.Message, "")
-		hash := sha256.Sum256([]byte(pathoMsgWithoutTimes))
-		hashStr := fmt.Sprintf("%x", hash)[:10]
-
-		logrus.Infof("Looking at previous events for %s, msg=%s\n", amPathoEvent.Locator, amPathoEvent.Message)
-		logrus.Infof("  %s - %s\n", amPathoEvent.From.Format("15:04:05"), amPathoEvent.To.Format("15:04:05"))
-		matchCount := 0
-		sortedEventsToScan := events
-		for i := range sortedEventsToScan {
-			scannedEvent := sortedEventsToScan[i]
-			if strings.Contains(scannedEvent.Message, duplicateevents.PathologicalMark) {
-				// The event already has the pathological/true mark: times number is above threshold
-				// and is already set to be charted on the spyglass chart or just got marked to be
-				// included in a spyglass chart.
-				continue
-			}
-			scannedEventLocatorWithMsgHash := fmt.Sprintf("%s hmsg/%s", scannedEvent.Locator, hashStr)
-			scannedEventMsgWithoutTimes := removeNTimes.ReplaceAllString(scannedEvent.Message, "")
-
-			// Check if we found a match; we match the locator and message; note the message has to
-			// be "normalized" (with pathological/true prepended) so that we have a proper comparison.
-			if scannedEventLocatorWithMsgHash == amPathoEvent.Locator && fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, scannedEventMsgWithoutTimes) == pathoMsgWithoutTimes {
-				// Since this event is an earlier instance of the already marked pathological Event,
-				// mark it as pathological and unknown and update the locator for display in the
-				// spyglass chart.
-				matchCount++
-				logrus.Infof("Found a times match: %d\n", matchCount)
-				logrus.Infof("scannedEvent: %s - %s\n", scannedEvent.From.Format("15:04:05"), scannedEvent.To.Format("15:04:05"))
-				updatedMessage := fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, scannedEvent.Message)
-				sortedEventsToScan[i].Message = updatedMessage
-				sortedEventsToScan[i].Locator = scannedEventLocatorWithMsgHash
-			}
+	for k := range amPathoEventList {
+		fmt.Printf("k=%s\n", k)
+	}
+	for i, scannedEvent := range events {
+		msgWithPathoMark := fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, removeNTimes.ReplaceAllString(scannedEvent.Message, ""))
+		if pLocator, ok := amPathoEventList[msgWithPathoMark+"//"+scannedEvent.Locator]; ok {
+			events[i].Message = msgWithPathoMark
+			events[i].Locator = pLocator
 		}
 	}
+	//logrus.Infof("Scanning the sorted events (%d) looking for those marked only as pathological/true (%d)", len(events), len(amPathoEventList))
+	//for _, amPathoEvent := range amPathoEventList {
+	//	// Search back for any matching EventIntervals that are less than threshold.
+
+	//	// EventIntervals marked with pathological/true alone have a hmsg/HASH on the end of the locator
+	//	// and happened more than threshold times.
+	//	pathoMsgWithoutTimes := removeNTimes.ReplaceAllString(amPathoEvent.Message, "")
+	//	hash := sha256.Sum256([]byte(pathoMsgWithoutTimes))
+	//	hashStr := fmt.Sprintf("%x", hash)[:10]
+
+	//	logrus.Infof("Looking at previous events for %s, msg=%s\n", amPathoEvent.Locator, amPathoEvent.Message)
+	//	logrus.Infof("  %s - %s\n", amPathoEvent.From.Format("15:04:05"), amPathoEvent.To.Format("15:04:05"))
+	//	matchCount := 0
+	//	sortedEventsToScan := events
+	//	for i := range sortedEventsToScan {
+	//		scannedEvent := sortedEventsToScan[i]
+	//		if strings.Contains(scannedEvent.Message, duplicateevents.PathologicalMark) {
+	//			// The event already has the pathological/true mark: times number is above threshold
+	//			// and is already set to be charted on the spyglass chart or just got marked to be
+	//			// included in a spyglass chart.
+	//			continue
+	//		}
+	//		scannedEventLocatorWithMsgHash := fmt.Sprintf("%s hmsg/%s", scannedEvent.Locator, hashStr)
+	//		scannedEventMsgWithoutTimes := removeNTimes.ReplaceAllString(scannedEvent.Message, "")
+
+	//		// Check if we found a match; we match the locator and message; note the message has to
+	//		// be "normalized" (with pathological/true prepended) so that we have a proper comparison.
+	//		if scannedEventLocatorWithMsgHash == amPathoEvent.Locator && fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, scannedEventMsgWithoutTimes) == pathoMsgWithoutTimes {
+	//			// Since this event is an earlier instance of the already marked pathological Event,
+	//			// mark it as pathological and unknown and update the locator for display in the
+	//			// spyglass chart.
+	//			matchCount++
+	//			logrus.Infof("Found a times match: %d\n", matchCount)
+	//			logrus.Infof("scannedEvent: %s - %s\n", scannedEvent.From.Format("15:04:05"), scannedEvent.To.Format("15:04:05"))
+	//			updatedMessage := fmt.Sprintf("%s %s", duplicateevents.PathologicalMark, scannedEvent.Message)
+	//			sortedEventsToScan[i].Message = updatedMessage
+	//			sortedEventsToScan[i].Locator = scannedEventLocatorWithMsgHash
+	//		}
+	//	}
+	//}
 }
 
 // End mutates the method receiver so you shouldn't call it multiple times.
