@@ -18,7 +18,9 @@ func Test_markMissedPathologicalEvents(t *testing.T) {
 
 	// https://prow.ci.openshift.org/view/gs/origin-ci-test/pr-logs/pull/27743/pull-ci-openshift-origin-master-e2e-azure-ovn-etcd-scaling/1628465728585732096
 	// https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/pr-logs/pull/27743/pull-ci-openshift-origin-master-e2e-azure-ovn-etcd-scaling/1628465728585732096/artifacts/e2e-azure-ovn-etcd-scaling/openshift-e2e-test/artifacts/junit/
-	eventListFile := "/tmp/test/e2e-events_20230222-195949.json"
+	//eventListFile := "/tmp/test/e2e-events_20230222-195949.json"
+	eventListFile := "/tmp/test/e2e-events_20230315-142847.json" // 30485 events, 269 keys
+
 	eventIntervalList, err := monitorserialization.EventsFromFile(eventListFile)
 	skipFullTest := false
 	if err != nil {
