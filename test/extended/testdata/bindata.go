@@ -52319,11 +52319,54 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
         return false
     }
 
+    // If this is a leader found, lost, elected, or missing, return true and the reason.
+    // Otherwise, return false.
+    function isEtcdLeaderFoundOrLost(eventInterval) {
+        const { tempStructuredLocator, tempStructuredMessage } = eventInterval;
+        let reason = null;
+        if (
+            tempStructuredLocator &&
+            tempStructuredLocator.keys &&
+            tempStructuredLocator.keys.hasOwnProperty('namespace') &&
+            tempStructuredLocator.keys['namespace'].includes('openshift-etcd')
+        ) {
+            if (tempStructuredMessage && tempStructuredMessage.hasOwnProperty('reason')) {
+                reason = tempStructuredMessage['reason']
+                if (reason.includes('leader-found') || reason.includes('leader-lost') ||
+                    reason.includes('leader-elected') || reason.includes('leader-missing')) {
+                    return [true, reason];
+                }
+            }
+        }
+
+        // Just out of curiosity, see what the other eventIntervals look like.
+        if (reason != null) {
+            console.log('Is openshift-etcd, not etcd leader, reason: ', reason )
+            console.log('eventInterval: ', eventInterval)
+        }
+        return [false, null];
+    }
+
     function isPodLog(eventInterval) {
+        const [isLeaderFoundOrLost, notUsed] = isEtcdLeaderFoundOrLost(eventInterval)
+        if (isLeaderFoundOrLost) {
+            return false
+        }
+        if (eventInterval.locator.includes("etcd-member/")) {
+            return false
+        }
         if (eventInterval.locator.includes("src/podLog")) {
             return true
         }
+        return false
+    }
+
+    function isEtcdLog(eventInterval) {
         if (eventInterval.locator.includes("etcd-member/")) {
+            return true
+        }
+        const [isLeaderFoundOrLost, notUsed] = isEtcdLeaderFoundOrLost(eventInterval)
+        if (isLeaderFoundOrLost) {
             return true
         }
         return false
@@ -52337,6 +52380,13 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
     }
 
     function isPod(eventInterval) {
+        const [isLeaderFoundOrLost, notUsed] = isEtcdLeaderFoundOrLost(eventInterval)
+        if (isLeaderFoundOrLost) {
+            return false
+        }
+        if (eventInterval.locator.includes("etcd-member/")) {
+            return false
+        }
         // this check was added to keep the repeating events out fo the "pods" section
         const nTimes = new RegExp("\\(\\d+ times\\)")
         if (eventInterval.message.match(nTimes)) {
@@ -52535,6 +52585,71 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
         return [item.locator, ` + "`" + ` (${roles})` + "`" + `, m];
     }
 
+    function etcdLogs(item) {
+        let nodeVal = 'noNode'
+        if (item.tempStructuredLocator &&
+            item.tempStructuredLocator.keys &&
+            item.tempStructuredLocator.keys.hasOwnProperty('etcd-member') &&
+            item.tempStructuredLocator.keys.hasOwnProperty('node')) {
+            if (item.tempStructuredLocator.keys['node'].length > 0) {
+                nodeVal = item.tempStructuredLocator.keys['node']
+            }
+        }
+        // See if this is a leader change interval.
+        const [isLeaderFoundOrLost, foundOrLost] = isEtcdLeaderFoundOrLost(item)
+        if (isLeaderFoundOrLost) {
+            let leaderColor = "none"
+
+            // For leader-found, term is there; this line attempts to get it and
+            // if not there, we'll set it to ''.
+            let term = item.tempStructuredMessage?.annotations?.term ?? '';
+            if (term.length == 0) {
+                // For leader-lost, leader-elected, and leader-missing, term is in the humanMessage.
+                // Ensure it exists and if not, just default to 'noTerm'
+                const term = item.tempStructuredMessage?.humanMessage ?? 'noTerm';
+            }
+            nodeVal = item.tempStructuredLocator.keys['node']
+            if (foundOrLost == "leader-found") {
+                console.log('found: ', item)
+                leaderColor = "EtcdLeaderFound"
+
+            } else if (foundOrLost == "leader-lost") {
+                console.log('lost: ', item.tempStructuredMessage)
+                leaderColor = "EtcdLeaderLost"
+
+            } else if (foundOrLost == "leader-elected") {
+                console.log('elected: ', item.tempStructuredMessage)
+                leaderColor = "EtcdLeaderElected"
+
+            } else if (foundOrLost == "leader-missing") {
+                console.log('missing: ', item.tempStructuredMessage)
+                leaderColor = "EtcdLeaderMissing"
+
+            }
+            return [` + "`" + `${nodeVal} term/${term}` + "`" + `, ` + "`" + ` (${foundOrLost}=${nodeVal})` + "`" + `, leaderColor]
+
+        } else {
+
+            const etcdMemberVal = item.tempStructuredLocator.keys['etcd-member']
+            if (nodeVal.length == 0 && etcdMemberVal.length == 0) {
+                return [` + "`" + `empty` + "`" + `, ` + "`" + `(empty)` + "`" + `, 'EtcdUnknown']
+            }
+
+            if (nodeVal.length > 0 && etcdMemberVal.length > 0) {
+                const term = item.tempStructuredMessage.annotations['term']
+                return [` + "`" + `Leader ${nodeVal} term/${term}` + "`" + `, ` + "`" + ` etcd-member/${etcdMemberVal}` + "`" + `, 'EtcdLeading']
+            }
+
+            if (nodeVal == "noNode" && etcdMemberVal.length == 0) {
+                console.log(` + "`" + `node and etcd-member are both empty: ` + "`" + `, item)
+                return [` + "`" + `${nodeVal}` + "`" + `, ` + "`" + ` (etcd-member=none)` + "`" + `, 'EtcdUnknown']
+            }
+
+            console.log('Anything else:', item)
+            return [` + "`" + `${nodeVal}` + "`" + `, ` + "`" + ` (etcd-member=${etcdMember})` + "`" + `, 'EtcdUnknown']
+        }
+    }
+
     function cloudMetricsValue(item) {
         return [item.locator, "", "CloudMetric"];
     }
@@ -52714,6 +52829,9 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
             return e1.label < e2.label ? -1 : e1.label > e2.label;
         })
 
+        timelineGroups.push({ group: "etcd-leaders", data: [] })
+        createTimelineData(etcdLogs, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isEtcdLog, regex)
+
         timelineGroups.push({group: "cloud-metrics", data: []})
         createTimelineData(cloudMetricsValue, timelineGroups[timelineGroups.length - 1].data, eventIntervals, isCloudMetrics, regex)
 
@@ -52769,7 +52887,8 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
                 'PodCreated', 'PodScheduled', 'PodTerminating','ContainerWait', 'ContainerStart', 'ContainerNotReady', 'ContainerReady', 'ContainerReadinessFailed', 'ContainerReadinessErrored',  'StartupProbeFailed', // pods
                 'CIClusterDisruption', 'Disruption', // disruption
                 'Degraded', 'Upgradeable', 'False', 'Unknown',
-                'PodLogInfo', 'PodLogWarning', 'PodLogError'])
+                'PodLogInfo', 'PodLogWarning', 'PodLogError',
+                'EtcdUnknown', 'EtcdLeading', 'EtcdLeaderFound', 'EtcdLeaderLost', 'EtcdLeaderElected', 'EtcdLeaderMissing'])
             .range([
                 '#6E6E6E', '#0000ff', '#d0312d', '#ffa500', // pathological and interesting events
                 '#fada5e','#fada5e','#ffa500', '#d0312d',  // alerts
@@ -52779,7 +52898,8 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
                 '#96cbff', '#1e7bd9', '#ffa500', '#ca8dfd', '#9300ff', '#fada5e','#3cb043', '#d0312d', '#d0312d', '#c90076', // pods
                 '#96cbff', '#d0312d', // disruption
                 '#b65049', '#32b8b6', '#ffffff', '#bbbbbb',
-                '#96cbff', '#fada5e', '#d0312d']);
+                '#96cbff', '#fada5e', '#d0312d',
+                '#d3d3de', '#4da385', '#03fc62', '#fc0303', '#fada5e', '#8c5efa']);
         myChart.
         data(timelineGroups).
         useUtc(true).
