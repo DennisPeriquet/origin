@@ -52338,12 +52338,6 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
                 }
             }
         }
-
-        // Just out of curiosity, see what the other eventIntervals look like.
-        if (reason != null) {
-            console.log('Is openshift-etcd, not etcd leader, reason: ', reason )
-            console.log('eventInterval: ', eventInterval)
-        }
         return [false, null];
     }
 
@@ -52598,33 +52592,31 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
         // See if this is a leader change interval.
         const [isLeaderFoundOrLost, foundOrLost] = isEtcdLeaderFoundOrLost(item)
         if (isLeaderFoundOrLost) {
-            let leaderColor = "none"
 
-            // For leader-found, term is there; this line attempts to get it and
-            // if not there, we'll set it to ''.
-            let term = item.tempStructuredMessage?.annotations?.term ?? '';
+            // For leader-found, a 'term' is expected to be present; this line attempts to
+            // get the value of 'term' and if not there, we'll default to ''.
+            let term = item.tempStructuredMessage?.annotations?.['term'] ?? '';
             if (term.length == 0) {
                 // For leader-lost, leader-elected, and leader-missing, term is in the humanMessage.
                 // Ensure it exists and if not, just default to 'noTerm'
-                const term = item.tempStructuredMessage?.humanMessage ?? 'noTerm';
+                term = item.tempStructuredMessage?.humanMessage ?? 'noTerm';
             }
             nodeVal = item.tempStructuredLocator.keys['node']
-            if (foundOrLost == "leader-found") {
-                console.log('found: ', item)
-                leaderColor = "EtcdLeaderFound"
 
-            } else if (foundOrLost == "leader-lost") {
-                console.log('lost: ', item.tempStructuredMessage)
-                leaderColor = "EtcdLeaderLost"
-
-            } else if (foundOrLost == "leader-elected") {
-                console.log('elected: ', item.tempStructuredMessage)
-                leaderColor = "EtcdLeaderElected"
-
-            } else if (foundOrLost == "leader-missing") {
-                console.log('missing: ', item.tempStructuredMessage)
-                leaderColor = "EtcdLeaderMissing"
-
+            let leaderColor ="EtcdUnknown"
+            switch (foundOrLost) {
+                case "leader-found":
+                    leaderColor = "EtcdLeaderFound";
+                    break;
+                case "leader-lost":
+                    leaderColor = "EtcdLeaderLost";
+                    break;
+                case "leader-elected":
+                    leaderColor = "EtcdLeaderElected";
+                    break;
+                case "leader-missing":
+                    leaderColor = "EtcdLeaderMissing";
+                    break;
             }
             return [` + "`" + `${nodeVal} term/${term}` + "`" + `, ` + "`" + ` (${foundOrLost}=${nodeVal})` + "`" + `, leaderColor]
 
@@ -52645,7 +52637,6 @@ var _e2echartE2eChartTemplateHtml = []byte(`<html lang="en">
                 return [` + "`" + `${nodeVal}` + "`" + `, ` + "`" + ` (etcd-member=none)` + "`" + `, 'EtcdUnknown']
             }
 
-            console.log('Anything else:', item)
             return [` + "`" + `${nodeVal}` + "`" + `, ` + "`" + ` (etcd-member=${etcdMember})` + "`" + `, 'EtcdUnknown']
         }
     }
